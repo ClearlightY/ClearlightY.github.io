@@ -1,15 +1,22 @@
 //底部爱心小图标跳动
-keyframes heartAnimate {
-  0%,100%{transform:scale(1);}
-10%,30%{transform:scale(0.9);}
-20%,40%,60%,80%{transform:scale(1.1);}
-50%,70%{transform:scale(1.1);}
+.keyframes {
+  animation-duration: 1.33s;
+  animation-timing-function: ease-in-out;
+  animation-delay: 0s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-play-state: running;
+  animation-name: heartAnimate;
 }
 
 //图标所对应的span中的ID
 #heart {
   animation: heartAnimate 1.33s ease-in-out infinite;
 }
+
 .with-love {
   color: rgb(255, 113, 113);
+  animation: heartAnimate 1.33s ease-in-out infinite;
+  color: #ff71a8;
 }

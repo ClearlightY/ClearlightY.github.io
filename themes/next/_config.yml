@@ -290,7 +290,8 @@ custom_logo:
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: night bright 
+#highlight_theme: night bright
+highlight_theme: night eighties
 
 
 # ---------------------------------------------------------------
@@ -834,3 +835,8 @@ duoshuo:
 # 文章末尾添加“本文结束”标记
 passage_end_tag:
   enabled: true
+
+# 鼠标特效
+cursor_effect:
+  enabled: ture
+  type: love  # fireworks：礼花 | explosion：爆炸 | love：浮出爱心 | text：浮出文字
