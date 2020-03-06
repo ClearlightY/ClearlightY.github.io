@@ -62,6 +62,11 @@
 
         <div class="post-meta">
           <span class="post-time">
+            {% if post.top %}
+           <i class="fa fa-thumb-tack"></i>
+            <font color=#7D26CD>Top</font>
+           <span class="post-meta-divider">|</span>
+          {% endif %}
             {% if theme.post_meta.created_at %}
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
@@ -210,6 +215,7 @@
                  <span class="post-meta-item-text">{{__('post.visitors')}}&#58;</span>
                {% endif %}
                  <span class="leancloud-visitors-count"></span>
+               <span>℃</span>
              </span>
           {% endif %}
 
@@ -334,11 +340,7 @@
     {### END POST BODY ###}
     {#####################}
 
-    <div>
-      {% if not is_index %}
-      {% include 'passage-end-tag.swig' %}
-      {% endif %}
-    </div>
+
 
     {% if theme.wechat_subscriber.enabled and not is_index %}
       <div>
@@ -357,6 +359,13 @@
         {% include 'post-copyright.swig' with { post: post } %}
       </div>
     {% endif %}
+
+    <br/><br/>
+    <div>
+      {% if not is_index %}
+      {% include 'passage-end-tag.swig' %}
+      {% endif %}
+    </div>
 
     <footer class="post-footer">
       {% if post.tags and post.tags.length and not is_index %}

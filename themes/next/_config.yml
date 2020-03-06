@@ -27,8 +27,10 @@ override: false
 # For example, you put your favicons into `hexo-site/source/images` directory.
 # Then need to rename & redefine they on any other names, otherwise icons from Next will rewrite your custom icons in Hexo.
 favicon:
-  small: /images/favicon-16x16-next.png
-  medium: /images/favicon-32x32-next.png
+#  small: /images/favicon-16x16-next.png
+  small: /images/favicon.ico
+#  medium: /images/favicon-32x32-next.png
+  medium: /images/favicon.ico
   apple_touch_icon: /images/apple-touch-icon-next.png
   safari_pinned_tab: /images/logo.svg
   #android_manifest: /images/manifest.json
@@ -206,7 +208,7 @@ sidebar:
   b2t: false
 
   # Scroll percent label in b2t button.
-  scrollpercent: false
+  scrollpercent: true
 
   # Enable sidebar on narrow view (only for Muse | Mist).
   onmobile: false
@@ -228,22 +230,22 @@ excerpt_description: true
 # Automatically Excerpt. Not recommend.
 # Please use <!-- more --> in the post to control excerpt accurately.
 auto_excerpt:
-  enable: false
-  length: 150
+  enable: true
+  length: 380
 
 # Post meta display settings
 post_meta:
   item_text: true
   created_at: true
-  updated_at: false
+  updated_at: true
   categories: true
 
 # Post wordcount display settings
 # Dependencies: https://github.com/willin/hexo-wordcount
 post_wordcount:
   item_text: true
-  wordcount: false
-  min2read: false
+  wordcount: true
+  min2read: true
   totalcount: false
   separated_meta: true
 
@@ -254,9 +256,9 @@ post_wordcount:
   #description: ex. subscribe to my blog by scanning my public wechat account
 
 # Reward
-#reward_comment: Donate comment here
-#wechatpay: /images/wechatpay.jpg
-#alipay: /images/alipay.jpg
+reward_comment: Adhere to original technology sharing, thank you for your support and encouragement!
+wechatpay: /images/wechatpay.png
+alipay: /images/alipay.png
 #bitcoin: /images/bitcoin.png
 
 # Declare license on posts
@@ -392,13 +394,14 @@ changyan:
 # You can get your appid and appkey from https://leancloud.cn
 # more info please open https://valine.js.org
 valine:
-  enable: false
-  appid:  # your leancloud application appid
-  appkey:  # your leancloud application appkey
+  enable: true
+  appid: b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz # your leancloud application appid
+  appkey: bw1k0GCjO6lHifiPFl0A2Unz # your leancloud application appkey
   notify: false # mail notifier , https://github.com/xCss/Valine/wiki
   verify: false # Verification code
   placeholder: Just go go # comment box placeholder
-  avatar: mm # gravatar style
+#  avatar: mm # gravatar style
+  avatar: wavatar # gravatar style
   guest_info: nick,mail,link # custom comment header
   pageSize: 10 # pagination size
 
@@ -439,7 +442,7 @@ gitment:
 # This plugin is more useful in China, make sure you known how to use it.
 # And you can find the use guide at official webiste: http://www.jiathis.com/.
 # Warning: JiaThis does not support https.
-#jiathis:
+#jiathis: true
   ##uid: Get this uid from http://www.jiathis.com/
 #add_this_id:
 
@@ -500,7 +503,7 @@ needmoreshare2:
 # user_id must NOT be null when admin_enable is true!
 # you can visit http://dev.duoshuo.com get duoshuo user id.
 duoshuo_info:
-  ua_enable: true
+  ua_enable: false
   admin_enable: false
   user_id: 0
   #admin_nickname: Author
@@ -620,7 +623,7 @@ algolia_search:
 # Local search
 # Dependencies: https://github.com/flashlab/hexo-generator-search
 local_search:
-  enable: false
+  enable: true
   # if auto, trigger search by changing input
   # if manual, trigger search by pressing enter key or search button
   trigger: auto
@@ -691,7 +694,7 @@ motion:
 fancybox: true
 
 # Progress bar in the top during page loading.
-pace: false
+pace: true
 # Themes list:
 #pace-theme-big-counter
 #pace-theme-bounce
@@ -709,6 +712,7 @@ pace: false
 # For example
 # pace_theme: pace-theme-center-simple
 pace_theme: pace-theme-minimal
+#pace_theme: pace-theme-flash
 
 # Canvas-nest
 canvas_nest: false
@@ -840,3 +844,20 @@ passage_end_tag:
 cursor_effect:
   enabled: ture
   type: love  # fireworks：礼花 | explosion：爆炸 | love：浮出爱心 | text：浮出文字
+
+# 访客沟通
+# Online contact
+daovoice: true
+daovoice_app_id: 871ab97d
+
+# 相关推荐
+related_posts:
+  enable: true  # 是否开启
+  title: Relevant articles recommended     # 标题
+  display_in_home: false # 是否在首页显示，建议为false
+  params:
+    maxCount: 5   # 相关文章的最大数量
+    #PPMixingRate: 0.0
+    #isDate: false
+    #isImage: false
+    #isExcerpt: false

@@ -76,13 +76,13 @@ setInterval("createtime()",250);
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <script async="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-  <span id="busuanzi_container_site_pv"><i class="fa fa-user"></i> Visitor <span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i>&nbsp;</span></span>
+  <span id="busuanzi_container_site_uv"><i class="fa fa-user"></i> Visitor <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i>&nbsp;</span></span>
    |
-  <span id="busuanzi_container_site_uv"><i class="fa fa-eye"></i> PageView <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin"></i> &nbsp;</span></span>
+  <span id="busuanzi_container_site_pv"><i class="fa fa-eye"></i> PageView <span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin"></i> &nbsp;</span></span>
    |
   <!-- 博客字数统计 -->
   <span class="site-pv">
       <i class="fa fa-pencil"></i>
-       <span class="post-count"><i class="fa fa-spinner fa-spin"></i>{{ totalcount(site) }}</span>
+       <span class="post-count">{{ totalcount(site) }}</span>
     </span>
 </div>

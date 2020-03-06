@@ -1,7 +1,8 @@
 ---
 title: 侧栏中的posts打开的链接错误 /archives/%7C%7C%20archive/ - Hexo建站
-date: 2020-03-05 17:53:31
 tags: Hexo
+abbrlink: 28754
+date: 2020-03-05 17:53:31
 ---
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200305174327105.png)
 **当鼠标移到posts时, 访问的链接是`域名/archives/%7C%7C%20archive/`, 可见后面的多余了, 问题就是删除后面多余字符**

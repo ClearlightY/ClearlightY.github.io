@@ -1,18 +1,27 @@
 @media screen and (min-width: 992px) {
+  /* 鼠标样式 */
+  * {
+    cursor: url(/images/default.cur),auto;
+  }
+  :link {
+    cursor: url(/images/pointer.cur),auto
+  }
+
   // background
   //背景
   body {
     background-image: url(../images/background.jpg);
-    height:100%;
-    width:100%;
-    background-repeat:repeat-x;
-    background-attachment:fixed;
-    background-size:cover;
+    height: 100%;
+    width: 100%;
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+    background-size: cover;
   }
 
-  #footer{
+  #footer {
     color: #F7F2D8;
   }
+
   #footer a {
     color: #eee;
   }
@@ -47,7 +56,6 @@
   padding: 25px;
 }
 
-  
 
 .content-wrap {
   opacity: 0.84;
@@ -64,7 +72,6 @@
 .popup {
   opacity: 0.8;
 }
-
 
 
 //标题字体及背景
@@ -85,6 +92,7 @@
   font-size: 14px;
   color: #79724b;
 }
+
 //当鼠标移动到选项时的优化
 .menu .menu-item a:hover, .menu-item-active a {
   background: rgba(193, 193, 193, 0.09);
@@ -99,4 +107,28 @@
   padding: 0px;
   -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
   -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
+}
+
+.comments {
+  background: rgba(255,255,255,.71);
+
+  margin: 60px 20px 0;
+  margin: 0px 0;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 25px;
+  -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
+  -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
+}
+
+.v .vlist {
+  background: rgba(255,255,255,.71);
+}
+
+/* 鼠标样式 */
+* {
+  cursor: url(/images/default.cur),auto;
+}
+:link {
+  cursor: url(/images/pointer.cur),auto
 }

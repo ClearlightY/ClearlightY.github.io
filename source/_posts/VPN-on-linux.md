@@ -1,7 +1,9 @@
 ---
 title: VPN on linux
-date: 2020-03-04 22:24:37
+categories: technology
 tags: Linux
+abbrlink: 7479
+date: 2020-03-04 22:24:37
 ---
 1. vpn软件下载地址: <https://github.com/Qv2ray/Qv2ray/releases>
 2. ray的核心文件:<https://github.com/v2ray/v2ray-core/releases>
