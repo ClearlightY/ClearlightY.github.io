@@ -102,3 +102,20 @@ deploy:
   type: git
   repository: git@github.com:ClearlightY/ClearlightY.github.io.git 
   branch: master
+
+# 自动生成sitemap
+sitemap:
+    path: sitemap.xml
+baidusitemap:
+  path: baidusitemap.xml
+
+# 站内搜索
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+
+# Extensions RSS
+## Plugins: http://hexo.io/plugins/
+plugins: hexo-generate-feed

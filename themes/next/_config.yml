@@ -35,12 +35,12 @@ favicon:
   #ms_browserconfig: /images/browserconfig.xml
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+keywords: "Hexo, NexT, Clearlight, Linux, 网站, 分享, 工具"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
 # Set rss to specific value if you have burned your feed already.
-rss:
+rss: /atom.xml
 
 footer:
   # Specify the date when the site was setup.
@@ -48,7 +48,10 @@ footer:
   since: 2020
 
   # Icon between year and copyright info.
-  icon: user
+  icon:
+    name: fa fa-heart
+    animated: true
+    color: "#ff0000"
 
   # If not defined, will be used `author` from Hexo main config.
   copyright:
@@ -133,7 +136,10 @@ scheme: Muse
 social:
   GitHub: https://github.com/clearlightY || github
   E-Mail: mailto:lxy12531@163.com || envelope
-  CSDN: https://blog.csdn.net/qq_36852780
+  CSDN: https://blog.csdn.net/qq_36852780 || copyright
+  QQ: tencent://message/?Menu=yes&uin=870520936&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45 || qq
+  网易云音乐: https://music.163.com/#/user/home?id=466796519 || music
+  #Wechat: lxy9961108
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
@@ -538,9 +544,9 @@ rating:
 # Show number of visitors to each article.
 # You can visit https://leancloud.cn get AppID and AppKey.
 leancloud_visitors:
-  enable: false
-  app_id: #<app_id>
-  app_key: #<app_key>
+  enable: true
+  app_id: b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz #<app_id>
+  app_key: bw1k0GCjO6lHifiPFl0A2Unz #<app_key>
 
 # Another tool to show number of visitors to each article.
 # visit https://console.firebase.google.com/u/0/ to get apiKey and projectId
@@ -558,18 +564,20 @@ busuanzi_count:
   # count values only if the other configs are false
   enable: false
   # custom uv span for the whole site
-  site_uv: true
+  site_uv: false
   site_uv_header: <i class="fa fa-user"></i>
   site_uv_footer:
   # custom pv span for the whole site
-  site_pv: true
+  site_pv: false
   site_pv_header: <i class="fa fa-eye"></i>
   site_pv_footer:
   # custom pv span for one page only
-  page_pv: true
+  page_pv: false
   page_pv_header: <i class="fa fa-file-o"></i>
   page_pv_footer:
 
+# visitors count
+#counter: true
 
 # Tencent analytics ID
 # tencent_analytics:
@@ -579,7 +587,7 @@ busuanzi_count:
 
 
 # Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO
-baidu_push: false
+baidu_push: true
 
 # Google Calendar
 # Share your recent schedule to others via calendar page
@@ -735,7 +743,7 @@ vendors:
   _internal: lib
 
   # Internal version: 2.1.3
-  jquery:
+  jquery: https://code.jquery.com/jquery-2.1.3.min.js
 
   # Internal version: 2.1.5
   # See: http://fancyapps.com/fancybox/
@@ -820,5 +828,9 @@ images: images
 version: 5.1.4
 
 duoshuo:
-  enable: true
+  enable: false
   shortname: your-duoshuo-shortname
+
+# 文章末尾添加“本文结束”标记
+passage_end_tag:
+  enabled: true

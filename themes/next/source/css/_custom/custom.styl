@@ -1,1 +1,101 @@
-// Custom styles.
+@media screen and (min-width: 992px) {
+  // background
+  //背景
+  body {
+    background-image: url(../images/background.jpg);
+    height:100%;
+    width:100%;
+    background-repeat:repeat-x;
+    background-attachment:fixed;
+    background-size:cover;
+  }
+
+  #footer{
+    color: #F7F2D8;
+  }
+  #footer a {
+    color: #eee;
+  }
+
+  //当鼠标移动到选项时的优化
+  .menu .menu-item a:hover, .menu-item-active a {
+    background: #b9b9b924;
+    border-bottom-color: rgba(189, 98, 206, 0.588);
+  }
+
+  // 主页文章添加阴影效果
+  .post {
+    margin-top: 60px;
+    margin-bottom: 60px;
+    padding: 0px;
+    -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
+    -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
+  }
+
+  .post-block {
+    background: rgba(255, 255, 255, 0.84);
+    padding: 25px;
+  }
+
+  .content-wrap {
+    opacity: 0.84;
+  }
+}
+
+.post-block {
+  background: rgba(255, 255, 255, 0.71);
+  padding: 25px;
+}
+
+
+.content-wrap {
+  opacity: 0.84;
+}
+
+.sidebar {
+  opacity: 0.85;
+}
+
+.header-inner {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.popup {
+  opacity: 0.8;
+}
+
+
+
+//标题字体及背景
+.site-title {
+  font-size: 23px
+  font-family: 'Lato', "PingFang SC", "FZShuTi", sans-serif;
+}
+
+//副标题配置
+.site-subtitle {
+  margin-top: 10px;
+  color: #000;
+  font-family: 'Lato', "PingFang SC", "STXingkai", sans-serif;
+}
+
+//底部博客信息颜色
+.footer {
+  font-size: 14px;
+  color: #79724b;
+}
+//当鼠标移动到选项时的优化
+.menu .menu-item a:hover, .menu-item-active a {
+  background: rgba(193, 193, 193, 0.09);
+  border-bottom-color: rgba(189, 98, 206, 0.588);
+}
+
+
+// 主页文章添加阴影效果
+.post {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  padding: 0px;
+  -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
+  -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
+}
