@@ -6,7 +6,7 @@
     {% endif %}
 
     {% if page.comments %}
-      <script type="text/javascript">
+      <!--<script type="text/javascript">
         var disqus_config = function () {
           this.page.url = '{{ page.permalink }}';
           this.page.identifier = '{{ page.path }}';
@@ -16,7 +16,7 @@
         s.src = 'https://{{theme.disqus.shortname}}.disqus.com/embed.js';
         s.setAttribute('data-timestamp', '' + +new Date());
         (d.head || d.body).appendChild(s);
-      </script>
+      </script>-->
     {% endif %}
 
   {% endif %}

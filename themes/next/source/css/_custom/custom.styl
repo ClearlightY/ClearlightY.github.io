@@ -1,10 +1,30 @@
+@media screen and (max-width: 1460px) {
+  .sidebar-toggle {
+    display: none !important;
+  }
+
+  .sidebar {
+    display: none !important;
+  }
+
+  .back-to-top {
+    display: important;
+  }
+
+  .post-block {
+    background: rgb(255, 255, 255);
+    padding: 25px;
+  }
+}
+
 @media screen and (min-width: 992px) {
   /* 鼠标样式 */
   * {
-    cursor: url(/images/default.cur),auto;
+    cursor: url(/images/default.cur), auto;
   }
+
   :link {
-    cursor: url(/images/pointer.cur),auto
+    cursor: url(/images/pointer.cur), auto
   }
 
   // background
@@ -49,11 +69,19 @@
   .content-wrap {
     opacity: 0.84;
   }
+
 }
 
-.post-block {
-  background: rgba(255, 255, 255, 0.71);
-  padding: 25px;
+
+// background
+//背景
+body {
+  background-image: url(../images/background.jpg);
+  height: 100%;
+  width: 100%;
+  background-repeat: repeat-x;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 
@@ -90,7 +118,7 @@
 //底部博客信息颜色
 .footer {
   font-size: 14px;
-  color: #79724b;
+  color: #F7F2D8;
 }
 
 //当鼠标移动到选项时的优化
@@ -110,7 +138,7 @@
 }
 
 .comments {
-  background: rgba(255,255,255,.71);
+  background: rgba(255, 255, 255, .71);
 
   margin: 60px 20px 0;
   margin: 0px 0;
@@ -122,13 +150,20 @@
 }
 
 .v .vlist {
-  background: rgba(255,255,255,.71);
+  background: rgba(255, 255, 255, .71);
+}
+
+//  当没有侧边栏时, 文章内容伸长
+.main-inner {
+  margin: 0 auto;
+  width: 850px;
 }
 
 /* 鼠标样式 */
 * {
-  cursor: url(/images/default.cur),auto;
+  cursor: url(/images/default.cur), auto;
 }
+
 :link {
-  cursor: url(/images/pointer.cur),auto
+  cursor: url(/images/pointer.cur), auto
 }
