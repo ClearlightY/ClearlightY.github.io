@@ -3,7 +3,8 @@
 #}&copy; {% if theme.footer.since and theme.footer.since != current %}{{ theme.footer.since }} &mdash; {% endif %}{#
 #}<span itemprop="copyrightYear">{{ current }}</span>
   <span class="with-love" id="heart">
-    <i class="fa fa-heart" aria-hidden="true"></i>
+<!--    <i class="fa fa-heart" aria-hidden="true"></i>-->
+    <span><i class="fa fa-spin"><img class="sun" src="https://s2.ax1x.com/2020/03/09/8pQoTS.png"  alt="sun" /></i></span>
   </span>
   <span class="author" itemprop="copyrightHolder">{{ theme.footer.copyright || config.author }}</span>
 
