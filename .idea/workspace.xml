@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a2462d22-b0ea-4761-8a41-1204caddf9d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/themes/next/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/_config.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/next/layout/_partials/footer.swig" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/layout/_partials/footer.swig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/next/source/css/_custom/custom.styl" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/source/css/_custom/custom.styl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/next/source/css/_variables/custom.styl" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/source/css/_variables/custom.styl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/next/source/dist/music.js" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/source/dist/music.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +46,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/themes/next/_config.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="556">
@@ -67,11 +64,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/themes/next/source/dist/music.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1326">
-              <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
+            <state relative-caret-position="390">
+              <caret line="79" column="74" selection-start-line="79" selection-start-column="74" selection-end-line="79" selection-end-column="74" />
             </state>
           </provider>
         </entry>
@@ -187,11 +184,11 @@
         <option value="$PROJECT_DIR$/_config.yml" />
         <option value="$PROJECT_DIR$/source/categories/index.md" />
         <option value="$PROJECT_DIR$/themes/next/layout/_layout.swig" />
-        <option value="$PROJECT_DIR$/themes/next/source/dist/music.js" />
         <option value="$PROJECT_DIR$/themes/next/source/css/_custom/custom.styl" />
         <option value="$PROJECT_DIR$/themes/next/layout/_partials/footer.swig" />
         <option value="$PROJECT_DIR$/themes/next/source/css/_variables/custom.styl" />
         <option value="$PROJECT_DIR$/themes/next/_config.yml" />
+        <option value="$PROJECT_DIR$/themes/next/source/dist/music.js" />
       </list>
     </option>
   </component>
@@ -362,18 +359,18 @@
       <workItem from="1583409579331" duration="25321000" />
       <workItem from="1583482819286" duration="22532000" />
       <workItem from="1583566659387" duration="11931000" />
-      <workItem from="1583731416221" duration="5344000" />
+      <workItem from="1583731416221" duration="13036000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69365000" />
+    <option name="totallyTimeSpent" value="77057000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="952" y="-8" width="976" height="1066" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30567685" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.30567685" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -681,13 +678,6 @@
     <entry file="file://$PROJECT_DIR$/themes/next/layout/_custom/sidebar.swig">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/themes/next/source/dist/music.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1326">
-          <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/themes/next/source/css/_custom/custom.styl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
@@ -744,6 +734,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="556">
           <caret line="142" column="53" selection-start-line="142" selection-start-column="53" selection-end-line="142" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/themes/next/source/dist/music.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="79" column="74" selection-start-line="79" selection-start-column="74" selection-end-line="79" selection-end-column="74" />
         </state>
       </provider>
     </entry>
