@@ -100,6 +100,18 @@ const ap = new APlayer({
       cover: 'https://s2.ax1x.com/2020/03/08/3zOSRx.jpg',
     },
     {
+      name: '本兮',
+      artist: '...',
+      url: 'https://sharefs.yun.kugou.com/202003101323/81a10954ccdd520b735e523963caa366/G009/M02/0A/17/qYYBAFT71ACAPFypADuZUHiT44A955.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/08/3zOSRx.jpg',
+    },
+    {
+      name: '本兮',
+      artist: '一直在等',
+      url: 'http://fdfs.xmcdn.com/group16/M0B/5C/88/wKgDalXLWD7S_1FIAB8AgG5wQr4608.mp3',
+      cover: 'http://imagev2.xmcdn.com/group12/M07/44/29/wKgDW1Wl5rTCWmIlAABU9OJHURY156.jpg!op_type=3&columns=640&rows=640',
+    },
+    {
       name: '李源田',
       artist: '庸俗',
       url: 'https://sharefs.yun.kugou.com/202003082333/4cd8aa50e50a42a326b33b21fa8cdd4a/G092/M05/10/10/PJQEAFu5R6yAXQQdADwkF32nMeA103.mp3',
