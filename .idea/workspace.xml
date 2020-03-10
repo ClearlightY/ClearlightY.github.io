@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a2462d22-b0ea-4761-8a41-1204caddf9d3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/themes/next/source/dist/music.js" beforeDir="false" afterPath="$PROJECT_DIR$/themes/next/source/dist/music.js" afterDir="false" />
-    </list>
+    <list default="true" id="a2462d22-b0ea-4761-8a41-1204caddf9d3" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/themes/next/source/dist/music.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="557">
-              <caret line="111" column="31" lean-forward="true" selection-start-line="111" selection-start-column="31" selection-end-line="111" selection-end-column="31" />
+              <caret line="111" column="31" selection-start-line="111" selection-start-column="31" selection-end-line="111" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -246,12 +244,12 @@
       <workItem from="1583566659387" duration="11931000" />
       <workItem from="1583731416221" duration="13306000" />
       <workItem from="1583809341450" duration="669000" />
-      <workItem from="1583820056437" duration="906000" />
+      <workItem from="1583820056437" duration="1175000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78902000" />
+    <option name="totallyTimeSpent" value="79171000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="952" y="-8" width="976" height="1066" extended-state="0" />
@@ -623,7 +621,7 @@
     <entry file="file://$PROJECT_DIR$/themes/next/source/dist/music.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="557">
-          <caret line="111" column="31" lean-forward="true" selection-start-line="111" selection-start-column="31" selection-end-line="111" selection-end-column="31" />
+          <caret line="111" column="31" selection-start-line="111" selection-start-column="31" selection-end-line="111" selection-end-column="31" />
         </state>
       </provider>
     </entry>
