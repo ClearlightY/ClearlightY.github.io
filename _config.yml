@@ -103,6 +103,7 @@ deploy:
   repository: git@github.com:ClearlightY/ClearlightY.github.io.git 
   branch: master
 
+
 # 自动生成sitemap
 sitemap:
     path: sitemap.xml
@@ -148,3 +149,9 @@ lazyload:
   enable: true
   onlypost: false
 #  loadingImg: /images/loading.gif
+
+baidu_url_submit:
+        count: 3
+        host: http://clearlight.com.cn
+        token: aE8RYTe1ToL0GEac
+        path: baidu_urls.txt

@@ -400,7 +400,7 @@ valine:
   appkey: bw1k0GCjO6lHifiPFl0A2Unz # your leancloud application appkey
   notify: false # mail notifier , https://github.com/xCss/Valine/wiki
   verify: false # Verification code
-  placeholder: Just go go # comment box placeholder
+  placeholder: Leave your mark # comment box placeholder
 #  avatar: mm # gravatar style
   avatar: wavatar # gravatar style
   guest_info: nick,mail,link # custom comment header
