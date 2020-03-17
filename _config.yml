@@ -99,9 +99,10 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
+- type: git
   repository: git@github.com:ClearlightY/ClearlightY.github.io.git 
   branch: master
+- type: baidu_url_submitter
 
 
 # 自动生成sitemap
@@ -152,6 +153,6 @@ lazyload:
 
 baidu_url_submit:
         count: 5 
-        host: http://clearlight.com.cn
+        host: www.clearlight.com.cn
         token: aE8RYTe1ToL0GEac
         path: baidu_urls.txt
