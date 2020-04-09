@@ -59,7 +59,7 @@ highlight:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
-  per_page: 5
+  per_page: 8
   order_by: -date
 
 # Category & Tag
@@ -100,7 +100,10 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
 - type: git
-  repository: git@github.com:ClearlightY/ClearlightY.github.io.git 
+  repo: 
+        github: git@github.com:ClearlightY/ClearlightY.github.io.git
+        coding: git@e.coding.net:clearlighty/clearlighty.git 
+  
   branch: master
 - type: baidu_url_submitter
 
