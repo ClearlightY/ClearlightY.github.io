@@ -1,7 +1,7 @@
 const ap = new APlayer({
   container: document.getElementById('aplayer'),
   fixed: true,
-  autoplay: false,
+  autoplay: true,
   loop: 'all',
   order: 'random',
   preload: 'auto',
@@ -12,7 +12,7 @@ const ap = new APlayer({
     {
       name: '1---------------------',
       artist: '--------------------------------------------------------------',
-      url: 'http://www.0dutv.com/plug/down/up2.php/205127505.mp3',
+      url: 'https://www.0dutv.com/plug/down/up2.php/205127505.mp3',
       cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
     },
     {
@@ -24,19 +24,19 @@ const ap = new APlayer({
     {
       name: '3---------------------',
       artist: '--------------------------------------------------------------',
-      url: 'http://www.0dutv.com/plug/down/up2.php/127049945.mp3',
+      url: 'https://www.0dutv.com/plug/down/up2.php/127049945.mp3',
       cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
     },
     {
       name: '4---------------------',
       artist: '--------------------------------------------------------------',
-      url: 'http://www.0dutv.com/plug/down/up2.php/651386.mp3',
+      url: 'https://www.0dutv.com/plug/down/up2.php/651386.mp3',
       cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
     },
     {
       name: '5---------------------',
       artist: '--------------------------------------------------------------',
-      url: 'http://www.0dutv.com/plug/down/up2.php/651386.mp3',
+      url: 'https://www.0dutv.com/plug/down/up2.php/651386.mp3',
       cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
     },
     {
@@ -48,13 +48,13 @@ const ap = new APlayer({
     {
       name: '7---------------------',
       artist: '--------------------------------------------------------------',
-      url: 'http://www.0dutv.com/plug/down/up2.php/818067.mp3',
+      url: 'https://www.0dutv.com/plug/down/up2.php/818067.mp3',
       cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
     },
     {
       name: '8---------------------',
       artist: '--------------------------------------------------------------',
-      url: 'http://www.0dutv.com/plug/down/up2.php/460866.mp3',
+      url: 'https://www.0dutv.com/plug/down/up2.php/460866.mp3',
       cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
     },
     {
@@ -66,13 +66,13 @@ const ap = new APlayer({
     {
       name: '10---------------------',
       artist: '--------------------------------------------------------------',
-      url: 'http://www.0dutv.com/plug/down/up2.php/107770314.mp3',
+      url: 'https://www.0dutv.com/plug/down/up2.php/107770314.mp3',
       cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
     },
     {
       name: '11---------------------',
       artist: '--------------------------------------------------------------',
-      url: 'http://www.0dutv.com/plug/down/up2.php/107587533.mp3',
+      url: 'https://www.0dutv.com/plug/down/up2.php/107587533.mp3',
       cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
     },
     {
