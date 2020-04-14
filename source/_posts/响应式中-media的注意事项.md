@@ -1,9 +1,7 @@
 ---
 title: 响应式中@media的注意事项
-top: 0
 categories: 前端
 tags: 响应式
-abbrlink: 20080
 date: 2020-03-27 13:53:54
 ---
 
