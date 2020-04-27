@@ -1,0 +1,17 @@
+---
+title: 高效使用Google搜索 - Tools
+top: 0
+date: 2020-04-27 16:32:01
+categories: 资源分享
+tags: tools
+---
+
+官网: <https://b.xinshengdaxue.com/C04.html>
+
+Chrome浏览器插件:
+- GooglePass: <https://www.lanzous.com/iaedwaj>
+- Google上网助手: <https://www.lanzous.com/ia88npe>
+- Google-access-helper: <https://www.lanzous.com/i4hskyd>
+>只能帮你到这了
+
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20200427010818335.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM2ODUyNzgw,size_16,color_FFFFFF,t_70)
