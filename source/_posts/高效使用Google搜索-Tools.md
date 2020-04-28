@@ -1,9 +1,10 @@
 ---
 title: 高效使用Google搜索 - Tools
 top: 0
-date: 2020-04-27 16:32:01
 categories: 资源分享
 tags: tools
+abbrlink: 33405
+date: 2020-04-27 16:32:01
 ---
 
 官网: <https://b.xinshengdaxue.com/C04.html>
