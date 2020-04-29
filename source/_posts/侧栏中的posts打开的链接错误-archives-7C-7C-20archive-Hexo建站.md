@@ -1,6 +1,7 @@
 ---
 title: 侧栏中的posts打开的链接错误 /archives/%7C%7C%20archive/ - Hexo建站
 tags: Hexo
+categories: BugFix
 abbrlink: 28754
 date: 2020-03-05 17:53:31
 ---

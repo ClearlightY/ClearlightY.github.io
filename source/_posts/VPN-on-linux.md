@@ -1,6 +1,6 @@
 ---
 title: VPN on linux
-categories: technology
+categories: soft
 tags: Linux
 abbrlink: 7479
 date: 2020-03-04 22:24:37

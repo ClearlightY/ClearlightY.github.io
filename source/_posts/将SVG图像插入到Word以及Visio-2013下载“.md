@@ -1,9 +1,10 @@
 ---
-title: '将SVG图像插入到Word以及Visio 2013下载'
+title: 将SVG图像插入到Word以及Visio 2013下载
 top: 0
-date: 2020-04-28 17:18:20
 categories: 资源分享
 tags: tools
+abbrlink: 34755
+date: 2020-04-28 17:18:20
 ---
 
 >visio 2013下载地址： [Visio 2013](http://pan.iflytek.com:80/link/D8A03733930CE25A17ABF511EB957B10)

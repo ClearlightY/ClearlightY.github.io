@@ -3,8 +3,8 @@ title: win10字体显示Mac效果+Chrome字体效果增强
 top: 0
 abbrlink: 31617
 date: 2020-03-14 21:51:15
-categories:
-tags:
+categories: soft
+tags: tools
 ---
 
 ## win10字体显示Mac效果
