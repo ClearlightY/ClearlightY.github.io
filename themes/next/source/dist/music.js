@@ -18,7 +18,7 @@ const ap = new APlayer({
     {
       name: '2---------------------',
       artist: '--------------------------------------------------------------',
-      url: 'http://www.0dutv.com/upload/dance/20200307/3F1162E59BF4F9D06AFE61A86CDCF508.mp3',
+      url: 'http://www.clearlight.top/homepage/music/moshang.mp3',
       cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
     },
     {
