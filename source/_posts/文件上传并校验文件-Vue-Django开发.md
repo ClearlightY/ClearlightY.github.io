@@ -1,9 +1,10 @@
 ---
 title: 文件上传并校验文件 - Vue+Django开发
 top: 0
-date: 2020-06-12 11:17:34
 categories: 实习
 tags: Vue Django
+abbrlink: 17143
+date: 2020-06-12 11:17:34
 ---
 
 # 一. 创建Django项目
@@ -98,3 +99,57 @@ Tip: [vue——解决“You may use special comments to disable some warnings. U
 > ```
 >
 > **然后 npm run dev 就能正常运行了**
+
+
+
+## 文件上传的Djangode views.py代码
+
+```python
+import os
+
+from django.http import HttpResponse
+from django.middleware.csrf import get_token
+from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
+
+
+@require_http_methods(["GET", "POST"])
+def index(request):
+    response = {}
+    try:
+        if request.method == 'GET':
+            a = get_token(request)
+            # print(a)
+        if request.method == 'POST':
+            req = request.FILES.get('file')
+            print(req)
+            print(req.size)
+            # for chunk in req.chunks():
+            #     print(chunk)
+            content = []
+	    # 逐行读取文件内容, 并且消除换行
+            for line in req.read().splitlines():
+                print(line)
+		# 将每行内容添加到list中
+                content.append(line)
+            destination = open(
+                os.path.join("f://vue", req.name),
+                'wb+')  # 打开特定的文件进行二进制的写操作
+            for chunk in req.chunks():  # 分块写入文件
+                destination.write(chunk)
+            destination.close()
+            print(content[2])
+            response['code'] = 200
+    except Exception as e:
+        response['code'] = 1
+    return HttpResponse(response)
+
+# Create your views here.
+# def index(request):
+#     request_method = request.FILES.get('file')
+#     print(request_method)
+#     print(request_method.size)
+#     return HttpResponse("200")
+
+```
