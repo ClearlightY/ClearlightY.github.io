@@ -1,25 +1,25 @@
 @media screen and (max-width: 767px) {
   .pagination .next, .pagination .page-number, .pagination .prev {
     margin-bottom: 10px;
+    padding: 0 10px;
     border-top: 0;
     border-bottom: 1px solid #46de9d;
-    padding: 0 10px;
     color: #47ffd5;
-    //background: #fff0;
+    // background: #fff0;
   }
 
   .pagination {
-    background: #fff0;
-    padding: 25px;
     margin: -30px 0 40px;
+    padding: 25px;
+    background: #fff0;
   }
 }
 
 @media screen and (min-width: 767px) {
   .pagination {
-    background: rgb(255, 255, 255, 0.84);
-    padding: 25px;
     margin: -30px 0 40px;
+    padding: 25px;
+    background: rgb(255, 255, 255, .84);
   }
 }
 
@@ -37,52 +37,57 @@
   }
 
   .post-block {
-    background: rgb(255, 255, 255);
     padding: 25px;
+    background: rgb(255, 255, 255);
   }
 
   /*
-
-  .posts-expand {
-    padding-top: 0;
-  }
-  */
+  
+    .posts-expand {
+      padding-top: 0;
+    }
+    */
   .pagination {
-    //background: rgb(255, 255, 255, 0.54);
-    padding: 25px;
     margin: -30px 0 40px;
+    // background: rgb(255, 255, 255, 0.54);
+    padding: 25px;
   }
 }
-
 
 @media screen and (min-width: 992px) {
   /* 鼠标样式 */
   * {
-    cursor: url(/images/default.cur), auto;
+    cursor: url('/images/default.cur'), auto;
   }
 
   :link {
-    cursor: url(/images/pointer.cur), auto
+    cursor: url('/images/pointer.cur'), auto;
   }
 
   // background
-  //背景
+  // 背景
   body {
-    //background-image: url(../images/background.jpg);
-    //background-image: url(https://s2.ax1x.com/2020/03/09/8p9Jcd.jpg);
-    /*   background-image: url(https://s1.ax1x.com/2020/03/16/8JiCcR.jpg);
-       height: 100%;
-       width: 100%;
-       background-repeat: repeat-x;
-       background-attachment: fixed;
-       background-size: cover;
-       color: black;*/
-    background-image: url(https://s1.ax1x.com/2020/05/15/Ysddun.gif
-    ) !important;
-    background-repeat: repeat !important;
-    background-color: #0a0a0a !important
-  }
+    width: 100%;
+    height: 100%;
+    /* background-image: url(https://s1.ax1x.com/2020/03/16/8JiCcR.jpg);
+    height: 100%;
+    width: 100%;
+    background-repeat: repeat-x;
+    background-attachment: fixed;
+    background-size: cover;
+    color: black; */
+    /* background-image: url(https://s1.ax1x.com/2020/05/15/Ysddun.gif
+    ) !important; */
+    background-image: url('https://clearlight.top/resources/images/clearlight_bg.png') !important;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: repeat-x;
+    color: black;
 
+@css {
+  *
+}
+  }
 
   #footer {
     color: #F7F2D8;
@@ -92,122 +97,124 @@
     color: #eee;
   }
 
-  //当鼠标移动到选项时的优化
+  // 当鼠标移动到选项时的优化
   .menu .menu-item a:hover, .menu-item-active a {
+    border-bottom-color: rgba(189, 98, 206, .588);
     background: #b9b9b924;
-    border-bottom-color: rgba(189, 98, 206, 0.588);
   }
 
   // 主页文章添加阴影效果
   .post {
     margin-top: 60px;
     margin-bottom: 60px;
-    padding: 0px;
+    padding: 0;
     -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
     -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
   }
 
   .post-block {
-    background: rgba(255, 255, 255, 0.84);
     padding: 25px;
+    background: rgba(255, 255, 255, .84);
   }
 
   .content-wrap {
-    opacity: 0.84;
+    opacity: .84;
   }
 
-  /*  .posts-expand {
-      padding-top: 0;
-    }*/
+  /* .posts-expand {
+    padding-top: 0;
+  } */
   .pagination {
-    background: rgb(255, 255, 255, 0.54);
-    padding: 25px;
     margin: -30px 0 40px;
+    padding: 25px;
+    background: rgb(255, 255, 255, .54);
   }
 }
 
-
-/*.posts-expand {
+/* .posts-expand {
   padding-top: 0;
-}*/
-
-// background
-//背景
+} */
 body {
-  //background-image: url(https://s2.ax1x.com/2020/03/09/8p9Jcd.jpg);
-  /*  background-image: url(https://s1.ax1x.com/2020/03/16/8JiCcR.jpg);
-    height: 100%;
-    width: 100%;
-    background-repeat: repeat-x;
-    background-attachment: fixed;
-    background-size: cover;*/
-  background-image: url(https://s1.ax1x.com/2020/05/15/Ysddun.gif
+  width: 100%;
+  height: 100%;
+  /* background-image: url(https://s1.ax1x.com/2020/03/16/8JiCcR.jpg);
+  height: 100%;
+  width: 100%;
+  background-repeat: repeat-x;
+  background-attachment: fixed;
+  background-size: cover; */
+  /* background-image: url(https://s1.ax1x.com/2020/05/15/Ysddun.gif
   ) !important;
   background-repeat: repeat !important;
-  background-color: #0a0a0a !important
+  background-color: #0a0a0a !important */
+  background-image: url('https://clearlight.top/resources/images/clearlight_bg.png') !important; 
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: repeat-x;
+  color: black;
+
+@css {
+  *
+}
 }
 
-
 .content-wrap {
-  opacity: 0.84;
+  opacity: .84;
 }
 
 .sidebar {
-  opacity: 0.85;
+  opacity: .85;
 }
 
 .header-inner {
-  background: rgba(255, 255, 255, 0.0);
+  background: rgba(255, 255, 255, 0);
 }
 
 .popup {
-  opacity: 0.8;
+  opacity: .8;
 }
 
-
-//标题字体及背景
+// 标题字体及背景
 .site-title {
-  font-size: 23px
-  font-family: 'Lato', "PingFang SC", "FZShuTi", sans-serif;
+  font-size: 23px;
+  font-family: 'Lato', 'PingFang SC', 'FZShuTi', sans-serif;
 }
 
-//副标题配置
+// 副标题配置
 .site-subtitle {
   margin-top: 10px;
   color: #000;
-  font-family: 'Lato', "PingFang SC", "STXingkai", sans-serif;
+  font-family: 'Lato', 'PingFang SC', 'STXingkai', sans-serif;
 }
 
-//底部博客信息颜色
+// 底部博客信息颜色
 .footer {
-  font-size: 14px;
   color: #F7F2D8;
+  font-size: 14px;
 }
 
-//当鼠标移动到选项时的优化
+// 当鼠标移动到选项时的优化
 .menu .menu-item a:hover, .menu-item-active a {
+  border-bottom-color: rgba(189, 98, 206, .588);
   background: rgba(193, 193, 193, 0);
-  border-bottom-color: rgba(189, 98, 206, 0.588);
 }
-
 
 // 主页文章添加阴影效果
 .post {
   margin-top: 60px;
   margin-bottom: 60px;
-  padding: 0px;
+  padding: 0;
   -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
   -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
 }
 
 .comments {
-  background: rgb(255, 255, 255);
-
   margin: 60px 20px 0;
-  margin: 0px 0;
+  margin: 0;
   margin-top: 60px;
   margin-bottom: 60px;
   padding: 25px;
+  background: rgb(255, 255, 255);
   -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
   -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
 }
@@ -216,7 +223,7 @@ body {
   background: rgba(255, 255, 255, .71);
 }
 
-//  当没有侧边栏时, 文章内容伸长
+// 当没有侧边栏时, 文章内容伸长
 .main-inner {
   margin: 0 auto;
   width: 850px;
@@ -224,9 +231,9 @@ body {
 
 /* 鼠标样式 */
 * {
-  cursor: url(/images/default.cur), auto;
+  cursor: url('/images/default.cur'), auto;
 }
 
 :link {
-  cursor: url(/images/pointer.cur), auto
+  cursor: url('/images/pointer.cur'), auto;
 }

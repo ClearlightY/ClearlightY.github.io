@@ -167,3 +167,11 @@ baidu_url_submit:
         host: www.clearlight.com.cn
         token: aE8RYTe1ToL0GEac
         path: baidu_urls.txt
+
+# offline config passed 加速加载速度
+service_worker:
+  maximumFileSizeToCacheInBytes: 5242880
+  staticFileGlobs:
+  - public/**/*.{js,html,css,png,jpg,gif,svg,eot,ttf,woff,woff2}
+  stripPrefix: public
+  verbose: true
