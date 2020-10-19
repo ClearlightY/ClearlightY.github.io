@@ -95,6 +95,9 @@
   <div id="aplayer"></div>
   <script type="text/javascript" src="/dist/APlayer.min.js"></script>
   <script type="text/javascript" src="/dist/music.js"></script>
+  <!--热加载,加快网站打开速度-->
+  <script type="text/javascript" src="/js/src/instantclick.js" data-no-instant></script>
+  <script data-no-instant>InstantClick.init();</script>
 </body>
 
 </html>
