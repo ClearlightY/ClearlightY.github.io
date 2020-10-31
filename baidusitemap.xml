@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://clearlight.com.cn/2020/03/14/win10%E5%AD%97%E4%BD%93%E6%98%BE%E7%A4%BAMac%E6%95%88%E6%9E%9C-Chrome%E5%AD%97%E4%BD%93%E6%95%88%E6%9E%9C%E5%A2%9E%E5%BC%BA/</loc>
+    <lastmod>2020-10-31</lastmod>
+  </url>  <url>
+    <loc>http://clearlight.com.cn/2020/10/31/%E7%BE%8E%E9%A3%9F%E9%A3%9F%E8%B0%B1/</loc>
+    <lastmod>2020-10-31</lastmod>
+  </url>  <url>
     <loc>http://clearlight.com.cn/2020/10/21/%E5%81%87%E5%A6%82%E6%88%91%E7%9A%84%E6%98%8E%E5%A4%A9%E6%98%AF%E8%BF%99%E6%A0%B7/</loc>
     <lastmod>2020-10-20</lastmod>
   </url>  <url>
@@ -37,13 +43,10 @@
     <loc>http://clearlight.com.cn/2020/03/27/%E5%93%8D%E5%BA%94%E5%BC%8F%E4%B8%AD-media%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</loc>
     <lastmod>2020-09-05</lastmod>
   </url>  <url>
-    <loc>http://clearlight.com.cn/2020/03/14/win10%E5%AD%97%E4%BD%93%E6%98%BE%E7%A4%BAMac%E6%95%88%E6%9E%9C-Chrome%E5%AD%97%E4%BD%93%E6%95%88%E6%9E%9C%E5%A2%9E%E5%BC%BA/</loc>
+    <loc>http://clearlight.com.cn/2020/05/21/vimdiff%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</loc>
     <lastmod>2020-09-05</lastmod>
   </url>  <url>
     <loc>http://clearlight.com.cn/2020/06/04/vim%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/</loc>
-    <lastmod>2020-09-05</lastmod>
-  </url>  <url>
-    <loc>http://clearlight.com.cn/2020/05/21/vimdiff%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</loc>
     <lastmod>2020-09-05</lastmod>
   </url>  <url>
     <loc>http://clearlight.com.cn/2020/04/16/project-problem-record/</loc>
@@ -52,10 +55,10 @@
     <loc>http://clearlight.com.cn/2020/03/04/VPN-on-linux/</loc>
     <lastmod>2020-09-05</lastmod>
   </url>  <url>
-    <loc>http://clearlight.com.cn/2020/04/22/Redis%E7%9A%84%E5%AE%89%E8%A3%85-Linux/</loc>
+    <loc>http://clearlight.com.cn/2020/03/04/Ubuntu18-04-IDEA2019-2-1%E7%9A%84%E5%AE%89%E8%A3%85/</loc>
     <lastmod>2020-09-05</lastmod>
   </url>  <url>
-    <loc>http://clearlight.com.cn/2020/03/04/Ubuntu18-04-IDEA2019-2-1%E7%9A%84%E5%AE%89%E8%A3%85/</loc>
+    <loc>http://clearlight.com.cn/2020/04/22/Redis%E7%9A%84%E5%AE%89%E8%A3%85-Linux/</loc>
     <lastmod>2020-09-05</lastmod>
   </url>  <url>
     <loc>http://clearlight.com.cn/2020/03/12/MyBatis%E5%85%A5%E9%97%A8-%E4%BA%8C/</loc>
