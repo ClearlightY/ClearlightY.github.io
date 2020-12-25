@@ -87,3 +87,7 @@ setInterval("createtime()",250);
        <span class="post-count">{{ totalcount(site) }}</span>
     </span>
 </div>
+
+<div class="copyright">
+<a href="http://beian.miit.gov.cn/publish/query/indexFirst.action" target="_blank" rel="nofollow noopener">冀ICP备19019307号</a>
+</div>
