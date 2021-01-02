@@ -1,5 +1,5 @@
-http://clearlight.com.cn/2021/01/02/test/
-http://clearlight.com.cn/2021/01/01/IDEA-PyCharm-GoLang%E7%AD%89JetBrains-2020-3-x%E6%BF%80%E6%B4%BB%E5%88%B02099/
-http://clearlight.com.cn/2020/11/12/JetBrains-%E5%85%A8%E7%B3%BB%E5%88%97%E4%BA%A7%E5%93%81-%E5%8C%85%E6%8B%AC-IDEA%E6%BF%80%E6%B4%BB%E5%88%B02089%E5%B9%B4/
-http://clearlight.com.cn/2020/11/01/PLSQL%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E9%85%8D%E7%BD%AE-11-1-Oracle/
-http://clearlight.com.cn/2020/10/31/%E7%BE%8E%E9%A3%9F%E9%A3%9F%E8%B0%B1/
+http://clearlight.com.cn/posts/10838.html
+http://clearlight.com.cn/posts/64128.html
+http://clearlight.com.cn/posts/52325.html
+http://clearlight.com.cn/posts/45769.html
+http://clearlight.com.cn/posts/18217.html

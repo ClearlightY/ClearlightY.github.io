@@ -1,3 +1,3 @@
-// build time:Sat Jan 02 2021 14:10:52 GMT+0800 (GMT+08:00)
+// build time:Sat Jan 02 2021 16:30:57 GMT+0800 (GMT+08:00)
 window.requestAnimationFrame=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame;function Debouncer(i){this.callback=i;this.ticking=false}Debouncer.prototype={constructor:Debouncer,update:function(){this.callback&&this.callback();this.ticking=false},requestTick:function(){if(!this.ticking){requestAnimationFrame(this.rafCallback||(this.rafCallback=this.update.bind(this)));this.ticking=true}},handleEvent:function(){this.requestTick()}};
 //rebuild by neat 

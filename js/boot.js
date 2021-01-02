@@ -1,3 +1,3 @@
-// build time:Sat Jan 02 2021 14:10:52 GMT+0800 (GMT+08:00)
+// build time:Sat Jan 02 2021 16:30:57 GMT+0800 (GMT+08:00)
 Fluid.boot={};Fluid.boot.registerEvents=function(){Fluid.events.registerNavbarEvent();Fluid.events.registerParallaxEvent();Fluid.events.registerScrollDownArrowEvent();Fluid.events.registerScrollTopArrowEvent()};Fluid.boot.refresh=function(){CONFIG.toc.enable&&Fluid.plugins.initTocBot();CONFIG.image_zoom&&Fluid.plugins.wrapImageWithFancyBox();CONFIG.anchorjs.enable&&Fluid.plugins.registerAnchor();CONFIG.copy_btn&&Fluid.plugins.registerCopyCode();CONFIG.progressbar&&Fluid.plugins.registerImageLoaded()};document.addEventListener("DOMContentLoaded",function(){Fluid.boot.registerEvents();Fluid.boot.refresh()});
 //rebuild by neat 
