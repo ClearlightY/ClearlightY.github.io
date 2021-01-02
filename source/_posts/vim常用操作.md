@@ -21,3 +21,9 @@ date: 2020-06-04 00:12:09
    ctrl+l -> 清屏
 3. gi -> 快速回到最后一次编辑的位置并进入插入模式
 
+---
+
+**Vim常用快捷键_PDF**
+
+下载地址: [**Vim - 全面解析快捷键.zip**](https://clearlight.lanzous.com/i26V1fqkc3g)
+

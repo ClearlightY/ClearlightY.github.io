@@ -13,11 +13,11 @@ tags: tools
 
 然后开始安装软件[MacType](https://www.mactype.net/), `选择托盘加载, 独立加载模式`, 下一步后你喜欢的字体.(<font color=greenred>推荐: `XMac`中的`XMac.LCD.Default`字体</font>)
 
-![1584192982223](1584192982223.png)
+![1584192982223](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102172439.png)
 
 效果展示:
 
-![1584193238839](1584193238839.png)
+![1584193238839](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102172458.png)
 
 ## 视频演示
 
@@ -29,7 +29,7 @@ tags: tools
 
 `设置`→`外观`→`自定义字体`
 
-![1584193393311](1584193393311.png)
+![1584193393311](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102172514.png)
 
 此时将字体换为XHei之后, 显示效果并不是很好, 这是在结合油猴插件将会增强字体的显示效果
 
@@ -37,9 +37,9 @@ tags: tools
 
 显示效果对比:
 
-![1584193655469](1584193655469.png)
+![1584193655469](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102172525.png)
 
-![1584193693173](1584193693173.png)
+![1584193693173](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102172535.png)
 
 对于视觉效果超棒, 你将更加清晰的浏览网页.
 

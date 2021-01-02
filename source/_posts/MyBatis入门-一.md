@@ -183,7 +183,7 @@ public interface UserDao {
 
 `测试类`
 
-![1583847823526](1583847823526.png)
+![1583847823526](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102172941.png)
 
 **注意事项:**
 

@@ -16,11 +16,17 @@ timezone: ''
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://clearlight.com.cn/
 root: /
-permalink: :year/:month/:day/:title/
+# permalink: :year/:month/:day/:title/
+permalink: posts/:abbrlink.html  # 此处可以自己设置，也可以直接使用 :/abbrlink
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
+    
+# abbrlink config
+abbrlink:
+  alg: crc32 #support crc16(default) and crc32
+  rep: hex #support dec(default) and hex
 
 # Directory
 source_dir: source
@@ -102,7 +108,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: fluid
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
@@ -123,11 +129,11 @@ baidusitemap:
   path: baidusitemap.xml
 
 # 站内搜索
-search:
-  path: search.xml
-  field: post
-  format: html
-  limit: 10000
+##search:
+##  path: search.xml
+##  field: post
+##  format: html
+##  limit: 10000
 
 # Extensions RSS
 ## Plugins: http://hexo.io/plugins/
@@ -144,7 +150,7 @@ neat_html:
 neat_css:
   enable: true
   exclude:
-    - '*/*.min.css'
+    - '**/*.min.css'
 # 压缩js
 neat_js:
   enable: true

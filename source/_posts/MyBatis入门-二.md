@@ -13,7 +13,7 @@ tags: MyBatis
 
 ## 一、MyBatis如何通过XML方式对JDBC实现封装
 
-![MyBatis_all](MyBatis_all.png)
+![MyBatis_all](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173001.png)
 
 
 
@@ -29,11 +29,11 @@ void updateUser(User user);
 
 step2、修改映射文件
 
-![1571043760801](1571043760801.png)
+![1571043760801](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173029.png)
 
 step3、测试即可
 
-![1571043830811](1571043830811.png)
+![1571043830811](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173044.png)
 
 ## 删除操作
 
@@ -45,11 +45,11 @@ void delUser(Integer uid);
 
 step2、映射文件
 
-![1571044142787](1571044142787.png)
+![1571044142787](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173056.png)
 
 step3、测试
 
-![1571044205710](1571044205710.png)
+![1571044205710](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173129.png)
 
 
 
@@ -65,11 +65,11 @@ List<User> findAllUsers1();
 
 step2、映射文件
 
-![1571044564929](1571044564929.png)
+![1571044564929](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173144.png)
 
 step3、测试即可
 
-![1571044635199](1571044635199.png)
+![1571044635199](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173209.png)
 
 
 
@@ -85,11 +85,11 @@ step2、映射文件
 
 手动映射名称不一致的情况
 
-![1571044965358](1571044965358.png)
+![1571044965358](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173228.png)
 
 step3、测试类
 
-![1571044779971](1571044779971.png)
+![1571044779971](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173241.png)
 
 ## 条件查询
 
@@ -103,11 +103,11 @@ User findUserByUid(Integer uid);
 
 step2、映射文件
 
-![1571046361233](1571046361233.png)
+![1571046361233](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173254.png)
 
 step3、测试
 
-![1571046416787](1571046416787.png)
+![1571046416787](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173309.png)
 
 ### 情况二：有多个简单类型的参数
 
@@ -119,17 +119,17 @@ User findUserByUidUsername(Integer uid,String username);
 
 step2、映射文件
 
-![1571046645444](1571046645444.png)
+![1571046645444](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173320.png)
 
 
 
 自己指定参数名称
 
-![1571046737598](1571046737598.png)
+![1571046737598](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173332.png)
 
 step3、测试类
 
-![1571046656518](1571046656518.png)
+![1571046656518](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173344.png)
 
 ### 情况三：使用VO对象进行封装多个参数
 
@@ -137,7 +137,7 @@ VO：Value Object，专门封装数据的（类似POJO）。
 
 step1、把查询条件封装到一个VO对象中
 
-![1571046852101](1571046852101.png)
+![1571046852101](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173356.png)
 
 step2、编写dao接口
 
@@ -147,11 +147,11 @@ User findUserByUidUsername1(UserVO vo);
 
 step3、映射文件
 
-![1571046911114](1571046911114.png)
+![1571046911114](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173413.png)
 
 step4、测试类
 
-![1571047010724](1571047010724.png)
+![1571047010724](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173431.png)
 
 ## 模糊查询
 
@@ -165,11 +165,11 @@ List<User> findUserByUsername1(String username);
 
 step2、映射文件
 
-![1571047205911](1571047205911.png)
+![1571047205911](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173447.png)
 
 step3、测试类
 
-![1571047298046](1571047298046.png)
+![1571047298046](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173500.png)
 
 ### 方式二：（推荐）
 
@@ -183,11 +183,11 @@ List<User> findUserByUsername2(String username);
 
 step2、映射文件
 
-![1571047409500](1571047409500.png)
+![1571047409500](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173521.png)
 
 step3、测试类
 
-![1571047456882](1571047456882.png)
+![1571047456882](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173532.png)
 
 ### 方式三：（了解）
 
@@ -199,11 +199,11 @@ List<User> findUserByUsername3(String username);
 
 step2、映射文件
 
-![1571047713267](1571047713267.png)
+![1571047713267](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173547.png)
 
 step3、测试
 
-![1571047726523](1571047726523.png)
+![1571047726523](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173600.png)
 
 > #{username}和${username}的区别是什么？
 >
