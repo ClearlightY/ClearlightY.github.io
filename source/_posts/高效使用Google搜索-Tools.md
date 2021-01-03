@@ -15,15 +15,14 @@ Chrome浏览器插件:
 - Google-access-helper: <https://www.lanzous.com/i4hskyd>
 
 Google镜像: (太好用了, 建议都收藏一下~)
-
- - <https://us9060.scholar.eu.org/>
-   - <https://search.lib.edu.eu.org/>
-   - <https://search.library.edu.eu.org/>
-   - <https://g.caduo.ml/>
-   - <http://g.histsci.org/>
-   - <https://g.teareading.app/>
-   - <https://www.google-fix.com/>
-   - <https://g.hbte.ch/>
+	- <https://us9060.scholar.eu.org/>
+	- <https://search.lib.edu.eu.org/>
+	- <https://search.library.edu.eu.org/>
+	- <https://g.caduo.ml/>
+	- <http://g.histsci.org/>
+	- <https://g.teareading.app/>
+	- <https://www.google-fix.com/>
+	- <https://g.hbte.ch/>
 
 >只能帮你到这了
 

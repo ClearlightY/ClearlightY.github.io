@@ -116,7 +116,7 @@ deploy:
 - type: git
   repo: 
         github: git@github.com:ClearlightY/ClearlightY.github.io.git
-        coding: git@e.coding.net:clearlighty/clearlighty.git 
+        # coding: git@e.coding.net:clearlighty/clearlighty.git 
   
   branch: master
 - type: baidu_url_submitter
@@ -141,7 +141,7 @@ plugins: hexo-generate-feed
 
 # hexo-neat
 # 博文压缩
-neat_enable: true
+neat_enable: false
 # 压缩html
 neat_html:
   enable: true
