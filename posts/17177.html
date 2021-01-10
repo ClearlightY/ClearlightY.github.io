@@ -69,6 +69,20 @@
 <meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="Clearlight's BLOG" type="application/atom+xml">
 </head>
 
+<link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js"></script>
+ <!-- <script type="text/javascript" src="/dist/music.js"></script> -->
+<style>
+  .demo {
+    width: 360px;
+    margin: 0px auto 20px auto
+  }
+
+  .demo p {
+    padding: 10px 0
+  }
+
+</style>
 
 <body>
   <header style="height: 70vh;">
@@ -176,8 +190,7 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/posts/article_bg.jpg') no-repeat center center;
+    <div class="banner" id="banner" parallax=true style="background: url('/img/posts/article_bg.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
@@ -187,7 +200,7 @@
             </span>
 
             
-              <div class="mt-3">
+            <div class="mt-3">
   
   
     <span class="post-meta">
@@ -242,7 +255,7 @@
 
   <main>
     
-      
+    
 
 <div class="container-fluid nopadding-x">
   <div class="row nomargin-x">
@@ -441,13 +454,13 @@
     
 
     
-      <a id="scroll-top-button" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
     
 
     
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+    <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
@@ -471,6 +484,7 @@
     
 
     
+    <div id="aplayer"></div>
   </main>
 
   <footer class="text-center mt-5 py-3">
@@ -656,4 +670,192 @@
 
 
 
-<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+<script>!function(e){var c=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){for(var r=0;r<c.length;r++)t=c[r],0<=(n=t.getBoundingClientRect()).bottom&&0<=n.left&&n.top<=(e.innerHeight||document.documentElement.clientHeight)&&function(){var t,n,e,i,o=c[r];t=o,n=function(){c=c.filter(function(t){return o!==t})},e=new Image,i=t.getAttribute("data-original"),e.onload=function(){t.src=i,n&&n()},e.src=i}();var t,n}i(),e.addEventListener("scroll",function(){var t,n;t=i,n=e,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(n)},500)})}(this);</script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script></body>
+<script>
+  const ap = new APlayer({
+  container: document.getElementById('aplayer'),
+  fixed: true,
+  autoplay: true,
+  loop: 'all',
+  order: 'random',
+  preload: 'auto',
+  theme: '#8B275F',
+  mutex: true,
+  volume: '0.65',
+  audio: [
+    {
+      name: 'Air',
+      artist: '纯音乐',
+      url: 'https://clearlight.top/resources/music/piano/leisure.mp3',
+      cover: 'https://p3.music.126.net/_BqzzgcXVksCJkL4-sIxcw==/2892815093153065.jpg?param=300y300',
+    },
+    {
+      name: '2---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/2.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '3---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/3.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '4---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/4.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '5---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/5.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '6---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/6.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '7---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/7.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '8---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/8.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '9---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/9.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '10---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/10.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '11---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/11.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '12---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/12.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '13---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/13.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '14---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/14.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '15---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/15.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '16---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/16.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '17---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/17.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '18---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/18.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '19---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/19.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '19---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/1.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '20---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/20.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '21---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/21.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '22---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/22.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '23---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/23.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '24---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/24.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '25---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/25.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '邱有句',
+      artist: '夏天的秘密',
+      url: 'http://fdfs.xmcdn.com/group20/M07/24/44/wKgJLFs2-_OCFQYuABlJQt4DYWc894.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg',
+    }
+    /*
+    ,{
+      name: ' ',
+      artist: '',
+      url: 'http://www.clearlight.top/homepage/music/',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    */
+
+  ]
+});
+
+</script>
+</html>
