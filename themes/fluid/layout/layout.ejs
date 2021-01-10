@@ -10,31 +10,44 @@ var colorSchema = theme.dark_mode && theme.dark_mode.enable && theme.dark_mode.d
 <html lang="<%= config.language %>" <%= colorSchema ? `data-default-color-scheme="${colorSchema}"` : '' %>>
 
 <%- partial('_partial/head') %>
+<link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js"></script>
+ <!-- <script type="text/javascript" src="/dist/music.js"></script> -->
+<style>
+  .demo {
+    width: 360px;
+    margin: 0px auto 20px auto
+  }
+
+  .demo p {
+    padding: 10px 0
+  }
+
+</style>
 
 <body>
   <header style="height: <%- banner_img_height %>vh;">
     <%- partial('_partial/nav') %>
-    <div class="banner" id="banner" <%- theme.banner && theme.banner.parallax && 'parallax=true' %>
-         style="background: url('<%- url_for(banner_img) %>') no-repeat center center;
+    <div class="banner" id="banner" <%- theme.banner && theme.banner.parallax && 'parallax=true' %> style="background: url('<%- url_for(banner_img) %>') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, <%= parseFloat(banner_mask_alpha) %>)">
           <div class="page-header text-center fade-in-up">
             <span class="h2" id="subtitle" title="<%- subtitle %>">
               <% if(!theme.fun_features.typing.enable) { %>
-                <%- subtitle %>
+              <%- subtitle %>
               <% } %>
             </span>
 
             <% if(is_post() && page.meta !== false) { %>
-              <%- partial('_partial/post-meta') %>
+            <%- partial('_partial/post-meta') %>
             <% } %>
           </div>
 
           <% if (theme.scroll_down_arrow.enable && theme.scroll_down_arrow.banner_height_limit <= banner_img_height && page.layout !== '404') { %>
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
+          <div class="scroll-down-bar">
+            <i class="iconfont icon-arrowdown"></i>
+          </div>
           <% } %>
         </div>
       </div>
@@ -43,48 +56,235 @@ var colorSchema = theme.dark_mode && theme.dark_mode.enable && theme.dark_mode.d
 
   <main>
     <% if(is_post() || page.layout === '404') { %>
-      <%- body %>
+    <%- body %>
     <% } else { %>
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          <%- banner_img_height >= 100 && theme.banner && theme.banner.parallax ? 'style=margin-top:0' : '' %>>
-          <% if(page.layout === 'about') { %>
-            <div class="about-avatar">
-              <img src="<%- url_for(theme.about.avatar) %>"
-                   class="img-fluid" alt="avatar">
-            </div>
-          <% } %>
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                <%- body %>
-              </div>
+    <div class="container nopadding-x-md">
+      <div class="py-5" id="board"
+        <%- banner_img_height >= 100 && theme.banner && theme.banner.parallax ? 'style=margin-top:0' : '' %>>
+        <% if(page.layout === 'about') { %>
+        <div class="about-avatar">
+          <img src="<%- url_for(theme.about.avatar) %>" class="img-fluid" alt="avatar">
+        </div>
+        <% } %>
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-10 m-auto">
+              <%- body %>
             </div>
           </div>
         </div>
       </div>
+    </div>
     <% } %>
 
     <% if (theme.scroll_top_arrow.enable) { %>
-      <a id="scroll-top-button" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
+    <a id="scroll-top-button" href="#" role="button">
+      <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+    </a>
     <% } %>
 
     <% if (theme.search.enable) { %>
-      <%- partial('_partial/search') %>
+    <%- partial('_partial/search') %>
     <% } %>
 
     <% if (theme.custom_html) { %>
-      <div class="col-lg-7 mx-auto nopadding-x-md">
-        <div class="container custom mx-auto">
-          <%- theme.custom_html %>
-        </div>
+    <div class="col-lg-7 mx-auto nopadding-x-md">
+      <div class="container custom mx-auto">
+        <%- theme.custom_html %>
       </div>
+    </div>
     <% } %>
+    <div id="aplayer"></div>
   </main>
 
   <%- partial('_partial/footer', { params: { subtitle: subtitle } }) %>
 
 </body>
+<script>
+  const ap = new APlayer({
+  container: document.getElementById('aplayer'),
+  fixed: true,
+  autoplay: true,
+  loop: 'all',
+  order: 'random',
+  preload: 'auto',
+  theme: '#8B275F',
+  mutex: true,
+  volume: '0.65',
+  audio: [
+    {
+      name: 'Air',
+      artist: '纯音乐',
+      url: 'https://clearlight.top/resources/music/piano/leisure.mp3',
+      cover: 'https://p3.music.126.net/_BqzzgcXVksCJkL4-sIxcw==/2892815093153065.jpg?param=300y300',
+    },
+    {
+      name: '2---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/2.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '3---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/3.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '4---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/4.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '5---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/5.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '6---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/6.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '7---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/7.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '8---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/8.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '9---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/9.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '10---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/10.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '11---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/11.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '12---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/12.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '13---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/13.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '14---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/14.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '15---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/15.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '16---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/16.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '17---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/17.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '18---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/18.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '19---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/19.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '19---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/1.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '20---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/20.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '21---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/21.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '22---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/22.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '23---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/23.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '24---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/24.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '25---------------------',
+      artist: '--------------------------------------------------------------',
+      url: 'https://clearlight.top/resources/music/piano/25.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pI7En.png',
+    },
+    {
+      name: '邱有句',
+      artist: '夏天的秘密',
+      url: 'http://fdfs.xmcdn.com/group20/M07/24/44/wKgJLFs2-_OCFQYuABlJQt4DYWc894.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg',
+    }
+    /*
+    ,{
+      name: ' ',
+      artist: '',
+      url: 'http://www.clearlight.top/homepage/music/',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    */
+
+  ]
+});
+
+</script>
 </html>
