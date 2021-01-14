@@ -33,7 +33,7 @@ date: 2021-01-14 17:02:28
 
 
 
-![Navicat 15.x for Oracle最新版安装破解教程_2](Navicat-for-Oracle-15-x-%E6%BF%80%E6%B4%BB%E5%92%8CNavicat-Premium-15-%E6%BF%80%E6%B4%BB.assets/sd3SoR.png)
+![Navicat 15.x for Oracle最新版安装破解教程_2](https://s3.ax1x.com/2021/01/14/sd3SoR.png)
 
 
 
@@ -41,7 +41,7 @@ date: 2021-01-14 17:02:28
 
 
 
-![Navicat 15.x for Oracle最新版安装破解教程_4](Navicat-for-Oracle-15-x-%E6%BF%80%E6%B4%BB%E5%92%8CNavicat-Premium-15-%E6%BF%80%E6%B4%BB.assets/sd1bWV.png)
+![Navicat 15.x for Oracle最新版安装破解教程_4](https://s3.ax1x.com/2021/01/14/sd1bWV.png)
 
 
 
