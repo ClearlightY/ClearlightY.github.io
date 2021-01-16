@@ -404,7 +404,8 @@ index:
   # 首页 Banner 头图，可以是相对路径或绝对路径，以下相同
   # Path of Banner image, can be a relative path or an absolute path, the same on other pages
   # banner_img: https://s3.ax1x.com/2021/01/02/rzYiwR.png
-  banner_img: https://s3.ax1x.com/2021/01/14/sdtVIJ.jpg
+  # banner_img: https://s3.ax1x.com/2021/01/14/sdtVIJ.jpg
+  banner_img: https://s3.ax1x.com/2021/01/16/sr3MKx.jpg
   # banner_img: /img/bg/ca_bg.jpg
 
   # 头图高度，屏幕百分比
@@ -415,7 +416,7 @@ index:
   # 头图黑色蒙版的不透明度，available: 0 - 1.0， 1 是完全不透明
   # Opacity of the banner mask, 1.0 is completely opaque
   # Available: 0 - 1.0
-  banner_mask_alpha: 0.1
+  banner_mask_alpha: 0.2
 
   # 首页副标题的独立设置
   # Independent config of home page subtitle
@@ -853,7 +854,8 @@ page404:
 #---------------------------
 links:
   enable: true
-  banner_img: /img/bg/link_bg.jpg
+  # banner_img: /img/bg/link_bg.jpg
+  banner_img: https://s3.ax1x.com/2021/01/14/sd0AZ6.jpg
   banner_img_height: 80
   banner_mask_alpha: 0.3
   subtitle:
