@@ -46,7 +46,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"clearlight.com.cn","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":false,"onlypost":false},"web_analytics":{"enable":true,"baidu":"47f5c6c5881db830494f6ce89651d7ed","google":"G-NJCES20K5B","gtag":257598550,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","app_key":"bw1k0GCjO6lHifiPFl0A2Unz","server_url":"https://b0klyfca.lc-cn-n1-shared.com"}}};
+    var CONFIG = {"hostname":"clearlight.com.cn","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":85,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":2,"color":"#CC874C","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":false,"onlypost":false},"web_analytics":{"enable":true,"baidu":"47f5c6c5881db830494f6ce89651d7ed","google":"G-NJCES20K5B","gtag":257598550,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","app_key":"bw1k0GCjO6lHifiPFl0A2Unz","server_url":"https://b0klyfca.lc-cn-n1-shared.com"}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -55,6 +55,7 @@
 
 <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
 <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
  <!-- <script type="text/javascript" src="/dist/music.js"></script> -->
 <style>
   .demo {
@@ -101,35 +102,38 @@
           
           
           
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                Archives
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                article
               </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                CAT
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                Tags
-              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    Archives
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    Categories
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    Tags
+                  </a>
+                
+              </div>
             </li>
           
         
@@ -174,10 +178,10 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true style="background: url('https://s3.ax1x.com/2021/01/16/sr3MKx.jpg') no-repeat center center;
+    <div class="banner" id="banner" parallax=true style="background: url('https://s3.ax1x.com/2021/01/23/s7NwnJ.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.2)">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.05)">
           <div class="page-header text-center fade-in-up">
             <span class="h2" id="subtitle" title="Let me down slowly">
               
@@ -207,6 +211,66 @@
             <div class="col-12 col-md-10 m-auto">
               
 
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/posts/18217.html">美食食谱</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/posts/18217.html">
+          
+          
+            
+          
+          一.锅包豆腐材料:
+
+酱汁: [一勺生抽，一勺醋，一勺番茄酱，半勺糖。四勺清水。（12块豆腐&lt;豆腐切成三分之二食指长 一厘米厚的正方体&gt;的用量）]  , 一块老豆腐
+
+步骤: 
+
+切成1cm的厚片。撒上少许盐，两面撒上淀粉拍一下。
+来个鸡蛋打散备用。锅里刷一层油。裹好淀粉的豆腐在蛋液里滚一圈。
+放在锅里，中火煎至两面金黄。倒入刚刚调好的料汁。OK，大功告成。
+
+二. 酱香豆腐材料:
+
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2020-10-31 17:09" pubdate>
+              2020-10-31
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%BE%8E%E9%A3%9F/">美食</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%A3%9F%E8%B0%B1/">食谱</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
 
   <div class="row mx-auto index-card">
     
@@ -300,7 +364,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E5%AE%9E%E4%B9%A0/">实习</a>
+              <a href="/categories/Work/">Work</a>
             
           </div>
         
@@ -308,7 +372,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/Vue-Django/">Vue Django</a>
+              <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">文件上传</a>
             
           </div>
         
@@ -354,7 +418,7 @@
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/skill/">skill</a>
+              <a href="/categories/Skill/">Skill</a>
             
           </div>
         
@@ -362,7 +426,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/win10/">win10</a>
+              <a href="/tags/Windows/">Windows</a>
             
           </div>
         
@@ -413,7 +477,7 @@ win键,直接输入cmd
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/skill/">skill</a>
+              <a href="/categories/Skill/">Skill</a>
             
           </div>
         
@@ -421,7 +485,7 @@ win键,直接输入cmd
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/win10/">win10</a>
+              <a href="/tags/Windows/">Windows</a>
             
           </div>
         
@@ -463,7 +527,7 @@ ctrl+h -&gt; 删除上一个字符ctrl+w -&gt; 删除上一个单词ctrl+u -&gt;
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/IDE/">IDE</a>
+              <a href="/categories/Dev-tools/">Dev tools</a>
             
           </div>
         
@@ -471,7 +535,7 @@ ctrl+h -&gt; 删除上一个字符ctrl+w -&gt; 删除上一个单词ctrl+u -&gt;
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/vim/">vim</a>
+              <a href="/tags/Vim/">Vim</a>
             
           </div>
         
@@ -516,7 +580,7 @@ ctrl+h -&gt; 删除上一个字符ctrl+w -&gt; 删除上一个单词ctrl+u -&gt;
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/Linux/">Linux</a>
+              <a href="/categories/Dev-tools/">Dev tools</a>
             
           </div>
         
@@ -524,7 +588,7 @@ ctrl+h -&gt; 删除上一个字符ctrl+w -&gt; 删除上一个单词ctrl+u -&gt;
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/vim/">vim</a>
+              <a href="/tags/vimdiff/">vimdiff</a>
             
           </div>
         
@@ -538,27 +602,18 @@ ctrl+h -&gt; 删除上一个字符ctrl+w -&gt; 删除上一个单词ctrl+u -&gt;
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/posts/34755.html">将SVG图像插入到Word以及Visio 2013下载</a>
+        <a href="/posts/38754.html">音乐下载公告</a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/posts/34755.html">
+        <a href="/posts/38754.html">
           
           
             
           
-          
-visio 2013下载地址： Visio 2013截止日期: 2021-11-30密码: Oaia
-
-将svg图像使用Visio打开后， 导出格式为emf格式， 然后就可以直接拖进word了
-
-
-参考内容
-
-将SVG格式的图片嵌入Word中
-Visio安装包、安装步骤、破解教程、使用方法
-
-
+          本人由于在网易云音乐的评论中留言说该站有b哥的音乐， 由于某些原因原链接失效了，因此本着负责的态度，将b哥音乐的链接放上，用户可以直接根据下面的歌单对应下载。
+比如你想听周杰伦的稻香,可以通过网址: http://clearlight.top/resources/music/popular/p19.mp3 来收听, 并且右键可以直接下载该音乐.
+对应的更改上面网址的 pXX.mp3就可以播放下面对
         </a>
       </p>
 
@@ -566,8 +621,8 @@ Visio安装包、安装步骤、破解教程、使用方法
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2020-04-28 17:18" pubdate>
-              2020-04-28
+            <time datetime="2020-05-18 03:57" pubdate>
+              2020-05-18
             </time>
           </div>
         
@@ -575,7 +630,7 @@ Visio安装包、安装步骤、破解教程、使用方法
           <div class="post-meta mr-3">
             <i class="iconfont icon-category"></i>
             
-              <a href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a>
+              <a href="/categories/%E5%85%AC%E5%91%8A/">公告</a>
             
           </div>
         
@@ -583,62 +638,7 @@ Visio安装包、安装步骤、破解教程、使用方法
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/tools/">tools</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/33405.html">高效使用Google搜索 - Tools</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/posts/33405.html">
-          
-          
-            
-          
-          官网: https://b.xinshengdaxue.com/C04.html
-Chrome浏览器插件:
-
-GooglePass: https://www.lanzous.com/iaedwaj
-Google上网助手: https://www.lanzous.com/ia88npe
-Google-access-helper: https://www.lanzous.com/i4hskyd
-
-Go
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2020-04-27 16:32" pubdate>
-              2020-04-27
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/">资源分享</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/tools/">tools</a>
+              <a href="/tags/Notice/">Notice</a>
             
           </div>
         
@@ -704,8 +704,40 @@ Go
   </main>
 
   <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
+  
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i color="red" class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("04/03/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "🚀 &nbsp"+dnum+"&nbsp天";  //此次自定义显示内容
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }  //此次自定义显示内容
+      setInterval("createtime()",250);
+      </script>
+    </div>
   </div>
   
   <div class="statistics">
@@ -733,20 +765,12 @@ Go
   </div>
 
 
-  
-  <!-- 备案信息 -->
-  <div class="beian">
-    <span>
-      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
-        冀ICP备19019307号-2
-      </a>
-    </span>
-    
-  </div>
-
-
+  <div>©2020-2021&nbsp;<a href="https://clearlight.blog.csdn.net/" target="_blank" rel="noopener">ClearlightY</a> <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">冀ICP备19019307号-2</a></div>
+   <!-- 
+ -->
   
 </footer>
+
 
 <!-- SCRIPTS -->
 

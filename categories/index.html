@@ -46,7 +46,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"clearlight.com.cn","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":false,"onlypost":false},"web_analytics":{"enable":true,"baidu":"47f5c6c5881db830494f6ce89651d7ed","google":"G-NJCES20K5B","gtag":257598550,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","app_key":"bw1k0GCjO6lHifiPFl0A2Unz","server_url":"https://b0klyfca.lc-cn-n1-shared.com"}}};
+    var CONFIG = {"hostname":"clearlight.com.cn","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":85,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":2,"color":"#CC874C","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":false,"onlypost":false},"web_analytics":{"enable":true,"baidu":"47f5c6c5881db830494f6ce89651d7ed","google":"G-NJCES20K5B","gtag":257598550,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","app_key":"bw1k0GCjO6lHifiPFl0A2Unz","server_url":"https://b0klyfca.lc-cn-n1-shared.com"}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -55,6 +55,7 @@
 
 <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
 <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script>
  <!-- <script type="text/javascript" src="/dist/music.js"></script> -->
 <style>
   .demo {
@@ -101,35 +102,38 @@
           
           
           
-            <li class="nav-item">
-              <a class="nav-link" href="/archives/">
-                <i class="iconfont icon-archive-fill"></i>
-                Archives
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                article
               </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                CAT
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/">
-                <i class="iconfont icon-tags-fill"></i>
-                Tags
-              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    Archives
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    Categories
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    Tags
+                  </a>
+                
+              </div>
             </li>
           
         
@@ -223,7 +227,7 @@
     <div class="category row">
       <a
         class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckk72tq100005lkul7sbcfysr" role="tab" data-toggle="collapse" href="#collapse-ckk72tq100005lkul7sbcfysr"
+        id="heading-ckk9kh0rg0005r8ul00ncdd6g" role="tab" data-toggle="collapse" href="#collapse-ckk9kh0rg0005r8ul00ncdd6g"
         aria-expanded="false"
       >
         资源分享
@@ -231,15 +235,22 @@
       </a>
       <a href="/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/" class="category-count col-2 col-md-1">
         <i class="iconfont icon-articles"></i>
-        <span>6</span>
+        <span>9</span>
       </a>
       <div class="category-collapse">
         
           
-  <div id="collapse-ckk72tq100005lkul7sbcfysr" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckk72tq100005lkul7sbcfysr">
+  <div id="collapse-ckk9kh0rg0005r8ul00ncdd6g" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9kh0rg0005r8ul00ncdd6g">
     
     
+    
+      
+      
+        <a href="/posts/3b3ba7ea.html" class="list-group-item list-group-item-action">
+          <span class="category-post">Navicat for Oracle 15.x 激活和Navicat Premium 15 激活</span>
+        </a>
+      
     
       
       
@@ -252,6 +263,13 @@
       
         <a href="/posts/52325.html" class="list-group-item list-group-item-action">
           <span class="category-post">JetBrains 全系列产品 包括 IDEA激活到2089年</span>
+        </a>
+      
+    
+      
+      
+        <a href="/posts/45769.html" class="list-group-item list-group-item-action">
+          <span class="category-post">PLSQL的安装和配置 - v11.1 Oracle</span>
         </a>
       
     
@@ -283,6 +301,13 @@
         </a>
       
     
+      
+      
+        <a href="/posts/7479.html" class="list-group-item list-group-item-action">
+          <span class="category-post">VPN on linux</span>
+        </a>
+      
+    
   </div>
 
         
@@ -294,35 +319,35 @@
     <div class="category row">
       <a
         class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckk72tq1m000nlkul7gan2uy1" role="tab" data-toggle="collapse" href="#collapse-ckk72tq1m000nlkul7gan2uy1"
+        id="heading-ckk9kh0sd0010r8ul6yk0giep" role="tab" data-toggle="collapse" href="#collapse-ckk9kh0sd0010r8ul6yk0giep"
         aria-expanded="false"
       >
-        soft
+        Skill
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/soft/" class="category-count col-2 col-md-1">
+      <a href="/categories/Skill/" class="category-count col-2 col-md-1">
         <i class="iconfont icon-articles"></i>
         <span>5</span>
       </a>
       <div class="category-collapse">
         
           
-  <div id="collapse-ckk72tq1m000nlkul7gan2uy1" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckk72tq1m000nlkul7gan2uy1">
+  <div id="collapse-ckk9kh0sd0010r8ul6yk0giep" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9kh0sd0010r8ul6yk0giep">
     
     
     
       
       
-        <a href="/posts/3b3ba7ea.html" class="list-group-item list-group-item-action">
-          <span class="category-post">Navicat for Oracle 15.x 激活和Navicat Premium 15 激活</span>
+        <a href="/posts/45902.html" class="list-group-item list-group-item-action">
+          <span class="category-post">腾讯电脑管家开启桌面整理的壁纸保存在PC的哪个文件夹中?</span>
         </a>
       
     
       
       
-        <a href="/posts/45769.html" class="list-group-item list-group-item-action">
-          <span class="category-post">PLSQL的安装和配置 - v11.1 Oracle</span>
+        <a href="/posts/59758.html" class="list-group-item list-group-item-action">
+          <span class="category-post">获取PC已连接过wifi密码的方法</span>
         </a>
       
     
@@ -342,8 +367,8 @@
     
       
       
-        <a href="/posts/7479.html" class="list-group-item list-group-item-action">
-          <span class="category-post">VPN on linux</span>
+        <a href="/posts/9290.html" class="list-group-item list-group-item-action">
+          <span class="category-post">Ubuntu18.04 IDEA2019.2.1的安装与破解</span>
         </a>
       
     
@@ -358,21 +383,64 @@
     <div class="category row">
       <a
         class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckk72tq1e000flkul1xmrdzt0" role="tab" data-toggle="collapse" href="#collapse-ckk72tq1e000flkul1xmrdzt0"
+        id="heading-ckk9kh0rl000ar8ul50mgfimk" role="tab" data-toggle="collapse" href="#collapse-ckk9kh0rl000ar8ul50mgfimk"
         aria-expanded="false"
       >
-        Java框架
+        Hexo
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/Java%E6%A1%86%E6%9E%B6/" class="category-count col-2 col-md-1">
+      <a href="/categories/Hexo/" class="category-count col-2 col-md-1">
         <i class="iconfont icon-articles"></i>
         <span>2</span>
       </a>
       <div class="category-collapse">
         
           
-  <div id="collapse-ckk72tq1e000flkul1xmrdzt0" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckk72tq1e000flkul1xmrdzt0">
+  <div id="collapse-ckk9kh0rl000ar8ul50mgfimk" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9kh0rl000ar8ul50mgfimk">
+    
+    
+    
+      
+      
+        <a href="/posts/fluid_details.html" class="list-group-item list-group-item-action">
+          <span class="category-post">Hexo Fluid主题 细节优化</span>
+        </a>
+      
+    
+      
+      
+        <a href="/posts/10838.html" class="list-group-item list-group-item-action">
+          <span class="category-post">hexo-abbrlink更改Hexo文章URL地址</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9kh0s4000mr8ulhqu08rfu" role="tab" data-toggle="collapse" href="#collapse-ckk9kh0s4000mr8ulhqu08rfu"
+        aria-expanded="false"
+      >
+        Java
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/Java/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9kh0s4000mr8ulhqu08rfu" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9kh0s4000mr8ulhqu08rfu">
     
     
     
@@ -401,222 +469,21 @@
     <div class="category row">
       <a
         class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckk72tq2b0020lkular388knd" role="tab" data-toggle="collapse" href="#collapse-ckk72tq2b0020lkular388knd"
+        id="heading-ckk9kh0si001dr8ulf4ma68v1" role="tab" data-toggle="collapse" href="#collapse-ckk9kh0si001dr8ulf4ma68v1"
         aria-expanded="false"
       >
-        前端
+        Dev tools
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/%E5%89%8D%E7%AB%AF/" class="category-count col-2 col-md-1">
+      <a href="/categories/Dev-tools/" class="category-count col-2 col-md-1">
         <i class="iconfont icon-articles"></i>
         <span>2</span>
       </a>
       <div class="category-collapse">
         
           
-  <div id="collapse-ckk72tq2b0020lkular388knd" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckk72tq2b0020lkular388knd">
-    
-    
-    
-      
-      
-        <a href="/posts/10838.html" class="list-group-item list-group-item-action">
-          <span class="category-post">hexo-abbrlink更改Hexo文章URL地址</span>
-        </a>
-      
-    
-      
-      
-        <a href="/posts/20080.html" class="list-group-item list-group-item-action">
-          <span class="category-post">响应式中@media的注意事项</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckk72tq2n002vlkulhj7gevvz" role="tab" data-toggle="collapse" href="#collapse-ckk72tq2n002vlkulhj7gevvz"
-        aria-expanded="false"
-      >
-        实习
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/%E5%AE%9E%E4%B9%A0/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>2</span>
-      </a>
-      <div class="category-collapse">
-        
-          
-  <div id="collapse-ckk72tq2n002vlkulhj7gevvz" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckk72tq2n002vlkulhj7gevvz">
-    
-    
-    
-      
-      
-        <a href="/posts/17143.html" class="list-group-item list-group-item-action">
-          <span class="category-post">文件上传并校验文件 - Vue+Django开发</span>
-        </a>
-      
-    
-      
-      
-        <a href="/posts/38652.html" class="list-group-item list-group-item-action">
-          <span class="category-post">实习日常问题记录_2020</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckk72tq2p0037lkulgv8t6zvx" role="tab" data-toggle="collapse" href="#collapse-ckk72tq2p0037lkulgv8t6zvx"
-        aria-expanded="false"
-      >
-        skill
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/skill/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>2</span>
-      </a>
-      <div class="category-collapse">
-        
-          
-  <div id="collapse-ckk72tq2p0037lkulgv8t6zvx" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckk72tq2p0037lkulgv8t6zvx">
-    
-    
-    
-      
-      
-        <a href="/posts/45902.html" class="list-group-item list-group-item-action">
-          <span class="category-post">腾讯电脑管家开启桌面整理的壁纸保存在PC的哪个文件夹中?</span>
-        </a>
-      
-    
-      
-      
-        <a href="/posts/59758.html" class="list-group-item list-group-item-action">
-          <span class="category-post">获取PC已连接过wifi密码的方法</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckk72tq25001jlkul46yu36nx" role="tab" data-toggle="collapse" href="#collapse-ckk72tq25001jlkul46yu36nx"
-        aria-expanded="false"
-      >
-        technology
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/technology/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse">
-        
-          
-  <div id="collapse-ckk72tq25001jlkul46yu36nx" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckk72tq25001jlkul46yu36nx">
-    
-    
-    
-      
-      
-        <a href="/posts/9290.html" class="list-group-item list-group-item-action">
-          <span class="category-post">Ubuntu18.04 IDEA2019.2.1的安装与破解</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckk72tq29001rlkul98cr4c9b" role="tab" data-toggle="collapse" href="#collapse-ckk72tq29001rlkul98cr4c9b"
-        aria-expanded="false"
-      >
-        question
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/question/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse">
-        
-          
-  <div id="collapse-ckk72tq29001rlkul98cr4c9b" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckk72tq29001rlkul98cr4c9b">
-    
-    
-    
-      
-      
-        <a href="/posts/5056.html" class="list-group-item list-group-item-action">
-          <span class="category-post">project_problem_record</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckk72tq2g0027lkul0tl17wjb" role="tab" data-toggle="collapse" href="#collapse-ckk72tq2g0027lkul0tl17wjb"
-        aria-expanded="false"
-      >
-        IDE
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/IDE/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse">
-        
-          
-  <div id="collapse-ckk72tq2g0027lkul0tl17wjb" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckk72tq2g0027lkul0tl17wjb">
+  <div id="collapse-ckk9kh0si001dr8ulf4ma68v1" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9kh0si001dr8ulf4ma68v1">
     
     
     
@@ -626,35 +493,6 @@
           <span class="category-post">vim常用操作</span>
         </a>
       
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckk72tq2j002dlkulf6b475j7" role="tab" data-toggle="collapse" href="#collapse-ckk72tq2j002dlkulf6b475j7"
-        aria-expanded="false"
-      >
-        Linux
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/Linux/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse">
-        
-          
-  <div id="collapse-ckk72tq2j002dlkulf6b475j7" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckk72tq2j002dlkulf6b475j7">
-    
-    
     
       
       
@@ -674,7 +512,50 @@
     <div class="category row">
       <a
         class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckk72tq2k002ilkul2nut79zg" role="tab" data-toggle="collapse" href="#collapse-ckk72tq2k002ilkul2nut79zg"
+        id="heading-ckk9kh0sl001mr8ul5f883rq8" role="tab" data-toggle="collapse" href="#collapse-ckk9kh0sl001mr8ul5f883rq8"
+        aria-expanded="false"
+      >
+        Work
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/Work/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9kh0sl001mr8ul5f883rq8" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9kh0sl001mr8ul5f883rq8">
+    
+    
+    
+      
+      
+        <a href="/posts/17143.html" class="list-group-item list-group-item-action">
+          <span class="category-post">文件上传并校验文件 - Vue+Django开发</span>
+        </a>
+      
+    
+      
+      
+        <a href="/posts/5056.html" class="list-group-item list-group-item-action">
+          <span class="category-post">project_problem_record</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9kh0ss001zr8ul53rqat78" role="tab" data-toggle="collapse" href="#collapse-ckk9kh0ss001zr8ul53rqat78"
         aria-expanded="false"
       >
         BugFix
@@ -687,8 +568,8 @@
       <div class="category-collapse">
         
           
-  <div id="collapse-ckk72tq2k002ilkul2nut79zg" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckk72tq2k002ilkul2nut79zg">
+  <div id="collapse-ckk9kh0ss001zr8ul53rqat78" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9kh0ss001zr8ul53rqat78">
     
     
     
@@ -710,7 +591,7 @@
     <div class="category row">
       <a
         class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckk72tq2m002qlkul0fid23zr" role="tab" data-toggle="collapse" href="#collapse-ckk72tq2m002qlkul0fid23zr"
+        id="heading-ckk9kh0su0026r8ulgwky7bn9" role="tab" data-toggle="collapse" href="#collapse-ckk9kh0su0026r8ulgwky7bn9"
         aria-expanded="false"
       >
         Note
@@ -723,8 +604,8 @@
       <div class="category-collapse">
         
           
-  <div id="collapse-ckk72tq2m002qlkul0fid23zr" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckk72tq2m002qlkul0fid23zr">
+  <div id="collapse-ckk9kh0su0026r8ulgwky7bn9" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9kh0su0026r8ulgwky7bn9">
     
     
     
@@ -746,28 +627,28 @@
     <div class="category row">
       <a
         class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckk72tq2o0032lkul5jb27zjo" role="tab" data-toggle="collapse" href="#collapse-ckk72tq2o0032lkul5jb27zjo"
+        id="heading-ckk9kh0sx002dr8ul6whf0v0x" role="tab" data-toggle="collapse" href="#collapse-ckk9kh0sx002dr8ul6whf0v0x"
         aria-expanded="false"
       >
-        美食
+        前端
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/%E7%BE%8E%E9%A3%9F/" class="category-count col-2 col-md-1">
+      <a href="/categories/%E5%89%8D%E7%AB%AF/" class="category-count col-2 col-md-1">
         <i class="iconfont icon-articles"></i>
         <span>1</span>
       </a>
       <div class="category-collapse">
         
           
-  <div id="collapse-ckk72tq2o0032lkul5jb27zjo" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckk72tq2o0032lkul5jb27zjo">
+  <div id="collapse-ckk9kh0sx002dr8ul6whf0v0x" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9kh0sx002dr8ul6whf0v0x">
     
     
     
       
       
-        <a href="/posts/18217.html" class="list-group-item list-group-item-action">
-          <span class="category-post">美食食谱, 太香啦~</span>
+        <a href="/posts/20080.html" class="list-group-item list-group-item-action">
+          <span class="category-post">响应式中@media的注意事项</span>
         </a>
       
     
@@ -782,7 +663,79 @@
     <div class="category row">
       <a
         class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ckk72tq2q003elkul4iy97e13" role="tab" data-toggle="collapse" href="#collapse-ckk72tq2q003elkul4iy97e13"
+        id="heading-ckk9kh0sy002ir8ul14d36nhf" role="tab" data-toggle="collapse" href="#collapse-ckk9kh0sy002ir8ul14d36nhf"
+        aria-expanded="false"
+      >
+        实习
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E5%AE%9E%E4%B9%A0/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9kh0sy002ir8ul14d36nhf" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9kh0sy002ir8ul14d36nhf">
+    
+    
+    
+      
+      
+        <a href="/posts/38652.html" class="list-group-item list-group-item-action">
+          <span class="category-post">实习日常问题记录_2020</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9kh0sz002or8ul8qe7ehed" role="tab" data-toggle="collapse" href="#collapse-ckk9kh0sz002or8ul8qe7ehed"
+        aria-expanded="false"
+      >
+        美食
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E7%BE%8E%E9%A3%9F/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+          
+  <div id="collapse-ckk9kh0sz002or8ul8qe7ehed" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9kh0sz002or8ul8qe7ehed">
+    
+    
+    
+      
+      
+        <a href="/posts/18217.html" class="list-group-item list-group-item-action">
+          <span class="category-post">美食食谱</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ckk9kh0t0002tr8ul5qij5hcf" role="tab" data-toggle="collapse" href="#collapse-ckk9kh0t0002tr8ul5qij5hcf"
         aria-expanded="false"
       >
         公告
@@ -795,8 +748,8 @@
       <div class="category-collapse">
         
           
-  <div id="collapse-ckk72tq2q003elkul4iy97e13" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ckk72tq2q003elkul4iy97e13">
+  <div id="collapse-ckk9kh0t0002tr8ul5qij5hcf" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ckk9kh0t0002tr8ul5qij5hcf">
     
     
     
@@ -857,8 +810,40 @@
   </main>
 
   <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
+  
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i color="red" class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  <div class="footer-content">
+    <div>
+      <span id="timeDate">载入天数...</span>
+      <span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date();
+      function createtime(){
+          var grt= new Date("04/03/2020 00:00:00");//此处修改你的建站时间或者网站上线时间
+          now.setTime(now.getTime()+250);
+          days = (now - grt ) / 1000 / 60 / 60 / 24;
+          dnum = Math.floor(days);
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum);
+          hnum = Math.floor(hours);
+          if(String(hnum).length ==1 ){
+              hnum = "0" + hnum;
+          }
+          minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+          mnum = Math.floor(minutes);
+          if(String(mnum).length ==1 ){
+                    mnum = "0" + mnum;
+          }
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+          snum = Math.round(seconds);
+          if(String(snum).length ==1 ){
+                    snum = "0" + snum;
+          }
+          document.getElementById("timeDate").innerHTML = "🚀 &nbsp"+dnum+"&nbsp天";  //此次自定义显示内容
+          document.getElementById("times").innerHTML = hnum + "&nbsp小时&nbsp" + mnum + "&nbsp分&nbsp" + snum + "&nbsp秒";
+      }  //此次自定义显示内容
+      setInterval("createtime()",250);
+      </script>
+    </div>
   </div>
   
   <div class="statistics">
@@ -886,20 +871,12 @@
   </div>
 
 
-  
-  <!-- 备案信息 -->
-  <div class="beian">
-    <span>
-      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
-        冀ICP备19019307号-2
-      </a>
-    </span>
-    
-  </div>
-
-
+  <div>©2020-2021&nbsp;<a href="https://clearlight.blog.csdn.net/" target="_blank" rel="noopener">ClearlightY</a> <a href="http://beian.miit.gov.cn/" target="_blank" rel="noopener">冀ICP备19019307号-2</a></div>
+   <!-- 
+ -->
   
 </footer>
+
 
 <!-- SCRIPTS -->
 
