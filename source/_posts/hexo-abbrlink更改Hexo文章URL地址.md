@@ -3,8 +3,8 @@ title: hexo-abbrlink更改Hexo文章URL地址
 top: 0
 abbrlink: 10838
 date: 2021-01-02 16:07:30
-categories: 前端
-tags: hexo
+categories: Hexo
+tags: hexo-abbrlink
 ---
 
 **作者：xingguang**

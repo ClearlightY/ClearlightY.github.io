@@ -1,8 +1,8 @@
 ---
 title: Navicat for Oracle 15.x 激活和Navicat Premium 15 激活
 top: 0
-categories: soft
-tags: tools
+categories: 资源分享
+tags: Navicat
 abbrlink: 3b3ba7ea
 date: 2021-01-14 17:02:28
 ---

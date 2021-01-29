@@ -1,8 +1,8 @@
 ---
 title: 获取PC已连接过wifi密码的方法
 top: 0
-categories: skill
-tags: win10
+categories: Skill
+tags: Windows
 abbrlink: 59758
 date: 2020-06-09 13:52:19
 ---

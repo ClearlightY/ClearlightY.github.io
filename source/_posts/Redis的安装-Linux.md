@@ -1,8 +1,8 @@
 ---
 title: Redis的安装 - Linux/Windows
 top: 0
-categories: soft
-tags: Linux
+categories: Skill
+tags: Linux_Redis
 abbrlink: 54105
 date: 2020-04-22 23:19:30
 ---

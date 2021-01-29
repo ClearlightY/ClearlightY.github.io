@@ -12,6 +12,7 @@ var colorSchema = theme.dark_mode && theme.dark_mode.enable && theme.dark_mode.d
 <%- partial('_partial/head') %>
 <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
 <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery-pjax@2.0.1/jquery.pjax.min.js"></script> -->
  <!-- <script type="text/javascript" src="/dist/music.js"></script> -->
 <style>
   .demo {
@@ -112,6 +113,7 @@ var colorSchema = theme.dark_mode && theme.dark_mode.enable && theme.dark_mode.d
   mutex: true,
   volume: '0.65',
   audio: [
+    /*
     {
       name: 'Air',
       artist: '纯音乐',
@@ -273,12 +275,259 @@ var colorSchema = theme.dark_mode && theme.dark_mode.enable && theme.dark_mode.d
       artist: '夏天的秘密',
       url: 'http://fdfs.xmcdn.com/group20/M07/24/44/wKgJLFs2-_OCFQYuABlJQt4DYWc894.mp3',
       cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg',
+    } */
+    /* b哥 */
+    {
+      name: '李志',
+      artist: '热河',
+      url: 'http://clearlight.top/resources/music/popular/p1.flac',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg',
+    },
+    {
+      name: '李志',
+      artist: '关于郑州的记忆',
+      url: 'http://clearlight.top/resources/music/popular/p5.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '五月天',
+      artist: '后来的我们',
+      url: 'http://clearlight.top/resources/music/popular/p6.flac',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '李志',
+      artist: '人民不需要自由(专辑)',
+      url: 'http://clearlight.top/resources/music/popular/p7.flac',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '李志',
+      artist: '人民不要自由(工体)',
+      url: 'http://clearlight.top/resources/music/popular/p9.flac',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '李志',
+      artist: '人民不需要自由(108关键词)',
+      url: 'http://clearlight.top/resources/music/popular/p8.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '以冬',
+      artist: '我的一个道姑朋友',
+      url: 'http://clearlight.top/resources/music/popular/p10.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '周杰伦',
+      artist: '七里香',
+      url: 'http://clearlight.top/resources/music/popular/p13.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '周杰伦',
+      artist: '听妈妈的话',
+      url: 'http://clearlight.top/resources/music/popular/p14.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '周杰伦',
+      artist: '告白气球',
+      url: 'http://clearlight.top/resources/music/popular/p15.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '周杰伦',
+      artist: '夜曲',
+      url: 'http://clearlight.top/resources/music/popular/p16.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '周杰伦',
+      artist: '彩虹',
+      url: 'http://clearlight.top/resources/music/popular/p17.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '李志',
+      artist: 'freenow',
+      url: 'http://clearlight.top/resources/music/popular/p4.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: 'BEYOND',
+      artist: '海阔天空',
+      url: 'http://clearlight.top/resources/music/popular/p3.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '周杰伦',
+      artist: '星晴',
+      url: 'http://clearlight.top/resources/music/popular/p18.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '周杰伦',
+      artist: '稻香',
+      url: 'http://clearlight.top/resources/music/popular/p19.mo3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '周杰伦',
+      artist: '花海',
+      url: 'http://clearlight.top/resources/music/popular/p20.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '杨丞琳',
+      artist: '年轮说',
+      url: 'http://clearlight.top/resources/music/popular/p22',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '李志',
+      artist: '广场',
+      url: 'http://clearlight.top/resources/music/popular/p23.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '张震岳',
+      artist: '小宇',
+      url: 'http://clearlight.top/resources/music/popular/p24.flac',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '小贱',
+      artist: '当我唱起这首歌',
+      url: 'http://clearlight.top/resources/music/popular/p25.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '本兮',
+      artist: '怎么办我想你',
+      url: 'http://clearlight.top/resources/music/popular/p27.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '本兮',
+      artist: '蓝色的海',
+      url: 'http://clearlight.top/resources/music/popular/p28.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '李志,张怡然',
+      artist: '山阴路的夏天',
+      url: 'http://clearlight.top/resources/music/popular/p29.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '李志',
+      artist: '你离开了南京,从此没有人和我说话',
+      url: 'http://clearlight.top/resources/music/popular/p30.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '李志',
+      artist: '忽然',
+      url: 'http://clearlight.top/resources/music/popular/p32.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '李志',
+      artist: '结婚',
+      url: 'http://clearlight.top/resources/music/popular/p33.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '李源田',
+      artist: '庸俗',
+      url: 'http://clearlight.top/resources/music/popular/p34.flac',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '梁博',
+      artist: '男孩',
+      url: 'http://clearlight.top/resources/music/popular/p35.flac',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '李志',
+      artist: '梵高先生',
+      url: 'http://clearlight.top/resources/music/popular/p36.flac',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '沈丫',
+      artist: '遇见',
+      url: 'http://clearlight.top/resources/music/popular/p37.flac',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '焦迈奇',
+      artist: '今天也想见到你',
+      url: 'http://clearlight.top/resources/music/popular/p38.flac',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '胡歌',
+      artist: '忘记时间',
+      url: 'http://clearlight.top/resources/music/popular/p39.flac',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '焦迈奇',
+      artist: '赧然的贼',
+      url: 'http://clearlight.top/resources/music/popular/p41.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '赵海洋',
+      artist: '秋的思念',
+      url: 'http://clearlight.top/resources/music/popular/p42.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '李志',
+      artist: '这个世界会好吗',
+      url: 'http://clearlight.top/resources/music/popular/p43.flac',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '阿狸有九条尾巴',
+      artist: '大鱼',
+      url: 'http://clearlight.top/resources/music/popular/p45.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '陈一发',
+      artist: '童话镇',
+      url: 'http://clearlight.top/resources/music/popular/p46.flac',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '陶峻汐',
+      artist: '和解',
+      url: 'http://clearlight.top/resources/music/popular/p47.flac',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '陶峻汐',
+      artist: '我想你了',
+      url: 'http://clearlight.top/resources/music/popular/p49.flac',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
+    }
+    ,{
+      name: '邱有句',
+      artist: '别哭',
+      url: 'http://clearlight.top/resources/music/popular/p44.mp3',
+      cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
     }
     /*
     ,{
-      name: ' ',
+      name: '',
       artist: '',
-      url: 'http://www.clearlight.top/homepage/music/',
+      url: 'http://clearlight.top/resources/music/popular/',
       cover: 'https://s2.ax1x.com/2020/03/09/8pTuyF.jpg'
     }
     */

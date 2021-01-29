@@ -1,7 +1,7 @@
 ---
 title: MyBatis入门(一)
 top: 0
-categories: Java框架
+categories: Java
 tags: MyBatis
 abbrlink: 17177
 date: 2020-03-10 22:22:39

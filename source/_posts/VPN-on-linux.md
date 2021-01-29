@@ -1,7 +1,7 @@
 ---
 title: VPN on linux
-categories: soft
-tags: Linux
+categories: 资源分享
+tags: V2ray
 abbrlink: 7479
 date: 2020-03-04 22:24:37
 ---

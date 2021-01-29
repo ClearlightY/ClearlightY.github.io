@@ -1,8 +1,8 @@
 ---
 title: project_problem_record
 top: 0
-categories: question
-tags: jsp ssm
+categories: Work
+tags: JSP
 abbrlink: 5056
 date: 2020-04-16 22:35:52
 ---

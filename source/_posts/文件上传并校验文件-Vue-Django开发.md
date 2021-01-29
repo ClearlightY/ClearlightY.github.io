@@ -1,8 +1,8 @@
 ---
 title: 文件上传并校验文件 - Vue+Django开发
 top: 0
-categories: 实习
-tags: Vue Django
+categories: Work
+tags: ["Vue","Django"]
 abbrlink: 17143
 date: 2020-06-12 11:17:34
 ---

@@ -1,8 +1,8 @@
 ---
 title: PLSQL的安装和配置 - v11.1 Oracle
 top: 0
-categories: soft
-tags: tools
+categories: 资源分享
+tags: PLSQL developer
 abbrlink: 45769
 date: 2020-11-01 01:03:05
 ---

@@ -1,8 +1,8 @@
 ---
 title: vim常用操作
 top: 0
-categories: IDE
-tags: vim
+categories: Dev tools
+tags: Vim
 abbrlink: 55103
 date: 2020-06-04 00:12:09
 ---

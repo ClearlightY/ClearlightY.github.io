@@ -1,8 +1,8 @@
 ---
 title: 腾讯电脑管家开启桌面整理的壁纸保存在PC的哪个文件夹中?
 top: 0
-categories: skill
-tags: win10
+categories: Skill
+tags: Windows
 abbrlink: 45902
 date: 2020-06-09 17:39:20
 ---

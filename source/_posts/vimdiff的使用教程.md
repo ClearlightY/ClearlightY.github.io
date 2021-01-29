@@ -1,8 +1,8 @@
 ---
 title: vimdiff的使用教程
 top: 0
-categories: Linux
-tags: vim
+categories: Dev tools
+tags: vimdiff
 abbrlink: 21655
 date: 2020-05-21 13:52:13
 ---

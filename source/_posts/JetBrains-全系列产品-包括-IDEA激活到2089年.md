@@ -2,7 +2,7 @@
 title: JetBrains 全系列产品 包括 IDEA激活到2089年
 top: 0
 categories: 资源分享
-tags: tools
+tags: JetBrains产品激活
 abbrlink: 52325
 date: 2020-11-12 19:32:48
 ---
