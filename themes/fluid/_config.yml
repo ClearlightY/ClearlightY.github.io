@@ -888,7 +888,7 @@ links:
       title: "leader755 Blogs",
       intro: "分享web前端相关的技术文章，会记录日常生活中的琐事和大家一起分享。",
       link: "https://www.leader755.com/",
-      image: "https://gitee.com/leader755/imagehost/raw/master/blog/wx_avatar.png"
+      image: "https://cdn.leader755.com/public/wx_avatar.png"
     }
     # - {
       # title: "Fluid Blog",
