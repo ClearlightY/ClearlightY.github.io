@@ -29,7 +29,7 @@ date: 2021-06-01 18:27:28
 
 > Ps：如果破解Jar包路径填错或者Jar包文件位置有变动都会导致Goland软件无法打开。不要慌，Goland的vm options文件/User/用户`名/Library/Preferences/GoLand2019.2`位置中，打开文件后编辑正确的Jar包路径或者删除刚刚配置的`-javaagent:绝对路径`软件即可正常打开。
 >
-> ![Mac中Vm Options位置](MacOS%E7%B3%BB%E7%BB%9F-Goland-2019-2-3%E7%A0%B4%E8%A7%A3.assets/20210528000938654.png)
+> ![Mac中Vm Options位置](https://gitee.com/clearlightY/mapdepot/raw/master/img/20210629103617.png)
 
 
 配置好后，重启Goland，如图进行配置。License server address：`http://fls.jetbrains-agent.com`

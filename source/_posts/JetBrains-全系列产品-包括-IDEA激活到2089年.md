@@ -7,6 +7,8 @@ abbrlink: 52325
 date: 2020-11-12 19:32:48
 ---
 
+> # 抱歉，下面方法已失效，仅留作纪念
+>
 > 完全照搬网站: <https://mp.weixin.qq.com/s/lwAsoUbEAVz_sHsnAhbGfg>
 >
 > ![image-20201112193833824](https://gitee.com/clearlightY/mapdepot/raw/master/img/20201112193837.png)
