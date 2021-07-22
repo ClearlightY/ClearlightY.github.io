@@ -1,6 +1,6 @@
 ---
 title: IDEA/PyCharm/GoLang等JetBrains 2020.3.x激活到2099
-top: 1
+top: 0
 categories: 资源分享
 tags: IDEA2020.3激活
 abbrlink: 64128
