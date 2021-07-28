@@ -9,9 +9,9 @@ date: 2020-11-01 01:03:05
 
 # 一. 工具分享
 
-[PL/SQL v11.1免安装破解版](https://clearlight.lanzous.com/iX8jQhxc9vc)
+[PL/SQL v11.1免安装破解版](https://clearlight.lanzoui.com/iX8jQhxc9vc)
 
-[客户端插件](https://clearlight.lanzous.com/iCWXvhxcjzg)
+[客户端插件](https://clearlight.lanzoui.com/i0FE5iglrob)
 
 
 
