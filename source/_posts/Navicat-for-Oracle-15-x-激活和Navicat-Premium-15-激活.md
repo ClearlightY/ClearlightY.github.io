@@ -9,15 +9,15 @@ date: 2021-01-14 17:02:28
 
 # 一.  工具下载地址
 
-- Navicat for Oracle 15.22 : <https://clearlight.lanzous.com/i7Dg6kebova>
+- Navicat for Oracle 15.22 : <https://clearlight.lanzoui.com/i7Dg6kebova>
 
-- Navicat for Oracle 激活程序 : <https://clearlight.lanzous.com/i8ePUkebcfc>
+- Navicat for Oracle 激活程序 : <https://clearlight.lanzoui.com/i8ePUkebcfc>
 
   > 就这花了我5大洋, 别说 确实好用, 不过和破解Premium的东西好像是一个, 之前有个朋友分享过, :tada:
 
-- Navicat for Oracle 15 配套的 instantclient(oci.dll) : <https://clearlight.lanzous.com/iBV7nkecdji>
+- Navicat for Oracle 15 配套的 instantclient(oci.dll) : <https://clearlight.lanzoui.com/iBV7nkecdji>
 
-- Navicat Premium 15 + 激活程序 + 安装教程 : <https://clearlight.lanzous.com/ioORMds35ih>
+- Navicat Premium 15 + 激活程序 + 安装教程 : <https://clearlight.lanzoui.com/ioORMds35ih>
 
 # 二. Navicat for Oracle激活教程
 

@@ -22,10 +22,10 @@ date: 2020-03-04 22:24:37
 
 ---
 **[蓝奏云文件下载]**
-1. [Qv2ray](https://www.lanzous.com/i9q94sb)
-2. [v2ray核心](https://www.lanzous.com/i9q93jg)
+1. [Qv2ray](https://www.lanzoui.com/i9q94sb)
+2. [v2ray核心](https://www.lanzoui.com/i9q93jg)
 
 windows版vpn, 下载直接打开exe即可
-[V2rayN](https://www.lanzous.com/i9q97lc)
+[V2rayN](https://www.lanzoui.com/i9q97lc)
 
-订阅地址: <jiyou.cloud>
+订阅地址: [地址](https://efanccyun.net/aff.php?aff=6200)
