@@ -89,6 +89,15 @@ comment: 'valine'
                   <div class="info">分享web前端相关的技术文章，会记录日常生活中的琐事和大家一起分享。</div>
                </div>
             </div>
+            <div class="card">
+               <img class="ava" src="https://github.com/identicons/chucklu.png" />
+               <div class="card-header">
+                  <div>
+                     <a href="https://xiyu.pro">XiYu博客</a>
+                  </div>
+                  <div class="info">XiYu博客</div>
+               </div>
+            </div>
       </div>
    </div>
 </div>
