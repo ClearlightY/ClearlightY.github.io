@@ -38,13 +38,9 @@ layout: about
 \
 运维: Docker
 后端: Java、SSM、Python、MySQL、Django、Oracle、SpringBoot
-前端: HTML、CSS、JS、JQuery、React、Vue、Vue-element-ui
+前端: JavaScript、React、Vue
 
-- 2020-11-20 sinosoft提前转正 :)
-- 2020-09-14 入职北京中科软
-- 2020-09-01 离开讯飞 :(
-- 2020-06-30 大四毕业，软件工程专业
-- 2020-01-16 科大讯飞实习
+
 
 <br/><br/>
 
