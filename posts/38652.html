@@ -1,0 +1,954 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xyli">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Linux记录1.查看端口是否占用netstat -ntulp | grep PORT_id 2.centos系统目录中文乱码到当前用户目录中, 修改当前用户的.bashrc 添加下面两行内容 12export LC_ALL&#x3D;&quot;zh_CN.UTF-8&quot;export LANG&#x3D;&quot;zh_CN.UTF-8&quot;  :wq保存退出后, 执行命令 1$source .&#x2F;.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实习日常问题记录_2020">
+<meta property="og:url" content="http://clearlight.com.cn/posts/38652.html">
+<meta property="og:site_name" content="Clearlight&#39;s BLOG">
+<meta property="og:description" content="Linux记录1.查看端口是否占用netstat -ntulp | grep PORT_id 2.centos系统目录中文乱码到当前用户目录中, 修改当前用户的.bashrc 添加下面两行内容 12export LC_ALL&#x3D;&quot;zh_CN.UTF-8&quot;export LANG&#x3D;&quot;zh_CN.UTF-8&quot;  :wq保存退出后, 执行命令 1$source .&#x2F;.">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/04/GwaKFx.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/04/GwaGOH.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/04/GwaNTI.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/04/GwafhV.png">
+<meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20200407155935.png">
+<meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20200407160205.png">
+<meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20200408101800.png">
+<meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20200413131036.png">
+<meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20200419232008.png">
+<meta property="article:published_time" content="2020-03-25T00:44:21.000Z">
+<meta property="article:modified_time" content="2022-11-04T08:07:11.866Z">
+<meta property="article:author" content="xyli">
+<meta property="article:tag" content="Daily_notes">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/04/04/GwaKFx.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>实习日常问题记录_2020 - Clearlight&#39;s BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/iconfont_csdn/iconfont.css">
+<link rel="stylesheet" href="/css/iconfont_cloud/iconfont.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"clearlight.com.cn","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":78,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":2,"color":"#CC874C","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"47f5c6c5881db830494f6ce89651d7ed","google":"G-NJCES20K5B","gtag":257598550,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","app_key":"bw1k0GCjO6lHifiPFl0A2Unz","server_url":"https://b0klyfca.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?47f5c6c5881db830494f6ce89651d7ed";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-NJCES20K5B', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.googletagmanager.com/gtag/js?id=257598550', function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '257598550');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Clearlight's BLOG" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xyli&#39;s nest</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                Article
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    Archives
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    Categories
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    Tags
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s3.ax1x.com/2021/01/14/sdtlqO.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="实习日常问题记录_2020"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2020-03-25 08:44" pubdate>
+          March 25, 2020 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          8.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          68 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">实习日常问题记录_2020</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：November 4, 2022 pm
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Linux记录"><a href="#Linux记录" class="headerlink" title="Linux记录"></a>Linux记录</h1><h2 id="1-查看端口是否占用"><a href="#1-查看端口是否占用" class="headerlink" title="1.查看端口是否占用"></a><strong>1.查看端口是否占用</strong></h2><p><code>netstat -ntulp | grep PORT_id</code></p>
+<h2 id="2-centos系统目录中文乱码"><a href="#2-centos系统目录中文乱码" class="headerlink" title="2.centos系统目录中文乱码"></a><strong>2.centos系统目录中文乱码</strong></h2><p>到当前用户目录中, 修改当前用户的<code>.bashrc</code></p>
+<p>添加下面两行内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs linux">export LC_ALL=&quot;zh_CN.UTF-8&quot;<br>export LANG=&quot;zh_CN.UTF-8&quot;<br></code></pre></td></tr></table></figure>
+
+<p><code>:wq</code>保存退出后, 执行命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs linux">$source ./.bashrc<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="3-配置环境变量"><a href="#3-配置环境变量" class="headerlink" title="3.配置环境变量"></a><strong>3.配置环境变量</strong></h2><p>编辑用户目录下的<code>.bashrc</code>文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs linux">$vim .bashrc<br><br># 进入该文件后, 添加如下语句<br>export PATH=环境的bin目录路径:$PATH<br><br># 退出保存<br>:wq<br><br># 让环境变量生效<br>source ./.bashrc<br><br># 查看已配置的环境变量<br>$echo $PATH<br><br># 暂时取消所有环境变量(重新登录用户即可恢复)<br>$unset XX_PATH<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="4-删除中文乱码目录或文件"><a href="#4-删除中文乱码目录或文件" class="headerlink" title="4.删除中文乱码目录或文件"></a><strong>4.删除中文乱码目录或文件</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs linux"># 首先找到文件或目录的inode<br>$ls -i<br><br># 使用find命令查询并删除此文件或目录<br>$find -inum 2312334 -exec rm rf &#123;&#125; \;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-curl命令"><a href="#5-curl命令" class="headerlink" title="5. curl命令"></a><strong>5. curl命令</strong></h2><p><code>curl url</code></p>
+<p>eg: <code>curl www.sina.com</code></p>
+<h2 id="6-远程桌面访问服务器上部署的React项目"><a href="#6-远程桌面访问服务器上部署的React项目" class="headerlink" title="6.远程桌面访问服务器上部署的React项目"></a><strong>6.远程桌面访问服务器上部署的React项目</strong></h2><p>Clearlight:<br>首先看项目是否启动成功, npm start之后, 新建个对话执行 curl <code>http://localhost:3000</code>, 返回了网页源码.  证明项目启动成功.</p>
+<p>然后, 就是修改pageage.json里面的proxy为 <code>http://0.0.0.0:3000</code>后, 主机浏览器再去访问 xshell的ip+3000端口 就行了</p>
+<p>Clearlight:<br>一直太执念于  setupProxy.js 里面的两个ip了</p>
+<h2 id="7-vim打开文件每行末尾有-M"><a href="#7-vim打开文件每行末尾有-M" class="headerlink" title="7.vim打开文件每行末尾有^M"></a><strong>7.vim打开文件每行末尾有^M</strong></h2><p>*方法1: 命令模式下    <code>:%s/^M//g</code></p>
+<p>回车即可替换</p>
+<blockquote>
+<p>其中”^M”的输入,分别是”Ctrl+v”, “Ctrl+m” 键生成的</p>
+</blockquote>
+<p>方法2: 使用vi打开文本文件<br>   vi dos.txt<br>   命令模式下输入<br>   :set fileformat&#x3D;unix<br>   :w</p>
+<p>方法3:使用sed 工具<br>   sed ’s&#x2F;^M&#x2F;&#x2F;’ filename &gt; tmp_filename</p>
+<p>方法4:既然window下的回车符多了‘\r’，那么当然通过删除‘\r’ ，也可以实现：<br>   tr -d ‘\r’</p>
+<p>方法5:最常用的方法，个人觉得最方便<br>   在终端下敲命令：<br>   $ dos2unix filename<br>   直接转换成unix格式，就OK了！～</p>
+<h2 id="8-解压zip文件到指定目录"><a href="#8-解压zip文件到指定目录" class="headerlink" title="8.解压zip文件到指定目录"></a><strong>8.解压zip文件到指定目录</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs linux">$ unzip a.zip -d ./fileName<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="9-查看linux系统当前时间-date-查看日历-cal"><a href="#9-查看linux系统当前时间-date-查看日历-cal" class="headerlink" title="9.查看linux系统当前时间: date 查看日历: cal"></a><strong>9.查看linux系统当前时间: <code>date</code> 查看日历: <code>cal</code></strong></h2><h1 id="前端记录"><a href="#前端记录" class="headerlink" title="前端记录"></a>前端记录</h1><h2 id="1-div遮住底层的按钮了怎么办"><a href="#1-div遮住底层的按钮了怎么办" class="headerlink" title="1.div遮住底层的按钮了怎么办?"></a><strong>1.div遮住底层的按钮了怎么办?</strong></h2><p><strong>div看起来是透明，但实际上是覆盖在上面的，想点按钮两个方法：</strong><br><strong>1.div不覆盖到按钮</strong><br><strong>2.按钮的z-index设置值</strong></p>
+<h2 id="2-移动div位置"><a href="#2-移动div位置" class="headerlink" title="2.移动div位置"></a><strong>2.移动div位置</strong></h2><p>除了<code>margin:上 右 下 左</code>以外, 还有top:xxpx; left:xxpx;</p>
+<h2 id="3-修改button样式以及里面文字的样式"><a href="#3-修改button样式以及里面文字的样式" class="headerlink" title="3.修改button样式以及里面文字的样式"></a><strong>3.修改button样式以及里面文字的样式</strong></h2><h2 id="4-react项目中使用jsx语法修复栅格化的显示问题"><a href="#4-react项目中使用jsx语法修复栅格化的显示问题" class="headerlink" title="4.react项目中使用jsx语法修复栅格化的显示问题"></a><strong>4.react项目中使用jsx语法修复栅格化的显示问题</strong></h2><h2 id="5-react中的js文件注释的方式"><a href="#5-react中的js文件注释的方式" class="headerlink" title="5.react中的js文件注释的方式"></a><strong>5.react中的js文件注释的方式</strong></h2><p><code>&#123;/* .... */&#125;</code></p>
+<h2 id="6-做后端接口字段"><a href="#6-做后端接口字段" class="headerlink" title="6.做后端接口字段"></a><strong>6.做后端接口字段</strong></h2><p><img src="https://s1.ax1x.com/2020/04/04/GwaKFx.png" srcset="/img/loading.gif" lazyload alt="image-20200331164310633"></p>
+<p><img src="https://s1.ax1x.com/2020/04/04/GwaGOH.png" srcset="/img/loading.gif" lazyload alt="image-20200331165741417"></p>
+<p><img src="https://s1.ax1x.com/2020/04/04/GwaNTI.png" srcset="/img/loading.gif" lazyload alt="image-20200331170300808"></p>
+<p>请求接口 api&#x2F;index.js</p>
+<p><img src="https://s1.ax1x.com/2020/04/04/GwafhV.png" srcset="/img/loading.gif" lazyload alt="image-20200331172849856"></p>
+<h2 id="7-项目中es6的语法"><a href="#7-项目中es6的语法" class="headerlink" title="7.项目中es6的语法"></a><strong>7.项目中es6的语法</strong></h2><h3 id="7-1-箭头函数"><a href="#7-1-箭头函数" class="headerlink" title="7.1 箭头函数"></a>7.1 箭头函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> <span class="hljs-title function_">f</span> = v =&gt; v;<br><br><span class="hljs-comment">// 等同于</span><br><span class="hljs-keyword">var</span> f = <span class="hljs-keyword">function</span> (<span class="hljs-params">v</span>) &#123;<br>  <span class="hljs-keyword">return</span> v;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>无参或需要多个参数, 需要圆括号代表参数部分</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> <span class="hljs-title function_">f</span> = (<span class="hljs-params"></span>) =&gt; <span class="hljs-number">5</span>;<br><span class="hljs-comment">// 等同于</span><br><span class="hljs-keyword">var</span> f = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123; <span class="hljs-keyword">return</span> <span class="hljs-number">5</span> &#125;;<br><br><span class="hljs-keyword">var</span> <span class="hljs-title function_">sum</span> = (<span class="hljs-params">num1, num2</span>) =&gt; num1 + num2;<br><span class="hljs-comment">// 等同于</span><br><span class="hljs-keyword">var</span> sum = <span class="hljs-keyword">function</span>(<span class="hljs-params">num1, num2</span>) &#123;<br>  <span class="hljs-keyword">return</span> num1 + num2;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>函数的代码块多余一条语句, 需要大括号括起来, 并且使用return语句返回</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> <span class="hljs-title function_">sum</span> = (<span class="hljs-params">num1, num2</span>) =&gt; &#123; <span class="hljs-keyword">return</span> num1 + num2; &#125;<br></code></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>如果箭头函数返回一个对象, 必须在对象外面加上括号, 否则会报错</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 报错</span><br><span class="hljs-keyword">let</span> <span class="hljs-title function_">getTempItem</span> = id =&gt; &#123; <span class="hljs-attr">id</span>: id, <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Temp&quot;</span> &#125;;<br><br><span class="hljs-comment">// 不报错</span><br><span class="hljs-keyword">let</span> <span class="hljs-title function_">getTempItem</span> = id =&gt; (&#123; <span class="hljs-attr">id</span>: id, <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Temp&quot;</span> &#125;);<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>简化回调函数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 正常函数写法</span><br>[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>].<span class="hljs-title function_">map</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">x</span>) &#123;<br>    <span class="hljs-keyword">return</span> x*x;<br>&#125;);<br><br><span class="hljs-comment">// 箭头函数写法</span><br>[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>].<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">x</span>=&gt;</span>x*x);<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="7-2-let和const"><a href="#7-2-let和const" class="headerlink" title="7.2 let和const"></a><code>7.2 let和const</code></h3><p><code>let</code><strong>命令，用来声明变量。它的用法类似于</strong><code>var</code><strong>，但是所声明的变量，只在</strong><code>let</code><strong>命令所在的代码块内有效</strong></p>
+<p><code>const</code><strong>声明一个只读的常量。一旦声明，常量的值就不能改变。</strong></p>
+<p><code>const</code><strong>实际上保证的，并不是变量的值不得改动，而是变量指向的那个内存地址所保存的数据不得改动。对于简单类型的数据（数值、字符串、布尔值），值就保存在变量指向的那个内存地址，因此等同于常量。但对于复合类型的数据（主要是对象和数组），变量指向的内存地址，保存的只是一个指向实际数据的指针，</strong><code>const</code><strong>只能保证这个指针是固定的（即总是指向另一个固定的地址），至于它指向的数据结构是不是可变的，就完全不能控制了</strong></p>
+<p><strong>常量</strong><code>foo</code><strong>储存的是一个地址，这个地址指向一个对象。不可变的只是这个地址，即不能把</strong><code>foo</code><strong>指向另一个地址，但对象本身是可变的，所以依然可以为其添加新属性。</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">const</span> a = [];<br>a.<span class="hljs-title function_">push</span>(<span class="hljs-string">&#x27;Hello&#x27;</span>); <span class="hljs-comment">// 可执行</span><br>a.<span class="hljs-property">length</span> = <span class="hljs-number">0</span>;    <span class="hljs-comment">// 可执行</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="8-后台数据已经传到前端-前端也已经获取-但是内容为空"><a href="#8-后台数据已经传到前端-前端也已经获取-但是内容为空" class="headerlink" title="8.后台数据已经传到前端, 前端也已经获取, 但是内容为空"></a><strong>8.后台数据已经传到前端, 前端也已经获取, 但是内容为空</strong></h2><p>首先可以先打印获取的长度, 看获取了多少, 如果有长度则说明有接收到数据.</p>
+<p>然后在分析数据是否解析正确, 二维数组, 只取数组本身是不行的, 需要 array[0], 这种形式, 来获取二维数组的内容.</p>
+<h2 id="9-react项目无法启动-报错Error-spawn-xdg-open-ENOENT-at-Process-ChildProcess-handle-onexit"><a href="#9-react项目无法启动-报错Error-spawn-xdg-open-ENOENT-at-Process-ChildProcess-handle-onexit" class="headerlink" title="9.react项目无法启动, 报错Error:spawn xdg-open ENOENT at Process.ChildProcess._handle.onexit"></a><strong>9.react项目无法启动, 报错<code>Error:spawn xdg-open ENOENT at Process.ChildProcess._handle.onexit</code></strong></h2><p><img src="https://gitee.com/clearlightY/mapdepot/raw/master/img/20200407155935.png" srcset="/img/loading.gif" lazyload alt="image-20200407155922496"></p>
+<p><img src="https://gitee.com/clearlightY/mapdepot/raw/master/img/20200407160205.png" srcset="/img/loading.gif" lazyload alt="image-20200407160204627"></p>
+<p><strong>解决方案:</strong></p>
+<p>依赖的问题, 通过 <code>npm i</code>来将依赖下好, 如果下载未成功可以尝试:<code>npm i  --registry=https://registry.npm.taobao.org</code></p>
+<p>然后在去 <code>npm start</code> 即可.</p>
+<h2 id="10-css小细节"><a href="#10-css小细节" class="headerlink" title="10.css小细节"></a><strong>10.css小细节</strong></h2><h3 id="10-1-如何让两个div重叠在一起"><a href="#10-1-如何让两个div重叠在一起" class="headerlink" title="10.1 如何让两个div重叠在一起?"></a>10.1 如何让两个div重叠在一起?</h3><blockquote>
+<p><strong>CSS中设置一下position:absolute;</strong> <a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=z-index&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao">z-index</a><strong>:10000;</strong></p>
+</blockquote>
+<h3 id="10-2-如何让div居中"><a href="#10-2-如何让div居中" class="headerlink" title="10.2 如何让div居中?"></a>10.2 如何让div居中?</h3><blockquote>
+<p><img src="https://gitee.com/clearlightY/mapdepot/raw/master/img/20200408101800.png" srcset="/img/loading.gif" lazyload alt="image-20200408101750093"></p>
+</blockquote>
+<h3 id="10-3-font-weight"><a href="#10-3-font-weight" class="headerlink" title="10.3 font-weight"></a>10.3 font-weight</h3><blockquote>
+<p>对象值：从100到900，最常用font-weight的值为bold</p>
+</blockquote>
+<h3 id="10-4-让两个div并排显示"><a href="#10-4-让两个div并排显示" class="headerlink" title="10.4 让两个div并排显示"></a>10.4 让两个div并排显示</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/liukuan73/article/details/51894476">https://blog.csdn.net/liukuan73/article/details/51894476</a></p>
+<blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width:300px; height:auto; float:left; display:inline&quot;</span>&gt;</span>AAAA<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span> <br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;width:300px; height:auto; float:left; display:inline&quot;</span>&gt;</span>BBBB<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span> <br></code></pre></td></tr></table></figure>
+</blockquote>
+<p>最有效的还是flex进行布局, 还可以实现响应式.</p>
+<h2 id="11-如何在react中使用canvas画箭头"><a href="#11-如何在react中使用canvas画箭头" class="headerlink" title="11. 如何在react中使用canvas画箭头?"></a><strong>11. 如何在react中使用canvas画箭头?</strong></h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span>, &#123; <span class="hljs-title class_">Component</span> &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br><br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">rect</span>(<span class="hljs-params">props</span>) &#123;<br><br>    <span class="hljs-keyword">const</span> &#123; ctx, fromX, fromY, toX, toY, color &#125; = props;<br>    <span class="hljs-keyword">var</span> headlen = <span class="hljs-number">10</span>; <span class="hljs-comment">//自定义箭头线的长度</span><br>    <span class="hljs-keyword">var</span> theta = <span class="hljs-number">30</span>; <span class="hljs-comment">//自定义箭头线与直线的夹角，个人觉得45°刚刚好</span><br>    <span class="hljs-keyword">var</span> arrowX, arrowY; <span class="hljs-comment">//箭头线终点坐标</span><br>    <span class="hljs-comment">// 计算各角度和对应的箭头终点坐标</span><br>    <span class="hljs-keyword">var</span> angle = <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">atan2</span>(fromY - toY, fromX - toX) * <span class="hljs-number">180</span> / <span class="hljs-title class_">Math</span>.<span class="hljs-property">PI</span>;<br>    <span class="hljs-keyword">var</span> angle1 = (angle + theta) * <span class="hljs-title class_">Math</span>.<span class="hljs-property">PI</span> / <span class="hljs-number">180</span>;<br>    <span class="hljs-keyword">var</span> angle2 = (angle - theta) * <span class="hljs-title class_">Math</span>.<span class="hljs-property">PI</span> / <span class="hljs-number">180</span>;<br>    <span class="hljs-keyword">var</span> topX = headlen * <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">cos</span>(angle1);<br>    <span class="hljs-keyword">var</span> topY = headlen * <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">sin</span>(angle1);<br>    <span class="hljs-keyword">var</span> botX = headlen * <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">cos</span>(angle2);<br>    <span class="hljs-keyword">var</span> botY = headlen * <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">sin</span>(angle2);<br>    ctx.<span class="hljs-title function_">beginPath</span>();<br>    <span class="hljs-comment">//画直线</span><br>    ctx.<span class="hljs-title function_">moveTo</span>(fromX, fromY);<br>    ctx.<span class="hljs-title function_">lineTo</span>(toX, toY);<br><br>    arrowX = toX + topX;<br>    arrowY = toY + topY;<br>    <span class="hljs-comment">//画上边箭头线</span><br>    ctx.<span class="hljs-title function_">moveTo</span>(arrowX, arrowY);<br>    ctx.<span class="hljs-title function_">lineTo</span>(toX, toY);<br><br>    arrowX = toX + botX;<br>    arrowY = toY + botY;<br>    <span class="hljs-comment">//画下边箭头线</span><br>    ctx.<span class="hljs-title function_">lineTo</span>(arrowX, arrowY);<br><br>    ctx.<span class="hljs-property">strokeStyle</span> = color;<br>    ctx.<span class="hljs-title function_">stroke</span>();<br>&#125;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">LineRow</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Component</span> &#123;<br>    <span class="hljs-title function_">componentDidMount</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">updateCanvas</span>();<br>    &#125;<br>    <span class="hljs-title function_">componentDidUpdate</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">updateCanvas</span>();<br>    &#125;<br>    <span class="hljs-title function_">updateCanvas</span>(<span class="hljs-params"></span>) &#123;<br><br><br><br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-keyword">var</span> canvas = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;canvas1&#x27;</span>);<br><br><br>            <span class="hljs-keyword">if</span> (!canvas) &#123; <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Canvas not found.&#x27;</span>); &#125;<br>            <span class="hljs-keyword">else</span> &#123;<br><br>                <span class="hljs-keyword">if</span> (!canvas.<span class="hljs-property">getContext</span>) &#123; <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Context not supported.&#x27;</span>); &#125;<br>                <span class="hljs-keyword">else</span> &#123;<br>                    <span class="hljs-keyword">const</span> ctx = <span class="hljs-variable language_">this</span>.<span class="hljs-property">refs</span>.<span class="hljs-property">canvas</span>.<span class="hljs-title function_">getContext</span>(<span class="hljs-string">&#x27;2d&#x27;</span>);<br>                    <span class="hljs-keyword">if</span> (!ctx) &#123; <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Context 2D not available.&#x27;</span>); &#125;<br>                    <span class="hljs-keyword">else</span> &#123;<br>                        <span class="hljs-title function_">rect</span>(&#123; ctx, <span class="hljs-attr">fromX</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">fromY</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">toX</span>: <span class="hljs-number">200</span>, <span class="hljs-attr">toY</span>: <span class="hljs-number">200</span>, <span class="hljs-attr">color</span>: <span class="hljs-string">&quot;#000&quot;</span> &#125;);<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">catch</span> (exc) &#123; <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(exc); &#125;<br>    &#125;<br>    <span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">return</span> (<br>            <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">                <span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;canvas1&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;canvas&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&#123;300&#125;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&#123;300&#125;</span> /&gt;</span></span><br><span class="language-xml">            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>        )<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-title class_">LineRow</span>;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">import</span> <span class="hljs-title class_">React</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react&#x27;</span>;<br><span class="hljs-keyword">import</span> <span class="hljs-title class_">ReactDOM</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;react-dom&#x27;</span>;<br><br><br><span class="hljs-keyword">import</span> <span class="hljs-title class_">LineRow</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./LineRow&#x27;</span><br><br><span class="hljs-title class_">ReactDOM</span>.<span class="hljs-title function_">render</span>(<br>  <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">React.StrictMode</span>&gt;</span></span><br><span class="language-xml">    &#123; <span class="hljs-tag">&lt;<span class="hljs-name">LineRow</span> /&gt;</span>&#125;</span><br><span class="language-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">React.StrictMode</span>&gt;</span></span>,<br>  <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;root&#x27;</span>)<br>);<br></code></pre></td></tr></table></figure>
+
+<p><strong>效果:</strong></p>
+<p><img src="https://gitee.com/clearlightY/mapdepot/raw/master/img/20200413131036.png" srcset="/img/loading.gif" lazyload alt="image-20200413131027416"></p>
+<h2 id="12-遍历二维数组-来拼接想要的语句"><a href="#12-遍历二维数组-来拼接想要的语句" class="headerlink" title="12.遍历二维数组, 来拼接想要的语句"></a><strong>12.遍历二维数组, 来拼接想要的语句</strong></h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-keyword">var</span> <span class="hljs-title class_">Demo</span> = <span class="hljs-title class_">React</span>.<span class="hljs-title function_">createClass</span>(&#123;<br>    <span class="hljs-attr">getInitialState</span>:<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>        <span class="hljs-keyword">return</span> &#123;<span class="hljs-attr">lenght</span>:<span class="hljs-number">3</span>&#125;<br>    &#125;,<br>    <span class="hljs-attr">render</span>:<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>        <span class="hljs-keyword">var</span> items = [];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">3</span>; i++) &#123;<br>            items.<span class="hljs-title function_">push</span>(<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">&quot;item&quot;</span>&gt;</span>gagaag<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>);<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> (<br>            <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">                &#123;items&#125;</span><br><span class="language-xml">            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>        )<br>    &#125;<br>&#125;)<br><span class="hljs-title class_">React</span>.<span class="hljs-title function_">render</span>(<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Demo</span>/&gt;</span></span>,<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;example&#x27;</span>))<br></code></pre></td></tr></table></figure>
+
+<h2 id="13-Adjacent-JSX-elements-must-be-wrapped-in-an-enclosing-tag-Did-you-want-a-JSX-fragment-lt-gt-lt-gt-React标签都闭合-但还是报该错误"><a href="#13-Adjacent-JSX-elements-must-be-wrapped-in-an-enclosing-tag-Did-you-want-a-JSX-fragment-lt-gt-lt-gt-React标签都闭合-但还是报该错误" class="headerlink" title="13.Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment &lt;&gt;...&lt;/&gt;?React标签都闭合,但还是报该错误"></a>13.<code>Adjacent JSX elements must be wrapped in an enclosing tag. Did you want a JSX fragment &lt;&gt;...&lt;/&gt;?</code>React标签都闭合,但还是报该错误</h2><p>1.检查标签的拼写是否有误</p>
+<p>2.再用一组标签去包装所有东西.即所有内容在套一个div</p>
+<h2 id="14-React组件中通信"><a href="#14-React组件中通信" class="headerlink" title="14.React组件中通信"></a><strong>14.React组件中通信</strong></h2><p>详情请看:<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36852780/article/details/105541540">https://blog.csdn.net/qq_36852780/article/details/105541540</a></p>
+<h2 id="15-如何将两个div平行两侧排列"><a href="#15-如何将两个div平行两侧排列" class="headerlink" title="15.如何将两个div平行两侧排列"></a>15.如何将两个div平行两侧排列</h2><p>很简单, </p>
+<p>显示在右侧的div可以直接<code>position:absolute; right:8px;</code></p>
+<h2 id="16-按钮绑定点击事件"><a href="#16-按钮绑定点击事件" class="headerlink" title="16.按钮绑定点击事件"></a>16.按钮绑定点击事件</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">    	&#123;/* 需求: 点击按钮, 把修改msg的值 */&#125;</span><br><span class="language-xml">        &#123;/* React绑定事件的标准格式 */&#125;</span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;</span> () =&gt;</span> this.show(&#x27;Hello&#x27;, &#x27;pizza&#x27;)&#125;&gt;按钮<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>&#123;this.state.msg&gt;<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span></span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>&#125;<br><br>show = <span class="hljs-function">(<span class="hljs-params">arg1, arg2</span>) =&gt;</span> &#123;<br>                <span class="hljs-comment">// 注意: React中, 如果想为state中的数据, 重新赋值, 不要使用 this.state.*** = 值</span><br>                <span class="hljs-comment">// 应该调用React提供的 this.setState(&#123;msg:&#x27;124&#x27;&#125;)</span><br>                <span class="hljs-comment">// this.state.msg = &#x27;00000&#x27;</span><br>                <br>                <span class="hljs-comment">// 在React中, 推荐使用 this.setState(&#123;&#125;) 修改状态值</span><br>                <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">setState</span>(&#123;<br>                    <span class="hljs-comment">// 在 setState, 只会把 对应的 state 状态更新, 而不会 覆盖其他的 state 状态</span><br>                    <span class="hljs-attr">msg</span>: <span class="hljs-string">&#x27;123&#x27;</span> + arg1 + arg2<br>                &#125;, <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123; <span class="hljs-comment">// 回调</span><br>                	<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">state</span>.<span class="hljs-property">msg</span>)<br>                &#125;)<br>            &#125;      <br>            <br>            <span class="hljs-comment">// 注意: this.setState 方法的执行, 是异步的;</span><br>            <span class="hljs-comment">// 如果大家在 调用完 this.setState 之后, 又想立即拿到 最新的 state 值, 需要使用 this.setState(&#123;&#125;,callback)</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="17-React绑定文本框和state中的值-双向绑定"><a href="#17-React绑定文本框和state中的值-双向绑定" class="headerlink" title="17. React绑定文本框和state中的值(双向绑定)"></a>17. React绑定文本框和state中的值(双向绑定)</h2><p>​	<img src="https://gitee.com/clearlightY/mapdepot/raw/master/img/20200419232008.png" srcset="/img/loading.gif" lazyload alt="image-20200419231957963"></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs jsx"><span class="hljs-title function_">render</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">return</span> <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span></span><br><span class="language-xml">    	&#123;/* 如果我们把文本框的 value 属性, 绑定到了 state 状态, 但是, 如果不提供 onChange 处理函数的话, 得到的文本框, 将会是一个只读的文本框 */&#125;</span><br><span class="language-xml">        &#123;/* 当为文本框绑定 value 值 以后, 要么同时提供一个 readOnly, 要么, 提供一个 onChange 处理函数 */&#125;</span><br><span class="language-xml">        &#123;/* &lt;input=&quot;text&quot; style=&#123;&#123; width: &#x27;100%&#x27;&#125;&#125; value=&#123;this.state.msg&#125; readOnly /&gt; */&#125;</span><br><span class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">style</span>=<span class="hljs-string">&#123;&#123;width:</span>&#x27;<span class="hljs-attr">100</span>%&#x27;&#125;&#125; <span class="hljs-attr">value</span>=<span class="hljs-string">&#123;this.state.msg&#125;</span> <span class="hljs-attr">onChange</span>=<span class="hljs-string">&#123;(e)</span> =&gt;</span> this.txtChanged(e)&#125; ref=&quot;txt&quot;/&gt;</span><br><span class="language-xml">    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br>    <br>    <span class="hljs-comment">// 每当文本框的内容变化了, 必然会调用这个 TXTChanged</span><br>    txtChanged = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> &#123;<br>        <span class="hljs-comment">// console.log(&#x27;变化了&#x27;);</span><br>        <br>        <span class="hljs-comment">// 在onChange 事件中, 获取 文本框的值, 有两种方案:</span><br>        <span class="hljs-comment">// 方案1: 通过事件参数 e 来获取;</span><br>        <span class="hljs-comment">// console.log(e.target.value);</span><br>        <span class="hljs-comment">// 在React中, 也有 ref, 如果要获取元素的引用 this.refs.引用名称</span><br>        <span class="hljs-comment">// this.refs.txt: 获取引用的元素(&lt;input type=&quot;text&quot; value=&quot;哈哈&quot; style=&quot;width: 100%;&quot;)</span><br>        <span class="hljs-comment">// this.refs.txt.value: 获取引用的元素的value值</span><br>        <span class="hljs-comment">// console.log(this.refs.txt.value)</span><br>      <br>        <br>    &#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="18-点击按钮生成新的空白窗口"><a href="#18-点击按钮生成新的空白窗口" class="headerlink" title="18. 点击按钮生成新的空白窗口"></a>18. 点击按钮生成新的空白窗口</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;this.show_blank_window&#125;</span>&gt;</span>新窗口<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><br>// 新窗口的点击事件<br>show_blank_window=()=&#123;<br>    window.open(&#x27;about:blank&#x27;);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="后端记录"><a href="#后端记录" class="headerlink" title="后端记录"></a>后端记录</h1><h2 id="1-Django项目如何启动"><a href="#1-Django项目如何启动" class="headerlink" title="1.Django项目如何启动"></a><strong>1.Django项目如何启动</strong></h2><blockquote>
+<p>Django下载地址:<strong><a target="_blank" rel="noopener" href="https://www.djangoproject.com/">https://www.djangoproject.com/</a>	download&#x2F;</strong></p>
+<blockquote>
+<p>查看Django版本: <code>python -m django --version</code></p>
+</blockquote>
+</blockquote>
+<p>1.在项目根目录执行<code>python manage.py</code></p>
+<p>2.如果报错的话, 执行<code>pip install xxxx</code></p>
+<p>3.安装了之后,再运行<code>python manage.py</code>看是否成功</p>
+<p>4.一直运行可以执行:<code>python manage.py runserver</code></p>
+<blockquote>
+<p>对于内部服务器来说, 已经下载好的模块可以执行<code>pip install 模块名 --target=/home/下载好的模块路径/site-packages</code></p>
+</blockquote>
+<p>5.你确实启动成功了, 可是你是启动在默认的ip和端口 127.0.0.1:8000上…如果你想启动在本机ip:port的话, 需要执行<code>python manage.py runserver 0.0.0.0:8000</code></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%AE%9E%E4%B9%A0/" class="category-chain-item">实习</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Daily-notes/">#Daily_notes</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>实习日常问题记录_2020</div>
+      <div>http://clearlight.com.cn/posts/38652.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>xyli</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 25, 2020</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/20080.html" title="响应式中@media的注意事项">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">响应式中@media的注意事项</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/31617.html" title="win10字体显示Mac效果+Chrome字体效果增强">
+                        <span class="hidden-mobile">win10字体显示Mac效果+Chrome字体效果增强</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","appKey":"bw1k0GCjO6lHifiPFl0A2Unz","path":"window.location.pathname","placeholder":"Leave your mark~ :)","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"en","highlight":true,"recordIP":false,"serverURLs":"https://b0klyfca.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","appkey":"bw1k0GCjO6lHifiPFl0A2Unz","master":"5648a5366f6c27713d6b28070c99c6e8","friends":null},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://s3.ax1x.com/2021/01/03/spKCwV.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i color="red" class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      冀ICP备19019307号-2
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
