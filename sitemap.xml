@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://clearlight.com.cn/about/index.html</loc>
+    
+    <lastmod>2024-07-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://clearlight.com.cn/posts/eca52577.html</loc>
     
     <lastmod>2024-07-17</lastmod>
@@ -39,15 +48,6 @@
   
   <url>
     <loc>http://clearlight.com.cn/links/index.html</loc>
-    
-    <lastmod>2023-08-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://clearlight.com.cn/about/index.html</loc>
     
     <lastmod>2023-08-02</lastmod>
     
@@ -119,15 +119,6 @@
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/google91a04f17fb107c17.html</loc>
-    
-    <lastmod>2022-11-04</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://clearlight.com.cn/baidu_verify_ZY7f24W6aE.html</loc>
     
     <lastmod>2022-11-04</lastmod>
@@ -138,6 +129,15 @@
   
   <url>
     <loc>http://clearlight.com.cn/categories/index.html</loc>
+    
+    <lastmod>2022-11-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://clearlight.com.cn/google91a04f17fb107c17.html</loc>
     
     <lastmod>2022-11-04</lastmod>
     
@@ -474,14 +474,14 @@
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/tags/Linux-Redis/</loc>
+    <loc>http://clearlight.com.cn/tags/PLSQL-developer/</loc>
     <lastmod>2024-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/tags/PLSQL-developer/</loc>
+    <loc>http://clearlight.com.cn/tags/Linux-Redis/</loc>
     <lastmod>2024-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -551,14 +551,14 @@
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/tags/share/</loc>
+    <loc>http://clearlight.com.cn/tags/Bootstrap/</loc>
     <lastmod>2024-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/tags/Bootstrap/</loc>
+    <loc>http://clearlight.com.cn/tags/share/</loc>
     <lastmod>2024-07-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
