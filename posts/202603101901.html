@@ -1,0 +1,960 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xyli">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="錯誤描述當執行 hexo d 命令部署 Hexo 博客時，可能會遇到以下錯誤： 12345678Please make sure you have the correct access rightsand the repository exists.FATAL Something&amp;#x27;s wrong. Maybe you can find the solution here: https:&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 部署錯誤解決方案：Please make sure you have the correct access rights and the repository exists">
+<meta property="og:url" content="http://clearlight.com.cn/posts/202603101901.html">
+<meta property="og:site_name" content="Clearlight&#39;s BLOG">
+<meta property="og:description" content="錯誤描述當執行 hexo d 命令部署 Hexo 博客時，可能會遇到以下錯誤： 12345678Please make sure you have the correct access rightsand the repository exists.FATAL Something&amp;#x27;s wrong. Maybe you can find the solution here: https:&#x2F;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-10T11:00:01.000Z">
+<meta property="article:modified_time" content="2026-03-10T11:02:45.782Z">
+<meta property="article:author" content="xyli">
+<meta property="article:tag" content="问题修复">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Hexo 部署錯誤解決方案：Please make sure you have the correct access rights and the repository exists - Clearlight&#39;s BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/iconfont_csdn/iconfont.css">
+<link rel="stylesheet" href="/css/iconfont_cloud/iconfont.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"clearlight.com.cn","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":78,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":2,"color":"#CC874C","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"47f5c6c5881db830494f6ce89651d7ed","google":"G-NJCES20K5B","gtag":257598550,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","app_key":"bw1k0GCjO6lHifiPFl0A2Unz","server_url":"https://b0klyfca.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?47f5c6c5881db830494f6ce89651d7ed";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-NJCES20K5B', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.googletagmanager.com/gtag/js?id=257598550', function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '257598550');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Clearlight's BLOG" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xyli&#39;s nest</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                Article
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    Archives
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    Categories
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    Tags
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s3.ax1x.com/2021/01/14/sdtlqO.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Hexo 部署錯誤解決方案：Please make sure you have the correct access rights and the repository exists"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-10 19:00" pubdate>
+          March 10, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          4.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          36 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Hexo 部署錯誤解決方案：Please make sure you have the correct access rights and the repository exists</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：March 10, 2026 pm
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="錯誤描述"><a href="#錯誤描述" class="headerlink" title="錯誤描述"></a>錯誤描述</h2><p>當執行 <code>hexo d</code> 命令部署 Hexo 博客時，可能會遇到以下錯誤：</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs subunit">Please make sure you have the correct access rights<br>and the repository exists.<br>FATAL Something&#x27;s wrong. Maybe you can find the solution here: https://hexo.io/docs/troubleshooting.html<br><span class="hljs-keyword">Error: </span>Spawn failed<br>    at ChildProcess.&lt;anonymous&gt; (E:\Personal\Blog\ClearlightY.github.io\node_modules\hexo-util\lib\spawn.js:51:21)<br>    at ChildProcess.emit (node:events:508:28)<br>    at cp.emit (E:\Personal\Blog\ClearlightY.github.io\node_modules\cross-spawn\lib\enoent.js:34:29)<br>    at ChildProcess._handle.onexit (node:internal/child_process:294:12)<br></code></pre></td></tr></table></figure>
+
+<p>這個錯誤表明 Hexo 無法將生成的靜態文件推送到 Git 倉庫，通常是由於 Git 配置、權限問題或倉庫設置不正確導致的。</p>
+<h2 id="錯誤原因分析"><a href="#錯誤原因分析" class="headerlink" title="錯誤原因分析"></a>錯誤原因分析</h2><ol>
+<li><strong>Git 倉庫配置錯誤</strong>：<code>_config.yml</code> 中的 <code>deploy.repo</code> 設置不正確</li>
+<li><strong>倉庫權限問題</strong>：沒有對目標倉庫的寫入權限</li>
+<li><strong>Git 認證失敗</strong>：HTTPS 或 SSH 認證未正確設置</li>
+<li><strong>插件問題</strong>：<code>hexo-deployer-git</code> 插件未安裝或版本不兼容</li>
+<li><strong>網絡或環境問題</strong>：防火牆、代理或 Git 客戶端配置問題</li>
+</ol>
+<h2 id="解決方案步驟"><a href="#解決方案步驟" class="headerlink" title="解決方案步驟"></a>解決方案步驟</h2><h3 id="步驟-1：檢查-config-yml-配置"><a href="#步驟-1：檢查-config-yml-配置" class="headerlink" title="步驟 1：檢查 _config.yml 配置"></a>步驟 1：檢查 <code>_config.yml</code> 配置</h3><p>打開 Hexo 博客目錄下的 <code>_config.yml</code> 文件，檢查 <code>deploy</code> 部分：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">deploy:</span><br>  <span class="hljs-attr">type:</span> <span class="hljs-string">git</span><br>  <span class="hljs-attr">repo:</span> <span class="hljs-string">https://github.com/你的用戶名/你的倉庫名.git</span><br>  <span class="hljs-attr">branch:</span> <span class="hljs-string">main</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>重要檢查點</strong>：</p>
+<ul>
+<li>確保 <code>repo</code> URL 完全正確</li>
+<li>確認倉庫名稱與 GitHub 上的完全一致</li>
+<li>如果是個人主頁，倉庫名必須為 <code>你的用戶名.github.io</code></li>
+<li><code>branch</code> 通常為 <code>main</code>（新倉庫）或 <code>master</code>（舊倉庫）</li>
+</ul>
+<p><strong>URL 格式對比</strong>：</p>
+<ul>
+<li>HTTPS：<code>https://github.com/用戶名/倉庫名.git</code></li>
+<li>SSH：<code>git@github.com:用戶名/倉庫名.git</code></li>
+</ul>
+<h3 id="步驟-2：確認倉庫存在且有權限"><a href="#步驟-2：確認倉庫存在且有權限" class="headerlink" title="步驟 2：確認倉庫存在且有權限"></a>步驟 2：確認倉庫存在且有權限</h3><ol>
+<li><strong>訪問 GitHub</strong>，確認倉庫確實存在</li>
+<li><strong>檢查倉庫權限</strong>：<ul>
+<li>個人倉庫：確保你是所有者</li>
+<li>組織倉庫：確保你有寫入權限</li>
+</ul>
+</li>
+<li><strong>倉庫命名規則</strong>：<ul>
+<li>個人主頁：<code>用戶名.github.io</code></li>
+<li>項目頁面：<code>用戶名.github.io/項目名</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="步驟-3：檢查-Git-認證設置"><a href="#步驟-3：檢查-Git-認證設置" class="headerlink" title="步驟 3：檢查 Git 認證設置"></a>步驟 3：檢查 Git 認證設置</h3><h4 id="HTTPS-認證方式"><a href="#HTTPS-認證方式" class="headerlink" title="HTTPS 認證方式"></a>HTTPS 認證方式</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 檢查 Git 全局配置</span><br>git config --global user.email<br>git config --global user.name<br><br><span class="hljs-comment"># 如果未設置，設置你的信息</span><br>git config --global user.email <span class="hljs-string">&quot;你的郵箱&quot;</span><br>git config --global user.name <span class="hljs-string">&quot;你的用戶名&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>Windows 憑證管理器</strong>：</p>
+<ol>
+<li>打開「控制面板」→「用戶帳戶」→「憑證管理器」</li>
+<li>檢查「Windows 憑證」中是否有 GitHub 憑證</li>
+<li>如果沒有，Git 會提示輸入用戶名和密碼</li>
+</ol>
+<h4 id="SSH-認證方式"><a href="#SSH-認證方式" class="headerlink" title="SSH 認證方式"></a>SSH 認證方式</h4><ol>
+<li><p><strong>檢查 SSH 密鑰是否存在</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 查看 .ssh 目錄</span><br><span class="hljs-built_in">dir</span> ~/.ssh<br><br><span class="hljs-comment"># 檢查是否有 id_rsa 和 id_rsa.pub 文件</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>生成 SSH 密鑰（如果沒有）</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh-keygen -t rsa -b 4096 -C <span class="hljs-string">&quot;你的郵箱&quot;</span><br><span class="hljs-comment"># 按 Enter 接受默認路徑</span><br><span class="hljs-comment"># 設置密碼（可選）</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>將公鑰添加到 GitHub</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 複製公鑰內容</span><br><span class="hljs-built_in">type</span> ~/.ssh/id_rsa.pub<br></code></pre></td></tr></table></figure>
+
+<p>然後：</p>
+<ul>
+<li>登錄 GitHub</li>
+<li>進入 Settings → SSH and GPG keys</li>
+<li>點擊 “New SSH key”</li>
+<li>貼上公鑰內容</li>
+<li>點擊 “Add SSH key”</li>
+</ul>
+</li>
+<li><p><strong>測試 SSH 連接</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">ssh -T git@github.com<br></code></pre></td></tr></table></figure>
+<p>應該看到：<code>Hi 你的用戶名! You&#39;ve successfully authenticated...</code></p>
+</li>
+</ol>
+<h3 id="步驟-4：確認插件已正確安裝"><a href="#步驟-4：確認插件已正確安裝" class="headerlink" title="步驟 4：確認插件已正確安裝"></a>步驟 4：確認插件已正確安裝</h3><p>在博客目錄下執行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 檢查 hexo-deployer-git 是否已安裝</span><br>npm list hexo-deployer-git<br><br><span class="hljs-comment"># 如果未安裝，安裝插件</span><br>npm install hexo-deployer-git --save<br><br><span class="hljs-comment"># 或者重新安裝</span><br>npm uninstall hexo-deployer-git<br>npm install hexo-deployer-git --save<br></code></pre></td></tr></table></figure>
+
+<h3 id="步驟-5：測試-Git-連接"><a href="#步驟-5：測試-Git-連接" class="headerlink" title="步驟 5：測試 Git 連接"></a>步驟 5：測試 Git 連接</h3><p>在博客目錄外，測試 Git 是否能正常連接：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 測試 HTTPS 連接</span><br>git <span class="hljs-built_in">clone</span> https://github.com/你的用戶名/你的倉庫名.git test-repo-https<br><br><span class="hljs-comment"># 測試 SSH 連接</span><br>git <span class="hljs-built_in">clone</span> git@github.com:你的用戶名/你的倉庫名.git test-repo-ssh<br></code></pre></td></tr></table></figure>
+
+<p>如果克隆失敗，錯誤信息會提示具體原因。</p>
+<h3 id="步驟-6：執行診斷命令"><a href="#步驟-6：執行診斷命令" class="headerlink" title="步驟 6：執行診斷命令"></a>步驟 6：執行診斷命令</h3><p>在博客目錄下執行以下命令進行診斷：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 確認當前目錄</span><br><span class="hljs-built_in">cd</span> /d E:\Personal\Blog\ClearlightY.github.io<br><span class="hljs-built_in">echo</span> 當前目錄：%<span class="hljs-built_in">cd</span>%<br><br><span class="hljs-comment"># 2. 檢查 _config.yml 的 deploy 部分</span><br><span class="hljs-built_in">type</span> _config.yml | findstr <span class="hljs-string">&quot;deploy&quot;</span><br><br><span class="hljs-comment"># 3. 檢查 Git 遠程倉庫配置</span><br>git remote -v<br><br><span class="hljs-comment"># 4. 檢查 Node.js 和 npm 版本</span><br>node -v<br>npm -v<br><br><span class="hljs-comment"># 5. 檢查 Hexo 版本</span><br>hexo -v<br></code></pre></td></tr></table></figure>
+
+<h3 id="步驟-7：清理並重新部署"><a href="#步驟-7：清理並重新部署" class="headerlink" title="步驟 7：清理並重新部署"></a>步驟 7：清理並重新部署</h3><p>如果配置都正確，嘗試清理緩存後重新部署：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 清理緩存和生成的文件</span><br>hexo clean<br><br><span class="hljs-comment"># 重新生成靜態文件</span><br>hexo generate<br><br><span class="hljs-comment"># 嘗試部署</span><br>hexo deploy<br><br><span class="hljs-comment"># 或者使用組合命令</span><br>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d<br></code></pre></td></tr></table></figure>
+
+<h3 id="步驟-8：手動部署（備用方案）"><a href="#步驟-8：手動部署（備用方案）" class="headerlink" title="步驟 8：手動部署（備用方案）"></a>步驟 8：手動部署（備用方案）</h3><p>如果自動部署仍然失敗，可以手動部署：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 生成靜態文件</span><br>hexo generate<br><br><span class="hljs-comment"># 2. 進入 public 目錄</span><br><span class="hljs-built_in">cd</span> public<br><br><span class="hljs-comment"># 3. 初始化 Git（如果沒有）</span><br>git init<br><br><span class="hljs-comment"># 4. 添加所有文件</span><br>git add .<br><br><span class="hljs-comment"># 5. 提交更改</span><br>git commit -m <span class="hljs-string">&quot;Update: <span class="hljs-subst">$(date)</span>&quot;</span><br><br><span class="hljs-comment"># 6. 添加遠程倉庫</span><br>git remote add origin https://github.com/你的用戶名/你的倉庫名.git<br><br><span class="hljs-comment"># 7. 強制推送到主分支</span><br>git push -f origin main<br><br><span class="hljs-comment"># 或者使用 SSH</span><br>git push -f git@github.com:你的用戶名/你的倉庫名.git main<br></code></pre></td></tr></table></figure>
+
+<h2 id="常見問題與解決方法"><a href="#常見問題與解決方法" class="headerlink" title="常見問題與解決方法"></a>常見問題與解決方法</h2><h3 id="問題-1：倉庫不存在"><a href="#問題-1：倉庫不存在" class="headerlink" title="問題 1：倉庫不存在"></a>問題 1：倉庫不存在</h3><p><strong>解決方法</strong>：</p>
+<ol>
+<li>登錄 GitHub 創建倉庫</li>
+<li>確保倉庫名稱正確</li>
+<li>如果是個人主頁，倉庫名必須為 <code>用戶名.github.io</code></li>
+</ol>
+<h3 id="問題-2：權限不足"><a href="#問題-2：權限不足" class="headerlink" title="問題 2：權限不足"></a>問題 2：權限不足</h3><p><strong>解決方法</strong>：</p>
+<ol>
+<li>檢查你是否是倉庫的協作者</li>
+<li>如果是組織倉庫，請管理員添加你的寫入權限</li>
+<li>使用個人訪問令牌（PAT）代替密碼</li>
+</ol>
+<h3 id="問題-3：Git-憑證過期"><a href="#問題-3：Git-憑證過期" class="headerlink" title="問題 3：Git 憑證過期"></a>問題 3：Git 憑證過期</h3><p><strong>解決方法</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 清除緩存的憑證</span><br>git credential-manager reject https://github.com<br><br><span class="hljs-comment"># 或者手動刪除憑證管理器中的 GitHub 條目</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="問題-4：使用代理導致的網絡問題"><a href="#問題-4：使用代理導致的網絡問題" class="headerlink" title="問題 4：使用代理導致的網絡問題"></a>問題 4：使用代理導致的網絡問題</h3><p><strong>解決方法</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 暫時取消代理</span><br><span class="hljs-built_in">set</span> http_proxy=<br><span class="hljs-built_in">set</span> https_proxy=<br><br><span class="hljs-comment"># 或者設置正確的代理</span><br><span class="hljs-built_in">set</span> http_proxy=http://你的代理:端口<br><span class="hljs-built_in">set</span> https_proxy=http://你的代理:端口<br></code></pre></td></tr></table></figure>
+
+<h3 id="問題-5：防火牆或安全軟件阻擋"><a href="#問題-5：防火牆或安全軟件阻擋" class="headerlink" title="問題 5：防火牆或安全軟件阻擋"></a>問題 5：防火牆或安全軟件阻擋</h3><p><strong>解決方法</strong>：</p>
+<ol>
+<li>暫時禁用防火牆測試</li>
+<li>將 Git 和 Node.js 添加到防火牆白名單</li>
+<li>檢查企業網絡是否限制 Git 訪問</li>
+</ol>
+<h2 id="預防措施"><a href="#預防措施" class="headerlink" title="預防措施"></a>預防措施</h2><ol>
+<li><p><strong>定期更新插件</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm update hexo-deployer-git<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>備份配置文件</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 備份 _config.yml</span><br>copy _config.yml _config.yml.backup<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>使用版本控制</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 將整個 Hexo 源代碼也加入 Git</span><br>git init<br>git add .<br>git commit -m <span class="hljs-string">&quot;Initial commit&quot;</span><br>git remote add origin https://github.com/你的用戶名/hexo-source.git<br>git push -u origin main<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>測試部署流程</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 創建測試腳本</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hexo clean&quot;</span> &gt; deploy-test.bat<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hexo g&quot;</span> &gt;&gt; deploy-test.bat<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hexo d&quot;</span> &gt;&gt; deploy-test.bat<br></code></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>Hexo 部署錯誤 “Please make sure you have the correct access rights and the repository exists” 通常可以通過以下步驟解決：</p>
+<ol>
+<li>✅ 檢查 <code>_config.yml</code> 中的 <code>deploy.repo</code> 配置</li>
+<li>✅ 確認 GitHub 倉庫存在且有寫入權限</li>
+<li>✅ 設置正確的 Git 認證（HTTPS 或 SSH）</li>
+<li>✅ 安裝並更新 <code>hexo-deployer-git</code> 插件</li>
+<li>✅ 測試 Git 連接是否正常</li>
+<li>✅ 清理緩存後重新部署</li>
+</ol>
+<p>如果問題仍然存在，可以嘗試手動部署或檢查網絡環境。大多數情況下，問題出在 Git 配置或倉庫權限上。</p>
+<h2 id="參考資源"><a href="#參考資源" class="headerlink" title="參考資源"></a>參考資源</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/one-command-deployment">Hexo 官方文檔 - 部署</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.github.com/en/authentication/connecting-to-github-with-ssh">GitHub Help - SSH key authentication</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/microsoft/Git-Credential-Manager-Core">Git Credential Manager for Windows</a></li>
+<li><a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">Hexo Troubleshooting Guide</a></li>
+</ul>
+<hr>
+<p><strong>最後檢查清單</strong>：</p>
+<ul>
+<li><input disabled type="checkbox"> <code>_config.yml</code> 中的 <code>repo</code> URL 正確</li>
+<li><input disabled type="checkbox"> GitHub 倉庫存在且有寫入權限</li>
+<li><input disabled type="checkbox"> Git 用戶名和郵箱已設置</li>
+<li><input disabled type="checkbox"> SSH 密鑰已添加到 GitHub（如使用 SSH）</li>
+<li><input disabled type="checkbox"> <code>hexo-deployer-git</code> 插件已安裝</li>
+<li><input disabled type="checkbox"> 可以通過 <code>git clone</code> 測試連接</li>
+<li><input disabled type="checkbox"> 執行 <code>hexo clean</code> 後重新部署</li>
+</ul>
+<p>按照以上步驟逐一排查，應該能解決大部分 Hexo 部署問題。如果仍有困難，可以將錯誤信息和診斷結果提供給社區尋求幫助。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Hexo/" class="category-chain-item">Hexo</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%97%AE%E9%A2%98%E4%BF%AE%E5%A4%8D/">#问题修复</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Hexo 部署錯誤解決方案：Please make sure you have the correct access rights and the repository exists</div>
+      <div>http://clearlight.com.cn/posts/202603101901.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>xyli</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 10, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/202603101900.html" title="Hexo 静态博客框架使用教程">
+                        <span class="hidden-mobile">Hexo 静态博客框架使用教程</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","appKey":"bw1k0GCjO6lHifiPFl0A2Unz","path":"window.location.pathname","placeholder":"Leave your mark~ :)","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"en","highlight":true,"recordIP":false,"serverURLs":"https://b0klyfca.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","appkey":"bw1k0GCjO6lHifiPFl0A2Unz","master":"5648a5366f6c27713d6b28070c99c6e8","friends":null},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://s3.ax1x.com/2021/01/03/spKCwV.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i color="red" class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      冀ICP备19019307号-2
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
