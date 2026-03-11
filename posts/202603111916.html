@@ -1,0 +1,946 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xyli">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="📋 概述本文档详细介绍如何在 OpenClaw 中配置 Deepseek 3.2 模型，包括 deepseek-chat（非思考模式）和 deepseek-reasoner（思考模式）。通过本指南，您可以将 OpenClaw 的默认模型从 openrouter 切换为原生的 Deepseek API。 🎯 前提条件 OpenClaw 已安装并正常运行 有效的 Deepseek 账户 网络连接正">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenClaw 配置 Deepseek 3.2 模型指南">
+<meta property="og:url" content="http://clearlight.com.cn/posts/202603111916.html">
+<meta property="og:site_name" content="Clearlight&#39;s BLOG">
+<meta property="og:description" content="📋 概述本文档详细介绍如何在 OpenClaw 中配置 Deepseek 3.2 模型，包括 deepseek-chat（非思考模式）和 deepseek-reasoner（思考模式）。通过本指南，您可以将 OpenClaw 的默认模型从 openrouter 切换为原生的 Deepseek API。 🎯 前提条件 OpenClaw 已安装并正常运行 有效的 Deepseek 账户 网络连接正">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-11T02:46:39.000Z">
+<meta property="article:modified_time" content="2026-03-11T06:45:42.228Z">
+<meta property="article:author" content="xyli">
+<meta property="article:tag" content="OpenClaw">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>OpenClaw 配置 Deepseek 3.2 模型指南 - Clearlight&#39;s BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/iconfont_csdn/iconfont.css">
+<link rel="stylesheet" href="/css/iconfont_cloud/iconfont.css">
+<link rel="stylesheet" href="/css/toplist-page.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"clearlight.com.cn","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":78,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":2,"color":"#CC874C","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"47f5c6c5881db830494f6ce89651d7ed","google":"G-NJCES20K5B","gtag":257598550,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","app_key":"bw1k0GCjO6lHifiPFl0A2Unz","server_url":"https://b0klyfca.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?47f5c6c5881db830494f6ce89651d7ed";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-NJCES20K5B', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.googletagmanager.com/gtag/js?id=257598550', function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '257598550');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Clearlight's BLOG" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xyli&#39;s nest</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                Article
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    Archives
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    Categories
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    Tags
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/toplist/">
+                <i class="iconfont icon-top"></i>
+                TopList
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s3.ax1x.com/2021/01/14/sdtlqO.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="OpenClaw 配置 Deepseek 3.2 模型指南"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-11 10:46" pubdate>
+          March 11, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          7.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          60 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">OpenClaw 配置 Deepseek 3.2 模型指南</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：March 11, 2026 pm
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="📋-概述"><a href="#📋-概述" class="headerlink" title="📋 概述"></a>📋 概述</h2><p>本文档详细介绍如何在 OpenClaw 中配置 Deepseek 3.2 模型，包括 <code>deepseek-chat</code>（非思考模式）和 <code>deepseek-reasoner</code>（思考模式）。通过本指南，您可以将 OpenClaw 的默认模型从 openrouter 切换为原生的 Deepseek API。</p>
+<h2 id="🎯-前提条件"><a href="#🎯-前提条件" class="headerlink" title="🎯 前提条件"></a>🎯 前提条件</h2><ul>
+<li>OpenClaw 已安装并正常运行</li>
+<li>有效的 Deepseek 账户</li>
+<li>网络连接正常（如需代理，已正确配置）</li>
+</ul>
+<h2 id="🔑-第一步：获取-Deepseek-API-密钥"><a href="#🔑-第一步：获取-Deepseek-API-密钥" class="headerlink" title="🔑 第一步：获取 Deepseek API 密钥"></a>🔑 第一步：获取 Deepseek API 密钥</h2><ol>
+<li>访问 <a target="_blank" rel="noopener" href="https://platform.deepseek.com/api_keys">Deepseek 平台</a></li>
+<li>注册&#x2F;登录您的账户</li>
+<li>点击”创建新的 API 密钥”</li>
+<li>复制生成的 API 密钥（格式：<code>sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</code>）</li>
+<li>妥善保存密钥，不要泄露给他人</li>
+</ol>
+<h2 id="⚙️-第二步：修改-OpenClaw-配置文件"><a href="#⚙️-第二步：修改-OpenClaw-配置文件" class="headerlink" title="⚙️ 第二步：修改 OpenClaw 配置文件"></a>⚙️ 第二步：修改 OpenClaw 配置文件</h2><p>配置文件位置：<code>/Users/xyli/.openclaw/openclaw.json</code></p>
+<h3 id="2-1-备份当前配置（推荐）"><a href="#2-1-备份当前配置（推荐）" class="headerlink" title="2.1 备份当前配置（推荐）"></a>2.1 备份当前配置（推荐）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> /Users/xyli/.openclaw/openclaw.json /Users/xyli/.openclaw/openclaw.json.backup.$(<span class="hljs-built_in">date</span> +%Y%m%d)<br></code></pre></td></tr></table></figure>
+
+<h3 id="2-2-添加-Deepseek-提供商配置"><a href="#2-2-添加-Deepseek-提供商配置" class="headerlink" title="2.2 添加 Deepseek 提供商配置"></a>2.2 添加 Deepseek 提供商配置</h3><p>在 <code>models.providers</code> 部分添加以下配置：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;deepseek&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;baseUrl&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://api.deepseek.com&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;api&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;openai-completions&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;apiKey&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sk-您的Deepseek API密钥&quot;</span><span class="hljs-punctuation">,</span>  <span class="hljs-comment">// 替换为您的实际密钥</span><br>  <span class="hljs-attr">&quot;models&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>    <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;deepseek-chat&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DeepSeek-V3.2 Chat&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;reasoning&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;input&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;text&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;cost&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;input&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;output&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;cacheRead&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;cacheWrite&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;contextWindow&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">128000</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;maxTokens&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8192</span><br>    <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-punctuation">&#123;</span><br>      <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;deepseek-reasoner&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DeepSeek-V3.2 Reasoner&quot;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;reasoning&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;input&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;text&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;cost&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>        <span class="hljs-attr">&quot;input&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;output&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;cacheRead&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span><br>        <span class="hljs-attr">&quot;cacheWrite&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><br>      <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;contextWindow&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">128000</span><span class="hljs-punctuation">,</span><br>      <span class="hljs-attr">&quot;maxTokens&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8192</span><br>    <span class="hljs-punctuation">&#125;</span><br>  <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-3-添加-Deepseek-认证配置"><a href="#2-3-添加-Deepseek-认证配置" class="headerlink" title="2.3 添加 Deepseek 认证配置"></a>2.3 添加 Deepseek 认证配置</h3><p>在 <code>auth.profiles</code> 部分添加：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;deepseek:default&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;provider&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;deepseek&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;mode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;api_key&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-4-修改默认模型配置"><a href="#2-4-修改默认模型配置" class="headerlink" title="2.4 修改默认模型配置"></a>2.4 修改默认模型配置</h3><h4 id="更新-agents-defaults-model："><a href="#更新-agents-defaults-model：" class="headerlink" title="更新 agents.defaults.model："></a>更新 <code>agents.defaults.model</code>：</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;model&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;primary&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;deepseek/deepseek-chat&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;fallbacks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>    <span class="hljs-string">&quot;deepseek/deepseek-reasoner&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-string">&quot;kimi-coding/k2p5&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-string">&quot;qwen-portal/coder-model&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-string">&quot;qwen-portal/vision-model&quot;</span><br>  <span class="hljs-punctuation">]</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="更新-agents-defaults-models："><a href="#更新-agents-defaults-models：" class="headerlink" title="更新 agents.defaults.models："></a>更新 <code>agents.defaults.models</code>：</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;deepseek/deepseek-chat&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;alias&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DeepSeek Chat&quot;</span><br><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br><span class="hljs-attr">&quot;deepseek/deepseek-reasoner&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;alias&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DeepSeek Reasoner&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="更新-agents-list："><a href="#更新-agents-list：" class="headerlink" title="更新 agents.list："></a>更新 <code>agents.list</code>：</h4><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;list&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><br>  <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;main&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;model&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;deepseek/deepseek-chat&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><br><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-5-移除-openrouter-配置"><a href="#2-5-移除-openrouter-配置" class="headerlink" title="2.5 移除 openrouter 配置"></a>2.5 移除 openrouter 配置</h3><p>从以下位置移除所有 <code>openrouter/</code> 和 <code>vercel-ai-gateway/</code> 相关条目：</p>
+<ul>
+<li><code>agents.defaults.model.fallbacks</code></li>
+<li><code>agents.defaults.models</code></li>
+</ul>
+<h2 id="🔧-第三步：使用脚本自动配置（可选）"><a href="#🔧-第三步：使用脚本自动配置（可选）" class="headerlink" title="🔧 第三步：使用脚本自动配置（可选）"></a>🔧 第三步：使用脚本自动配置（可选）</h2><p>如果您希望快速应用所有更改，可以使用以下 Python 脚本：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python3</span><br><span class="hljs-keyword">import</span> json<br><span class="hljs-keyword">import</span> sys<br><br><span class="hljs-comment"># 读取当前配置</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;/Users/xyli/.openclaw/openclaw.json&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    config = json.load(f)<br><br><span class="hljs-comment"># 1. 添加 deepseek 提供商</span><br>deepseek_provider = &#123;<br>    <span class="hljs-string">&quot;baseUrl&quot;</span>: <span class="hljs-string">&quot;https://api.deepseek.com&quot;</span>,<br>    <span class="hljs-string">&quot;api&quot;</span>: <span class="hljs-string">&quot;openai-completions&quot;</span>,<br>    <span class="hljs-string">&quot;apiKey&quot;</span>: <span class="hljs-string">&quot;sk-您的Deepseek API密钥&quot;</span>,  <span class="hljs-comment"># 替换为实际密钥</span><br>    <span class="hljs-string">&quot;models&quot;</span>: [<br>        &#123;<br>            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;deepseek-chat&quot;</span>,<br>            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;DeepSeek-V3.2 Chat&quot;</span>,<br>            <span class="hljs-string">&quot;reasoning&quot;</span>: <span class="hljs-literal">False</span>,<br>            <span class="hljs-string">&quot;input&quot;</span>: [<span class="hljs-string">&quot;text&quot;</span>],<br>            <span class="hljs-string">&quot;cost&quot;</span>: &#123;<span class="hljs-string">&quot;input&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;output&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;cacheRead&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;cacheWrite&quot;</span>: <span class="hljs-number">0</span>&#125;,<br>            <span class="hljs-string">&quot;contextWindow&quot;</span>: <span class="hljs-number">128000</span>,<br>            <span class="hljs-string">&quot;maxTokens&quot;</span>: <span class="hljs-number">8192</span><br>        &#125;,<br>        &#123;<br>            <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;deepseek-reasoner&quot;</span>,<br>            <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;DeepSeek-V3.2 Reasoner&quot;</span>,<br>            <span class="hljs-string">&quot;reasoning&quot;</span>: <span class="hljs-literal">True</span>,<br>            <span class="hljs-string">&quot;input&quot;</span>: [<span class="hljs-string">&quot;text&quot;</span>],<br>            <span class="hljs-string">&quot;cost&quot;</span>: &#123;<span class="hljs-string">&quot;input&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;output&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;cacheRead&quot;</span>: <span class="hljs-number">0</span>, <span class="hljs-string">&quot;cacheWrite&quot;</span>: <span class="hljs-number">0</span>&#125;,<br>            <span class="hljs-string">&quot;contextWindow&quot;</span>: <span class="hljs-number">128000</span>,<br>            <span class="hljs-string">&quot;maxTokens&quot;</span>: <span class="hljs-number">8192</span><br>        &#125;<br>    ]<br>&#125;<br><br>config[<span class="hljs-string">&quot;models&quot;</span>][<span class="hljs-string">&quot;providers&quot;</span>][<span class="hljs-string">&quot;deepseek&quot;</span>] = deepseek_provider<br><br><span class="hljs-comment"># 2. 添加 deepseek 认证配置</span><br>config[<span class="hljs-string">&quot;auth&quot;</span>][<span class="hljs-string">&quot;profiles&quot;</span>][<span class="hljs-string">&quot;deepseek:default&quot;</span>] = &#123;<br>    <span class="hljs-string">&quot;provider&quot;</span>: <span class="hljs-string">&quot;deepseek&quot;</span>,<br>    <span class="hljs-string">&quot;mode&quot;</span>: <span class="hljs-string">&quot;api_key&quot;</span><br>&#125;<br><br><span class="hljs-comment"># 3. 修改 agents.defaults.model</span><br>fallbacks = config[<span class="hljs-string">&quot;agents&quot;</span>][<span class="hljs-string">&quot;defaults&quot;</span>][<span class="hljs-string">&quot;model&quot;</span>][<span class="hljs-string">&quot;fallbacks&quot;</span>]<br>new_fallbacks = []<br><span class="hljs-keyword">for</span> fb <span class="hljs-keyword">in</span> fallbacks:<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> fb.startswith(<span class="hljs-string">&quot;openrouter/&quot;</span>) <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> fb.startswith(<span class="hljs-string">&quot;vercel-ai-gateway/&quot;</span>):<br>        new_fallbacks.append(fb)<br>new_fallbacks.insert(<span class="hljs-number">0</span>, <span class="hljs-string">&quot;deepseek/deepseek-reasoner&quot;</span>)<br>config[<span class="hljs-string">&quot;agents&quot;</span>][<span class="hljs-string">&quot;defaults&quot;</span>][<span class="hljs-string">&quot;model&quot;</span>][<span class="hljs-string">&quot;fallbacks&quot;</span>] = new_fallbacks<br>config[<span class="hljs-string">&quot;agents&quot;</span>][<span class="hljs-string">&quot;defaults&quot;</span>][<span class="hljs-string">&quot;model&quot;</span>][<span class="hljs-string">&quot;primary&quot;</span>] = <span class="hljs-string">&quot;deepseek/deepseek-chat&quot;</span><br><br><span class="hljs-comment"># 4. 修改 agents.defaults.models</span><br>models = config[<span class="hljs-string">&quot;agents&quot;</span>][<span class="hljs-string">&quot;defaults&quot;</span>][<span class="hljs-string">&quot;models&quot;</span>]<br>keys_to_remove = []<br><span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> models.keys():<br>    <span class="hljs-keyword">if</span> key.startswith(<span class="hljs-string">&quot;openrouter/&quot;</span>) <span class="hljs-keyword">or</span> key.startswith(<span class="hljs-string">&quot;vercel-ai-gateway/&quot;</span>):<br>        keys_to_remove.append(key)<br><span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> keys_to_remove:<br>    <span class="hljs-keyword">del</span> models[key]<br><br>models[<span class="hljs-string">&quot;deepseek/deepseek-chat&quot;</span>] = &#123;<span class="hljs-string">&quot;alias&quot;</span>: <span class="hljs-string">&quot;DeepSeek Chat&quot;</span>&#125;<br>models[<span class="hljs-string">&quot;deepseek/deepseek-reasoner&quot;</span>] = &#123;<span class="hljs-string">&quot;alias&quot;</span>: <span class="hljs-string">&quot;DeepSeek Reasoner&quot;</span>&#125;<br><br><span class="hljs-comment"># 5. 修改 agents.list[0].model</span><br>config[<span class="hljs-string">&quot;agents&quot;</span>][<span class="hljs-string">&quot;list&quot;</span>][<span class="hljs-number">0</span>][<span class="hljs-string">&quot;model&quot;</span>] = <span class="hljs-string">&quot;deepseek/deepseek-chat&quot;</span><br><br><span class="hljs-comment"># 写回文件</span><br><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;/Users/xyli/.openclaw/openclaw.json&#x27;</span>, <span class="hljs-string">&#x27;w&#x27;</span>) <span class="hljs-keyword">as</span> f:<br>    json.dump(config, f, indent=<span class="hljs-number">2</span>)<br><br><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Deepseek 配置已成功添加。请将 apiKey 替换为您的实际密钥。&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+<h2 id="✅-第四步：验证配置"><a href="#✅-第四步：验证配置" class="headerlink" title="✅ 第四步：验证配置"></a>✅ 第四步：验证配置</h2><h3 id="4-1-重启-OpenClaw-网关"><a href="#4-1-重启-OpenClaw-网关" class="headerlink" title="4.1 重启 OpenClaw 网关"></a>4.1 重启 OpenClaw 网关</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw gateway restart<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-2-检查模型列表"><a href="#4-2-检查模型列表" class="headerlink" title="4.2 检查模型列表"></a>4.2 检查模型列表</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw models list<br></code></pre></td></tr></table></figure>
+
+<p>预期输出应包含：</p>
+<ul>
+<li><code>deepseek/deepseek-chat</code> (DeepSeek Chat)</li>
+<li><code>deepseek/deepseek-reasoner</code> (DeepSeek Reasoner)</li>
+</ul>
+<h3 id="4-3-测试模型连接"><a href="#4-3-测试模型连接" class="headerlink" title="4.3 测试模型连接"></a>4.3 测试模型连接</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 测试 deepseek-chat</span><br>openclaw agent --model deepseek/deepseek-chat --message <span class="hljs-string">&quot;Hello&quot;</span> --dry-run<br><br><span class="hljs-comment"># 测试 deepseek-reasoner</span><br>openclaw agent --model deepseek/deepseek-reasoner --message <span class="hljs-string">&quot;请解决这个数学问题：1+1=?&quot;</span> --dry-run<br></code></pre></td></tr></table></figure>
+
+<h3 id="4-4-检查健康状态"><a href="#4-4-检查健康状态" class="headerlink" title="4.4 检查健康状态"></a>4.4 检查健康状态</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw health<br></code></pre></td></tr></table></figure>
+
+<p>确保所有组件状态正常。</p>
+<h2 id="🔍-第五步：故障排除"><a href="#🔍-第五步：故障排除" class="headerlink" title="🔍 第五步：故障排除"></a>🔍 第五步：故障排除</h2><h3 id="问题-1：认证失败"><a href="#问题-1：认证失败" class="headerlink" title="问题 1：认证失败"></a>问题 1：认证失败</h3><p><strong>症状</strong>：<code>401 Unauthorized</code> 或 <code>Invalid API key</code></p>
+<p><strong>解决方案</strong>：</p>
+<ol>
+<li>检查 API 密钥是否正确</li>
+<li>确认密钥是否有访问权限</li>
+<li>重新生成 API 密钥并更新配置</li>
+</ol>
+<h3 id="问题-2：连接超时"><a href="#问题-2：连接超时" class="headerlink" title="问题 2：连接超时"></a>问题 2：连接超时</h3><p><strong>症状</strong>：<code>Connection timeout</code> 或 <code>Network error</code></p>
+<p><strong>解决方案</strong>：</p>
+<ol>
+<li>检查网络连接</li>
+<li>如果使用代理，确保代理配置正确</li>
+<li>检查 Telegram 配置中的代理设置：</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-attr">&quot;telegram&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;proxy&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;http://127.0.0.1:7890&quot;</span>  <span class="hljs-comment">// 确保此地址与您的代理一致</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="问题-3：模型未找到"><a href="#问题-3：模型未找到" class="headerlink" title="问题 3：模型未找到"></a>问题 3：模型未找到</h3><p><strong>症状</strong>：<code>Model not found</code> 或 <code>Unknown model</code></p>
+<p><strong>解决方案</strong>：</p>
+<ol>
+<li>确认模型 ID 拼写正确：<code>deepseek-chat</code> 或 <code>deepseek-reasoner</code></li>
+<li>重启 OpenClaw 网关：<code>openclaw gateway restart</code></li>
+<li>检查配置文件格式是否正确</li>
+</ol>
+<h3 id="问题-4：配置未生效"><a href="#问题-4：配置未生效" class="headerlink" title="问题 4：配置未生效"></a>问题 4：配置未生效</h3><p><strong>解决方案</strong>：</p>
+<ol>
+<li>确认配置文件路径正确：<code>/Users/xyli/.openclaw/openclaw.json</code></li>
+<li>检查 JSON 格式是否正确（可使用 <code>jq</code> 验证）</li>
+<li>重启 OpenClaw 服务</li>
+</ol>
+<h2 id="📝-第六步：使用说明"><a href="#📝-第六步：使用说明" class="headerlink" title="📝 第六步：使用说明"></a>📝 第六步：使用说明</h2><h3 id="6-1-模型选择"><a href="#6-1-模型选择" class="headerlink" title="6.1 模型选择"></a>6.1 模型选择</h3><ul>
+<li><strong>常规对话</strong>：使用 <code>deepseek-chat</code>（非思考模式）</li>
+<li><strong>复杂推理</strong>：使用 <code>deepseek-reasoner</code>（思考模式）</li>
+</ul>
+<h3 id="6-2-命令行使用"><a href="#6-2-命令行使用" class="headerlink" title="6.2 命令行使用"></a>6.2 命令行使用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 使用 deepseek-chat</span><br>openclaw agent --model deepseek/deepseek-chat --message <span class="hljs-string">&quot;你的问题&quot;</span><br><br><span class="hljs-comment"># 使用 deepseek-reasoner</span><br>openclaw agent --model deepseek/deepseek-reasoner --message <span class="hljs-string">&quot;复杂推理问题&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="6-3-模型切换"><a href="#6-3-模型切换" class="headerlink" title="6.3 模型切换"></a>6.3 模型切换</h3><p>如果需要临时切换模型，可以使用 <code>--model</code> 参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw agent --model deepseek/deepseek-reasoner --message <span class="hljs-string">&quot;请分析这个代码...&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="⚠️-注意事项"><a href="#⚠️-注意事项" class="headerlink" title="⚠️ 注意事项"></a>⚠️ 注意事项</h2><h3 id="7-1-安全性"><a href="#7-1-安全性" class="headerlink" title="7.1 安全性"></a>7.1 安全性</h3><ul>
+<li><strong>不要</strong>将 API 密钥提交到版本控制系统</li>
+<li><strong>不要</strong>在公共场合分享配置文件</li>
+<li>定期轮换 API 密钥</li>
+</ul>
+<h3 id="7-2-成本管理"><a href="#7-2-成本管理" class="headerlink" title="7.2 成本管理"></a>7.2 成本管理</h3><ul>
+<li>Deepseek API 可能有使用限制或费用</li>
+<li>监控 API 使用情况</li>
+<li>设置使用限额（如适用）</li>
+</ul>
+<h3 id="7-3-网络配置"><a href="#7-3-网络配置" class="headerlink" title="7.3 网络配置"></a>7.3 网络配置</h3><ul>
+<li>如果在中国大陆使用，可能需要配置代理</li>
+<li>确保代理规则包含 <code>api.deepseek.com</code></li>
+<li>测试网络连接：<code>curl -v https://api.deepseek.com</code></li>
+</ul>
+<h3 id="7-4-备份策略"><a href="#7-4-备份策略" class="headerlink" title="7.4 备份策略"></a>7.4 备份策略</h3><ul>
+<li>定期备份配置文件</li>
+<li>使用版本控制管理配置变更</li>
+<li>记录重要的配置修改</li>
+</ul>
+<h2 id="🔄-恢复原始配置"><a href="#🔄-恢复原始配置" class="headerlink" title="🔄 恢复原始配置"></a>🔄 恢复原始配置</h2><p>如果需要恢复之前的配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 从备份恢复</span><br><span class="hljs-built_in">cp</span> /Users/xyli/.openclaw/openclaw.json.backup.deepseek /Users/xyli/.openclaw/openclaw.json<br><br><span class="hljs-comment"># 重启网关</span><br>openclaw gateway restart<br></code></pre></td></tr></table></figure>
+
+<h2 id="📞-支持与帮助"><a href="#📞-支持与帮助" class="headerlink" title="📞 支持与帮助"></a>📞 支持与帮助</h2><p>如果遇到问题：</p>
+<ol>
+<li>检查 OpenClaw 日志：<code>openclaw logs</code></li>
+<li>查看 Deepseek API 文档：<a target="_blank" rel="noopener" href="https://api-docs.deepseek.com/">https://api-docs.deepseek.com/</a></li>
+<li>在 OpenClaw 社区寻求帮助</li>
+</ol>
+<hr>
+<p><strong>文档版本</strong>：1.0<br><strong>最后更新</strong>：2026年3月10日<br><strong>适用版本</strong>：OpenClaw 2026.3.8<br><strong>配置文件路径</strong>：<code>/Users/xyli/.openclaw/openclaw.json</code></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/OpenClaw/">#OpenClaw</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>OpenClaw 配置 Deepseek 3.2 模型指南</div>
+      <div>http://clearlight.com.cn/posts/202603111916.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>xyli</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 11, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/202603116759.html" title="OpenClaw Telegram 解决方案">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">OpenClaw Telegram 解决方案</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/202603118334.html" title="Openclaw installation guide wechat">
+                        <span class="hidden-mobile">Openclaw installation guide wechat</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","appKey":"bw1k0GCjO6lHifiPFl0A2Unz","path":"window.location.pathname","placeholder":"Leave your mark~ :)","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"en","highlight":true,"recordIP":false,"serverURLs":"https://b0klyfca.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","appkey":"bw1k0GCjO6lHifiPFl0A2Unz","master":"5648a5366f6c27713d6b28070c99c6e8","friends":null},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://s3.ax1x.com/2021/01/03/spKCwV.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i color="red" class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      冀ICP备19019307号-2
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

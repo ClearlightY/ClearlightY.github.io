@@ -1,0 +1,972 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xyli">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="解决 OpenClaw Telegram Bot 连接问题完整方案📋 问题背景在使用 OpenClaw 配置 Telegram Bot 时，用户遇到 Bot 无响应的问题。具体表现为：  给 Bot 发送 &#x2F;start 命令无反应 openclaw health 显示 Telegram: failed (unknown) - This operation was aborted 网络环境受限，需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenClaw Telegram 解决方案">
+<meta property="og:url" content="http://clearlight.com.cn/posts/202603116759.html">
+<meta property="og:site_name" content="Clearlight&#39;s BLOG">
+<meta property="og:description" content="解决 OpenClaw Telegram Bot 连接问题完整方案📋 问题背景在使用 OpenClaw 配置 Telegram Bot 时，用户遇到 Bot 无响应的问题。具体表现为：  给 Bot 发送 &#x2F;start 命令无反应 openclaw health 显示 Telegram: failed (unknown) - This operation was aborted 网络环境受限，需">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-11T02:46:39.000Z">
+<meta property="article:modified_time" content="2026-03-11T02:49:42.567Z">
+<meta property="article:author" content="xyli">
+<meta property="article:tag" content="OpenClaw">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>OpenClaw Telegram 解决方案 - Clearlight&#39;s BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/iconfont_csdn/iconfont.css">
+<link rel="stylesheet" href="/css/iconfont_cloud/iconfont.css">
+<link rel="stylesheet" href="/css/toplist-page.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"clearlight.com.cn","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":78,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":2,"color":"#CC874C","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"47f5c6c5881db830494f6ce89651d7ed","google":"G-NJCES20K5B","gtag":257598550,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","app_key":"bw1k0GCjO6lHifiPFl0A2Unz","server_url":"https://b0klyfca.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?47f5c6c5881db830494f6ce89651d7ed";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-NJCES20K5B', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.googletagmanager.com/gtag/js?id=257598550', function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '257598550');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Clearlight's BLOG" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xyli&#39;s nest</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                Article
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    Archives
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    Categories
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    Tags
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/toplist/">
+                <i class="iconfont icon-top"></i>
+                TopList
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s3.ax1x.com/2021/01/14/sdtlqO.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="OpenClaw Telegram 解决方案"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-11 10:46" pubdate>
+          March 11, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          4.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          38 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">OpenClaw Telegram 解决方案</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：March 11, 2026 am
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="解决-OpenClaw-Telegram-Bot-连接问题完整方案"><a href="#解决-OpenClaw-Telegram-Bot-连接问题完整方案" class="headerlink" title="解决 OpenClaw Telegram Bot 连接问题完整方案"></a>解决 OpenClaw Telegram Bot 连接问题完整方案</h1><h2 id="📋-问题背景"><a href="#📋-问题背景" class="headerlink" title="📋 问题背景"></a>📋 问题背景</h2><p>在使用 OpenClaw 配置 Telegram Bot 时，用户遇到 Bot 无响应的问题。具体表现为：</p>
+<ul>
+<li>给 Bot 发送 <code>/start</code> 命令无反应</li>
+<li><code>openclaw health</code> 显示 <code>Telegram: failed (unknown) - This operation was aborted</code></li>
+<li>网络环境受限，需要通过代理访问 Telegram API</li>
+</ul>
+<h2 id="🔍-问题分析"><a href="#🔍-问题分析" class="headerlink" title="🔍 问题分析"></a>🔍 问题分析</h2><p>经过诊断，发现以下关键问题：</p>
+<h3 id="1-ClashX-代理服务配置问题"><a href="#1-ClashX-代理服务配置问题" class="headerlink" title="1. ClashX 代理服务配置问题"></a>1. ClashX 代理服务配置问题</h3><ul>
+<li>ClashX 进程在运行，API 可访问 (<code>127.0.0.1:9090</code>)</li>
+<li>系统代理已设置为 <code>127.0.0.1:7890</code> (<code>networksetup -getwebproxy Wi-Fi</code> 确认)</li>
+<li>但代理连接测试失败：<code>curl -x http://127.0.0.1:7890</code> 返回 “Connection reset by peer”</li>
+</ul>
+<h3 id="2-ClashX-规则配置不全"><a href="#2-ClashX-规则配置不全" class="headerlink" title="2. ClashX 规则配置不全"></a>2. ClashX 规则配置不全</h3><ul>
+<li>现有配置包含 <code>telegram.org</code> 规则</li>
+<li><strong>缺少 <code>api.telegram.org</code> 规则</strong>，导致 Telegram Bot API 无法通过代理访问</li>
+</ul>
+<h3 id="3-OpenClaw-配置问题"><a href="#3-OpenClaw-配置问题" class="headerlink" title="3. OpenClaw 配置问题"></a>3. OpenClaw 配置问题</h3><ul>
+<li>Telegram 配置中 <code>groupPolicy</code> 为 “allowlist” 但 <code>groupAllowFrom</code> 为空</li>
+<li>缺少代理环境变量配置</li>
+<li>有时以 root 用户运行导致网关令牌认证失败</li>
+</ul>
+<h3 id="4-网络环境限制"><a href="#4-网络环境限制" class="headerlink" title="4. 网络环境限制"></a>4. 网络环境限制</h3><ul>
+<li>所在网络环境无法直接访问 Telegram API</li>
+<li>必须通过代理服务器中转</li>
+</ul>
+<h2 id="🛠️-完整解决方案"><a href="#🛠️-完整解决方案" class="headerlink" title="🛠️ 完整解决方案"></a>🛠️ 完整解决方案</h2><h3 id="步骤-1：修复-ClashX-代理连接"><a href="#步骤-1：修复-ClashX-代理连接" class="headerlink" title="步骤 1：修复 ClashX 代理连接"></a>步骤 1：修复 ClashX 代理连接</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 完全重启 ClashX</span><br>killall ClashX 2&gt;/dev/null<br>open -a ClashX<br><br><span class="hljs-comment"># 2. 等待 ClashX 完全启动（检查菜单栏图标）</span><br><span class="hljs-built_in">sleep</span> 5<br><br><span class="hljs-comment"># 3. 通过 API 检查状态</span><br>curl -s http://127.0.0.1:9090/proxies | grep -o <span class="hljs-string">&#x27;&quot;now&quot;:&quot;[^&quot;]*&quot;&#x27;</span> | <span class="hljs-built_in">head</span> -5<br><br><span class="hljs-comment"># 4. 切换到一个可用的代理节点（如香港07）</span><br>curl -X PUT -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> -d <span class="hljs-string">&#x27;&#123;&quot;name&quot;:&quot;香港07&quot;&#125;&#x27;</span> http://127.0.0.1:9090/proxies/节点选择<br></code></pre></td></tr></table></figure>
+
+<h3 id="步骤-2：添加-Telegram-API-规则到-ClashX-配置"><a href="#步骤-2：添加-Telegram-API-规则到-ClashX-配置" class="headerlink" title="步骤 2：添加 Telegram API 规则到 ClashX 配置"></a>步骤 2：添加 Telegram API 规则到 ClashX 配置</h3><p>编辑 ClashX 配置文件，添加 <code>api.telegram.org</code> 规则：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 备份配置文件</span><br><span class="hljs-built_in">cp</span> ~/.config/clash/饿饭cc云-A计划（10GB）.yaml ~/.config/clash/饿饭cc云-A计划（10GB）.yaml.backup<br><br><span class="hljs-comment"># 快速添加命令（在 Telegram 规则部分添加 api.telegram.org）</span><br>sed -i <span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-string">&#x27;/telegram.org,节点选择/a\</span><br><span class="hljs-string"> - DOMAIN-SUFFIX,api.telegram.org,节点选择&#x27;</span> ~/.config/clash/饿饭cc云-A计划（10GB）.yaml<br></code></pre></td></tr></table></figure>
+
+<p><strong>配置文件位置：</strong> <code>~/.config/clash/饿饭cc云-A计划（10GB）.yaml</code></p>
+<h3 id="步骤-3：为-OpenClaw-配置代理"><a href="#步骤-3：为-OpenClaw-配置代理" class="headerlink" title="步骤 3：为 OpenClaw 配置代理"></a>步骤 3：为 OpenClaw 配置代理</h3><h4 id="方案-A：环境变量（推荐）"><a href="#方案-A：环境变量（推荐）" class="headerlink" title="方案 A：环境变量（推荐）"></a>方案 A：环境变量（推荐）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 设置代理环境变量</span><br><span class="hljs-built_in">export</span> HTTP_PROXY=<span class="hljs-string">&quot;http://127.0.0.1:7890&quot;</span><br><span class="hljs-built_in">export</span> HTTPS_PROXY=<span class="hljs-string">&quot;http://127.0.0.1:7890&quot;</span><br><span class="hljs-built_in">export</span> ALL_PROXY=<span class="hljs-string">&quot;socks5://127.0.0.1:7891&quot;</span><br><br><span class="hljs-comment"># 永久配置（添加到 ~/.zshrc）</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;export HTTP_PROXY=&quot;http://127.0.0.1:7890&quot;&#x27;</span> &gt;&gt; ~/.zshrc<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;export HTTPS_PROXY=&quot;http://127.0.0.1:7890&quot;&#x27;</span> &gt;&gt; ~/.zshrc<br><span class="hljs-built_in">source</span> ~/.zshrc<br></code></pre></td></tr></table></figure>
+
+<h4 id="方案-B：OpenClaw-配置（如果支持）"><a href="#方案-B：OpenClaw-配置（如果支持）" class="headerlink" title="方案 B：OpenClaw 配置（如果支持）"></a>方案 B：OpenClaw 配置（如果支持）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 如果 OpenClaw 支持代理配置</span><br>openclaw config <span class="hljs-built_in">set</span> network.proxy <span class="hljs-string">&quot;http://127.0.0.1:7890&quot;</span><br><br><span class="hljs-comment"># 或直接编辑 Telegram 频道配置</span><br>openclaw config <span class="hljs-built_in">set</span> channels.telegram.proxy <span class="hljs-string">&quot;http://127.0.0.1:7890&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="步骤-4：修复-OpenClaw-Telegram-配置"><a href="#步骤-4：修复-OpenClaw-Telegram-配置" class="headerlink" title="步骤 4：修复 OpenClaw Telegram 配置"></a>步骤 4：修复 OpenClaw Telegram 配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 添加 groupAllowFrom 到 Telegram 配置（解决警告）</span><br>python3 -c <span class="hljs-string">&quot;</span><br><span class="hljs-string">import json</span><br><span class="hljs-string">with open(&#x27;/Users/xyli/.openclaw/openclaw.json&#x27;, &#x27;r&#x27;) as f:</span><br><span class="hljs-string">    data = json.load(f)</span><br><span class="hljs-string"></span><br><span class="hljs-string">if &#x27;channels&#x27; in data and &#x27;telegram&#x27; in data[&#x27;channels&#x27;]:</span><br><span class="hljs-string">    data[&#x27;channels&#x27;][&#x27;telegram&#x27;][&#x27;groupAllowFrom&#x27;] = [&#x27;5975504516&#x27;]</span><br><span class="hljs-string">    </span><br><span class="hljs-string">    with open(&#x27;/Users/xyli/.openclaw/openclaw.json&#x27;, &#x27;w&#x27;) as f:</span><br><span class="hljs-string">        json.dump(data, f, indent=2)</span><br><span class="hljs-string">    print(&#x27;Configuration updated successfully&#x27;)</span><br><span class="hljs-string">&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="步骤-5：重启并验证"><a href="#步骤-5：重启并验证" class="headerlink" title="步骤 5：重启并验证"></a>步骤 5：重启并验证</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 1. 重启 OpenClaw 网关</span><br>openclaw gateway restart<br><br><span class="hljs-comment"># 2. 等待 15 秒后检查状态</span><br><span class="hljs-built_in">sleep</span> 15 &amp;&amp; openclaw health<br><br><span class="hljs-comment"># 3. 查看 Telegram 连接日志</span><br>openclaw logs | grep -i <span class="hljs-string">&quot;telegram\\|connected\\|failed&quot;</span> | <span class="hljs-built_in">tail</span> -20<br><br><span class="hljs-comment"># 4. 测试代理连接（使用环境变量）</span><br><span class="hljs-built_in">env</span> HTTP_PROXY=<span class="hljs-string">&quot;http://127.0.0.1:7890&quot;</span> HTTPS_PROXY=<span class="hljs-string">&quot;http://127.0.0.1:7890&quot;</span> \<br>  curl -s <span class="hljs-string">&quot;https://api.telegram.org/bot8775360310:AAFak2jbq7JTngNrfxrP2hLA0SwgHIhpE0I/getMe&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="🔧-故障排除"><a href="#🔧-故障排除" class="headerlink" title="🔧 故障排除"></a>🔧 故障排除</h2><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>解决方案</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>ClashX 菜单栏无响应</strong></td>
+<td>点击菜单栏 ClashX 图标 → 确保”设置为系统代理”已开启</td>
+</tr>
+<tr>
+<td><strong>代理测试仍失败</strong></td>
+<td>尝试 ClashX 菜单 → 模式 → 切换为”全局模式”测试</td>
+</tr>
+<tr>
+<td><strong>OpenClaw 仍显示 failed</strong></td>
+<td>检查 OpenClaw 日志：<code>openclaw logs | grep -A10 -B10 telegram</code></td>
+</tr>
+<tr>
+<td><strong>环境变量未生效</strong></td>
+<td>重启终端或执行 <code>exec $SHELL</code></td>
+</tr>
+<tr>
+<td><strong>规则未生效</strong></td>
+<td>重启 ClashX 并清除 DNS 缓存：<code>sudo dscacheutil -flushcache</code></td>
+</tr>
+<tr>
+<td><strong>网关令牌认证失败</strong></td>
+<td>不要以 root 用户运行 OpenClaw，使用普通用户权限</td>
+</tr>
+</tbody></table>
+<h2 id="📋-验证清单"><a href="#📋-验证清单" class="headerlink" title="📋 验证清单"></a>📋 验证清单</h2><ol>
+<li><p><strong>ClashX 状态验证</strong></p>
+<ul>
+<li><input disabled type="checkbox"> 菜单栏图标显示代理已启用</li>
+<li><input disabled type="checkbox"> <code>curl -s http://127.0.0.1:9090</code> 返回 <code>&#123;&quot;hello&quot;:&quot;clash&quot;&#125;</code></li>
+</ul>
+</li>
+<li><p><strong>代理连接验证</strong></p>
+<ul>
+<li><input disabled type="checkbox"> <code>env HTTP_PROXY=... curl https://httpbin.org/ip</code> 返回代理服务器 IP（非本地）</li>
+<li><input disabled type="checkbox"> <code>curl -x ... https://www.google.com</code> 能够访问</li>
+</ul>
+</li>
+<li><p><strong>Telegram API 验证</strong></p>
+<ul>
+<li><input disabled type="checkbox"> <code>curl -x ... https://api.telegram.org/botTOKEN/getMe</code> 返回 <code>&#123;&quot;ok&quot;:true,...&#125;</code></li>
+</ul>
+</li>
+<li><p><strong>OpenClaw 健康验证</strong></p>
+<ul>
+<li><input disabled type="checkbox"> <code>openclaw health</code> 显示 <code>Telegram: connected</code></li>
+<li><input disabled type="checkbox"> <code>openclaw doctor</code> 无 Telegram 相关警告</li>
+</ul>
+</li>
+<li><p><strong>Bot 功能验证</strong></p>
+<ul>
+<li><input disabled type="checkbox"> 发送 <code>/start</code> 给 Bot，收到欢迎消息</li>
+<li><input disabled type="checkbox"> Bot 能够响应其他命令</li>
+</ul>
+</li>
+</ol>
+<h2 id="💡-重要提示"><a href="#💡-重要提示" class="headerlink" title="💡 重要提示"></a>💡 重要提示</h2><h3 id="1-ClashX-配置要点"><a href="#1-ClashX-配置要点" class="headerlink" title="1. ClashX 配置要点"></a>1. ClashX 配置要点</h3><ul>
+<li>确保使用的是正确的配置文件：<code>饿饭cc云-A计划（10GB）.yaml</code></li>
+<li>如果”规则模式”不行，临时切换为”全局模式”测试</li>
+<li>定期更新订阅确保节点可用</li>
+</ul>
+<h3 id="2-OpenClaw-运行要点"><a href="#2-OpenClaw-运行要点" class="headerlink" title="2. OpenClaw 运行要点"></a>2. OpenClaw 运行要点</h3><ul>
+<li><strong>不要以 root 用户运行</strong>：OpenClaw 设计在普通用户权限下运行</li>
+<li>每次修改配置后必须重启：<code>openclaw gateway restart</code></li>
+<li>检查网关令牌配置：<code>gateway.auth.token</code> 必须正确设置</li>
+</ul>
+<h3 id="3-网络环境要点"><a href="#3-网络环境要点" class="headerlink" title="3. 网络环境要点"></a>3. 网络环境要点</h3><ul>
+<li>确保没有其他代理工具冲突（如 VPN、其他代理软件）</li>
+<li>检查防火墙设置，确保端口 7890 和 9090 可访问</li>
+<li>如果使用企业网络，可能需要额外配置</li>
+</ul>
+<h3 id="4-配置文件位置"><a href="#4-配置文件位置" class="headerlink" title="4. 配置文件位置"></a>4. 配置文件位置</h3><ul>
+<li><strong>OpenClaw 配置</strong>：<code>/Users/xyli/.openclaw/openclaw.json</code></li>
+<li><strong>ClashX 配置</strong>：<code>/Users/xyli/.config/clash/饿饭cc云-A计划（10GB）.yaml</code></li>
+<li><strong>环境变量</strong>：<code>~/.zshrc</code> 或 <code>~/.bash_profile</code></li>
+</ul>
+<h2 id="🔄-操作顺序总结"><a href="#🔄-操作顺序总结" class="headerlink" title="🔄 操作顺序总结"></a>🔄 操作顺序总结</h2><ol>
+<li><strong>重启 ClashX</strong> → 确保代理服务正常运行</li>
+<li><strong>添加 API 规则</strong> → 确保 <code>api.telegram.org</code> 可通过代理访问</li>
+<li><strong>设置环境变量</strong> → 为 OpenClaw 配置代理</li>
+<li><strong>修复 OpenClaw 配置</strong> → 添加 <code>groupAllowFrom</code> 字段</li>
+<li><strong>重启 OpenClaw</strong> → 应用所有配置更改</li>
+<li><strong>全面验证</strong> → 按照验证清单检查每个环节</li>
+</ol>
+<h2 id="📞-进一步帮助"><a href="#📞-进一步帮助" class="headerlink" title="📞 进一步帮助"></a>📞 进一步帮助</h2><p>如果按照本方案操作后问题仍未解决：</p>
+<ol>
+<li><p><strong>查看详细日志</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># ClashX 日志（通过菜单栏查看）</span><br><span class="hljs-comment"># OpenClaw 详细日志</span><br>openclaw logs --level debug | grep -i telegram<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>检查网络连通性</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 测试基础网络</span><br>ping api.telegram.org<br><span class="hljs-comment"># 测试代理连接</span><br>curl -v --proxy http://127.0.0.1:7890 https://api.telegram.org<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>重置配置</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 备份后重置 OpenClaw 配置</span><br><span class="hljs-built_in">cp</span> ~/.openclaw/openclaw.json ~/.openclaw/openclaw.json.backup<br>openclaw reset<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>寻求社区帮助</strong></p>
+<ul>
+<li>OpenClaw 官方文档：<code>openclaw docs</code></li>
+<li>GitHub Issues：相关项目的问题页面</li>
+<li>技术社区讨论</li>
+</ul>
+</li>
+</ol>
+<hr>
+<p><strong>最后更新：</strong> 2026年3月9日<br><strong>适用环境：</strong> macOS (Darwin 23.1.0)<br><strong>软件版本：</strong> OpenClaw 2026.3.8, ClashX 最新版<br><strong>作者：</strong> iFlow CLI 助手</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/OpenClaw/">#OpenClaw</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>OpenClaw Telegram 解决方案</div>
+      <div>http://clearlight.com.cn/posts/202603116759.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>xyli</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 11, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/202603111916.html" title="OpenClaw 配置 Deepseek 3.2 模型指南">
+                        <span class="hidden-mobile">OpenClaw 配置 Deepseek 3.2 模型指南</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","appKey":"bw1k0GCjO6lHifiPFl0A2Unz","path":"window.location.pathname","placeholder":"Leave your mark~ :)","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"en","highlight":true,"recordIP":false,"serverURLs":"https://b0klyfca.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","appkey":"bw1k0GCjO6lHifiPFl0A2Unz","master":"5648a5366f6c27713d6b28070c99c6e8","friends":null},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://s3.ax1x.com/2021/01/03/spKCwV.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i color="red" class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      冀ICP备19019307号-2
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>

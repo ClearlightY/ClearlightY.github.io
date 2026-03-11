@@ -1,0 +1,937 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.ico">
+  <link rel="icon" href="/img/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xyli">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="🦞 OpenClaw 安装与配置完全指南引言OpenClaw 是一款功能强大的个人 AI 助手，可以在自己的设备上独立运行。它支持多种主流通信渠道（WhatsApp、Telegram、Slack、Discord、Google Chat、Signal、iMessage 等），并具备语音唤醒、实时画布等先进功能。 本文将手把手教你如何在 macOS 系统上完成 OpenClaw 的安装和初步配置，让">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Openclaw installation guide wechat">
+<meta property="og:url" content="http://clearlight.com.cn/posts/202603118334.html">
+<meta property="og:site_name" content="Clearlight&#39;s BLOG">
+<meta property="og:description" content="🦞 OpenClaw 安装与配置完全指南引言OpenClaw 是一款功能强大的个人 AI 助手，可以在自己的设备上独立运行。它支持多种主流通信渠道（WhatsApp、Telegram、Slack、Discord、Google Chat、Signal、iMessage 等），并具备语音唤醒、实时画布等先进功能。 本文将手把手教你如何在 macOS 系统上完成 OpenClaw 的安装和初步配置，让">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-11T02:46:39.000Z">
+<meta property="article:modified_time" content="2026-03-11T02:49:36.700Z">
+<meta property="article:author" content="xyli">
+<meta property="article:tag" content="OpenClaw">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>Openclaw installation guide wechat - Clearlight&#39;s BLOG</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/iconfont_csdn/iconfont.css">
+<link rel="stylesheet" href="/css/iconfont_cloud/iconfont.css">
+<link rel="stylesheet" href="/css/toplist-page.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"clearlight.com.cn","root":"/","version":"1.9.3","typing":{"enable":true,"typeSpeed":78,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":"§"},"progressbar":{"enable":true,"height_px":2,"color":"#CC874C","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":"47f5c6c5881db830494f6ce89651d7ed","google":"G-NJCES20K5B","gtag":257598550,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","app_key":"bw1k0GCjO6lHifiPFl0A2Unz","server_url":"https://b0klyfca.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+    <!-- Baidu Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?47f5c6c5881db830494f6ce89651d7ed";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      }
+    </script>
+  
+
+  
+    <!-- Google Analytics -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.google-analytics.com/analytics.js', function() {
+          window.ga = window.ga || function() { (ga.q = ga.q || []).push(arguments) };
+          ga.l = +new Date;
+          ga('create', 'G-NJCES20K5B', 'auto');
+          ga('send', 'pageview');
+        });
+      }
+    </script>
+  
+
+  
+    <!-- Google gtag.js -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript('https://www.googletagmanager.com/gtag/js?id=257598550', function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '257598550');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Clearlight's BLOG" type="application/atom+xml">
+</head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>xyli&#39;s nest</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" target="_self" href="javascript:;" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                Article
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/archives/">
+                    <i class="iconfont icon-archive-fill"></i>
+                    Archives
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/categories/">
+                    <i class="iconfont icon-category-fill"></i>
+                    Categories
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/tags/">
+                    <i class="iconfont icon-tags-fill"></i>
+                    Tags
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/toplist/">
+                <i class="iconfont icon-top"></i>
+                TopList
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('https://s3.ax1x.com/2021/01/14/sdtlqO.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Openclaw installation guide wechat"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-11 10:46" pubdate>
+          March 11, 2026 am
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          2.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          19 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Openclaw installation guide wechat</h1>
+            
+              <p class="note note-info">
+                
+                  
+                    <!-- compatible with older versions-->
+                    本文最后更新于：March 11, 2026 am
+                  
+                
+              </p>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="🦞-OpenClaw-安装与配置完全指南"><a href="#🦞-OpenClaw-安装与配置完全指南" class="headerlink" title="🦞 OpenClaw 安装与配置完全指南"></a>🦞 OpenClaw 安装与配置完全指南</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>OpenClaw 是一款功能强大的个人 AI 助手，可以在自己的设备上独立运行。它支持多种主流通信渠道（WhatsApp、Telegram、Slack、Discord、Google Chat、Signal、iMessage 等），并具备语音唤醒、实时画布等先进功能。</p>
+<p>本文将手把手教你如何在 macOS 系统上完成 OpenClaw 的安装和初步配置，让你快速拥有属于自己的智能助手。</p>
+<hr>
+<h2 id="📋-系统环境要求"><a href="#📋-系统环境要求" class="headerlink" title="📋 系统环境要求"></a>📋 系统环境要求</h2><p>在开始安装前，请确保你的系统满足以下要求：</p>
+<ul>
+<li><strong>操作系统</strong>：macOS、Linux 或 Windows（通过 WSL2 运行）</li>
+<li><strong>Node.js</strong>：版本 ≥ 22（推荐使用最新稳定版）</li>
+<li><strong>包管理器</strong>：npm、pnpm 或 bun 均可</li>
+</ul>
+<hr>
+<h2 id="🚀-安装步骤详解"><a href="#🚀-安装步骤详解" class="headerlink" title="🚀 安装步骤详解"></a>🚀 安装步骤详解</h2><h3 id="第一步：检查-Node-js-版本"><a href="#第一步：检查-Node-js-版本" class="headerlink" title="第一步：检查 Node.js 版本"></a>第一步：检查 Node.js 版本</h3><p>打开终端，输入以下命令检查当前 Node.js 版本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">node --version<br></code></pre></td></tr></table></figure>
+
+<p><strong>期望输出</strong>：<code>v22.22.1</code> 或更高版本</p>
+<p>如果版本低于 22，请先升级 Node.js 到最新版本。</p>
+<h3 id="第二步：全局安装-OpenClaw"><a href="#第二步：全局安装-OpenClaw" class="headerlink" title="第二步：全局安装 OpenClaw"></a>第二步：全局安装 OpenClaw</h3><p>使用 npm 全局安装 OpenClaw 最新版：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">npm install -g openclaw@latest<br></code></pre></td></tr></table></figure>
+
+<p>安装过程可能需要几分钟，系统会自动下载约 694 个依赖包。期间可能会看到一些警告信息，这属于正常现象。</p>
+<h3 id="第三步：验证安装结果"><a href="#第三步：验证安装结果" class="headerlink" title="第三步：验证安装结果"></a>第三步：验证安装结果</h3><p>安装完成后，通过以下命令验证是否安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw --version<br><span class="hljs-comment"># 或简写</span><br>openclaw -v<br></code></pre></td></tr></table></figure>
+
+<p><strong>成功标志</strong>：显示版本号如 <code>2026.3.2</code></p>
+<h3 id="第四步：运行配置向导"><a href="#第四步：运行配置向导" class="headerlink" title="第四步：运行配置向导"></a>第四步：运行配置向导</h3><p>OpenClaw 提供了贴心的交互式配置向导。运行以下命令开始配置并安装后台服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw onboard --install-daemon<br></code></pre></td></tr></table></figure>
+
+<h4 id="向导流程说明："><a href="#向导流程说明：" class="headerlink" title="向导流程说明："></a>向导流程说明：</h4><ol>
+<li><p><strong>安全警告确认</strong><br>OpenClaw 会显示详细的安全提示，强调这是个人使用的 AI 助手，启用工具后具有系统访问权限。请仔细阅读并理解相关风险。</p>
+</li>
+<li><p><strong>确认继续</strong><br>选择 “Yes” 接受安全警告并继续配置。</p>
+</li>
+<li><p><strong>选择配置模式</strong><br>推荐选择 **”QuickStart”**（快速开始模式），后续可以通过 <code>openclaw configure</code> 命令随时调整详细配置。</p>
+</li>
+</ol>
+<h4 id="重要提示："><a href="#重要提示：" class="headerlink" title="重要提示："></a>重要提示：</h4><ul>
+<li>向导是交互式的，需要根据提示手动选择选项</li>
+<li>如需非交互式运行，可使用 <code>--non-interactive --accept-risk</code> 参数</li>
+<li>安装守护进程后，OpenClaw 网关会自动在后台运行</li>
+</ul>
+<h3 id="第五步：手动启动网关（可选）"><a href="#第五步：手动启动网关（可选）" class="headerlink" title="第五步：手动启动网关（可选）"></a>第五步：手动启动网关（可选）</h3><p>如果未通过向导安装守护进程，可以手动启动网关服务：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw gateway --port 18789 --verbose<br></code></pre></td></tr></table></figure>
+
+<h3 id="第六步：功能测试"><a href="#第六步：功能测试" class="headerlink" title="第六步：功能测试"></a>第六步：功能测试</h3><p>安装配置完成后，可以尝试以下命令体验 OpenClaw 的功能：</p>
+<p><strong>发送测试消息：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw message send --to +1234567890 --message <span class="hljs-string">&quot;Hello from OpenClaw&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>与 AI 助手对话：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw agent --message <span class="hljs-string">&quot;Ship checklist&quot;</span> --thinking high<br></code></pre></td></tr></table></figure>
+
+<p><strong>检查系统状态：</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw doctor<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="📁-文件目录结构"><a href="#📁-文件目录结构" class="headerlink" title="📁 文件目录结构"></a>📁 文件目录结构</h2><p>安装完成后，相关文件会存储在以下位置：</p>
+<ul>
+<li><strong>可执行文件</strong>：<code>/Users/xyli/.npm-global/bin/openclaw</code></li>
+<li><strong>配置文件</strong>：<code>~/.openclaw/openclaw.json</code></li>
+<li><strong>工作区目录</strong>：<code>~/.openclaw/workspace/</code></li>
+<li><strong>技能目录</strong>：<code>~/.openclaw/workspace/skills/</code></li>
+</ul>
+<hr>
+<h2 id="❓-常见问题解答"><a href="#❓-常见问题解答" class="headerlink" title="❓ 常见问题解答"></a>❓ 常见问题解答</h2><h3 id="Q1：提示-“command-not-found-openclaw”"><a href="#Q1：提示-“command-not-found-openclaw”" class="headerlink" title="Q1：提示 “command not found: openclaw”"></a>Q1：提示 “command not found: openclaw”</h3><p>请检查以下项目：</p>
+<ul>
+<li>Node.js 是否正确安装</li>
+<li>npm 全局 bin 目录是否已加入 PATH 环境变量</li>
+<li>尝试重新登录终端或重启 shell 会话</li>
+</ul>
+<h3 id="Q2：如何更新-OpenClaw-版本？"><a href="#Q2：如何更新-OpenClaw-版本？" class="headerlink" title="Q2：如何更新 OpenClaw 版本？"></a>Q2：如何更新 OpenClaw 版本？</h3><p>使用以下命令更新到最新稳定版：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw update --channel stable<br></code></pre></td></tr></table></figure>
+
+<p>可选更新渠道：</p>
+<ul>
+<li><code>stable</code>：稳定版（推荐）</li>
+<li><code>beta</code>：测试版</li>
+<li><code>dev</code>：开发版</li>
+</ul>
+<h3 id="Q3：如何完全卸载-OpenClaw？"><a href="#Q3：如何完全卸载-OpenClaw？" class="headerlink" title="Q3：如何完全卸载 OpenClaw？"></a>Q3：如何完全卸载 OpenClaw？</h3><p>执行以下命令进行卸载：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 卸载 npm 包</span><br>npm uninstall -g openclaw<br><br><span class="hljs-comment"># 删除配置文件（谨慎操作！）</span><br><span class="hljs-built_in">rm</span> -rf ~/.openclaw<br></code></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="🔒-安全使用建议"><a href="#🔒-安全使用建议" class="headerlink" title="🔒 安全使用建议"></a>🔒 安全使用建议</h2><ol>
+<li><p><strong>个人使用原则</strong><br>OpenClaw 默认设计为个人使用，请勿在多用户环境中直接暴露。</p>
+</li>
+<li><p><strong>工具权限管理</strong><br>启用工具功能时需格外谨慎，恶意提示可能导致不安全操作。</p>
+</li>
+<li><p><strong>网络访问安全</strong><br>如果通过互联网暴露网关，务必配置身份验证（token 或密码）。</p>
+</li>
+<li><p><strong>定期安全审计</strong><br>建议定期运行以下安全审计命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">openclaw security audit --deep<br>openclaw security audit --fix<br></code></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<h2 id="📚-学习资源推荐"><a href="#📚-学习资源推荐" class="headerlink" title="📚 学习资源推荐"></a>📚 学习资源推荐</h2><ul>
+<li><strong>官方文档</strong>：<a target="_blank" rel="noopener" href="https://docs.openclaw.ai/">https://docs.openclaw.ai</a></li>
+<li><strong>GitHub 仓库</strong>：<a target="_blank" rel="noopener" href="https://github.com/openclaw/openclaw">https://github.com/openclaw/openclaw</a></li>
+<li><strong>Discord 社区</strong>：获取实时帮助和技术交流</li>
+</ul>
+<hr>
+<h2 id="💡-总结"><a href="#💡-总结" class="headerlink" title="💡 总结"></a>💡 总结</h2><p>OpenClaw 是一个功能全面、部署简单的个人 AI 助手平台。通过本文的步骤，你可以在 macOS 系统上快速完成安装和初步配置，开始体验智能助手带来的便利。</p>
+<blockquote>
+<p><strong>温馨提示</strong>：OpenClaw 仍在积极开发中，建议定期更新以获取最新功能和安全修复。</p>
+</blockquote>
+<hr>
+<p><strong>文档信息</strong></p>
+<ul>
+<li>生成时间：2026年3月7日</li>
+<li>测试环境：macOS 23.1.0, Node.js v22.22.1, OpenClaw 2026.3.2</li>
+<li>适用系统：macOS（Linux&#x2F;Windows 类似）</li>
+</ul>
+<hr>
+<p>如果遇到任何问题，欢迎在评论区留言讨论！ 🦞</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/AI/" class="category-chain-item">AI</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/OpenClaw/">#OpenClaw</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Openclaw installation guide wechat</div>
+      <div>http://clearlight.com.cn/posts/202603118334.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>xyli</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 11, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/202603111916.html" title="OpenClaw 配置 Deepseek 3.2 模型指南">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">OpenClaw 配置 Deepseek 3.2 模型指南</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/202603101901.html" title="Hexo 部署錯誤解決方案：Please make sure you have the correct access rights and the repository exists">
+                        <span class="hidden-mobile">Hexo 部署錯誤解決方案：Please make sure you have the correct access rights and the repository exists</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","appKey":"bw1k0GCjO6lHifiPFl0A2Unz","path":"window.location.pathname","placeholder":"Leave your mark~ :)","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"en","highlight":true,"recordIP":false,"serverURLs":"https://b0klyfca.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"b0KlyFCaEvUNenu8ge3YrEiX-gzGzoHsz","appkey":"bw1k0GCjO6lHifiPFl0A2Unz","master":"5648a5366f6c27713d6b28070c99c6e8","friends":null},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+  <!-- Custom -->
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://s3.ax1x.com/2021/01/03/spKCwV.png" srcset="/img/loading.gif" lazyload class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i color="red" class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+    <!-- 备案信息 ICP for China -->
+    <div class="beian">
+  <span>
+    <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+      冀ICP备19019307号-2
+    </a>
+  </span>
+  
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
