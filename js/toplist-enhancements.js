@@ -1,9 +1,63 @@
 (function() {
+  function isDesktop() {
+    return window.matchMedia && window.matchMedia('(min-width: 768px)').matches;
+  }
+
+  function prefersReducedMotion() {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
   function escId(s) {
     if (window.CSS && typeof window.CSS.escape === 'function') {
       return window.CSS.escape(s);
     }
     return String(s).replace(/[^a-zA-Z0-9_-]/g, '\\$&');
+  }
+
+  function setActiveButton(hours, btn) {
+    var buttons = hours.querySelectorAll('.toplist-hour-btn');
+    for (var i = 0; i < buttons.length; i++) {
+      var b = buttons[i];
+      b.classList.toggle('is-active', b === btn);
+      b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+    }
+  }
+
+  function showPanels(hours, startIndex, count, updateHash) {
+    var panels = hours.querySelectorAll('.toplist-hour-panel');
+    for (var i = 0; i < panels.length; i++) {
+      panels[i].hidden = true;
+    }
+    var shown = 0;
+    for (var j = startIndex; j < panels.length && shown < count; j++) {
+      panels[j].hidden = false;
+      animatePanel(panels[j]);
+      shown++;
+    }
+    if (updateHash && panels[startIndex] && history && history.replaceState) {
+      history.replaceState(null, '', '#' + panels[startIndex].id);
+    }
+  }
+
+  function animatePanel(panel) {
+    if (!panel || prefersReducedMotion()) {
+      return;
+    }
+    var items = panel.querySelectorAll('.toplist-entry__content li');
+    if (!items || !items.length) {
+      return;
+    }
+    for (var i = 0; i < items.length; i++) {
+      var li = items[i];
+      li.classList.remove('toplist-animated');
+      li.style.animationDelay = '';
+    }
+    panel.offsetHeight;
+    for (var j = 0; j < items.length; j++) {
+      var delay = Math.min(j, 40) * 18;
+      items[j].style.animationDelay = delay + 'ms';
+      items[j].classList.add('toplist-animated');
+    }
   }
 
   function activateHour(hours, btn) {
@@ -14,22 +68,52 @@
     if (!targetId) {
       return;
     }
+    setActiveButton(hours, btn);
     var buttons = hours.querySelectorAll('.toplist-hour-btn');
+    var idx = 0;
     for (var i = 0; i < buttons.length; i++) {
-      var b = buttons[i];
-      b.classList.toggle('is-active', b === btn);
-      b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
-    }
-    var panels = hours.querySelectorAll('.toplist-hour-panel');
-    for (var j = 0; j < panels.length; j++) {
-      panels[j].hidden = true;
-    }
-    var panel = hours.querySelector('#' + escId(targetId));
-    if (panel) {
-      panel.hidden = false;
-      if (history && history.replaceState) {
-        history.replaceState(null, '', '#' + targetId);
+      if (buttons[i] === btn) {
+        idx = i;
+        break;
       }
+    }
+    showPanels(hours, idx, isDesktop() ? 3 : 1, true);
+  }
+
+  function activateHourSilent(hours, btn) {
+    if (!hours || !btn) {
+      return;
+    }
+    var targetId = btn.getAttribute('data-target');
+    if (!targetId) {
+      return;
+    }
+    setActiveButton(hours, btn);
+    var buttons = hours.querySelectorAll('.toplist-hour-btn');
+    var idx = 0;
+    for (var i = 0; i < buttons.length; i++) {
+      if (buttons[i] === btn) {
+        idx = i;
+        break;
+      }
+    }
+    showPanels(hours, idx, isDesktop() ? 3 : 1, false);
+  }
+
+  function ensureDayLatestHourVisible(day) {
+    if (!day || !day.open) {
+      return;
+    }
+    var hours = day.querySelector('.toplist-hours');
+    if (!hours) {
+      return;
+    }
+    var active = hours.querySelector('.toplist-hour-btn.is-active');
+    if (!active) {
+      active = hours.querySelector('.toplist-hour-btn');
+    }
+    if (active) {
+      activateHourSilent(hours, active);
     }
   }
 
@@ -160,6 +244,24 @@
     });
 
     applyHash(root);
+
+    var openDays = root.querySelectorAll('details.toplist-day[open]');
+    for (var i = 0; i < openDays.length; i++) {
+      ensureDayLatestHourVisible(openDays[i]);
+    }
+
+    var visiblePanels = root.querySelectorAll('.toplist-hour-panel:not([hidden])');
+    for (var j = 0; j < visiblePanels.length; j++) {
+      animatePanel(visiblePanels[j]);
+    }
+
+    root.addEventListener('toggle', function(e) {
+      var day = e.target;
+      if (!day || !day.classList || !day.classList.contains('toplist-day')) {
+        return;
+      }
+      ensureDayLatestHourVisible(day);
+    }, true);
   }
 
   if (document.readyState === 'loading') {
