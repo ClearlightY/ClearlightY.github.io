@@ -220,6 +220,14 @@
     margin-top: 0.75rem;
   }
 
+  .toplist-page .toplist-hours__panels[data-cols="1"] {
+    grid-template-columns: 1fr;
+  }
+
+  .toplist-page .toplist-hours__panels[data-cols="2"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .toplist-page .toplist-hour-panel .toplist-entry__content {
     font-size: 0.86rem;
   }
@@ -233,9 +241,6 @@
     top: 0.52rem;
   }
 
-  .toplist-page .toplist-entry__heat {
-    font-size: 0.88rem;
-  }
 }
 
 html[data-user-color-scheme='dark'] .toplist-page .toplist-hour-panel {
@@ -270,6 +275,8 @@ html[data-user-color-scheme='dark'] .toplist-page .toplist-hour-panel {
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
+  min-width: 0;
+  overflow: hidden;
   column-gap: 0.55rem;
   row-gap: 0.28rem;
   margin-bottom: 0.65rem;
@@ -284,11 +291,14 @@ html[data-user-color-scheme='dark'] .toplist-page .toplist-hour-panel {
 }
 
 .toplist-page .toplist-entry__content li > a {
-  flex: 1 1 auto;
-  min-width: 10rem;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 100%;
   color: var(--text-color);
   text-decoration: none;
   line-height: 1.45;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .toplist-page .toplist-entry__content li > a:hover,

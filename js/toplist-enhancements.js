@@ -23,7 +23,7 @@
     }
   }
 
-  function showPanels(hours, startIndex, count, updateHash) {
+  function showPanels(hours, startIndex, count, updateHash, hashId) {
     var panels = hours.querySelectorAll('.toplist-hour-panel');
     for (var i = 0; i < panels.length; i++) {
       panels[i].hidden = true;
@@ -34,8 +34,13 @@
       animatePanel(panels[j]);
       shown++;
     }
-    if (updateHash && panels[startIndex] && history && history.replaceState) {
-      history.replaceState(null, '', '#' + panels[startIndex].id);
+    var panelsWrap = hours.querySelector('.toplist-hours__panels');
+    if (panelsWrap) {
+      panelsWrap.setAttribute('data-cols', String(shown || 1));
+    }
+    var id = hashId || (panels[startIndex] ? panels[startIndex].id : '');
+    if (updateHash && id && history && history.replaceState) {
+      history.replaceState(null, '', '#' + id);
     }
   }
 
@@ -77,7 +82,17 @@
         break;
       }
     }
-    showPanels(hours, idx, isDesktop() ? 3 : 1, true);
+    var panels = hours.querySelectorAll('.toplist-hour-panel');
+    if (isDesktop()) {
+      if (panels.length >= 3) {
+        var remaining = panels.length - idx;
+        showPanels(hours, idx, remaining >= 3 ? 3 : remaining, true, targetId);
+        return;
+      }
+      showPanels(hours, idx, panels.length, true, targetId);
+      return;
+    }
+    showPanels(hours, idx, 1, true, targetId);
   }
 
   function activateHourSilent(hours, btn) {
@@ -97,7 +112,17 @@
         break;
       }
     }
-    showPanels(hours, idx, isDesktop() ? 3 : 1, false);
+    var panels = hours.querySelectorAll('.toplist-hour-panel');
+    if (isDesktop()) {
+      if (panels.length >= 3) {
+        var remaining = panels.length - idx;
+        showPanels(hours, idx, remaining >= 3 ? 3 : remaining, false, targetId);
+        return;
+      }
+      showPanels(hours, idx, panels.length, false, targetId);
+      return;
+    }
+    showPanels(hours, idx, 1, false, targetId);
   }
 
   function ensureDayLatestHourVisible(day) {
