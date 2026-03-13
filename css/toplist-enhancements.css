@@ -116,6 +116,15 @@
   margin-top: 0.5rem;
 }
 
+.toplist-page .toplist-day__lazy {
+  padding: 0.8rem 0.9rem;
+  border: 1px dashed rgba(148, 163, 184, 0.32);
+  border-radius: 10px;
+  font-size: 0.92rem;
+  color: var(--sec-text-color);
+  background: rgba(255, 255, 255, 0.04);
+}
+
 .toplist-page .toplist-hours__nav {
   display: flex;
   flex-wrap: wrap;
@@ -210,6 +219,23 @@
   margin-top: 0.5rem;
 }
 
+.toplist-page .toplist-hour-panel .toplist-entry__content {
+  font-size: 0.9rem;
+}
+
+.toplist-page .toplist-hour-panel .toplist-entry__content li {
+  padding: 0.5rem 0.72rem 0.5rem 2.95rem;
+  font-size: 0.9rem;
+}
+
+.toplist-page .toplist-hour-panel .toplist-entry__content li::before {
+  left: 0.72rem;
+  top: 0.52rem;
+  width: 1.8rem;
+  height: 1.42rem;
+  font-size: 0.78rem;
+}
+
 @media (min-width: 768px) {
   .toplist-page .toplist-hours__panels {
     display: grid;
@@ -229,16 +255,20 @@
   }
 
   .toplist-page .toplist-hour-panel .toplist-entry__content {
-    font-size: 0.86rem;
+    font-size: 0.82rem;
   }
 
   .toplist-page .toplist-hour-panel .toplist-entry__content li {
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
+    padding: 0.4rem 0.62rem 0.4rem 2.72rem;
+    font-size: 0.82rem;
   }
 
   .toplist-page .toplist-hour-panel .toplist-entry__content li::before {
-    top: 0.52rem;
+    left: 0.66rem;
+    top: 0.48rem;
+    width: 1.68rem;
+    height: 1.3rem;
+    font-size: 0.72rem;
   }
 
 }

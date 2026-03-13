@@ -125,11 +125,120 @@
     showPanels(hours, idx, 1, false, targetId);
   }
 
-  function ensureDayLatestHourVisible(day) {
+  function readLazyData(root) {
+    var node = root.querySelector('#toplist-day-data');
+    if (!node || !node.textContent) {
+      return {};
+    }
+    try {
+      return JSON.parse(node.textContent);
+    } catch (e) {
+      return {};
+    }
+  }
+
+  function buildHoursFromPayload(doc, payload) {
+    var hours = doc.createElement('div');
+    hours.className = 'toplist-hours is-lazy';
+
+    var nav = doc.createElement('div');
+    nav.className = 'toplist-hours__nav';
+    nav.setAttribute('role', 'tablist');
+    nav.setAttribute('aria-label', '\u5c0f\u65f6\u9009\u62e9');
+
+    var panelsWrap = doc.createElement('div');
+    panelsWrap.className = 'toplist-hours__panels';
+
+    for (var i = 0; i < payload.length; i++) {
+      var it = payload[i];
+
+      var btn = doc.createElement('button');
+      btn.type = 'button';
+      btn.className = 'toplist-hour-btn' + (i === 0 ? ' is-active' : '');
+      btn.setAttribute('data-target', it.panelId);
+      btn.setAttribute('data-idx', String(i));
+      btn.setAttribute('aria-controls', it.panelId);
+      btn.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      if (it.updatedAt) {
+        btn.title = it.updatedAt;
+      }
+      btn.textContent = it.hourLabel || '--';
+      nav.appendChild(btn);
+
+      var panel = doc.createElement('section');
+      panel.className = 'toplist-hour-panel';
+      panel.id = it.panelId;
+      panel.setAttribute('data-idx', String(i));
+      if (i !== 0) {
+        panel.hidden = true;
+      }
+
+      var meta = doc.createElement('div');
+      meta.className = 'toplist-hour-panel__meta';
+
+      var time = doc.createElement('span');
+      time.className = 'toplist-hour-panel__time';
+      time.textContent = it.hourLabel || '--';
+      meta.appendChild(time);
+
+      if (it.updatedAt) {
+        var updated = doc.createElement('span');
+        updated.className = 'toplist-hour-panel__updated';
+        updated.textContent = it.updatedAt;
+        meta.appendChild(updated);
+      }
+
+      var entry = doc.createElement('div');
+      entry.className = 'toplist-entry';
+
+      var content = doc.createElement('div');
+      content.className = 'toplist-entry__content';
+      content.innerHTML = it.html || '';
+
+      entry.appendChild(content);
+      panel.appendChild(meta);
+      panel.appendChild(entry);
+      panelsWrap.appendChild(panel);
+    }
+
+    hours.appendChild(nav);
+    hours.appendChild(panelsWrap);
+    return hours;
+  }
+
+  function hydrateDayIfNeeded(day, lazyData) {
+    if (!day) {
+      return null;
+    }
+
+    var existingHours = day.querySelector('.toplist-hours');
+    if (existingHours) {
+      return existingHours;
+    }
+
+    var dayKey = day.getAttribute('data-day-key') || '';
+    var payload = lazyData[dayKey];
+    if (!payload || !payload.length) {
+      return null;
+    }
+
+    var body = day.querySelector('.toplist-day__body');
+    if (!body) {
+      return null;
+    }
+
+    var hours = buildHoursFromPayload(day.ownerDocument, payload);
+    body.innerHTML = '';
+    body.appendChild(hours);
+    day.setAttribute('data-day-loaded', '1');
+    return hours;
+  }
+
+  function ensureDayLatestHourVisible(day, lazyData) {
     if (!day || !day.open) {
       return;
     }
-    var hours = day.querySelector('.toplist-hours');
+    var hours = hydrateDayIfNeeded(day, lazyData);
     if (!hours) {
       return;
     }
@@ -164,15 +273,44 @@
     }
   }
 
-  function applyHash(root) {
+  function findLazyTargetByPanelId(lazyData, panelId) {
+    var dayKeys = Object.keys(lazyData || {});
+    for (var i = 0; i < dayKeys.length; i++) {
+      var dayKey = dayKeys[i];
+      var payload = lazyData[dayKey] || [];
+      for (var j = 0; j < payload.length; j++) {
+        if (payload[j].panelId === panelId) {
+          return { dayKey: dayKey, panelId: panelId };
+        }
+      }
+    }
+    return null;
+  }
+
+  function applyHash(root, lazyData) {
     var hash = location.hash ? location.hash.slice(1) : '';
     if (!hash) {
       return;
     }
+
     var panel = document.getElementById(hash);
     if (!panel) {
-      return;
+      var lazyTarget = findLazyTargetByPanelId(lazyData, hash);
+      if (!lazyTarget) {
+        return;
+      }
+      var lazyDay = root.querySelector('details.toplist-day[data-day-key="' + escId(lazyTarget.dayKey) + '"]');
+      if (!lazyDay) {
+        return;
+      }
+      lazyDay.open = true;
+      hydrateDayIfNeeded(lazyDay, lazyData);
+      panel = document.getElementById(hash);
+      if (!panel) {
+        return;
+      }
     }
+
     var day = panel.closest ? panel.closest('details.toplist-day') : null;
     if (day) {
       day.open = true;
@@ -192,6 +330,8 @@
     if (!root) {
       return;
     }
+    var lazyData = readLazyData(root);
+
     root.addEventListener('click', function(e) {
       var actionBtn = e.target && e.target.closest ? e.target.closest('.toplist-action') : null;
       if (actionBtn && root.contains(actionBtn)) {
@@ -214,10 +354,7 @@
       }
 
       var a = e.target && e.target.closest ? e.target.closest('a') : null;
-      if (!a) {
-        return;
-      }
-      if (!root.contains(a)) {
+      if (!a || !root.contains(a)) {
         return;
       }
       var li = a.closest('li');
@@ -268,11 +405,11 @@
       buttons[next].focus();
     });
 
-    applyHash(root);
+    applyHash(root, lazyData);
 
     var openDays = root.querySelectorAll('details.toplist-day[open]');
     for (var i = 0; i < openDays.length; i++) {
-      ensureDayLatestHourVisible(openDays[i]);
+      ensureDayLatestHourVisible(openDays[i], lazyData);
     }
 
     var visiblePanels = root.querySelectorAll('.toplist-hour-panel:not([hidden])');
@@ -285,7 +422,7 @@
       if (!day || !day.classList || !day.classList.contains('toplist-day')) {
         return;
       }
-      ensureDayLatestHourVisible(day);
+      ensureDayLatestHourVisible(day, lazyData);
     }, true);
   }
 
