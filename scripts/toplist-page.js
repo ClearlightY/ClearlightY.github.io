@@ -298,6 +298,14 @@ function rootPath(hexo, routePath) {
   return `${String(root).replace(/\/?$/, '/')}${String(routePath || '').replace(/^\/+/, '')}`;
 }
 
+function loadToplistInlineScript(hexo) {
+  const sourceJs = path.join(hexo.source_dir, 'js', 'toplist-enhancements.js');
+  if (!fs.existsSync(sourceJs)) {
+    return '';
+  }
+  return fs.readFileSync(sourceJs, 'utf8').replace(/<\/script>/gi, '<\\/script>');
+}
+
 function renderTopListPage(hexo) {
   const { cfg, items, days, sourceDir } = buildToplistData(hexo);
   const heroTitle = cfg.title || '\u70ed\u641c\u699c TOP50';
@@ -319,8 +327,15 @@ function renderTopListPage(hexo) {
     ? `\u6700\u65b0\u66f4\u65b0\uff1a${escapeHtml(newest.updatedAt)}`
     : (newest.date ? `\u6700\u65b0\u65f6\u6bb5\uff1a${escapeHtml(newest.date)}${newest.hour ? ` ${escapeHtml(newest.hour)}:00` : ''}` : '');
 
-  const jumpHtml = days.map((day, index) =>
-    `<button type="button" class="toplist-day-jump${index === 0 ? ' is-active' : ''}" data-day-key="${escapeHtml(day.dayId)}">${escapeHtml(day.dateKey)}</button>`
+  const quickDesktopDays = days.slice(0, 6);
+  const quickMobileDays = days.slice(0, 3);
+
+  const jumpHtml = quickDesktopDays.map((day, index) =>
+    `<button type="button" class="toplist-day-jump${index === 0 ? ' is-active' : ''}" data-day-key="${escapeHtml(day.dayId)}"${index === 0 ? ' data-is-latest="true"' : ''}>${escapeHtml(day.dateKey)}${index === 0 ? '<span class="toplist-day-jump__badge">最新</span>' : ''}</button>`
+  ).join('\n');
+
+  const mobileJumpHtml = quickMobileDays.map((day, index) =>
+    `<button type="button" class="toplist-day-jump toplist-day-jump--mobile${index === 0 ? ' is-active' : ''}" data-day-key="${escapeHtml(day.dayId)}"${index === 0 ? ' data-is-latest="true"' : ''}>${escapeHtml(day.dateKey.slice(5))}${index === 0 ? '<span class="toplist-day-jump__badge">最新</span>' : ''}</button>`
   ).join('\n');
 
   const daysHtml = days.map((day, index) => {
@@ -332,10 +347,11 @@ function renderTopListPage(hexo) {
       : `<div class="toplist-day__lazy" data-day-key="${escapeHtml(day.dayId)}" data-src="${escapeHtml(rootPath(hexo, day.routePath))}" data-state="idle"><span class="toplist-day__lazy-spinner" aria-hidden="true"></span><span class="toplist-day__lazy-text">\u5c55\u5f00\u540e\u52a0\u8f7d\u5f53\u65e5\u5c0f\u65f6\u699c\u5355</span><button type="button" class="toplist-day__retry" hidden>\u91cd\u8bd5</button></div>`;
 
     return `
-<details class="toplist-day" data-day-key="${escapeHtml(day.dayId)}" data-panel-ids="${escapeHtml(day.panelIds.join(','))}"${index === 0 ? ' open' : ''}>
+<details class="toplist-day${index === 0 ? ' is-latest-day' : ''}" data-day-key="${escapeHtml(day.dayId)}" data-date="${escapeHtml(day.dateKey)}" data-panel-ids="${escapeHtml(day.panelIds.join(','))}"${index === 0 ? ' open' : ''}>
   <summary>
     <div class="toplist-day__left">
       <span class="toplist-day__date">${escapeHtml(day.dateKey)}</span>
+      ${index === 0 ? '<span class="toplist-day__date-badge">最新日期</span>' : ''}
       <span class="toplist-day__count">${day.payload.length} \u4e2a\u65f6\u6bb5</span>
       ${latestMeta}
     </div>
@@ -357,8 +373,48 @@ function renderTopListPage(hexo) {
       <button type="button" class="toplist-action" data-action="collapse-all">\u6298\u53e0\u5168\u90e8</button>
       <button type="button" class="toplist-action" data-action="toggle-compare" aria-pressed="false">\u684c\u9762\u53cc\u5217\u5bf9\u6bd4</button>
     </div>
-    <div class="toplist-day-jumps" aria-label="\u65e5\u671f\u8df3\u8f6c">
-      ${jumpHtml}
+    <div class="toplist-date-controls">
+      <div class="toplist-day-jumps" aria-label="\u6700\u8fd1 5 \u5929">
+        ${jumpHtml}
+      </div>
+      <div class="toplist-day-jumps toplist-day-jumps--mobile" aria-label="\u6700\u8fd1 3 \u5929">
+        ${mobileJumpHtml}
+      </div>
+      <div class="toplist-calendar-launcher">
+        <button type="button" class="toplist-calendar-trigger" data-action="toggle-calendar" aria-expanded="false" aria-controls="toplist-calendar-panel" aria-label="\u6253\u5f00\u5386\u53f2\u65e5\u5386">
+          <span class="toplist-calendar-trigger__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M7 2.75a.75.75 0 0 1 .75.75v1h8.5v-1a.75.75 0 0 1 1.5 0v1h.75A2.5 2.5 0 0 1 21 7v11.5A2.5 2.5 0 0 1 18.5 21h-13A2.5 2.5 0 0 1 3 18.5V7a2.5 2.5 0 0 1 2.5-2.5h.75v-1A.75.75 0 0 1 7 2.75ZM4.5 9.5v9a1 1 0 0 0 1 1h13a1 1 0 0 0 1-1v-9h-15Zm1-3.5a1 1 0 0 0-1 1V8h15V7a1 1 0 0 0-1-1h-.75v.75a.75.75 0 0 1-1.5 0V6h-8.5v.75a.75.75 0 0 1-1.5 0V6H5.5Z" fill="currentColor"/>
+            </svg>
+          </span>
+          <span class="toplist-calendar-trigger__text">\u66f4\u591a\u5386\u53f2</span>
+        </button>
+        <button type="button" class="toplist-calendar-backdrop" data-action="close-calendar" aria-label="\u5173\u95ed\u5386\u53f2\u65e5\u5386" hidden></button>
+        <div id="toplist-calendar-panel" class="toplist-calendar" role="dialog" aria-modal="true" aria-labelledby="toplist-calendar-title" hidden>
+          <div class="toplist-calendar__topbar">
+            <div class="toplist-calendar__heading">
+              <div id="toplist-calendar-title" class="toplist-calendar__dialog-title">\u5386\u53f2\u65e5\u671f</div>
+              <div class="toplist-calendar__dialog-desc">\u9009\u62e9\u67d0\u4e00\u5929\uff0c\u53ea\u67e5\u770b\u5f53\u65e5\u70ed\u641c</div>
+            </div>
+            <button type="button" class="toplist-calendar__close" data-action="close-calendar" aria-label="\u5173\u95ed\u5386\u53f2\u65e5\u5386">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toplist-calendar__header">
+            <button type="button" class="toplist-calendar__nav" data-action="calendar-prev" aria-label="\u4e0a\u4e00\u6708">&lt;</button>
+            <div class="toplist-calendar__title">\u5386\u53f2\u65e5\u671f</div>
+            <button type="button" class="toplist-calendar__nav" data-action="calendar-next" aria-label="\u4e0b\u4e00\u6708">&gt;</button>
+          </div>
+          <div class="toplist-calendar__weekdays" aria-hidden="true">
+            <span>Mo</span><span>Tu</span><span>We</span><span>Th</span><span>Fr</span><span>Sa</span><span>Su</span>
+          </div>
+          <div class="toplist-calendar__grid" role="grid" aria-label="\u53ef\u9009\u5386\u53f2\u65e5\u671f"></div>
+          <div class="toplist-calendar__legend">
+            <span class="toplist-calendar__legend-dot" aria-hidden="true"></span>
+            <span>\u6709\u70ed\u641c\u6570\u636e</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="toplist-days">
@@ -391,3 +447,8 @@ hexo.extend.filter.register('after_post_render', function(data) {
   data.description = DEFAULT_DESCRIPTION;
   return data;
 });
+
+const injectedToplistScript = loadToplistInlineScript(hexo);
+if (injectedToplistScript) {
+  hexo.extend.injector.register('body_end', `<script>${injectedToplistScript}</script>`, 'default');
+}
