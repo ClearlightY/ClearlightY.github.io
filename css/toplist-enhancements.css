@@ -533,6 +533,11 @@ html[data-user-color-scheme='dark'] .toplist-page .toplist-calendar {
   box-shadow: 0 24px 60px rgba(2, 6, 23, 0.48);
 }
 
+html[data-user-color-scheme='dark'] .toplist-page .toplist-calendar__close {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(148, 163, 184, 0.18);
+}
+
 html[data-user-color-scheme='dark'] .toplist-page .toplist-calendar-backdrop {
   background: rgba(2, 6, 23, 0.5);
 }
@@ -779,6 +784,51 @@ html[data-user-color-scheme='dark'] .toplist-page .toplist-entry__content li:nth
   transform: translateY(-0.4rem) scale(0.98);
   transform-origin: top left;
   transition: opacity 0.24s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.toplist-page .toplist-calendar__topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.toplist-page .toplist-calendar__heading {
+  min-width: 0;
+}
+
+.toplist-page .toplist-calendar__dialog-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-color);
+  line-height: 1.2;
+}
+
+.toplist-page .toplist-calendar__dialog-desc {
+  margin-top: 0.28rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--sec-text-color);
+}
+
+.toplist-page .toplist-calendar__close {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  flex: 0 0 auto;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.24);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-color);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.toplist-page .toplist-calendar__close:hover {
+  background: rgba(255, 255, 255, 0.14);
 }
 
 .toplist-page.is-calendar-open .toplist-calendar-backdrop {
@@ -1073,11 +1123,6 @@ html[data-user-color-scheme='dark'] .toplist-page .toplist-entry__content li:nth
 }
 
 @media (min-width: 768px) {
-  html.toplist-calendar-open,
-  html.toplist-calendar-open body {
-    overflow: hidden;
-  }
-
   .toplist-page .toplist-calendar-backdrop {
     display: block;
     background: rgba(15, 23, 42, 0.26);
@@ -1089,17 +1134,25 @@ html[data-user-color-scheme='dark'] .toplist-page .toplist-entry__content li:nth
     position: fixed;
     top: 50%;
     left: 50%;
-    width: min(24rem, calc(100vw - 3rem));
-    max-height: min(34rem, calc(100vh - 4rem));
+    width: min(26rem, calc(100vw - 3rem));
+    max-height: min(36rem, calc(100vh - 4rem));
     overflow: auto;
     overscroll-behavior: contain;
     transform: translate(-50%, calc(-50% - 0.75rem)) scale(0.98);
     transform-origin: center center;
+    border-radius: 22px;
+    padding: 1.1rem 1.1rem 1rem;
     box-shadow: 0 28px 80px rgba(15, 23, 42, 0.24);
   }
 
   .toplist-page.is-calendar-open .toplist-calendar {
     transform: translate(-50%, -50%) scale(1);
+  }
+
+  .toplist-page .toplist-calendar__topbar {
+    padding-bottom: 0.95rem;
+    margin-bottom: 0.15rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.14);
   }
 
   .toplist-page .toplist-hours__panels {
@@ -1174,6 +1227,16 @@ html[data-user-color-scheme='dark'] .toplist-page .toplist-entry__content li:nth
     box-shadow: 0 -10px 42px rgba(15, 23, 42, 0.28);
     transform: translateY(1.75rem) scale(0.98);
     transform-origin: center bottom;
+  }
+
+  .toplist-page .toplist-calendar__dialog-desc {
+    font-size: 0.78rem;
+  }
+
+  .toplist-page .toplist-calendar__close {
+    width: 1.95rem;
+    height: 1.95rem;
+    font-size: 1.05rem;
   }
 
   .toplist-page.is-calendar-open .toplist-calendar {

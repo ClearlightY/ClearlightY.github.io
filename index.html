@@ -806,133 +806,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/202603116759.html" target="_blank">
-          OpenClaw Telegram 解决方案
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/202603116759.html" target="_blank">
-        <div>
-          解决 OpenClaw Telegram Bot 连接问题完整方案📋 问题背景在使用 OpenClaw 配置 Telegram Bot 时，用户遇到 Bot 无响应的问题。具体表现为：  给 Bot 发送 /start 命令无反应 openclaw health 显示 Telegram: failed (unknown) - This operation was aborted 网络环境受限，需
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-03-11 10:46" pubdate>
-              2026-03-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/AI/" class="category-chain-item">AI</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OpenClaw/">#OpenClaw</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/posts/202603118334.html" target="_blank">
-          Openclaw installation guide wechat
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/202603118334.html" target="_blank">
-        <div>
-          🦞 OpenClaw 安装与配置完全指南引言OpenClaw 是一款功能强大的个人 AI 助手，可以在自己的设备上独立运行。它支持多种主流通信渠道（WhatsApp、Telegram、Slack、Discord、Google Chat、Signal、iMessage 等），并具备语音唤醒、实时画布等先进功能。 本文将手把手教你如何在 macOS 系统上完成 OpenClaw 的安装和初步配置，让
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2026-03-11 10:46" pubdate>
-              2026-03-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/AI/" class="category-chain-item">AI</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OpenClaw/">#OpenClaw</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
@@ -1104,7 +982,9 @@
     calendarMonths: [],
     calendarDays: {},
     calendarMonthIndex: 0,
-    calendarCloseTimer: null
+    calendarCloseTimer: null,
+    desktopScrollY: 0,
+    programmaticDayKey: ''
   };
 
   function isDesktop() {
@@ -1494,6 +1374,17 @@
     });
   }
 
+  function settleAndScrollToDay(day) {
+    return new Promise(function(resolve) {
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          scrollDayIntoView(day);
+          resolve();
+        });
+      });
+    });
+  }
+
   function collectCalendarData(root) {
     var days = root.querySelectorAll('details.toplist-day[data-date]');
     var monthMap = {};
@@ -1535,6 +1426,33 @@
     return day < 10 ? '0' + day : String(day);
   }
 
+  function lockDesktopScroll() {
+    if (!isDesktop()) {
+      return;
+    }
+    state.desktopScrollY = window.pageYOffset || window.scrollY || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = '-' + state.desktopScrollY + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+  }
+
+  function unlockDesktopScroll() {
+    if (!isDesktop() && !document.body.style.position) {
+      return;
+    }
+    var scrollY = state.desktopScrollY || 0;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    if (isDesktop()) {
+      window.scrollTo(0, scrollY);
+    }
+  }
+
   function openCalendar(root) {
     var trigger = root.querySelector('.toplist-calendar-trigger');
     var backdrop = root.querySelector('.toplist-calendar-backdrop');
@@ -1549,6 +1467,7 @@
     if (backdrop) {
       backdrop.hidden = false;
     }
+    lockDesktopScroll();
     panel.hidden = false;
     trigger.setAttribute('aria-expanded', 'true');
     requestAnimationFrame(function() {
@@ -1567,6 +1486,7 @@
     trigger.setAttribute('aria-expanded', 'false');
     root.classList.remove('is-calendar-open');
     document.documentElement.classList.remove('toplist-calendar-open');
+    unlockDesktopScroll();
     if (state.calendarCloseTimer) {
       clearTimeout(state.calendarCloseTimer);
     }
@@ -1690,16 +1610,12 @@
       return Promise.resolve();
     }
     closeOtherDays(root, day);
+    state.programmaticDayKey = dayKey;
     day.open = true;
     updateDayJumpActive(root, day);
     return ensureDayLatestHourVisible(day).then(function() {
       if (shouldScroll !== false) {
-        return new Promise(function(resolve) {
-          requestAnimationFrame(function() {
-            scrollDayIntoView(day);
-            resolve();
-          });
-        });
+        return settleAndScrollToDay(day);
       }
     });
   }
@@ -1868,9 +1784,10 @@
         if (calendarAction === 'calendar-pick') {
           var pickedDayKey = calendarBtn.getAttribute('data-day-key');
           if (isDesktop()) {
-            jumpToDay(root, pickedDayKey, true).then(function() {
-              closeCalendar(root);
-            });
+            closeCalendar(root);
+            setTimeout(function() {
+              jumpToDay(root, pickedDayKey, true);
+            }, prefersReducedMotion() ? 0 : 280);
             return;
           }
           closeCalendar(root);
@@ -1975,8 +1892,19 @@
         return;
       }
       if (day.open) {
+        var dayKey = day.getAttribute('data-day-key') || '';
+        var shouldScroll = state.programmaticDayKey !== dayKey;
         closeOtherDays(root, day);
         updateDayJumpActive(root, day);
+        ensureDayLatestHourVisible(day).then(function() {
+          if (shouldScroll) {
+            return settleAndScrollToDay(day);
+          }
+        });
+        if (state.programmaticDayKey === dayKey) {
+          state.programmaticDayKey = '';
+        }
+        return;
       }
       ensureDayLatestHourVisible(day);
     }, true);

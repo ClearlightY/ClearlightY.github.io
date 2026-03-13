@@ -6,7 +6,9 @@
     calendarMonths: [],
     calendarDays: {},
     calendarMonthIndex: 0,
-    calendarCloseTimer: null
+    calendarCloseTimer: null,
+    desktopScrollY: 0,
+    programmaticDayKey: ''
   };
 
   function isDesktop() {
@@ -396,6 +398,17 @@
     });
   }
 
+  function settleAndScrollToDay(day) {
+    return new Promise(function(resolve) {
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          scrollDayIntoView(day);
+          resolve();
+        });
+      });
+    });
+  }
+
   function collectCalendarData(root) {
     var days = root.querySelectorAll('details.toplist-day[data-date]');
     var monthMap = {};
@@ -437,6 +450,33 @@
     return day < 10 ? '0' + day : String(day);
   }
 
+  function lockDesktopScroll() {
+    if (!isDesktop()) {
+      return;
+    }
+    state.desktopScrollY = window.pageYOffset || window.scrollY || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = '-' + state.desktopScrollY + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+  }
+
+  function unlockDesktopScroll() {
+    if (!isDesktop() && !document.body.style.position) {
+      return;
+    }
+    var scrollY = state.desktopScrollY || 0;
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    if (isDesktop()) {
+      window.scrollTo(0, scrollY);
+    }
+  }
+
   function openCalendar(root) {
     var trigger = root.querySelector('.toplist-calendar-trigger');
     var backdrop = root.querySelector('.toplist-calendar-backdrop');
@@ -451,6 +491,7 @@
     if (backdrop) {
       backdrop.hidden = false;
     }
+    lockDesktopScroll();
     panel.hidden = false;
     trigger.setAttribute('aria-expanded', 'true');
     requestAnimationFrame(function() {
@@ -469,6 +510,7 @@
     trigger.setAttribute('aria-expanded', 'false');
     root.classList.remove('is-calendar-open');
     document.documentElement.classList.remove('toplist-calendar-open');
+    unlockDesktopScroll();
     if (state.calendarCloseTimer) {
       clearTimeout(state.calendarCloseTimer);
     }
@@ -592,16 +634,12 @@
       return Promise.resolve();
     }
     closeOtherDays(root, day);
+    state.programmaticDayKey = dayKey;
     day.open = true;
     updateDayJumpActive(root, day);
     return ensureDayLatestHourVisible(day).then(function() {
       if (shouldScroll !== false) {
-        return new Promise(function(resolve) {
-          requestAnimationFrame(function() {
-            scrollDayIntoView(day);
-            resolve();
-          });
-        });
+        return settleAndScrollToDay(day);
       }
     });
   }
@@ -770,9 +808,10 @@
         if (calendarAction === 'calendar-pick') {
           var pickedDayKey = calendarBtn.getAttribute('data-day-key');
           if (isDesktop()) {
-            jumpToDay(root, pickedDayKey, true).then(function() {
-              closeCalendar(root);
-            });
+            closeCalendar(root);
+            setTimeout(function() {
+              jumpToDay(root, pickedDayKey, true);
+            }, prefersReducedMotion() ? 0 : 280);
             return;
           }
           closeCalendar(root);
@@ -877,8 +916,19 @@
         return;
       }
       if (day.open) {
+        var dayKey = day.getAttribute('data-day-key') || '';
+        var shouldScroll = state.programmaticDayKey !== dayKey;
         closeOtherDays(root, day);
         updateDayJumpActive(root, day);
+        ensureDayLatestHourVisible(day).then(function() {
+          if (shouldScroll) {
+            return settleAndScrollToDay(day);
+          }
+        });
+        if (state.programmaticDayKey === dayKey) {
+          state.programmaticDayKey = '';
+        }
+        return;
       }
       ensureDayLatestHourVisible(day);
     }, true);
