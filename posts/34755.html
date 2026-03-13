@@ -911,6 +911,62 @@
     }
   }
 
+  function bindHourNavDrag(nav) {
+    if (!nav || nav.getAttribute('data-drag-bound') === '1') {
+      return;
+    }
+    nav.setAttribute('data-drag-bound', '1');
+
+    var dragState = {
+      active: false,
+      moved: false,
+      startX: 0,
+      startScrollLeft: 0
+    };
+
+    nav.addEventListener('mousedown', function(e) {
+      if (!isDesktop() || e.button !== 0) {
+        return;
+      }
+      dragState.active = true;
+      dragState.moved = false;
+      dragState.startX = e.clientX;
+      dragState.startScrollLeft = nav.scrollLeft;
+      nav.classList.add('is-dragging');
+      document.body.classList.add('toplist-hours-dragging');
+    });
+
+    window.addEventListener('mousemove', function(e) {
+      if (!dragState.active) {
+        return;
+      }
+      var deltaX = e.clientX - dragState.startX;
+      if (Math.abs(deltaX) > 4) {
+        dragState.moved = true;
+      }
+      nav.scrollLeft = dragState.startScrollLeft - deltaX;
+    });
+
+    window.addEventListener('mouseup', function() {
+      if (!dragState.active) {
+        return;
+      }
+      dragState.active = false;
+      nav.classList.remove('is-dragging');
+      document.body.classList.remove('toplist-hours-dragging');
+      if (dragState.moved) {
+        nav.setAttribute('data-drag-moved', '1');
+        setTimeout(function() {
+          nav.removeAttribute('data-drag-moved');
+        }, 120);
+      }
+    });
+
+    nav.addEventListener('dragstart', function(e) {
+      e.preventDefault();
+    });
+  }
+
   function animatePanel(panel) {
     if (!panel || prefersReducedMotion()) {
       return;
@@ -1016,6 +1072,7 @@
     nav.className = 'toplist-hours__nav';
     nav.setAttribute('role', 'tablist');
     nav.setAttribute('aria-label', '\u5c0f\u65f6\u9009\u62e9');
+    bindHourNavDrag(nav);
 
     var panelsWrap = doc.createElement('div');
     panelsWrap.className = 'toplist-hours__panels';
@@ -1578,6 +1635,10 @@
 
   function refreshVisibleHours(root) {
     root.classList.toggle('is-mobile-changes-mode', isMobileChangesMode());
+    var navs = root.querySelectorAll('.toplist-hours__nav');
+    for (var n = 0; n < navs.length; n++) {
+      bindHourNavDrag(navs[n]);
+    }
     var openDays = root.querySelectorAll('details.toplist-day[open]');
     for (var i = 0; i < openDays.length; i++) {
       var hours = openDays[i].querySelector('.toplist-hours');
@@ -1605,6 +1666,7 @@
     setActionPressed(root);
     root.classList.toggle('is-mobile-changes-mode', isMobileChangesMode());
     syncCalendar(root, '');
+    refreshVisibleHours(root);
 
     root.addEventListener('click', function(e) {
       var actionBtn = e.target && e.target.closest ? e.target.closest('.toplist-action') : null;
@@ -1680,6 +1742,10 @@
       var hourBtn = e.target && e.target.closest ? e.target.closest('.toplist-hour-btn') : null;
       if (hourBtn && root.contains(hourBtn)) {
         var hours = hourBtn.closest ? hourBtn.closest('.toplist-hours') : null;
+        var navWrap = hourBtn.closest ? hourBtn.closest('.toplist-hours__nav') : null;
+        if (navWrap && navWrap.getAttribute('data-drag-moved') === '1') {
+          return;
+        }
         if (hours) {
           activateHour(hours, hourBtn, true);
         }
