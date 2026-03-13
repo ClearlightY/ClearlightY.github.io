@@ -2,7 +2,11 @@
   var state = {
     compareMode: false,
     mobileChangesOnly: false,
-    dayCache: {}
+    dayCache: {},
+    calendarMonths: [],
+    calendarDays: {},
+    calendarMonthIndex: 0,
+    calendarCloseTimer: null
   };
 
   function isDesktop() {
@@ -374,10 +378,200 @@
   }
 
   function scrollDayIntoView(day) {
-    if (!day || !day.scrollIntoView) {
+    if (!day) {
       return;
     }
-    day.scrollIntoView({ block: 'start', behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+    var rect = day.getBoundingClientRect ? day.getBoundingClientRect() : null;
+    if (!rect || typeof window.scrollTo !== 'function') {
+      if (day.scrollIntoView) {
+        day.scrollIntoView({ block: 'start', behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+      }
+      return;
+    }
+    var offset = isDesktop() ? 78 : 72;
+    var targetTop = window.pageYOffset + rect.top - offset;
+    window.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: prefersReducedMotion() ? 'auto' : 'smooth'
+    });
+  }
+
+  function collectCalendarData(root) {
+    var days = root.querySelectorAll('details.toplist-day[data-date]');
+    var monthMap = {};
+    var monthOrder = [];
+    var dayMap = {};
+
+    for (var i = 0; i < days.length; i++) {
+      var dateText = days[i].getAttribute('data-date') || '';
+      var dayKey = days[i].getAttribute('data-day-key') || '';
+      if (!dateText || !dayKey) {
+        continue;
+      }
+      var monthKey = dateText.slice(0, 7);
+      if (!monthMap[monthKey]) {
+        monthMap[monthKey] = true;
+        monthOrder.push(monthKey);
+      }
+      dayMap[dateText] = dayKey;
+    }
+
+    state.calendarMonths = monthOrder;
+    state.calendarDays = dayMap;
+    state.calendarMonthIndex = 0;
+  }
+
+  function formatCalendarTitle(monthKey) {
+    if (!monthKey) {
+      return '';
+    }
+    return monthKey;
+  }
+
+  function currentActiveDayKey(root) {
+    var activeJump = root.querySelector('.toplist-day-jump.is-active');
+    return activeJump ? (activeJump.getAttribute('data-day-key') || '') : '';
+  }
+
+  function padDayNumber(day) {
+    return day < 10 ? '0' + day : String(day);
+  }
+
+  function openCalendar(root) {
+    var trigger = root.querySelector('.toplist-calendar-trigger');
+    var backdrop = root.querySelector('.toplist-calendar-backdrop');
+    var panel = root.querySelector('.toplist-calendar');
+    if (!trigger || !panel || root.classList.contains('is-calendar-open')) {
+      return;
+    }
+    if (state.calendarCloseTimer) {
+      clearTimeout(state.calendarCloseTimer);
+      state.calendarCloseTimer = null;
+    }
+    if (backdrop) {
+      backdrop.hidden = false;
+    }
+    panel.hidden = false;
+    trigger.setAttribute('aria-expanded', 'true');
+    requestAnimationFrame(function() {
+      root.classList.add('is-calendar-open');
+      document.documentElement.classList.add('toplist-calendar-open');
+    });
+  }
+
+  function closeCalendar(root) {
+    var trigger = root.querySelector('.toplist-calendar-trigger');
+    var backdrop = root.querySelector('.toplist-calendar-backdrop');
+    var panel = root.querySelector('.toplist-calendar');
+    if (!trigger || !panel) {
+      return;
+    }
+    trigger.setAttribute('aria-expanded', 'false');
+    root.classList.remove('is-calendar-open');
+    document.documentElement.classList.remove('toplist-calendar-open');
+    if (state.calendarCloseTimer) {
+      clearTimeout(state.calendarCloseTimer);
+    }
+    state.calendarCloseTimer = setTimeout(function() {
+      panel.hidden = true;
+      if (backdrop) {
+        backdrop.hidden = true;
+      }
+      state.calendarCloseTimer = null;
+    }, prefersReducedMotion() ? 0 : 260);
+  }
+
+  function getLatestDayKey(root) {
+    var latestDay = root.querySelector('details.toplist-day[data-day-key]');
+    return latestDay ? (latestDay.getAttribute('data-day-key') || '') : '';
+  }
+
+  function renderCalendar(root, selectedDayKey) {
+    var panel = root.querySelector('.toplist-calendar');
+    var title = root.querySelector('.toplist-calendar__title');
+    var grid = root.querySelector('.toplist-calendar__grid');
+    var prevBtn = root.querySelector('.toplist-calendar__nav[data-action="calendar-prev"]');
+    var nextBtn = root.querySelector('.toplist-calendar__nav[data-action="calendar-next"]');
+    if (!panel || !title || !grid || !state.calendarMonths.length) {
+      return;
+    }
+
+    var monthIndex = state.calendarMonthIndex;
+    if (monthIndex < 0) monthIndex = 0;
+    if (monthIndex >= state.calendarMonths.length) monthIndex = state.calendarMonths.length - 1;
+    state.calendarMonthIndex = monthIndex;
+
+    var monthKey = state.calendarMonths[monthIndex];
+    var latestDayKey = getLatestDayKey(root);
+    title.textContent = formatCalendarTitle(monthKey);
+    if (prevBtn) {
+      prevBtn.disabled = monthIndex >= state.calendarMonths.length - 1;
+    }
+    if (nextBtn) {
+      nextBtn.disabled = monthIndex <= 0;
+    }
+
+    var parts = monthKey.split('-');
+    var year = Number(parts[0]);
+    var monthNumber = Number(parts[1]);
+    var firstDate = new Date(year, monthNumber - 1, 1);
+    var offset = (firstDate.getDay() + 6) % 7;
+    var totalDays = new Date(year, monthNumber, 0).getDate();
+    var cells = [];
+
+    for (var i = 0; i < offset; i++) {
+      cells.push('<span class="toplist-calendar__cell toplist-calendar__cell--blank" aria-hidden="true"></span>');
+    }
+
+    for (var day = 1; day <= totalDays; day++) {
+      var dayLabel = padDayNumber(day);
+      var dateText = monthKey + '-' + dayLabel;
+      var dayKey = state.calendarDays[dateText] || '';
+      var isAvailable = !!dayKey;
+      var isSelected = !!selectedDayKey && dayKey === selectedDayKey;
+      var isLatest = !!latestDayKey && dayKey === latestDayKey;
+      var classes = 'toplist-calendar__cell toplist-calendar__day';
+      if (isAvailable) {
+        classes += ' is-available';
+      } else {
+        classes += ' is-empty';
+      }
+      if (isSelected) {
+        classes += ' is-selected';
+      }
+      if (isLatest) {
+        classes += ' is-latest';
+      }
+      if (isAvailable) {
+        cells.push('<button type="button" class="' + classes + '" data-action="calendar-pick" data-day-key="' + dayKey + '" data-date="' + dateText + '" role="gridcell" aria-selected="' + (isSelected ? 'true' : 'false') + '" aria-label="' + dateText + (isLatest ? ' 最新日期' : '') + '"><span>' + day + '</span>' + (isLatest ? '<span class="toplist-calendar__latest-badge">最新</span>' : '') + '</button>');
+      } else {
+        cells.push('<span class="' + classes + '" role="gridcell" aria-disabled="true"><span>' + day + '</span></span>');
+      }
+    }
+
+    grid.innerHTML = cells.join('');
+  }
+
+  function syncCalendar(root, dayKey) {
+    if (!state.calendarMonths.length) {
+      collectCalendarData(root);
+    }
+    var selectedDate = '';
+    var days = root.querySelectorAll('details.toplist-day[data-date]');
+    for (var i = 0; i < days.length; i++) {
+      if (days[i].getAttribute('data-day-key') === dayKey) {
+        selectedDate = days[i].getAttribute('data-date') || '';
+        break;
+      }
+    }
+    if (selectedDate) {
+      var monthKey = selectedDate.slice(0, 7);
+      var monthIndex = state.calendarMonths.indexOf(monthKey);
+      if (monthIndex >= 0) {
+        state.calendarMonthIndex = monthIndex;
+      }
+    }
+    renderCalendar(root, dayKey);
   }
 
   function updateDayJumpActive(root, day) {
@@ -386,17 +580,50 @@
     for (var i = 0; i < jumps.length; i++) {
       jumps[i].classList.toggle('is-active', jumps[i].getAttribute('data-day-key') === key);
     }
+    syncCalendar(root, key);
+  }
+
+  function jumpToDay(root, dayKey, shouldScroll) {
+    if (!dayKey) {
+      return Promise.resolve();
+    }
+    var day = root.querySelector('details.toplist-day[data-day-key="' + escId(dayKey) + '"]');
+    if (!day) {
+      return Promise.resolve();
+    }
+    closeOtherDays(root, day);
+    day.open = true;
+    updateDayJumpActive(root, day);
+    return ensureDayLatestHourVisible(day).then(function() {
+      if (shouldScroll !== false) {
+        return new Promise(function(resolve) {
+          requestAnimationFrame(function() {
+            scrollDayIntoView(day);
+            resolve();
+          });
+        });
+      }
+    });
+  }
+
+  function closeOtherDays(root, activeDay) {
+    var days = root.querySelectorAll('details.toplist-day');
+    for (var i = 0; i < days.length; i++) {
+      if (activeDay && days[i] === activeDay) {
+        continue;
+      }
+      days[i].open = false;
+    }
   }
 
   function expandLatest(root) {
     var days = root.querySelectorAll('details.toplist-day');
-    for (var i = 0; i < days.length; i++) {
-      days[i].open = i === 0;
-    }
     var latestDay = days[0];
     if (!latestDay) {
       return;
     }
+    closeOtherDays(root, latestDay);
+    latestDay.open = true;
     ensureDayLatestHourVisible(latestDay).then(function() {
       updateDayJumpActive(root, latestDay);
     });
@@ -483,9 +710,15 @@
     if (!root) {
       return;
     }
+    if (root.getAttribute('data-toplist-init') === '1') {
+      return;
+    }
+    root.setAttribute('data-toplist-init', '1');
 
+    collectCalendarData(root);
     setActionPressed(root);
     root.classList.toggle('is-mobile-changes-mode', isMobileChangesMode());
+    syncCalendar(root, '');
 
     root.addEventListener('click', function(e) {
       var actionBtn = e.target && e.target.closest ? e.target.closest('.toplist-action') : null;
@@ -508,18 +741,52 @@
         return;
       }
 
+      var calendarBtn = e.target && e.target.closest ? e.target.closest('[data-action]') : null;
+      if (calendarBtn && root.contains(calendarBtn)) {
+        var calendarAction = calendarBtn.getAttribute('data-action') || '';
+        if (calendarAction === 'toggle-calendar') {
+          if (root.classList.contains('is-calendar-open')) {
+            closeCalendar(root);
+          } else {
+            syncCalendar(root, currentActiveDayKey(root));
+            openCalendar(root);
+          }
+          return;
+        }
+        if (calendarAction === 'close-calendar') {
+          closeCalendar(root);
+          return;
+        }
+        if (calendarAction === 'calendar-prev') {
+          state.calendarMonthIndex += 1;
+          renderCalendar(root, currentActiveDayKey(root));
+          return;
+        }
+        if (calendarAction === 'calendar-next') {
+          state.calendarMonthIndex -= 1;
+          renderCalendar(root, currentActiveDayKey(root));
+          return;
+        }
+        if (calendarAction === 'calendar-pick') {
+          var pickedDayKey = calendarBtn.getAttribute('data-day-key');
+          if (isDesktop()) {
+            jumpToDay(root, pickedDayKey, true).then(function() {
+              closeCalendar(root);
+            });
+            return;
+          }
+          closeCalendar(root);
+          setTimeout(function() {
+            jumpToDay(root, pickedDayKey, true);
+          }, prefersReducedMotion() ? 0 : 280);
+          return;
+        }
+      }
+
       var jumpBtn = e.target && e.target.closest ? e.target.closest('.toplist-day-jump') : null;
       if (jumpBtn && root.contains(jumpBtn)) {
         var dayKey = jumpBtn.getAttribute('data-day-key');
-        var day = root.querySelector('details.toplist-day[data-day-key="' + escId(dayKey) + '"]');
-        if (!day) {
-          return;
-        }
-        day.open = true;
-        updateDayJumpActive(root, day);
-        ensureDayLatestHourVisible(day).then(function() {
-          scrollDayIntoView(day);
-        });
+        jumpToDay(root, dayKey, true);
         return;
       }
 
@@ -610,6 +877,7 @@
         return;
       }
       if (day.open) {
+        closeOtherDays(root, day);
         updateDayJumpActive(root, day);
       }
       ensureDayLatestHourVisible(day);
@@ -622,6 +890,22 @@
       }
       if (openDays[0]) {
         updateDayJumpActive(root, openDays[0]);
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      if (!root.classList.contains('is-calendar-open')) {
+        return;
+      }
+      var insideCalendar = e.target && e.target.closest ? e.target.closest('.toplist-calendar-launcher') : null;
+      if (!insideCalendar || !root.contains(insideCalendar)) {
+        closeCalendar(root);
+      }
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && root.classList.contains('is-calendar-open')) {
+        closeCalendar(root);
       }
     });
 
@@ -639,6 +923,7 @@
         media.addListener(onChange);
       }
     }
+
   }
 
   if (document.readyState === 'loading') {
