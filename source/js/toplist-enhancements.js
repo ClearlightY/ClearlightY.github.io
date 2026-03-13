@@ -1,6 +1,7 @@
 (function() {
   var state = {
     compareMode: false,
+    mobileChangesOnly: false,
     dayCache: {}
   };
 
@@ -19,15 +20,31 @@
     return String(s).replace(/[^a-zA-Z0-9_-]/g, '\\$&');
   }
 
+  function formatHeat(heat) {
+    if (heat === null || heat === undefined || heat === '') {
+      return '';
+    }
+    return String(heat).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
   function getVisibleCount() {
     return state.compareMode && isDesktop() ? 2 : 1;
+  }
+
+  function isMobileChangesMode() {
+    return !isDesktop() && state.mobileChangesOnly;
   }
 
   function setActionPressed(root) {
     var btn = root.querySelector('.toplist-action[data-action="toggle-compare"]');
     if (!btn) return;
-    btn.setAttribute('aria-pressed', state.compareMode ? 'true' : 'false');
-    btn.textContent = state.compareMode ? '退出双列对比' : '桌面双列对比';
+    var pressed = isDesktop() ? state.compareMode : state.mobileChangesOnly;
+    btn.setAttribute('aria-pressed', pressed ? 'true' : 'false');
+    if (isDesktop()) {
+      btn.textContent = state.compareMode ? '\u9000\u51fa\u53cc\u5217\u5bf9\u6bd4' : '\u684c\u9762\u53cc\u5217\u5bf9\u6bd4';
+      return;
+    }
+    btn.textContent = state.mobileChangesOnly ? '\u663e\u793a\u5168\u90e8' : '\u53ea\u770b\u53d8\u5316';
   }
 
   function setActiveButton(hours, btn) {
@@ -105,6 +122,37 @@
     showPanels(hours, idx, visible, updateHash !== false, targetId);
   }
 
+  function buildPanelSummary(item, panelIndex, panelCount) {
+    var total = item.total || (item.entries ? item.entries.length : 0);
+    if (item.isEarliest || panelIndex === panelCount - 1) {
+      return '\u5171 ' + total + ' \u6761\uff0c\u6682\u65e0\u66f4\u65e9\u5c0f\u65f6\u53ef\u5bf9\u6bd4';
+    }
+    return '\u5171 ' + total + ' \u6761\uff0c\u542b\u76f8\u5bf9\u4e0a\u4e00\u5c0f\u65f6\u53d8\u5316';
+  }
+
+  function buildStatsBar(doc, stats) {
+    var safeStats = stats || { new: 0, up: 0, down: 0, same: 0 };
+    var bar = doc.createElement('div');
+    bar.className = 'toplist-hour-panel__stats';
+    bar.setAttribute('aria-label', '\u53d8\u5316\u7edf\u8ba1');
+
+    var items = [
+      { cls: 'new', label: 'NEW ', value: safeStats.new || 0 },
+      { cls: 'up', label: '\u4e0a\u5347 ', value: safeStats.up || 0 },
+      { cls: 'down', label: '\u4e0b\u964d ', value: safeStats.down || 0 },
+      { cls: 'same', label: '\u6301\u5e73 ', value: safeStats.same || 0 }
+    ];
+
+    for (var i = 0; i < items.length; i++) {
+      var chip = doc.createElement('span');
+      chip.className = 'toplist-stat toplist-stat--' + items[i].cls;
+      chip.textContent = items[i].label + items[i].value;
+      bar.appendChild(chip);
+    }
+
+    return bar;
+  }
+
   function buildHoursFromPayload(doc, payload) {
     var panels = payload && payload.panels ? payload.panels : [];
     var hours = doc.createElement('div');
@@ -113,7 +161,7 @@
     var nav = doc.createElement('div');
     nav.className = 'toplist-hours__nav';
     nav.setAttribute('role', 'tablist');
-    nav.setAttribute('aria-label', '小时选择');
+    nav.setAttribute('aria-label', '\u5c0f\u65f6\u9009\u62e9');
 
     var panelsWrap = doc.createElement('div');
     panelsWrap.className = 'toplist-hours__panels';
@@ -167,7 +215,9 @@
 
       var summary = doc.createElement('p');
       summary.className = 'toplist-hour-panel__summary';
-      summary.textContent = '共 ' + (item.total || (item.entries ? item.entries.length : 0)) + ' 条，含相对上一小时变化';
+      summary.textContent = buildPanelSummary(item, i, panels.length);
+
+      var statsBar = buildStatsBar(doc, item.stats);
 
       var entry = doc.createElement('div');
       entry.className = 'toplist-entry';
@@ -203,8 +253,8 @@
         if (entries[j].heat) {
           var heat = doc.createElement('span');
           heat.className = 'toplist-entry__heat';
-          heat.title = '热度';
-          heat.textContent = entries[j].heat;
+          heat.title = '\u70ed\u5ea6';
+          heat.textContent = formatHeat(entries[j].heat);
           metaWrap.appendChild(heat);
         }
 
@@ -217,6 +267,7 @@
       entry.appendChild(content);
       panel.appendChild(meta);
       panel.appendChild(summary);
+      panel.appendChild(statsBar);
       panel.appendChild(entry);
       panelsWrap.appendChild(panel);
     }
@@ -263,7 +314,7 @@
     if (state.dayCache[src]) {
       return state.dayCache[src];
     }
-    setLazyState(day, 'loading', '正在加载当日小时榜单...');
+    setLazyState(day, 'loading', '\u6b63\u5728\u52a0\u8f7d\u5f53\u65e5\u5c0f\u65f6\u699c\u5355...');
     state.dayCache[src] = fetch(src, { credentials: 'same-origin' })
       .then(function(res) {
         if (!res.ok) {
@@ -288,7 +339,7 @@
     }
     return fetchDayPayload(day).then(function(payload) {
       if (!payload || !payload.panels || !payload.panels.length) {
-        setLazyState(day, 'error', '加载失败，请重试');
+        setLazyState(day, 'error', '\u52a0\u8f7d\u5931\u8d25\uff0c\u8bf7\u91cd\u8bd5');
         return null;
       }
       var body = day.querySelector('.toplist-day__body');
@@ -302,7 +353,7 @@
       fadeOutLazy(day);
       return hours;
     }).catch(function() {
-      setLazyState(day, 'error', '加载失败，请重试');
+      setLazyState(day, 'error', '\u52a0\u8f7d\u5931\u8d25\uff0c\u8bf7\u91cd\u8bd5');
       return null;
     });
   }
@@ -413,6 +464,7 @@
   }
 
   function refreshVisibleHours(root) {
+    root.classList.toggle('is-mobile-changes-mode', isMobileChangesMode());
     var openDays = root.querySelectorAll('details.toplist-day[open]');
     for (var i = 0; i < openDays.length; i++) {
       var hours = openDays[i].querySelector('.toplist-hours');
@@ -433,6 +485,7 @@
     }
 
     setActionPressed(root);
+    root.classList.toggle('is-mobile-changes-mode', isMobileChangesMode());
 
     root.addEventListener('click', function(e) {
       var actionBtn = e.target && e.target.closest ? e.target.closest('.toplist-action') : null;
@@ -443,8 +496,12 @@
         } else if (action === 'expand-latest') {
           expandLatest(root);
         } else if (action === 'toggle-compare') {
-          state.compareMode = !state.compareMode;
-          root.classList.toggle('is-compare-mode', state.compareMode);
+          if (isDesktop()) {
+            state.compareMode = !state.compareMode;
+            root.classList.toggle('is-compare-mode', state.compareMode);
+          } else {
+            state.mobileChangesOnly = !state.mobileChangesOnly;
+          }
           setActionPressed(root);
           refreshVisibleHours(root);
         }
@@ -571,6 +628,9 @@
     if (window.matchMedia) {
       var media = window.matchMedia('(min-width: 768px)');
       var onChange = function() {
+        root.classList.toggle('is-compare-mode', isDesktop() && state.compareMode);
+        root.classList.toggle('is-mobile-changes-mode', isMobileChangesMode());
+        setActionPressed(root);
         refreshVisibleHours(root);
       };
       if (media.addEventListener) {

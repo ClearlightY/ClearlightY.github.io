@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const DEFAULT_SOURCE_DIR = path.join('source', 'toplist', 'data');
-const DEFAULT_DESCRIPTION = '\u6309\u65e5\u671f\u548c\u5c0f\u65f6\u67e5\u770b\u5fae\u535a\u70ed\u641c TOP50\uff0c\u652f\u6301\u5355\u5c0f\u65f6\u6d4f\u89c8\u3001\u4e0a\u4e00\u5c0f\u65f6\u5bf9\u6bd4\u548c\u6309\u5929\u61d2\u52a0\u8f7d\u3002';
+const DEFAULT_DESCRIPTION = 'Weibo Top 50 by date and hour with lazy loading and rank change comparison.';
 const DAY_DATA_DIR = 'toplist/day-data';
 
 function resolveSourceDir(hexo, sourceDir) {
@@ -131,6 +131,19 @@ function trendMeta(rank, previousRank) {
   };
 }
 
+function buildTrendStats(entries) {
+  const stats = { new: 0, up: 0, down: 0, same: 0 };
+  for (const entry of entries) {
+    const direction = entry && entry.trend ? entry.trend.direction : 'same';
+    if (Object.prototype.hasOwnProperty.call(stats, direction)) {
+      stats[direction] += 1;
+    } else {
+      stats.same += 1;
+    }
+  }
+  return stats;
+}
+
 function formatHeat(heat) {
   if (!heat) return '';
   return String(heat).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -168,14 +181,15 @@ function loadHotFiles(sourceDir) {
       const { date, hour } = extractDateHourFromFilename(filePath);
       const raw = fs.readFileSync(filePath, 'utf8');
       const parsed = parseHotMd(raw);
+      const entries = parseHotEntries(parsed.body);
       return {
         date: date || '',
         hour: hour || '',
         path: filePath,
         title: parsed.title,
         updatedAt: parsed.updatedAt,
-        total: parsed.total,
-        entries: parseHotEntries(parsed.body)
+        total: String(entries.length),
+        entries
       };
     })
     .filter(item => item.date && item.entries.length)
@@ -213,10 +227,17 @@ function buildPayloadForDay(dayItems, dayId) {
       panelId: `${dayId}-${item.hour ? `h${item.hour}` : 'hna'}-${index}`,
       hourLabel: item.hour ? `${item.hour}:00` : '--',
       updatedAt: item.updatedAt || '',
-      total: item.total || String(entries.length),
+      total: String(entries.length),
+      isEarliest: index === dayItems.length - 1,
+      stats: buildTrendStats(entries),
       entries
     };
   });
+}
+
+function renderStatsBar(stats) {
+  const safeStats = stats || { new: 0, up: 0, down: 0, same: 0 };
+  return `<div class="toplist-hour-panel__stats" aria-label="\u53d8\u5316\u7edf\u8ba1"><span class="toplist-stat toplist-stat--new">NEW ${safeStats.new}</span><span class="toplist-stat toplist-stat--up">\u4e0a\u5347 ${safeStats.up}</span><span class="toplist-stat toplist-stat--down">\u4e0b\u964d ${safeStats.down}</span><span class="toplist-stat toplist-stat--same">\u6301\u5e73 ${safeStats.same}</span></div>`;
 }
 
 function renderHoursBlock(payload, isInitialVisible) {
@@ -233,7 +254,7 @@ function renderHoursBlock(payload, isInitialVisible) {
     const summaryText = index === payload.length - 1
       ? `\u5171 ${item.total} \u6761\uff0c\u6682\u65e0\u66f4\u65e9\u5c0f\u65f6\u53ef\u5bf9\u6bd4`
       : `\u5171 ${item.total} \u6761\uff0c\u542b\u76f8\u5bf9\u4e0a\u4e00\u5c0f\u65f6\u53d8\u5316`;
-    return `<section class="toplist-hour-panel"${active ? '' : ' hidden'} id="${item.panelId}" role="tabpanel" aria-labelledby="${item.panelId}-tab" aria-hidden="${active ? 'false' : 'true'}" data-idx="${index}"><div class="toplist-hour-panel__meta"><span class="toplist-hour-panel__time">${escapeHtml(item.hourLabel)}</span>${metaRight}</div><p class="toplist-hour-panel__summary">${escapeHtml(summaryText)}</p><div class="toplist-entry"><div class="toplist-entry__content">${renderEntryList(item.entries)}</div></div></section>`;
+    return `<section class="toplist-hour-panel"${active ? '' : ' hidden'} id="${item.panelId}" role="tabpanel" aria-labelledby="${item.panelId}-tab" aria-hidden="${active ? 'false' : 'true'}" data-idx="${index}"><div class="toplist-hour-panel__meta"><span class="toplist-hour-panel__time">${escapeHtml(item.hourLabel)}</span>${metaRight}</div><p class="toplist-hour-panel__summary">${escapeHtml(summaryText)}</p>${renderStatsBar(item.stats)}<div class="toplist-entry"><div class="toplist-entry__content">${renderEntryList(item.entries)}</div></div></section>`;
   }).join('\n');
 
   return `
