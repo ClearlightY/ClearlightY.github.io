@@ -673,9 +673,9 @@
       if (!hours) {
         return;
       }
-      var active = hours.querySelector('.toplist-hour-btn.is-active') || hours.querySelector('.toplist-hour-btn');
-      if (active) {
-        activateHour(hours, active, false);
+      var latestBtn = hours.querySelector('.toplist-hour-btn');
+      if (latestBtn) {
+        activateHour(hours, latestBtn, false);
       }
     });
   }
