@@ -84,7 +84,7 @@ fun_features:
   # 为 subtitle 添加打字机效果
   # Typing animation for subtitle
   typing:
-    enable: true
+    enable: false
 
     # 打印速度，数字越大越慢
     # Typing speed, the larger the number, the slower
@@ -101,7 +101,7 @@ fun_features:
   # 为文章内容中的标题添加锚图标
   # Add an anchor icon to the title on the post page
   anchorjs:
-    enable: true
+    enable: false
     element: h1,h2,h3,h4,h5,h6
     placement: right
     # Options: hover | always | touch
@@ -112,7 +112,7 @@ fun_features:
   # 加载进度条
   # Progress bar when loading
   progressbar:
-    enable: true
+    enable: false
     height_px: 2
     # color: "#29d"
     color: "#CC874C"
@@ -235,8 +235,7 @@ custom_css:
   - /css/toplist-entry-tweaks.css
   - /css/scroll-top-mobile.css
 
-custom_head: |
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+custom_head: ''
 
 # 自定义底部 HTML 内容（位于 footer 上方），注意不要和 `post: custom` 配置冲突
 # Customize the HTML content at the bottom (located above the footer), be careful not to conflict with `post: custom`

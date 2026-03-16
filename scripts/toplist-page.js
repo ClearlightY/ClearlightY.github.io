@@ -104,6 +104,8 @@ function trendMeta(rank, previousRank) {
   if (!previousRank) {
     return {
       direction: 'new',
+      delta: null,
+      emphasis: 'new',
       shortLabel: 'NEW',
       longLabel: '\u65b0\u4e0a\u699c'
     };
@@ -113,6 +115,8 @@ function trendMeta(rank, previousRank) {
   if (delta > 0) {
     return {
       direction: 'up',
+      delta,
+      emphasis: delta >= 5 ? 'rise' : 'default',
       shortLabel: `+${delta}`,
       longLabel: `\u8f83\u4e0a\u4e00\u5c0f\u65f6\u4e0a\u5347 ${delta} \u4f4d`
     };
@@ -120,12 +124,16 @@ function trendMeta(rank, previousRank) {
   if (delta < 0) {
     return {
       direction: 'down',
+      delta,
+      emphasis: 'default',
       shortLabel: String(delta),
       longLabel: `\u8f83\u4e0a\u4e00\u5c0f\u65f6\u4e0b\u964d ${Math.abs(delta)} \u4f4d`
     };
   }
   return {
     direction: 'same',
+    delta: 0,
+    emphasis: 'default',
     shortLabel: '-',
     longLabel: '\u4e0e\u4e0a\u4e00\u5c0f\u65f6\u6301\u5e73'
   };
@@ -157,8 +165,10 @@ function renderEntryList(entries) {
     const trendHtml = entry.trend
       ? `<span class="toplist-entry__trend toplist-entry__trend--${entry.trend.direction}" title="${escapeHtml(entry.trend.longLabel)}" aria-label="${escapeHtml(entry.trend.longLabel)}">${escapeHtml(entry.trend.shortLabel)}</span>`
       : '';
+    const trendDirection = entry.trend && entry.trend.direction ? entry.trend.direction : 'same';
+    const emphasis = entry.trend && entry.trend.emphasis ? entry.trend.emphasis : 'default';
 
-    return `<li data-trend="${escapeHtml(entry.trend.direction)}"><a target="_blank" rel="noopener" href="${escapeHtml(entry.url)}">${escapeHtml(entry.title)}</a><span class="toplist-entry__meta">${trendHtml}${heatHtml}</span></li>`;
+    return `<li data-rank="${escapeHtml(entry.rank)}" data-trend="${escapeHtml(trendDirection)}" data-emphasis="${escapeHtml(emphasis)}"><a target="_blank" rel="noopener" href="${escapeHtml(entry.url)}">${escapeHtml(entry.title)}</a><span class="toplist-entry__meta">${trendHtml}${heatHtml}</span></li>`;
   }).join('\n');
 
   return `<ol>\n${itemsHtml}\n</ol>`;
@@ -240,6 +250,23 @@ function renderStatsBar(stats) {
   return `<div class="toplist-hour-panel__stats" aria-label="\u53d8\u5316\u7edf\u8ba1"><span class="toplist-stat toplist-stat--new">NEW ${safeStats.new}</span><span class="toplist-stat toplist-stat--up">\u4e0a\u5347 ${safeStats.up}</span><span class="toplist-stat toplist-stat--down">\u4e0b\u964d ${safeStats.down}</span><span class="toplist-stat toplist-stat--same">\u6301\u5e73 ${safeStats.same}</span></div>`;
 }
 
+function renderFilterToolbar() {
+  return `<div class="toplist-filter" data-filter-mode="all" data-filter-search="">
+    <div class="toplist-filter__chips" role="toolbar" aria-label="\u699c\u5355\u7b5b\u9009">
+      <button type="button" class="toplist-filter__chip is-active" data-filter="all" aria-pressed="true">\u5168\u90e8</button>
+      <button type="button" class="toplist-filter__chip" data-filter="changes" aria-pressed="false">\u53ea\u770b\u53d8\u5316</button>
+      <button type="button" class="toplist-filter__chip" data-filter="new" aria-pressed="false">\u65b0\u4e0a\u699c</button>
+      <button type="button" class="toplist-filter__chip" data-filter="up" aria-pressed="false">\u4e0a\u5347</button>
+      <button type="button" class="toplist-filter__chip" data-filter="top10" aria-pressed="false">Top10</button>
+    </div>
+    <div class="toplist-filter__search">
+      <input type="search" class="toplist-filter__input" placeholder="\u641c\u7d22\u5173\u952e\u8bcd" inputmode="search" autocomplete="off" spellcheck="false" aria-label="\u641c\u7d22\u5f53\u524d\u699c\u5355\u5173\u952e\u8bcd">
+      <span class="toplist-filter__count" aria-live="polite"></span>
+    </div>
+  </div>
+  <p class="toplist-filter__empty" hidden>\u5f53\u524d\u7b5b\u9009\u4e0b\u6682\u65e0\u7ed3\u679c</p>`;
+}
+
 function renderHoursBlock(payload, isInitialVisible) {
   const navHtml = payload.map((item, index) => {
     const btnId = `${item.panelId}-tab`;
@@ -254,7 +281,7 @@ function renderHoursBlock(payload, isInitialVisible) {
     const summaryText = index === payload.length - 1
       ? `\u5171 ${item.total} \u6761\uff0c\u6682\u65e0\u66f4\u65e9\u5c0f\u65f6\u53ef\u5bf9\u6bd4`
       : `\u5171 ${item.total} \u6761\uff0c\u542b\u76f8\u5bf9\u4e0a\u4e00\u5c0f\u65f6\u53d8\u5316`;
-    return `<section class="toplist-hour-panel"${active ? '' : ' hidden'} id="${item.panelId}" role="tabpanel" aria-labelledby="${item.panelId}-tab" aria-hidden="${active ? 'false' : 'true'}" data-idx="${index}"><div class="toplist-hour-panel__meta"><span class="toplist-hour-panel__time">${escapeHtml(item.hourLabel)}</span>${metaRight}</div><p class="toplist-hour-panel__summary">${escapeHtml(summaryText)}</p>${renderStatsBar(item.stats)}<div class="toplist-entry"><div class="toplist-entry__content">${renderEntryList(item.entries)}</div></div></section>`;
+    return `<section class="toplist-hour-panel"${active ? '' : ' hidden'} id="${item.panelId}" role="tabpanel" aria-labelledby="${item.panelId}-tab" aria-hidden="${active ? 'false' : 'true'}" data-idx="${index}"><div class="toplist-hour-panel__meta"><span class="toplist-hour-panel__time">${escapeHtml(item.hourLabel)}</span>${metaRight}</div><p class="toplist-hour-panel__summary">${escapeHtml(summaryText)}</p>${renderStatsBar(item.stats)}${renderFilterToolbar()}<div class="toplist-entry"><div class="toplist-entry__content">${renderEntryList(item.entries)}</div></div></section>`;
   }).join('\n');
 
   return `
@@ -298,17 +325,10 @@ function rootPath(hexo, routePath) {
   return `${String(root).replace(/\/?$/, '/')}${String(routePath || '').replace(/^\/+/, '')}`;
 }
 
-function loadToplistInlineScript(hexo) {
-  const sourceJs = path.join(hexo.source_dir, 'js', 'toplist-enhancements.js');
-  if (!fs.existsSync(sourceJs)) {
-    return '';
-  }
-  return fs.readFileSync(sourceJs, 'utf8').replace(/<\/script>/gi, '<\\/script>');
-}
-
 function renderTopListPage(hexo) {
   const { cfg, items, days, sourceDir } = buildToplistData(hexo);
   const heroTitle = cfg.title || '\u70ed\u641c\u699c TOP50';
+  const enhancementsScriptSrc = rootPath(hexo, 'js/toplist-enhancements.js');
 
   if (items.length === 0) {
     return `
@@ -323,35 +343,66 @@ function renderTopListPage(hexo) {
   }
 
   const newest = items[0] || {};
+  const latestDay = days[0] || {};
+  const latestPanel = latestDay.payload && latestDay.payload[0] ? latestDay.payload[0] : null;
   const heroMeta = newest.updatedAt
     ? `\u6700\u65b0\u66f4\u65b0\uff1a${escapeHtml(newest.updatedAt)}`
     : (newest.date ? `\u6700\u65b0\u65f6\u6bb5\uff1a${escapeHtml(newest.date)}${newest.hour ? ` ${escapeHtml(newest.hour)}:00` : ''}` : '');
+  const summaryCards = latestPanel ? [
+    { label: '\u5f53\u524d\u65f6\u6bb5', value: latestPanel.hourLabel || '--', tone: 'neutral' },
+    { label: '\u65b0\u4e0a\u699c', value: latestPanel.stats && latestPanel.stats.new || 0, tone: 'new' },
+    { label: '\u4e0a\u5347', value: latestPanel.stats && latestPanel.stats.up || 0, tone: 'up' },
+    { label: '\u4e0b\u964d', value: latestPanel.stats && latestPanel.stats.down || 0, tone: 'down' }
+  ] : [];
+  const summaryHtml = summaryCards.length ? `
+    <div class="toplist-hero__summary" aria-label="\u6700\u65b0\u6982\u89c8">
+      ${summaryCards.map(card => `
+        <div class="toplist-summary-card toplist-summary-card--${card.tone}">
+          <span class="toplist-summary-card__label">${escapeHtml(card.label)}</span>
+          <strong class="toplist-summary-card__value">${escapeHtml(String(card.value))}</strong>
+        </div>
+      `.trim()).join('\n')}
+    </div>
+  `.trim() : '';
 
   const quickDesktopDays = days.slice(0, 6);
   const quickMobileDays = days.slice(0, 3);
 
   const jumpHtml = quickDesktopDays.map((day, index) =>
-    `<button type="button" class="toplist-day-jump${index === 0 ? ' is-active' : ''}" data-day-key="${escapeHtml(day.dayId)}"${index === 0 ? ' data-is-latest="true"' : ''}>${escapeHtml(day.dateKey)}${index === 0 ? '<span class="toplist-day-jump__badge">最新</span>' : ''}</button>`
+    `<button type="button" class="toplist-day-jump${index === 0 ? ' is-active' : ''}" data-day-key="${escapeHtml(day.dayId)}"${index === 0 ? ' data-is-latest="true"' : ''}>${escapeHtml(day.dateKey)}${index === 0 ? '<span class="toplist-day-jump__badge">\u6700\u65b0</span>' : ''}</button>`
   ).join('\n');
 
   const mobileJumpHtml = quickMobileDays.map((day, index) =>
-    `<button type="button" class="toplist-day-jump toplist-day-jump--mobile${index === 0 ? ' is-active' : ''}" data-day-key="${escapeHtml(day.dayId)}"${index === 0 ? ' data-is-latest="true"' : ''}>${escapeHtml(day.dateKey.slice(5))}${index === 0 ? '<span class="toplist-day-jump__badge">最新</span>' : ''}</button>`
+    `<button type="button" class="toplist-day-jump toplist-day-jump--mobile${index === 0 ? ' is-active' : ''}" data-day-key="${escapeHtml(day.dayId)}"${index === 0 ? ' data-is-latest="true"' : ''}>${escapeHtml(day.dateKey.slice(5))}${index === 0 ? '<span class="toplist-day-jump__badge">\u6700\u65b0</span>' : ''}</button>`
   ).join('\n');
+
+  const stickyBarHtml = `
+    <div class="toplist-stickybar" aria-label="\u5feb\u901f\u64cd\u4f5c">
+      <div class="toplist-stickybar__summary">
+        <span class="toplist-stickybar__label">\u5f53\u524d</span>
+        <strong class="toplist-stickybar__value">${escapeHtml(latestDay.dateKey || '--')} ${escapeHtml(latestPanel && latestPanel.hourLabel ? latestPanel.hourLabel : '--')}</strong>
+        <span class="toplist-stickybar__compare" hidden></span>
+      </div>
+      <div class="toplist-stickybar__actions">
+        <button type="button" class="toplist-stickybar__btn" data-action="prev-hour">\u4e0a\u4e00\u5c0f\u65f6</button>
+        <button type="button" class="toplist-stickybar__btn" data-action="next-hour">\u4e0b\u4e00\u5c0f\u65f6</button>
+        <button type="button" class="toplist-stickybar__btn toplist-stickybar__btn--latest" data-action="expand-latest">\u56de\u5230\u6700\u65b0</button>
+      </div>
+    </div>
+  `.trim();
 
   const daysHtml = days.map((day, index) => {
     const latestMeta = day.latestUpdatedAt
       ? `<span class="toplist-day__meta">\u6700\u65b0 ${escapeHtml(day.latestUpdatedAt.slice(11, 16))}</span>`
       : '';
-    const bodyHtml = index === 0
-      ? renderHoursBlock(day.payload, true)
-      : `<div class="toplist-day__lazy" data-day-key="${escapeHtml(day.dayId)}" data-src="${escapeHtml(rootPath(hexo, day.routePath))}" data-state="idle"><span class="toplist-day__lazy-spinner" aria-hidden="true"></span><span class="toplist-day__lazy-text">\u5c55\u5f00\u540e\u52a0\u8f7d\u5f53\u65e5\u5c0f\u65f6\u699c\u5355</span><button type="button" class="toplist-day__retry" hidden>\u91cd\u8bd5</button></div>`;
+    const bodyHtml = `<div class="toplist-day__lazy" data-day-key="${escapeHtml(day.dayId)}" data-src="${escapeHtml(rootPath(hexo, day.routePath))}" data-state="${index === 0 ? 'loading' : 'idle'}"><span class="toplist-day__lazy-spinner" aria-hidden="true"></span><span class="toplist-day__lazy-text">${index === 0 ? '\u6b63\u5728\u52a0\u8f7d\u6700\u65b0\u5c0f\u65f6\u699c\u5355...' : '\u5c55\u5f00\u540e\u52a0\u8f7d\u5f53\u65e5\u5c0f\u65f6\u699c\u5355'}</span><button type="button" class="toplist-day__retry" hidden>\u91cd\u8bd5</button></div>`;
 
     return `
 <details class="toplist-day${index === 0 ? ' is-latest-day' : ''}" data-day-key="${escapeHtml(day.dayId)}" data-date="${escapeHtml(day.dateKey)}" data-panel-ids="${escapeHtml(day.panelIds.join(','))}"${index === 0 ? ' open' : ''}>
   <summary>
     <div class="toplist-day__left">
       <span class="toplist-day__date">${escapeHtml(day.dateKey)}</span>
-      ${index === 0 ? '<span class="toplist-day__date-badge">最新日期</span>' : ''}
+      ${index === 0 ? '<span class="toplist-day__date-badge">\u6700\u65b0\u65e5\u671f</span>' : ''}
       <span class="toplist-day__count">${day.payload.length} \u4e2a\u65f6\u6bb5</span>
       ${latestMeta}
     </div>
@@ -368,10 +419,13 @@ function renderTopListPage(hexo) {
   <div class="toplist-hero">
     <div class="toplist-hero__title">${escapeHtml(heroTitle)}</div>
     <p class="toplist-hero__desc">\u6309\u65e5\u671f\u67e5\u770b\u5fae\u535a\u70ed\u641c TOP50\u3002\u9ed8\u8ba4\u5355\u5c0f\u65f6\u6d4f\u89c8\uff0c\u53ef\u5207\u6362\u4e3a\u684c\u9762\u53cc\u5217\u5bf9\u6bd4\uff0c\u5e76\u5c55\u793a\u76f8\u5bf9\u4e0a\u4e00\u5c0f\u65f6\u7684\u540d\u6b21\u53d8\u5316\u3002${heroMeta}</p>
+    ${summaryHtml}
+    <p class="toplist-hero__hint">\u79fb\u52a8\u7aef\u5efa\u8bae\u4f7f\u7528\u201c\u53ea\u770b\u53d8\u5316\u201d\uff0c\u684c\u9762\u7aef\u53ef\u5f00\u542f\u201c\u53cc\u5217\u5bf9\u6bd4\u201d\u3002\u5f53\u524d\u5c0f\u65f6\u53ef\u76f4\u63a5\u7b5b\u9009\u65b0\u4e0a\u699c\u3001\u4e0a\u5347\u3001Top10 \u6216\u641c\u7d22\u5173\u952e\u8bcd\u3002</p>
     <div class="toplist-actions">
-      <button type="button" class="toplist-action" data-action="expand-latest">\u5c55\u5f00\u6700\u65b0</button>
+      <button type="button" class="toplist-action toplist-action--primary" data-action="expand-latest">\u67e5\u770b\u6700\u65b0</button>
       <button type="button" class="toplist-action" data-action="collapse-all">\u6298\u53e0\u5168\u90e8</button>
-      <button type="button" class="toplist-action" data-action="toggle-compare" aria-pressed="false">\u684c\u9762\u53cc\u5217\u5bf9\u6bd4</button>
+      <button type="button" class="toplist-action toplist-action--desktop" data-action="toggle-compare" aria-pressed="false">\u684c\u9762\u53cc\u5217\u5bf9\u6bd4</button>
+      <button type="button" class="toplist-action toplist-action--mobile" data-action="toggle-changes" aria-pressed="false">\u53ea\u770b\u53d8\u5316</button>
     </div>
     <div class="toplist-date-controls">
       <div class="toplist-day-jumps" aria-label="\u6700\u8fd1 5 \u5929">
@@ -413,14 +467,19 @@ function renderTopListPage(hexo) {
             <span class="toplist-calendar__legend-dot" aria-hidden="true"></span>
             <span>\u6709\u70ed\u641c\u6570\u636e</span>
           </div>
+          <div class="toplist-calendar__footer">
+            <span>\u70b9\u51fb\u7a7a\u767d\u533a\u57df\u6216\u6309 Esc \u5173\u95ed</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  ${stickyBarHtml}
   <div class="toplist-days">
     ${daysHtml}
   </div>
 </div>
+<script src="${escapeHtml(enhancementsScriptSrc)}" defer></script>
   `.trim();
 }
 
@@ -447,8 +506,3 @@ hexo.extend.filter.register('after_post_render', function(data) {
   data.description = DEFAULT_DESCRIPTION;
   return data;
 });
-
-const injectedToplistScript = loadToplistInlineScript(hexo);
-if (injectedToplistScript) {
-  hexo.extend.injector.register('body_end', `<script>${injectedToplistScript}</script>`, 'default');
-}

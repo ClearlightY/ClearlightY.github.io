@@ -2,13 +2,17 @@
   var state = {
     compareMode: false,
     mobileChangesOnly: false,
+    filterMode: 'all',
+    filterSearch: '',
     dayCache: {},
     calendarMonths: [],
     calendarDays: {},
     calendarMonthIndex: 0,
     calendarCloseTimer: null,
     desktopScrollY: 0,
-    programmaticDayKey: ''
+    programmaticDayKey: '',
+    currentDayKey: '',
+    currentPanelId: ''
   };
 
   function isDesktop() {
@@ -42,15 +46,263 @@
   }
 
   function setActionPressed(root) {
-    var btn = root.querySelector('.toplist-action[data-action="toggle-compare"]');
-    if (!btn) return;
-    var pressed = isDesktop() ? state.compareMode : state.mobileChangesOnly;
-    btn.setAttribute('aria-pressed', pressed ? 'true' : 'false');
-    if (isDesktop()) {
-      btn.textContent = state.compareMode ? '\u9000\u51fa\u53cc\u5217\u5bf9\u6bd4' : '\u684c\u9762\u53cc\u5217\u5bf9\u6bd4';
+    var compareBtn = root.querySelector('.toplist-action[data-action="toggle-compare"]');
+    var mobileBtn = root.querySelector('.toplist-action[data-action="toggle-changes"]');
+    if (compareBtn) {
+      compareBtn.setAttribute('aria-pressed', state.compareMode ? 'true' : 'false');
+      compareBtn.textContent = state.compareMode ? '退出双列对比' : '桌面双列对比';
+    }
+    if (mobileBtn) {
+      mobileBtn.setAttribute('aria-pressed', state.mobileChangesOnly ? 'true' : 'false');
+      mobileBtn.textContent = state.mobileChangesOnly ? '显示全部' : '只看变化';
+    }
+  }
+
+  function getPanelsData(hours) {
+    return hours && hours._toplistPanelsData ? hours._toplistPanelsData : [];
+  }
+
+  function findRenderedPanel(hours, index) {
+    return hours ? hours.querySelector('.toplist-hour-panel[data-idx="' + index + '"]') : null;
+  }
+
+  function setActionPressed(root) {
+    var compareBtn = root.querySelector('.toplist-action[data-action="toggle-compare"]');
+    var mobileBtn = root.querySelector('.toplist-action[data-action="toggle-changes"]');
+    if (compareBtn) {
+      compareBtn.setAttribute('aria-pressed', state.compareMode ? 'true' : 'false');
+      compareBtn.textContent = state.compareMode ? '\u9000\u51fa\u53cc\u5217\u5bf9\u6bd4' : '\u684c\u9762\u53cc\u5217\u5bf9\u6bd4';
+    }
+    if (mobileBtn) {
+      mobileBtn.setAttribute('aria-pressed', state.mobileChangesOnly ? 'true' : 'false');
+      mobileBtn.textContent = state.mobileChangesOnly ? '\u663e\u793a\u5168\u90e8' : '\u53ea\u770b\u53d8\u5316';
+    }
+  }
+
+  function setToolbarState(toolbar) {
+    if (!toolbar) {
       return;
     }
-    btn.textContent = state.mobileChangesOnly ? '\u663e\u793a\u5168\u90e8' : '\u53ea\u770b\u53d8\u5316';
+    toolbar.setAttribute('data-filter-mode', state.filterMode);
+    toolbar.setAttribute('data-filter-search', state.filterSearch);
+    var input = toolbar.querySelector('.toplist-filter__input');
+    if (input && input.value !== state.filterSearch) {
+      input.value = state.filterSearch;
+    }
+  }
+
+  function syncPanelToolbar(panel) {
+    if (!panel) {
+      return;
+    }
+    var toolbar = panel.querySelector('.toplist-filter');
+    if (!toolbar) {
+      return;
+    }
+    setToolbarState(toolbar);
+    applyPanelFilter(panel);
+  }
+
+  function syncAllPanelFilters(root) {
+    var panels = root.querySelectorAll('.toplist-hour-panel');
+    for (var i = 0; i < panels.length; i++) {
+      syncPanelToolbar(panels[i]);
+    }
+  }
+
+  function updateStickyBar(root, day, panel) {
+    var sticky = root.querySelector('.toplist-stickybar');
+    if (!sticky) {
+      return;
+    }
+    var value = sticky.querySelector('.toplist-stickybar__value');
+    var dateEl = sticky.querySelector('.toplist-stickybar__date');
+    var meta = sticky.querySelector('.toplist-stickybar__meta');
+    var compare = sticky.querySelector('.toplist-stickybar__compare');
+    var progress = sticky.querySelector('.toplist-stickybar__progress');
+    var prevBtn = sticky.querySelector('[data-action="prev-hour"]');
+    var nextBtn = sticky.querySelector('[data-action="next-hour"]');
+    var hours = panel ? panel.closest('.toplist-hours') : (day ? day.querySelector('.toplist-hours') : null);
+    var label = '--';
+    var dateLabel = '--';
+    if (day && panel) {
+      var dateText = day.getAttribute('data-date') || '';
+      var timeEl = panel.querySelector('.toplist-hour-panel__time');
+      var timeText = timeEl ? timeEl.textContent : '';
+      dateLabel = dateText || '--';
+      label = timeText || '--';
+    }
+    if (value) {
+      value.textContent = label;
+    }
+    if (dateEl) {
+      dateEl.textContent = dateLabel;
+    }
+    if (compare) {
+      if (state.compareMode && isDesktop() && hours) {
+        var active = hours.querySelector('.toplist-hour-btn.is-active');
+        var activeIdx = active ? Number(active.getAttribute('data-idx') || '0') : 0;
+        var panelsData = getPanelsData(hours);
+        var nextPanel = panelsData[activeIdx + 1];
+        compare.hidden = !nextPanel;
+        compare.textContent = nextPanel ? ('\u5bf9\u6bd4 ' + (panelsData[activeIdx] ? panelsData[activeIdx].hourLabel : '--') + ' vs ' + nextPanel.hourLabel) : '';
+      } else {
+        compare.hidden = true;
+        compare.textContent = '';
+      }
+    }
+    if (hours) {
+      var activeBtn = hours.querySelector('.toplist-hour-btn.is-active');
+      var idx = activeBtn ? Number(activeBtn.getAttribute('data-idx') || '0') : 0;
+      var total = getPanelsData(hours).length;
+      if (meta) {
+        if (idx === 0) {
+          meta.textContent = total > 1 ? '\u6700\u65b0\u65f6\u6bb5' : '\u552f\u4e00\u65f6\u6bb5';
+        } else if (idx === total - 1) {
+          meta.textContent = '\u6700\u65e9\u65f6\u6bb5';
+        } else {
+          meta.textContent = (idx + 1) + ' / ' + total + ' \u65f6\u6bb5';
+        }
+      }
+      if (progress) {
+        progress.style.height = total > 1 ? ((idx / (total - 1)) * 100).toFixed(2) + '%' : '100%';
+      }
+      if (prevBtn) {
+        prevBtn.disabled = idx >= total - 1;
+      }
+      if (nextBtn) {
+        nextBtn.disabled = idx <= 0;
+      }
+    } else {
+      if (meta) {
+        meta.textContent = '\u672a\u9009\u4e2d\u65f6\u6bb5';
+      }
+      if (progress) {
+        progress.style.height = '0%';
+      }
+      if (prevBtn) {
+        prevBtn.disabled = true;
+      }
+      if (nextBtn) {
+        nextBtn.disabled = true;
+      }
+    }
+  }
+
+  function updateCurrentContext(root, day, panel) {
+    state.currentDayKey = day ? (day.getAttribute('data-day-key') || '') : '';
+    state.currentPanelId = panel ? (panel.id || '') : '';
+    updateStickyBar(root, day, panel);
+  }
+
+  function ensureStickyBar(root) {
+    return;
+  }
+
+  function buildPanelElement(doc, item, index, panelCount) {
+    var tabId = item.panelId + '-tab';
+    var panel = doc.createElement('section');
+    panel.className = 'toplist-hour-panel';
+    panel.id = item.panelId;
+    panel.setAttribute('role', 'tabpanel');
+    panel.setAttribute('aria-labelledby', tabId);
+    panel.setAttribute('aria-hidden', 'true');
+    panel.setAttribute('data-idx', String(index));
+
+    var meta = doc.createElement('div');
+    meta.className = 'toplist-hour-panel__meta';
+
+    var time = doc.createElement('span');
+    time.className = 'toplist-hour-panel__time';
+    time.textContent = item.hourLabel || '--';
+    meta.appendChild(time);
+
+    if (item.updatedAt) {
+      var updated = doc.createElement('span');
+      updated.className = 'toplist-hour-panel__updated';
+      updated.textContent = item.updatedAt;
+      meta.appendChild(updated);
+    }
+
+    var summary = doc.createElement('p');
+    summary.className = 'toplist-hour-panel__summary';
+    summary.textContent = buildPanelSummary(item, index, panelCount);
+
+    var statsBar = buildStatsBar(doc, item.stats);
+    var toolbar = buildFilterToolbar(doc);
+
+    var entry = doc.createElement('div');
+    entry.className = 'toplist-entry';
+    var content = doc.createElement('div');
+    content.className = 'toplist-entry__content';
+    var list = doc.createElement('ol');
+    var entries = item.entries || [];
+
+    for (var j = 0; j < entries.length; j++) {
+      var li = doc.createElement('li');
+      var direction = entries[j].trend && entries[j].trend.direction ? entries[j].trend.direction : 'same';
+      var emphasis = entries[j].trend && entries[j].trend.emphasis ? entries[j].trend.emphasis : 'default';
+      var rank = entries[j].rank || (j + 1);
+      li.setAttribute('data-rank', String(rank));
+      li.setAttribute('data-trend', direction);
+      li.setAttribute('data-emphasis', emphasis);
+
+      var a = doc.createElement('a');
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.href = entries[j].url || '#';
+      a.textContent = entries[j].title || '--';
+
+      var metaWrap = doc.createElement('span');
+      metaWrap.className = 'toplist-entry__meta';
+      var trend = entries[j].trend;
+      if (trend) {
+        var trendTag = doc.createElement('span');
+        trendTag.className = 'toplist-entry__trend toplist-entry__trend--' + direction;
+        trendTag.title = trend.longLabel || '';
+        trendTag.textContent = trend.shortLabel || '-';
+        metaWrap.appendChild(trendTag);
+      }
+      if (entries[j].heat) {
+        var heat = doc.createElement('span');
+        heat.className = 'toplist-entry__heat';
+        heat.title = '热度';
+        heat.textContent = formatHeat(entries[j].heat);
+        metaWrap.appendChild(heat);
+      }
+      li.appendChild(a);
+      li.appendChild(metaWrap);
+      list.appendChild(li);
+    }
+
+    content.appendChild(list);
+    entry.appendChild(content);
+    panel.appendChild(meta);
+    panel.appendChild(summary);
+    panel.appendChild(statsBar);
+    panel.appendChild(toolbar);
+    panel.appendChild(entry);
+    return panel;
+  }
+
+  function ensurePanelRendered(hours, index) {
+    if (!hours) {
+      return null;
+    }
+    var existing = findRenderedPanel(hours, index);
+    if (existing) {
+      return existing;
+    }
+    var panelsData = getPanelsData(hours);
+    var item = panelsData[index];
+    var panelsWrap = hours.querySelector('.toplist-hours__panels');
+    if (!item || !panelsWrap) {
+      return null;
+    }
+    var panel = buildPanelElement(hours.ownerDocument, item, index, panelsData.length);
+    panelsWrap.appendChild(panel);
+    applyPanelFilter(panel);
+    return panel;
   }
 
   function setActiveButton(hours, btn) {
@@ -63,43 +315,93 @@
     }
   }
 
+  function bindHourNavDrag(nav) {
+    if (!nav || nav.getAttribute('data-drag-bound') === '1') {
+      return;
+    }
+    nav.setAttribute('data-drag-bound', '1');
+
+    var dragState = {
+      active: false,
+      moved: false,
+      startX: 0,
+      startScrollLeft: 0
+    };
+
+    nav.addEventListener('mousedown', function(e) {
+      if (!isDesktop() || e.button !== 0) {
+        return;
+      }
+      dragState.active = true;
+      dragState.moved = false;
+      dragState.startX = e.clientX;
+      dragState.startScrollLeft = nav.scrollLeft;
+      nav.classList.add('is-dragging');
+      document.body.classList.add('toplist-hours-dragging');
+    });
+
+    window.addEventListener('mousemove', function(e) {
+      if (!dragState.active) {
+        return;
+      }
+      var deltaX = e.clientX - dragState.startX;
+      if (Math.abs(deltaX) > 4) {
+        dragState.moved = true;
+      }
+      nav.scrollLeft = dragState.startScrollLeft - deltaX;
+    });
+
+    window.addEventListener('mouseup', function() {
+      if (!dragState.active) {
+        return;
+      }
+      dragState.active = false;
+      nav.classList.remove('is-dragging');
+      document.body.classList.remove('toplist-hours-dragging');
+      if (dragState.moved) {
+        nav.setAttribute('data-drag-moved', '1');
+        setTimeout(function() {
+          nav.removeAttribute('data-drag-moved');
+        }, 120);
+      }
+    });
+
+    nav.addEventListener('dragstart', function(e) {
+      e.preventDefault();
+    });
+  }
+
   function animatePanel(panel) {
     if (!panel || prefersReducedMotion()) {
       return;
     }
-    var items = panel.querySelectorAll('.toplist-entry__content li');
-    if (!items.length) {
-      return;
-    }
-    for (var i = 0; i < items.length; i++) {
-      items[i].classList.remove('toplist-animated');
-      items[i].style.animationDelay = '';
-    }
-    panel.offsetHeight;
-    for (var j = 0; j < items.length; j++) {
-      items[j].style.animationDelay = Math.min(j, 24) * 16 + 'ms';
-      items[j].classList.add('toplist-animated');
-    }
   }
 
   function showPanels(hours, startIndex, count, updateHash, hashId) {
+    var panelsData = getPanelsData(hours);
+    var total = panelsData.length;
     var panels = hours.querySelectorAll('.toplist-hour-panel');
     var visibleCount = 0;
     for (var i = 0; i < panels.length; i++) {
       panels[i].hidden = true;
       panels[i].setAttribute('aria-hidden', 'true');
     }
-    for (var j = startIndex; j < panels.length && visibleCount < count; j++) {
-      panels[j].hidden = false;
-      panels[j].setAttribute('aria-hidden', 'false');
-      animatePanel(panels[j]);
+    for (var j = startIndex; j < total && visibleCount < count; j++) {
+      var panel = ensurePanelRendered(hours, j);
+      if (!panel) {
+        continue;
+      }
+      panel.hidden = false;
+      panel.setAttribute('aria-hidden', 'false');
+      animatePanel(panel);
       visibleCount++;
     }
     var panelsWrap = hours.querySelector('.toplist-hours__panels');
     if (panelsWrap) {
       panelsWrap.setAttribute('data-cols', String(visibleCount || 1));
     }
-    var id = hashId || (panels[startIndex] ? panels[startIndex].id : '');
+    var activePanel = ensurePanelRendered(hours, startIndex);
+    var id = hashId || (activePanel ? activePanel.id : '');
     if (updateHash && id && history && history.replaceState) {
       history.replaceState(null, '', '#' + id);
     }
@@ -122,10 +424,16 @@
         break;
       }
     }
-    var panels = hours.querySelectorAll('.toplist-hour-panel');
-    var remaining = panels.length - idx;
+    var panelCount = getPanelsData(hours).length;
+    var remaining = panelCount - idx;
     var visible = remaining > 0 ? Math.min(getVisibleCount(), remaining) : 1;
     showPanels(hours, idx, visible, updateHash !== false, targetId);
+    var panel = ensurePanelRendered(hours, idx);
+    var day = hours.closest ? hours.closest('details.toplist-day') : null;
+    var root = hours.closest ? hours.closest('.toplist-page') : null;
+    if (root) {
+      updateCurrentContext(root, day, panel);
+    }
   }
 
   function buildPanelSummary(item, panelIndex, panelCount) {
@@ -159,15 +467,80 @@
     return bar;
   }
 
+  function buildFilterToolbar(doc) {
+    var frag = doc.createDocumentFragment();
+    var wrap = doc.createElement('div');
+    wrap.className = 'toplist-filter';
+    wrap.setAttribute('data-filter-mode', state.filterMode);
+    wrap.setAttribute('data-filter-search', state.filterSearch);
+
+    var chips = doc.createElement('div');
+    chips.className = 'toplist-filter__chips';
+    chips.setAttribute('role', 'toolbar');
+    chips.setAttribute('aria-label', '\u699c\u5355\u7b5b\u9009');
+
+    var items = [
+      { mode: 'all', label: '\u5168\u90e8' },
+      { mode: 'changes', label: '\u53ea\u770b\u53d8\u5316' },
+      { mode: 'new', label: '\u65b0\u4e0a\u699c' },
+      { mode: 'up', label: '\u4e0a\u5347' },
+      { mode: 'top10', label: 'Top10' }
+    ];
+
+    for (var i = 0; i < items.length; i++) {
+      var chip = doc.createElement('button');
+      chip.type = 'button';
+      var active = items[i].mode === state.filterMode;
+      chip.className = 'toplist-filter__chip' + (active ? ' is-active' : '');
+      chip.setAttribute('data-filter', items[i].mode);
+      chip.setAttribute('aria-pressed', active ? 'true' : 'false');
+      chip.textContent = items[i].label;
+      chips.appendChild(chip);
+    }
+
+    var search = doc.createElement('div');
+    search.className = 'toplist-filter__search';
+
+    var input = doc.createElement('input');
+    input.type = 'search';
+    input.className = 'toplist-filter__input';
+    input.placeholder = '\u641c\u7d22\u5173\u952e\u8bcd';
+    input.setAttribute('inputmode', 'search');
+    input.setAttribute('autocomplete', 'off');
+    input.setAttribute('spellcheck', 'false');
+    input.setAttribute('aria-label', '\u641c\u7d22\u5f53\u524d\u699c\u5355\u5173\u952e\u8bcd');
+    input.value = state.filterSearch;
+    search.appendChild(input);
+
+    var count = doc.createElement('span');
+    count.className = 'toplist-filter__count';
+    count.setAttribute('aria-live', 'polite');
+    search.appendChild(count);
+
+    wrap.appendChild(chips);
+    wrap.appendChild(search);
+    frag.appendChild(wrap);
+
+    var empty = doc.createElement('p');
+    empty.className = 'toplist-filter__empty';
+    empty.hidden = true;
+    empty.textContent = '\u5f53\u524d\u7b5b\u9009\u4e0b\u6682\u65e0\u7ed3\u679c';
+    frag.appendChild(empty);
+
+    return frag;
+  }
+
   function buildHoursFromPayload(doc, payload) {
     var panels = payload && payload.panels ? payload.panels : [];
     var hours = doc.createElement('div');
     hours.className = 'toplist-hours is-lazy';
+    hours._toplistPanelsData = panels;
 
     var nav = doc.createElement('div');
     nav.className = 'toplist-hours__nav';
     nav.setAttribute('role', 'tablist');
-    nav.setAttribute('aria-label', '\u5c0f\u65f6\u9009\u62e9');
+    nav.setAttribute('aria-label', '小时选择');
+    bindHourNavDrag(nav);
 
     var panelsWrap = doc.createElement('div');
     panelsWrap.className = 'toplist-hours__panels';
@@ -192,90 +565,14 @@
       }
       btn.textContent = item.hourLabel || '--';
       nav.appendChild(btn);
+    }
 
-      var panel = doc.createElement('section');
-      panel.className = 'toplist-hour-panel';
-      panel.id = item.panelId;
-      panel.setAttribute('role', 'tabpanel');
-      panel.setAttribute('aria-labelledby', tabId);
-      panel.setAttribute('aria-hidden', i === 0 ? 'false' : 'true');
-      panel.setAttribute('data-idx', String(i));
-      if (i !== 0) {
-        panel.hidden = true;
-      }
-
-      var meta = doc.createElement('div');
-      meta.className = 'toplist-hour-panel__meta';
-
-      var time = doc.createElement('span');
-      time.className = 'toplist-hour-panel__time';
-      time.textContent = item.hourLabel || '--';
-      meta.appendChild(time);
-
-      if (item.updatedAt) {
-        var updated = doc.createElement('span');
-        updated.className = 'toplist-hour-panel__updated';
-        updated.textContent = item.updatedAt;
-        meta.appendChild(updated);
-      }
-
-      var summary = doc.createElement('p');
-      summary.className = 'toplist-hour-panel__summary';
-      summary.textContent = buildPanelSummary(item, i, panels.length);
-
-      var statsBar = buildStatsBar(doc, item.stats);
-
-      var entry = doc.createElement('div');
-      entry.className = 'toplist-entry';
-
-      var content = doc.createElement('div');
-      content.className = 'toplist-entry__content';
-
-      var list = doc.createElement('ol');
-      var entries = item.entries || [];
-      for (var j = 0; j < entries.length; j++) {
-        var li = doc.createElement('li');
-        var direction = entries[j].trend && entries[j].trend.direction ? entries[j].trend.direction : 'same';
-        li.setAttribute('data-trend', direction);
-
-        var a = doc.createElement('a');
-        a.target = '_blank';
-        a.rel = 'noopener';
-        a.href = entries[j].url || '#';
-        a.textContent = entries[j].title || '--';
-
-        var metaWrap = doc.createElement('span');
-        metaWrap.className = 'toplist-entry__meta';
-
-        var trend = entries[j].trend;
-        if (trend) {
-          var trendTag = doc.createElement('span');
-          trendTag.className = 'toplist-entry__trend toplist-entry__trend--' + direction;
-          trendTag.title = trend.longLabel || '';
-          trendTag.textContent = trend.shortLabel || '-';
-          metaWrap.appendChild(trendTag);
-        }
-
-        if (entries[j].heat) {
-          var heat = doc.createElement('span');
-          heat.className = 'toplist-entry__heat';
-          heat.title = '\u70ed\u5ea6';
-          heat.textContent = formatHeat(entries[j].heat);
-          metaWrap.appendChild(heat);
-        }
-
-        li.appendChild(a);
-        li.appendChild(metaWrap);
-        list.appendChild(li);
-      }
-
-      content.appendChild(list);
-      entry.appendChild(content);
-      panel.appendChild(meta);
-      panel.appendChild(summary);
-      panel.appendChild(statsBar);
-      panel.appendChild(entry);
-      panelsWrap.appendChild(panel);
+    if (panels.length) {
+      var initialPanel = buildPanelElement(doc, panels[0], 0, panels.length);
+      initialPanel.setAttribute('aria-hidden', 'false');
+      initialPanel.hidden = false;
+      panelsWrap.appendChild(initialPanel);
+      syncPanelToolbar(initialPanel);
     }
 
     hours.appendChild(nav);
@@ -355,6 +652,10 @@
       var hours = buildHoursFromPayload(day.ownerDocument, payload);
       body.innerHTML = '';
       body.appendChild(hours);
+      var firstPanel = hours.querySelector('.toplist-hour-panel');
+      if (firstPanel) {
+        applyPanelFilter(firstPanel);
+      }
       day.setAttribute('data-day-loaded', '1');
       fadeOutLazy(day);
       return hours;
@@ -372,9 +673,9 @@
       if (!hours) {
         return;
       }
-      var active = hours.querySelector('.toplist-hour-btn.is-active') || hours.querySelector('.toplist-hour-btn');
-      if (active) {
-        activateHour(hours, active, false);
+      var latestBtn = hours.querySelector('.toplist-hour-btn');
+      if (latestBtn) {
+        activateHour(hours, latestBtn, false);
       }
     });
   }
@@ -654,6 +955,32 @@
     }
   }
 
+  function getActiveHours(root) {
+    var day = root.querySelector('details.toplist-day[open]');
+    if (!day) {
+      return null;
+    }
+    return day.querySelector('.toplist-hours');
+  }
+
+  function stepHour(root, direction) {
+    var hours = getActiveHours(root);
+    if (!hours) {
+      return;
+    }
+    var active = hours.querySelector('.toplist-hour-btn.is-active') || hours.querySelector('.toplist-hour-btn');
+    if (!active) {
+      return;
+    }
+    var idx = Number(active.getAttribute('data-idx') || '0');
+    var nextIdx = idx + direction;
+    var buttons = hours.querySelectorAll('.toplist-hour-btn');
+    if (nextIdx < 0 || nextIdx >= buttons.length) {
+      return;
+    }
+    activateHour(hours, buttons[nextIdx], true);
+  }
+
   function expandLatest(root) {
     var days = root.querySelectorAll('details.toplist-day');
     var latestDay = days[0];
@@ -664,6 +991,8 @@
     latestDay.open = true;
     ensureDayLatestHourVisible(latestDay).then(function() {
       updateDayJumpActive(root, latestDay);
+      var panel = latestDay.querySelector('.toplist-hour-panel[aria-hidden="false"]') || latestDay.querySelector('.toplist-hour-panel');
+      updateCurrentContext(root, latestDay, panel);
     });
   }
 
@@ -672,6 +1001,7 @@
     for (var i = 0; i < days.length; i++) {
       days[i].open = false;
     }
+    updateCurrentContext(root, null, null);
   }
 
   function findDayByPanelId(root, panelId) {
@@ -730,6 +1060,10 @@
 
   function refreshVisibleHours(root) {
     root.classList.toggle('is-mobile-changes-mode', isMobileChangesMode());
+    var navs = root.querySelectorAll('.toplist-hours__nav');
+    for (var n = 0; n < navs.length; n++) {
+      bindHourNavDrag(navs[n]);
+    }
     var openDays = root.querySelectorAll('details.toplist-day[open]');
     for (var i = 0; i < openDays.length; i++) {
       var hours = openDays[i].querySelector('.toplist-hours');
@@ -741,6 +1075,99 @@
         activateHour(hours, active, false);
       }
     }
+    var activeDay = root.querySelector('details.toplist-day[open]');
+    var activePanel = activeDay ? (activeDay.querySelector('.toplist-hour-panel[aria-hidden="false"]') || activeDay.querySelector('.toplist-hour-panel')) : null;
+    updateCurrentContext(root, activeDay, activePanel);
+  }
+
+  function normalizeSearchValue(value) {
+    return String(value || '').trim().toLowerCase();
+  }
+
+  function matchesPanelFilter(item, mode, search) {
+    var rank = Number(item.getAttribute('data-rank') || '0');
+    var trend = item.getAttribute('data-trend') || 'same';
+    var text = normalizeSearchValue(item.textContent || '');
+
+    if (mode === 'changes' && trend === 'same') {
+      return false;
+    }
+    if (mode === 'new' && trend !== 'new') {
+      return false;
+    }
+    if (mode === 'up' && trend !== 'up') {
+      return false;
+    }
+    if (mode === 'top10' && (!rank || rank > 10)) {
+      return false;
+    }
+    if (search && text.indexOf(search) === -1) {
+      return false;
+    }
+    return true;
+  }
+
+  function updateFilterChips(panel, mode) {
+    var chips = panel.querySelectorAll('.toplist-filter__chip');
+    for (var i = 0; i < chips.length; i++) {
+      var active = chips[i].getAttribute('data-filter') === mode;
+      chips[i].classList.toggle('is-active', active);
+      chips[i].setAttribute('aria-pressed', active ? 'true' : 'false');
+    }
+  }
+
+  function applyPanelFilter(panel) {
+    if (!panel) {
+      return;
+    }
+    var toolbar = panel.querySelector('.toplist-filter');
+    var list = panel.querySelector('.toplist-entry__content ol');
+    if (!toolbar || !list) {
+      return;
+    }
+    var mode = toolbar.getAttribute('data-filter-mode') || 'all';
+    var search = normalizeSearchValue(toolbar.getAttribute('data-filter-search') || '');
+    var items = list.querySelectorAll('li');
+    var visible = 0;
+
+    for (var i = 0; i < items.length; i++) {
+      var matched = matchesPanelFilter(items[i], mode, search);
+      items[i].hidden = !matched;
+      if (matched) {
+        visible += 1;
+      }
+    }
+
+    var count = panel.querySelector('.toplist-filter__count');
+    if (count) {
+      count.textContent = visible + ' / ' + items.length;
+    }
+
+    var empty = panel.querySelector('.toplist-filter__empty');
+    if (empty) {
+      empty.hidden = visible > 0;
+    }
+
+    panel.classList.toggle('is-filtered-empty', visible === 0);
+    updateFilterChips(panel, mode);
+  }
+
+  function initPanelFilters(root) {
+    var panels = root.querySelectorAll('.toplist-hour-panel');
+    for (var i = 0; i < panels.length; i++) {
+      applyPanelFilter(panels[i]);
+    }
+  }
+
+  function updateHistoryVisibility(root) {
+    var hero = root.querySelector('.toplist-hero');
+    if (!hero) {
+      return;
+    }
+    var rect = hero.getBoundingClientRect();
+    var passedHero = rect.bottom < Math.min(window.innerHeight * 0.6, 280);
+    root.classList.toggle('is-history-ready', passedHero);
+    root.classList.toggle('is-hero-condensed', passedHero);
   }
 
   function init() {
@@ -752,29 +1179,49 @@
       return;
     }
     root.setAttribute('data-toplist-init', '1');
+    document.body.classList.add('toplist-page-active');
+    ensureStickyBar(root);
 
     collectCalendarData(root);
     setActionPressed(root);
     root.classList.toggle('is-mobile-changes-mode', isMobileChangesMode());
     syncCalendar(root, '');
+    refreshVisibleHours(root);
+    initPanelFilters(root);
+    updateHistoryVisibility(root);
 
     root.addEventListener('click', function(e) {
-      var actionBtn = e.target && e.target.closest ? e.target.closest('.toplist-action') : null;
+      var actionBtn = e.target && e.target.closest ? e.target.closest('.toplist-action, .toplist-stickybar__btn') : null;
       if (actionBtn && root.contains(actionBtn)) {
         var action = actionBtn.getAttribute('data-action') || '';
         if (action === 'collapse-all') {
           collapseAll(root);
         } else if (action === 'expand-latest') {
           expandLatest(root);
+        } else if (action === 'prev-hour') {
+          stepHour(root, 1);
+        } else if (action === 'next-hour') {
+          stepHour(root, -1);
         } else if (action === 'toggle-compare') {
-          if (isDesktop()) {
-            state.compareMode = !state.compareMode;
-            root.classList.toggle('is-compare-mode', state.compareMode);
-          } else {
-            state.mobileChangesOnly = !state.mobileChangesOnly;
-          }
+          state.compareMode = !state.compareMode;
+          root.classList.toggle('is-compare-mode', state.compareMode);
           setActionPressed(root);
           refreshVisibleHours(root);
+        } else if (action === 'toggle-changes') {
+          state.mobileChangesOnly = !state.mobileChangesOnly;
+          setActionPressed(root);
+          refreshVisibleHours(root);
+        }
+        return;
+      }
+
+      var filterChip = e.target && e.target.closest ? e.target.closest('.toplist-filter__chip') : null;
+      if (filterChip && root.contains(filterChip)) {
+        var panel = filterChip.closest ? filterChip.closest('.toplist-hour-panel') : null;
+        state.filterMode = filterChip.getAttribute('data-filter') || 'all';
+        syncAllPanelFilters(root);
+        if (panel) {
+          updateCurrentContext(root, panel.closest('details.toplist-day'), panel);
         }
         return;
       }
@@ -832,6 +1279,10 @@
       var hourBtn = e.target && e.target.closest ? e.target.closest('.toplist-hour-btn') : null;
       if (hourBtn && root.contains(hourBtn)) {
         var hours = hourBtn.closest ? hourBtn.closest('.toplist-hours') : null;
+        var navWrap = hourBtn.closest ? hourBtn.closest('.toplist-hours__nav') : null;
+        if (navWrap && navWrap.getAttribute('data-drag-moved') === '1') {
+          return;
+        }
         if (hours) {
           activateHour(hours, hourBtn, true);
         }
@@ -865,6 +1316,19 @@
       setTimeout(function() {
         li.classList.remove('toplist-clicked');
       }, 280);
+    });
+
+    root.addEventListener('input', function(e) {
+      var input = e.target && e.target.closest ? e.target.closest('.toplist-filter__input') : null;
+      if (!input || !root.contains(input)) {
+        return;
+      }
+      var panel = input.closest ? input.closest('.toplist-hour-panel') : null;
+      state.filterSearch = input.value || '';
+      syncAllPanelFilters(root);
+      if (panel) {
+        updateCurrentContext(root, panel.closest('details.toplist-day'), panel);
+      }
     });
 
     root.addEventListener('keydown', function(e) {
@@ -921,6 +1385,9 @@
         closeOtherDays(root, day);
         updateDayJumpActive(root, day);
         ensureDayLatestHourVisible(day).then(function() {
+          initPanelFilters(root);
+          var panel = day.querySelector('.toplist-hour-panel[aria-hidden="false"]') || day.querySelector('.toplist-hour-panel');
+          updateCurrentContext(root, day, panel);
           if (shouldScroll) {
             return settleAndScrollToDay(day);
           }
@@ -940,7 +1407,10 @@
       }
       if (openDays[0]) {
         updateDayJumpActive(root, openDays[0]);
+        var panel = openDays[0].querySelector('.toplist-hour-panel[aria-hidden="false"]') || openDays[0].querySelector('.toplist-hour-panel');
+        updateCurrentContext(root, openDays[0], panel);
       }
+      initPanelFilters(root);
     });
 
     document.addEventListener('click', function(e) {
@@ -966,6 +1436,8 @@
         root.classList.toggle('is-mobile-changes-mode', isMobileChangesMode());
         setActionPressed(root);
         refreshVisibleHours(root);
+        initPanelFilters(root);
+        updateHistoryVisibility(root);
       };
       if (media.addEventListener) {
         media.addEventListener('change', onChange);
@@ -973,6 +1445,10 @@
         media.addListener(onChange);
       }
     }
+
+    window.addEventListener('scroll', function() {
+      updateHistoryVisibility(root);
+    }, { passive: true });
 
   }
 
