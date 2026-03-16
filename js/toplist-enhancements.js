@@ -2,13 +2,17 @@
   var state = {
     compareMode: false,
     mobileChangesOnly: false,
+    filterMode: 'all',
+    filterSearch: '',
     dayCache: {},
     calendarMonths: [],
     calendarDays: {},
     calendarMonthIndex: 0,
     calendarCloseTimer: null,
     desktopScrollY: 0,
-    programmaticDayKey: ''
+    programmaticDayKey: '',
+    currentDayKey: '',
+    currentPanelId: ''
   };
 
   function isDesktop() {
@@ -60,6 +64,139 @@
 
   function findRenderedPanel(hours, index) {
     return hours ? hours.querySelector('.toplist-hour-panel[data-idx="' + index + '"]') : null;
+  }
+
+  function setActionPressed(root) {
+    var compareBtn = root.querySelector('.toplist-action[data-action="toggle-compare"]');
+    var mobileBtn = root.querySelector('.toplist-action[data-action="toggle-changes"]');
+    if (compareBtn) {
+      compareBtn.setAttribute('aria-pressed', state.compareMode ? 'true' : 'false');
+      compareBtn.textContent = state.compareMode ? '\u9000\u51fa\u53cc\u5217\u5bf9\u6bd4' : '\u684c\u9762\u53cc\u5217\u5bf9\u6bd4';
+    }
+    if (mobileBtn) {
+      mobileBtn.setAttribute('aria-pressed', state.mobileChangesOnly ? 'true' : 'false');
+      mobileBtn.textContent = state.mobileChangesOnly ? '\u663e\u793a\u5168\u90e8' : '\u53ea\u770b\u53d8\u5316';
+    }
+  }
+
+  function setToolbarState(toolbar) {
+    if (!toolbar) {
+      return;
+    }
+    toolbar.setAttribute('data-filter-mode', state.filterMode);
+    toolbar.setAttribute('data-filter-search', state.filterSearch);
+    var input = toolbar.querySelector('.toplist-filter__input');
+    if (input && input.value !== state.filterSearch) {
+      input.value = state.filterSearch;
+    }
+  }
+
+  function syncPanelToolbar(panel) {
+    if (!panel) {
+      return;
+    }
+    var toolbar = panel.querySelector('.toplist-filter');
+    if (!toolbar) {
+      return;
+    }
+    setToolbarState(toolbar);
+    applyPanelFilter(panel);
+  }
+
+  function syncAllPanelFilters(root) {
+    var panels = root.querySelectorAll('.toplist-hour-panel');
+    for (var i = 0; i < panels.length; i++) {
+      syncPanelToolbar(panels[i]);
+    }
+  }
+
+  function updateStickyBar(root, day, panel) {
+    var sticky = root.querySelector('.toplist-stickybar');
+    if (!sticky) {
+      return;
+    }
+    var value = sticky.querySelector('.toplist-stickybar__value');
+    var dateEl = sticky.querySelector('.toplist-stickybar__date');
+    var meta = sticky.querySelector('.toplist-stickybar__meta');
+    var compare = sticky.querySelector('.toplist-stickybar__compare');
+    var progress = sticky.querySelector('.toplist-stickybar__progress');
+    var prevBtn = sticky.querySelector('[data-action="prev-hour"]');
+    var nextBtn = sticky.querySelector('[data-action="next-hour"]');
+    var hours = panel ? panel.closest('.toplist-hours') : (day ? day.querySelector('.toplist-hours') : null);
+    var label = '--';
+    var dateLabel = '--';
+    if (day && panel) {
+      var dateText = day.getAttribute('data-date') || '';
+      var timeEl = panel.querySelector('.toplist-hour-panel__time');
+      var timeText = timeEl ? timeEl.textContent : '';
+      dateLabel = dateText || '--';
+      label = timeText || '--';
+    }
+    if (value) {
+      value.textContent = label;
+    }
+    if (dateEl) {
+      dateEl.textContent = dateLabel;
+    }
+    if (compare) {
+      if (state.compareMode && isDesktop() && hours) {
+        var active = hours.querySelector('.toplist-hour-btn.is-active');
+        var activeIdx = active ? Number(active.getAttribute('data-idx') || '0') : 0;
+        var panelsData = getPanelsData(hours);
+        var nextPanel = panelsData[activeIdx + 1];
+        compare.hidden = !nextPanel;
+        compare.textContent = nextPanel ? ('\u5bf9\u6bd4 ' + (panelsData[activeIdx] ? panelsData[activeIdx].hourLabel : '--') + ' vs ' + nextPanel.hourLabel) : '';
+      } else {
+        compare.hidden = true;
+        compare.textContent = '';
+      }
+    }
+    if (hours) {
+      var activeBtn = hours.querySelector('.toplist-hour-btn.is-active');
+      var idx = activeBtn ? Number(activeBtn.getAttribute('data-idx') || '0') : 0;
+      var total = getPanelsData(hours).length;
+      if (meta) {
+        if (idx === 0) {
+          meta.textContent = total > 1 ? '\u6700\u65b0\u65f6\u6bb5' : '\u552f\u4e00\u65f6\u6bb5';
+        } else if (idx === total - 1) {
+          meta.textContent = '\u6700\u65e9\u65f6\u6bb5';
+        } else {
+          meta.textContent = (idx + 1) + ' / ' + total + ' \u65f6\u6bb5';
+        }
+      }
+      if (progress) {
+        progress.style.height = total > 1 ? ((idx / (total - 1)) * 100).toFixed(2) + '%' : '100%';
+      }
+      if (prevBtn) {
+        prevBtn.disabled = idx >= total - 1;
+      }
+      if (nextBtn) {
+        nextBtn.disabled = idx <= 0;
+      }
+    } else {
+      if (meta) {
+        meta.textContent = '\u672a\u9009\u4e2d\u65f6\u6bb5';
+      }
+      if (progress) {
+        progress.style.height = '0%';
+      }
+      if (prevBtn) {
+        prevBtn.disabled = true;
+      }
+      if (nextBtn) {
+        nextBtn.disabled = true;
+      }
+    }
+  }
+
+  function updateCurrentContext(root, day, panel) {
+    state.currentDayKey = day ? (day.getAttribute('data-day-key') || '') : '';
+    state.currentPanelId = panel ? (panel.id || '') : '';
+    updateStickyBar(root, day, panel);
+  }
+
+  function ensureStickyBar(root) {
+    return;
   }
 
   function buildPanelElement(doc, item, index, panelCount) {
@@ -291,6 +428,12 @@
     var remaining = panelCount - idx;
     var visible = remaining > 0 ? Math.min(getVisibleCount(), remaining) : 1;
     showPanels(hours, idx, visible, updateHash !== false, targetId);
+    var panel = ensurePanelRendered(hours, idx);
+    var day = hours.closest ? hours.closest('details.toplist-day') : null;
+    var root = hours.closest ? hours.closest('.toplist-page') : null;
+    if (root) {
+      updateCurrentContext(root, day, panel);
+    }
   }
 
   function buildPanelSummary(item, panelIndex, panelCount) {
@@ -328,8 +471,8 @@
     var frag = doc.createDocumentFragment();
     var wrap = doc.createElement('div');
     wrap.className = 'toplist-filter';
-    wrap.setAttribute('data-filter-mode', 'all');
-    wrap.setAttribute('data-filter-search', '');
+    wrap.setAttribute('data-filter-mode', state.filterMode);
+    wrap.setAttribute('data-filter-search', state.filterSearch);
 
     var chips = doc.createElement('div');
     chips.className = 'toplist-filter__chips';
@@ -347,9 +490,10 @@
     for (var i = 0; i < items.length; i++) {
       var chip = doc.createElement('button');
       chip.type = 'button';
-      chip.className = 'toplist-filter__chip' + (i === 0 ? ' is-active' : '');
+      var active = items[i].mode === state.filterMode;
+      chip.className = 'toplist-filter__chip' + (active ? ' is-active' : '');
       chip.setAttribute('data-filter', items[i].mode);
-      chip.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+      chip.setAttribute('aria-pressed', active ? 'true' : 'false');
       chip.textContent = items[i].label;
       chips.appendChild(chip);
     }
@@ -365,6 +509,7 @@
     input.setAttribute('autocomplete', 'off');
     input.setAttribute('spellcheck', 'false');
     input.setAttribute('aria-label', '\u641c\u7d22\u5f53\u524d\u699c\u5355\u5173\u952e\u8bcd');
+    input.value = state.filterSearch;
     search.appendChild(input);
 
     var count = doc.createElement('span');
@@ -427,6 +572,7 @@
       initialPanel.setAttribute('aria-hidden', 'false');
       initialPanel.hidden = false;
       panelsWrap.appendChild(initialPanel);
+      syncPanelToolbar(initialPanel);
     }
 
     hours.appendChild(nav);
@@ -809,6 +955,32 @@
     }
   }
 
+  function getActiveHours(root) {
+    var day = root.querySelector('details.toplist-day[open]');
+    if (!day) {
+      return null;
+    }
+    return day.querySelector('.toplist-hours');
+  }
+
+  function stepHour(root, direction) {
+    var hours = getActiveHours(root);
+    if (!hours) {
+      return;
+    }
+    var active = hours.querySelector('.toplist-hour-btn.is-active') || hours.querySelector('.toplist-hour-btn');
+    if (!active) {
+      return;
+    }
+    var idx = Number(active.getAttribute('data-idx') || '0');
+    var nextIdx = idx + direction;
+    var buttons = hours.querySelectorAll('.toplist-hour-btn');
+    if (nextIdx < 0 || nextIdx >= buttons.length) {
+      return;
+    }
+    activateHour(hours, buttons[nextIdx], true);
+  }
+
   function expandLatest(root) {
     var days = root.querySelectorAll('details.toplist-day');
     var latestDay = days[0];
@@ -819,6 +991,8 @@
     latestDay.open = true;
     ensureDayLatestHourVisible(latestDay).then(function() {
       updateDayJumpActive(root, latestDay);
+      var panel = latestDay.querySelector('.toplist-hour-panel[aria-hidden="false"]') || latestDay.querySelector('.toplist-hour-panel');
+      updateCurrentContext(root, latestDay, panel);
     });
   }
 
@@ -827,6 +1001,7 @@
     for (var i = 0; i < days.length; i++) {
       days[i].open = false;
     }
+    updateCurrentContext(root, null, null);
   }
 
   function findDayByPanelId(root, panelId) {
@@ -900,6 +1075,9 @@
         activateHour(hours, active, false);
       }
     }
+    var activeDay = root.querySelector('details.toplist-day[open]');
+    var activePanel = activeDay ? (activeDay.querySelector('.toplist-hour-panel[aria-hidden="false"]') || activeDay.querySelector('.toplist-hour-panel')) : null;
+    updateCurrentContext(root, activeDay, activePanel);
   }
 
   function normalizeSearchValue(value) {
@@ -989,6 +1167,7 @@
     var rect = hero.getBoundingClientRect();
     var passedHero = rect.bottom < Math.min(window.innerHeight * 0.6, 280);
     root.classList.toggle('is-history-ready', passedHero);
+    root.classList.toggle('is-hero-condensed', passedHero);
   }
 
   function init() {
@@ -1000,6 +1179,8 @@
       return;
     }
     root.setAttribute('data-toplist-init', '1');
+    document.body.classList.add('toplist-page-active');
+    ensureStickyBar(root);
 
     collectCalendarData(root);
     setActionPressed(root);
@@ -1010,13 +1191,17 @@
     updateHistoryVisibility(root);
 
     root.addEventListener('click', function(e) {
-      var actionBtn = e.target && e.target.closest ? e.target.closest('.toplist-action') : null;
+      var actionBtn = e.target && e.target.closest ? e.target.closest('.toplist-action, .toplist-stickybar__btn') : null;
       if (actionBtn && root.contains(actionBtn)) {
         var action = actionBtn.getAttribute('data-action') || '';
         if (action === 'collapse-all') {
           collapseAll(root);
         } else if (action === 'expand-latest') {
           expandLatest(root);
+        } else if (action === 'prev-hour') {
+          stepHour(root, 1);
+        } else if (action === 'next-hour') {
+          stepHour(root, -1);
         } else if (action === 'toggle-compare') {
           state.compareMode = !state.compareMode;
           root.classList.toggle('is-compare-mode', state.compareMode);
@@ -1033,10 +1218,10 @@
       var filterChip = e.target && e.target.closest ? e.target.closest('.toplist-filter__chip') : null;
       if (filterChip && root.contains(filterChip)) {
         var panel = filterChip.closest ? filterChip.closest('.toplist-hour-panel') : null;
-        var toolbar = panel ? panel.querySelector('.toplist-filter') : null;
-        if (toolbar) {
-          toolbar.setAttribute('data-filter-mode', filterChip.getAttribute('data-filter') || 'all');
-          applyPanelFilter(panel);
+        state.filterMode = filterChip.getAttribute('data-filter') || 'all';
+        syncAllPanelFilters(root);
+        if (panel) {
+          updateCurrentContext(root, panel.closest('details.toplist-day'), panel);
         }
         return;
       }
@@ -1139,12 +1324,11 @@
         return;
       }
       var panel = input.closest ? input.closest('.toplist-hour-panel') : null;
-      var toolbar = panel ? panel.querySelector('.toplist-filter') : null;
-      if (!toolbar) {
-        return;
+      state.filterSearch = input.value || '';
+      syncAllPanelFilters(root);
+      if (panel) {
+        updateCurrentContext(root, panel.closest('details.toplist-day'), panel);
       }
-      toolbar.setAttribute('data-filter-search', input.value || '');
-      applyPanelFilter(panel);
     });
 
     root.addEventListener('keydown', function(e) {
@@ -1202,6 +1386,8 @@
         updateDayJumpActive(root, day);
         ensureDayLatestHourVisible(day).then(function() {
           initPanelFilters(root);
+          var panel = day.querySelector('.toplist-hour-panel[aria-hidden="false"]') || day.querySelector('.toplist-hour-panel');
+          updateCurrentContext(root, day, panel);
           if (shouldScroll) {
             return settleAndScrollToDay(day);
           }
@@ -1221,6 +1407,8 @@
       }
       if (openDays[0]) {
         updateDayJumpActive(root, openDays[0]);
+        var panel = openDays[0].querySelector('.toplist-hour-panel[aria-hidden="false"]') || openDays[0].querySelector('.toplist-hour-panel');
+        updateCurrentContext(root, openDays[0], panel);
       }
       initPanelFilters(root);
     });
