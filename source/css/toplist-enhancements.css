@@ -515,7 +515,8 @@ body.toplist-page-active #banner .mask {
 .toplist-page .toplist-hour-panel__meta {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex-wrap: wrap;
   gap: 0.75rem;
   margin-bottom: 0.6rem;
 }
@@ -528,6 +529,27 @@ body.toplist-page-active #banner .mask {
 .toplist-page .toplist-hour-panel__updated {
   font-size: 0.86rem;
   opacity: 0.72;
+}
+
+.toplist-page .toplist-hour-panel__state {
+  display: inline-flex;
+  align-items: center;
+  margin-left: auto;
+  padding: 0.18rem 0.56rem;
+  border: 1px solid rgba(58, 110, 165, 0.18);
+  border-radius: 999px;
+  background: rgba(58, 110, 165, 0.08);
+  color: var(--sec-text-color);
+  font-size: 0.76rem;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+  .toplist-page .toplist-hour-panel__state {
+    margin-left: 0;
+    white-space: normal;
+  }
 }
 
 .toplist-page .toplist-hour-panel .toplist-entry__content h2 {
@@ -1436,6 +1458,7 @@ html[data-user-color-scheme='dark'] .toplist-page .toplist-entry__content li:nth
 .toplist-page .toplist-filter__search {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.65rem;
 }
 
@@ -1465,6 +1488,29 @@ html[data-user-color-scheme='dark'] .toplist-page .toplist-entry__content li:nth
   color: var(--sec-text-color);
   font-size: 0.78rem;
   white-space: nowrap;
+}
+
+.toplist-page .toplist-filter__clear {
+  appearance: none;
+  flex: 0 0 auto;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--sec-text-color);
+  border-radius: 999px;
+  padding: 0.22rem 0.62rem;
+  font-size: 0.76rem;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.toplist-page .toplist-filter__clear:hover {
+  border-color: rgba(58, 110, 165, 0.26);
+  color: var(--text-color);
+}
+
+.toplist-page .toplist-filter__clear:disabled {
+  cursor: default;
+  opacity: 0.55;
 }
 
 .toplist-page .toplist-filter__empty {

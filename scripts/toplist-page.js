@@ -260,6 +260,7 @@ function renderFilterToolbar() {
     <div class="toplist-filter__search">
       <input type="search" class="toplist-filter__input" placeholder="\u641c\u7d22\u5173\u952e\u8bcd" inputmode="search" autocomplete="off" spellcheck="false" aria-label="\u641c\u7d22\u5f53\u524d\u699c\u5355\u5173\u952e\u8bcd">
       <span class="toplist-filter__count" aria-live="polite"></span>
+      <button type="button" class="toplist-filter__clear" hidden disabled>\u6e05\u9664\u7b5b\u9009</button>
     </div>
   </div>
   <p class="toplist-filter__empty" hidden>\u5f53\u524d\u7b5b\u9009\u4e0b\u6682\u65e0\u7ed3\u679c</p>`;
@@ -275,7 +276,7 @@ function renderHoursBlock(payload, isInitialVisible) {
 
   const panelsHtml = payload.map((item, index) => {
     const active = index === 0;
-    const metaRight = item.updatedAt ? `<span class="toplist-hour-panel__updated">${escapeHtml(item.updatedAt)}</span>` : '';
+    const metaRight = `${item.updatedAt ? `<span class="toplist-hour-panel__updated">${escapeHtml(item.updatedAt)}</span>` : ''}<span class="toplist-hour-panel__state" aria-live="polite"></span>`;
     const summaryText = index === payload.length - 1
       ? `\u5171 ${item.total} \u6761\uff0c\u6682\u65e0\u66f4\u65e9\u5c0f\u65f6\u53ef\u5bf9\u6bd4`
       : `\u5171 ${item.total} \u6761\uff0c\u542b\u76f8\u5bf9\u4e0a\u4e00\u5c0f\u65f6\u53d8\u5316`;

@@ -37,6 +37,18 @@
     return String(heat).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
+  function getFilterModeLabel(mode) {
+    switch (mode) {
+      case 'changes': return '\u53ea\u770b\u53d8\u5316';
+      case 'new': return 'NEW';
+      case 'up': return '\u4e0a\u5347';
+      case 'down': return '\u4e0b\u964d';
+      case 'same': return '\u6301\u5e73';
+      case 'top10': return 'Top10';
+      default: return '\u5168\u90e8';
+    }
+  }
+
   function getVisibleCount() {
     return state.compareMode && isDesktop() ? 2 : 1;
   }
@@ -88,6 +100,12 @@
     var input = toolbar.querySelector('.toplist-filter__input');
     if (input && input.value !== state.filterSearch) {
       input.value = state.filterSearch;
+    }
+    var clearBtn = toolbar.querySelector('.toplist-filter__clear');
+    if (clearBtn) {
+      var canClear = state.filterMode !== 'all' || !!state.filterSearch;
+      clearBtn.disabled = !canClear;
+      clearBtn.hidden = !canClear;
     }
   }
 
@@ -223,6 +241,11 @@
       updated.textContent = item.updatedAt;
       meta.appendChild(updated);
     }
+
+    var stateTag = doc.createElement('span');
+    stateTag.className = 'toplist-hour-panel__state';
+    stateTag.setAttribute('aria-live', 'polite');
+    meta.appendChild(stateTag);
 
     var summary = doc.createElement('p');
     summary.className = 'toplist-hour-panel__summary';
@@ -517,6 +540,14 @@
     count.className = 'toplist-filter__count';
     count.setAttribute('aria-live', 'polite');
     search.appendChild(count);
+
+    var clearBtn = doc.createElement('button');
+    clearBtn.type = 'button';
+    clearBtn.className = 'toplist-filter__clear';
+    clearBtn.textContent = '\u6e05\u9664\u7b5b\u9009';
+    clearBtn.disabled = state.filterMode === 'all' && !state.filterSearch;
+    clearBtn.hidden = state.filterMode === 'all' && !state.filterSearch;
+    search.appendChild(clearBtn);
 
     wrap.appendChild(chips);
     wrap.appendChild(search);
@@ -1157,6 +1188,16 @@
       count.textContent = visible + ' / ' + items.length;
     }
 
+    var stateTag = panel.querySelector('.toplist-hour-panel__state');
+    if (stateTag) {
+      var stateText = '\u5f53\u524d\uff1a' + getFilterModeLabel(mode);
+      if (search) {
+        stateText += ' \u00b7 \u641c\u7d22\uff1a' + search;
+      }
+      stateText += ' \u00b7 ' + visible + '/' + items.length;
+      stateTag.textContent = stateText;
+    }
+
     var empty = panel.querySelector('.toplist-filter__empty');
     if (empty) {
       empty.hidden = visible > 0;
@@ -1232,10 +1273,23 @@
       var filterChip = e.target && e.target.closest ? e.target.closest('.toplist-filter__chip, .toplist-stat') : null;
       if (filterChip && root.contains(filterChip)) {
           var panel = filterChip.closest ? filterChip.closest('.toplist-hour-panel') : null;
-          state.filterMode = filterChip.getAttribute('data-filter') || 'all';
+          var nextMode = filterChip.getAttribute('data-filter') || 'all';
+          state.filterMode = state.filterMode === nextMode ? 'all' : nextMode;
+          syncAllPanelFilters(root);
+          if (panel) {
+            updateCurrentContext(root, panel.closest('details.toplist-day'), panel);
+          }
+          return;
+        }
+
+      var clearBtn = e.target && e.target.closest ? e.target.closest('.toplist-filter__clear') : null;
+      if (clearBtn && root.contains(clearBtn)) {
+        state.filterMode = 'all';
+        state.filterSearch = '';
         syncAllPanelFilters(root);
-        if (panel) {
-          updateCurrentContext(root, panel.closest('details.toplist-day'), panel);
+        var clearPanel = clearBtn.closest ? clearBtn.closest('.toplist-hour-panel') : null;
+        if (clearPanel) {
+          updateCurrentContext(root, clearPanel.closest('details.toplist-day'), clearPanel);
         }
         return;
       }
