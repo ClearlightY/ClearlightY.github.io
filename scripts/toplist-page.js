@@ -247,7 +247,7 @@ function buildPayloadForDay(dayItems, dayId) {
 
 function renderStatsBar(stats) {
   const safeStats = stats || { new: 0, up: 0, down: 0, same: 0 };
-  return `<div class="toplist-hour-panel__stats" aria-label="\u53d8\u5316\u7edf\u8ba1"><span class="toplist-stat toplist-stat--new">NEW ${safeStats.new}</span><span class="toplist-stat toplist-stat--up">\u4e0a\u5347 ${safeStats.up}</span><span class="toplist-stat toplist-stat--down">\u4e0b\u964d ${safeStats.down}</span><span class="toplist-stat toplist-stat--same">\u6301\u5e73 ${safeStats.same}</span></div>`;
+  return `<div class="toplist-hour-panel__stats" aria-label="\u53d8\u5316\u7edf\u8ba1"><button type="button" class="toplist-stat toplist-stat--new" data-filter="new" aria-pressed="false">NEW ${safeStats.new}</button><button type="button" class="toplist-stat toplist-stat--up" data-filter="up" aria-pressed="false">\u4e0a\u5347 ${safeStats.up}</button><button type="button" class="toplist-stat toplist-stat--down" data-filter="down" aria-pressed="false">\u4e0b\u964d ${safeStats.down}</button><button type="button" class="toplist-stat toplist-stat--same" data-filter="same" aria-pressed="false">\u6301\u5e73 ${safeStats.same}</button></div>`;
 }
 
 function renderFilterToolbar() {
@@ -255,8 +255,6 @@ function renderFilterToolbar() {
     <div class="toplist-filter__chips" role="toolbar" aria-label="\u699c\u5355\u7b5b\u9009">
       <button type="button" class="toplist-filter__chip is-active" data-filter="all" aria-pressed="true">\u5168\u90e8</button>
       <button type="button" class="toplist-filter__chip" data-filter="changes" aria-pressed="false">\u53ea\u770b\u53d8\u5316</button>
-      <button type="button" class="toplist-filter__chip" data-filter="new" aria-pressed="false">\u65b0\u4e0a\u699c</button>
-      <button type="button" class="toplist-filter__chip" data-filter="up" aria-pressed="false">\u4e0a\u5347</button>
       <button type="button" class="toplist-filter__chip" data-filter="top10" aria-pressed="false">Top10</button>
     </div>
     <div class="toplist-filter__search">
@@ -348,6 +346,9 @@ function renderTopListPage(hexo) {
   const heroMeta = newest.updatedAt
     ? `\u6700\u65b0\u66f4\u65b0\uff1a${escapeHtml(newest.updatedAt)}`
     : (newest.date ? `\u6700\u65b0\u65f6\u6bb5\uff1a${escapeHtml(newest.date)}${newest.hour ? ` ${escapeHtml(newest.hour)}:00` : ''}` : '');
+  const heroUpdatedHtml = heroMeta
+    ? `<p class="toplist-hero__updated">${heroMeta}</p>`
+    : '';
   const summaryCards = latestPanel ? [
     { label: '\u5f53\u524d\u65f6\u6bb5', value: latestPanel.hourLabel || '--', tone: 'neutral' },
     { label: '\u65b0\u4e0a\u699c', value: latestPanel.stats && latestPanel.stats.new || 0, tone: 'new' },
@@ -418,7 +419,8 @@ function renderTopListPage(hexo) {
 <div class="markdown-body toplist-page" data-toplist-render="v4" data-default-description="${escapeHtml(DEFAULT_DESCRIPTION)}">
   <div class="toplist-hero">
     <div class="toplist-hero__title">${escapeHtml(heroTitle)}</div>
-    <p class="toplist-hero__desc">\u6309\u65e5\u671f\u67e5\u770b\u5fae\u535a\u70ed\u641c TOP50\u3002\u9ed8\u8ba4\u5355\u5c0f\u65f6\u6d4f\u89c8\uff0c\u53ef\u5207\u6362\u4e3a\u684c\u9762\u53cc\u5217\u5bf9\u6bd4\uff0c\u5e76\u5c55\u793a\u76f8\u5bf9\u4e0a\u4e00\u5c0f\u65f6\u7684\u540d\u6b21\u53d8\u5316\u3002${heroMeta}</p>
+    <p class="toplist-hero__desc">\u6309\u65e5\u671f\u67e5\u770b\u5fae\u535a\u70ed\u641c TOP50\u3002\u9ed8\u8ba4\u5355\u5c0f\u65f6\u6d4f\u89c8\uff0c\u53ef\u5207\u6362\u4e3a\u684c\u9762\u53cc\u5217\u5bf9\u6bd4\uff0c\u5e76\u5c55\u793a\u76f8\u5bf9\u4e0a\u4e00\u5c0f\u65f6\u7684\u540d\u6b21\u53d8\u5316\u3002</p>
+    ${heroUpdatedHtml}
     ${summaryHtml}
     <p class="toplist-hero__hint">\u79fb\u52a8\u7aef\u5efa\u8bae\u4f7f\u7528\u201c\u53ea\u770b\u53d8\u5316\u201d\uff0c\u684c\u9762\u7aef\u53ef\u5f00\u542f\u201c\u53cc\u5217\u5bf9\u6bd4\u201d\u3002\u5f53\u524d\u5c0f\u65f6\u53ef\u76f4\u63a5\u7b5b\u9009\u65b0\u4e0a\u699c\u3001\u4e0a\u5347\u3001Top10 \u6216\u641c\u7d22\u5173\u952e\u8bcd\u3002</p>
     <div class="toplist-actions">

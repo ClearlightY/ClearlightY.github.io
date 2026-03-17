@@ -451,15 +451,18 @@
     bar.setAttribute('aria-label', '\u53d8\u5316\u7edf\u8ba1');
 
     var items = [
-      { cls: 'new', label: 'NEW ', value: safeStats.new || 0 },
-      { cls: 'up', label: '\u4e0a\u5347 ', value: safeStats.up || 0 },
-      { cls: 'down', label: '\u4e0b\u964d ', value: safeStats.down || 0 },
-      { cls: 'same', label: '\u6301\u5e73 ', value: safeStats.same || 0 }
+      { mode: 'new', cls: 'new', label: 'NEW ', value: safeStats.new || 0 },
+      { mode: 'up', cls: 'up', label: '\u4e0a\u5347 ', value: safeStats.up || 0 },
+      { mode: 'down', cls: 'down', label: '\u4e0b\u964d ', value: safeStats.down || 0 },
+      { mode: 'same', cls: 'same', label: '\u6301\u5e73 ', value: safeStats.same || 0 }
     ];
 
     for (var i = 0; i < items.length; i++) {
-      var chip = doc.createElement('span');
+      var chip = doc.createElement('button');
+      chip.type = 'button';
       chip.className = 'toplist-stat toplist-stat--' + items[i].cls;
+      chip.setAttribute('data-filter', items[i].mode);
+      chip.setAttribute('aria-pressed', state.filterMode === items[i].mode ? 'true' : 'false');
       chip.textContent = items[i].label + items[i].value;
       bar.appendChild(chip);
     }
@@ -482,8 +485,6 @@
     var items = [
       { mode: 'all', label: '\u5168\u90e8' },
       { mode: 'changes', label: '\u53ea\u770b\u53d8\u5316' },
-      { mode: 'new', label: '\u65b0\u4e0a\u699c' },
-      { mode: 'up', label: '\u4e0a\u5347' },
       { mode: 'top10', label: 'Top10' }
     ];
 
@@ -1098,6 +1099,12 @@
     if (mode === 'up' && trend !== 'up') {
       return false;
     }
+    if (mode === 'down' && trend !== 'down') {
+      return false;
+    }
+    if (mode === 'same' && trend !== 'same') {
+      return false;
+    }
     if (mode === 'top10' && (!rank || rank > 10)) {
       return false;
     }
@@ -1113,6 +1120,13 @@
       var active = chips[i].getAttribute('data-filter') === mode;
       chips[i].classList.toggle('is-active', active);
       chips[i].setAttribute('aria-pressed', active ? 'true' : 'false');
+    }
+
+    var stats = panel.querySelectorAll('.toplist-stat');
+    for (var j = 0; j < stats.length; j++) {
+      var statActive = stats[j].getAttribute('data-filter') === mode;
+      stats[j].classList.toggle('is-active', statActive);
+      stats[j].setAttribute('aria-pressed', statActive ? 'true' : 'false');
     }
   }
 
@@ -1215,10 +1229,10 @@
         return;
       }
 
-      var filterChip = e.target && e.target.closest ? e.target.closest('.toplist-filter__chip') : null;
+      var filterChip = e.target && e.target.closest ? e.target.closest('.toplist-filter__chip, .toplist-stat') : null;
       if (filterChip && root.contains(filterChip)) {
-        var panel = filterChip.closest ? filterChip.closest('.toplist-hour-panel') : null;
-        state.filterMode = filterChip.getAttribute('data-filter') || 'all';
+          var panel = filterChip.closest ? filterChip.closest('.toplist-hour-panel') : null;
+          state.filterMode = filterChip.getAttribute('data-filter') || 'all';
         syncAllPanelFilters(root);
         if (panel) {
           updateCurrentContext(root, panel.closest('details.toplist-day'), panel);
