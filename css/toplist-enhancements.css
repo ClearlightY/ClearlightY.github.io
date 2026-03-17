@@ -516,6 +516,7 @@ body.toplist-page-active #banner .mask {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 0.75rem;
   margin-bottom: 0.6rem;
 }
@@ -528,6 +529,38 @@ body.toplist-page-active #banner .mask {
 .toplist-page .toplist-hour-panel__updated {
   font-size: 0.86rem;
   opacity: 0.72;
+}
+
+.toplist-page .toplist-hour-panel__meta-info {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+  margin-left: auto;
+}
+
+.toplist-page .toplist-hour-panel__state,
+.toplist-page .toplist-hour-panel__count {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.56rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.toplist-page .toplist-hour-panel__state {
+  border: 1px solid rgba(58, 110, 165, 0.18);
+  background: rgba(58, 110, 165, 0.08);
+  color: var(--sec-text-color);
+}
+
+.toplist-page .toplist-hour-panel__count {
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--sec-text-color);
 }
 
 .toplist-page .toplist-hour-panel .toplist-entry__content h2 {
@@ -1414,6 +1447,7 @@ html[data-user-color-scheme='dark'] .toplist-page .toplist-entry__content li:nth
   display: flex;
   flex-wrap: wrap;
   gap: 0.42rem;
+  align-items: center;
 }
 
 .toplist-page .toplist-filter__chip {
@@ -1433,10 +1467,35 @@ html[data-user-color-scheme='dark'] .toplist-page .toplist-entry__content li:nth
   color: var(--text-color);
 }
 
-.toplist-page .toplist-filter__search {
+.toplist-page .toplist-filter__search-toggle {
+  appearance: none;
+  margin-left: auto;
+  width: 1.95rem;
+  height: 1.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--sec-text-color);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.toplist-page .toplist-filter__search-toggle:hover {
+  border-color: rgba(58, 110, 165, 0.26);
+  color: var(--text-color);
+}
+
+.toplist-page .toplist-filter__search-toggle svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.toplist-page .toplist-filter__search-inline {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  margin-top: 0.55rem;
 }
 
 .toplist-page .toplist-filter__input {
@@ -1460,17 +1519,45 @@ html[data-user-color-scheme='dark'] .toplist-page .toplist-entry__content li:nth
   border-color: rgba(58, 110, 165, 0.28);
 }
 
-.toplist-page .toplist-filter__count {
+.toplist-page .toplist-filter__clear {
+  appearance: none;
   flex: 0 0 auto;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(255, 255, 255, 0.04);
   color: var(--sec-text-color);
-  font-size: 0.78rem;
-  white-space: nowrap;
+  border-radius: 999px;
+  padding: 0.22rem 0.62rem;
+  font-size: 0.76rem;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.toplist-page .toplist-filter__clear:hover {
+  border-color: rgba(58, 110, 165, 0.26);
+  color: var(--text-color);
+}
+
+.toplist-page .toplist-filter__clear:disabled {
+  cursor: default;
+  opacity: 0.55;
 }
 
 .toplist-page .toplist-filter__empty {
   margin: -0.2rem 0 0.8rem 0;
   color: var(--sec-text-color);
   font-size: 0.84rem;
+}
+
+@media (max-width: 767px) {
+  .toplist-page .toplist-hour-panel__meta-info {
+    width: 100%;
+    margin-left: 0;
+    justify-content: flex-start;
+  }
+
+  .toplist-page .toplist-filter__search-toggle {
+    margin-left: 0;
+  }
 }
 
 .toplist-page .toplist-stat {

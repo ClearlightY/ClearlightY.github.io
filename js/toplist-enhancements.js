@@ -37,6 +37,18 @@
     return String(heat).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
+  function getFilterModeLabel(mode) {
+    switch (mode) {
+      case 'changes': return '\u53ea\u770b\u53d8\u5316';
+      case 'new': return 'NEW';
+      case 'up': return '\u4e0a\u5347';
+      case 'down': return '\u4e0b\u964d';
+      case 'same': return '\u6301\u5e73';
+      case 'top10': return 'Top10';
+      default: return '\u5168\u90e8';
+    }
+  }
+
   function getVisibleCount() {
     return state.compareMode && isDesktop() ? 2 : 1;
   }
@@ -85,9 +97,27 @@
     }
     toolbar.setAttribute('data-filter-mode', state.filterMode);
     toolbar.setAttribute('data-filter-search', state.filterSearch);
+    var searchOpen = toolbar.getAttribute('data-search-open') === 'true' || !!state.filterSearch;
+    toolbar.classList.toggle('is-search-open', searchOpen);
+    toolbar.setAttribute('data-search-open', searchOpen ? 'true' : 'false');
     var input = toolbar.querySelector('.toplist-filter__input');
     if (input && input.value !== state.filterSearch) {
       input.value = state.filterSearch;
+    }
+    var toggleBtn = toolbar.querySelector('.toplist-filter__search-toggle');
+    if (toggleBtn) {
+      toggleBtn.setAttribute('aria-expanded', searchOpen ? 'true' : 'false');
+      toggleBtn.hidden = searchOpen;
+    }
+    var inlineWrap = toolbar.querySelector('.toplist-filter__search-inline');
+    if (inlineWrap) {
+      inlineWrap.hidden = !searchOpen;
+    }
+    var clearBtn = toolbar.querySelector('.toplist-filter__clear');
+    if (clearBtn) {
+      var canClear = state.filterMode !== 'all' || !!state.filterSearch;
+      clearBtn.disabled = !canClear;
+      clearBtn.hidden = !canClear;
     }
   }
 
@@ -223,6 +253,21 @@
       updated.textContent = item.updatedAt;
       meta.appendChild(updated);
     }
+
+    var metaInfo = doc.createElement('div');
+    metaInfo.className = 'toplist-hour-panel__meta-info';
+
+    var stateTag = doc.createElement('span');
+    stateTag.className = 'toplist-hour-panel__state';
+    stateTag.setAttribute('aria-live', 'polite');
+    metaInfo.appendChild(stateTag);
+
+    var countTag = doc.createElement('span');
+    countTag.className = 'toplist-hour-panel__count';
+    countTag.setAttribute('aria-live', 'polite');
+    metaInfo.appendChild(countTag);
+
+    meta.appendChild(metaInfo);
 
     var summary = doc.createElement('p');
     summary.className = 'toplist-hour-panel__summary';
@@ -499,8 +544,25 @@
       chips.appendChild(chip);
     }
 
-    var search = doc.createElement('div');
-    search.className = 'toplist-filter__search';
+    var searchToggle = doc.createElement('button');
+    searchToggle.type = 'button';
+    searchToggle.className = 'toplist-filter__search-toggle';
+    searchToggle.setAttribute('aria-label', '\u6253\u5f00\u641c\u7d22');
+    searchToggle.setAttribute('aria-expanded', state.filterSearch ? 'true' : 'false');
+    searchToggle.innerHTML = '<span aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M10.5 4a6.5 6.5 0 1 1 0 13a6.5 6.5 0 0 1 0-13Zm0-1.5a8 8 0 1 0 4.95 14.28l4.13 4.14a.75.75 0 1 0 1.06-1.06l-4.14-4.13A8 8 0 0 0 10.5 2.5Z" fill="currentColor"/></svg></span>';
+    chips.appendChild(searchToggle);
+
+    var clearBtn = doc.createElement('button');
+    clearBtn.type = 'button';
+    clearBtn.className = 'toplist-filter__clear';
+    clearBtn.textContent = '\u6e05\u9664\u7b5b\u9009';
+    clearBtn.disabled = state.filterMode === 'all' && !state.filterSearch;
+    clearBtn.hidden = state.filterMode === 'all' && !state.filterSearch;
+    chips.appendChild(clearBtn);
+
+    var searchInline = doc.createElement('div');
+    searchInline.className = 'toplist-filter__search-inline';
+    searchInline.hidden = !state.filterSearch;
 
     var input = doc.createElement('input');
     input.type = 'search';
@@ -511,15 +573,10 @@
     input.setAttribute('spellcheck', 'false');
     input.setAttribute('aria-label', '\u641c\u7d22\u5f53\u524d\u699c\u5355\u5173\u952e\u8bcd');
     input.value = state.filterSearch;
-    search.appendChild(input);
-
-    var count = doc.createElement('span');
-    count.className = 'toplist-filter__count';
-    count.setAttribute('aria-live', 'polite');
-    search.appendChild(count);
+    searchInline.appendChild(input);
 
     wrap.appendChild(chips);
-    wrap.appendChild(search);
+    wrap.appendChild(searchInline);
     frag.appendChild(wrap);
 
     var empty = doc.createElement('p');
@@ -1152,9 +1209,18 @@
       }
     }
 
-    var count = panel.querySelector('.toplist-filter__count');
+    var count = panel.querySelector('.toplist-hour-panel__count');
     if (count) {
       count.textContent = visible + ' / ' + items.length;
+    }
+
+    var stateTag = panel.querySelector('.toplist-hour-panel__state');
+    if (stateTag) {
+      var stateText = '\u5f53\u524d\uff1a' + getFilterModeLabel(mode);
+      if (search) {
+        stateText += ' \u00b7 \u641c\u7d22\uff1a' + search;
+      }
+      stateTag.textContent = stateText;
     }
 
     var empty = panel.querySelector('.toplist-filter__empty');
@@ -1232,10 +1298,40 @@
       var filterChip = e.target && e.target.closest ? e.target.closest('.toplist-filter__chip, .toplist-stat') : null;
       if (filterChip && root.contains(filterChip)) {
           var panel = filterChip.closest ? filterChip.closest('.toplist-hour-panel') : null;
-          state.filterMode = filterChip.getAttribute('data-filter') || 'all';
+          var nextMode = filterChip.getAttribute('data-filter') || 'all';
+          state.filterMode = state.filterMode === nextMode ? 'all' : nextMode;
+          syncAllPanelFilters(root);
+          if (panel) {
+            updateCurrentContext(root, panel.closest('details.toplist-day'), panel);
+          }
+          return;
+        }
+
+      var clearBtn = e.target && e.target.closest ? e.target.closest('.toplist-filter__clear') : null;
+      if (clearBtn && root.contains(clearBtn)) {
+        state.filterMode = 'all';
+        state.filterSearch = '';
         syncAllPanelFilters(root);
-        if (panel) {
-          updateCurrentContext(root, panel.closest('details.toplist-day'), panel);
+        var clearPanel = clearBtn.closest ? clearBtn.closest('.toplist-hour-panel') : null;
+        if (clearPanel) {
+          updateCurrentContext(root, clearPanel.closest('details.toplist-day'), clearPanel);
+        }
+        return;
+      }
+
+      var searchToggle = e.target && e.target.closest ? e.target.closest('.toplist-filter__search-toggle') : null;
+      if (searchToggle && root.contains(searchToggle)) {
+        var searchToolbar = searchToggle.closest ? searchToggle.closest('.toplist-filter') : null;
+        if (searchToolbar) {
+          searchToolbar.setAttribute('data-search-open', 'true');
+          setToolbarState(searchToolbar);
+          var searchInput = searchToolbar.querySelector('.toplist-filter__input');
+          if (searchInput) {
+            setTimeout(function() {
+              searchInput.focus();
+              searchInput.select();
+            }, 0);
+          }
         }
         return;
       }
@@ -1337,12 +1433,36 @@
       if (!input || !root.contains(input)) {
         return;
       }
+      var inputToolbar = input.closest ? input.closest('.toplist-filter') : null;
+      if (inputToolbar) {
+        inputToolbar.setAttribute('data-search-open', 'true');
+      }
       var panel = input.closest ? input.closest('.toplist-hour-panel') : null;
       state.filterSearch = input.value || '';
       syncAllPanelFilters(root);
       if (panel) {
         updateCurrentContext(root, panel.closest('details.toplist-day'), panel);
       }
+    });
+
+    root.addEventListener('focusout', function(e) {
+      var input = e.target && e.target.closest ? e.target.closest('.toplist-filter__input') : null;
+      if (!input || !root.contains(input)) {
+        return;
+      }
+      setTimeout(function() {
+        var toolbar = input.closest ? input.closest('.toplist-filter') : null;
+        if (!toolbar) {
+          return;
+        }
+        if (toolbar.contains(document.activeElement)) {
+          return;
+        }
+        if (!(input.value || '').trim()) {
+          toolbar.setAttribute('data-search-open', 'false');
+          setToolbarState(toolbar);
+        }
+      }, 0);
     });
 
     root.addEventListener('keydown', function(e) {
