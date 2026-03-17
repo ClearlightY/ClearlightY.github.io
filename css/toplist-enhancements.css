@@ -878,6 +878,14 @@ html[data-user-color-scheme='dark'] .toplist-page .toplist-entry__content li:nth
   line-height: 1.7;
 }
 
+.toplist-page .toplist-hero__updated {
+  margin: 0.15rem 0 0 0;
+  max-width: 60rem;
+  color: var(--sec-text-color);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
 .toplist-page .toplist-hero__hint {
   margin: 0.45rem 0 0 0;
   max-width: 60rem;
@@ -1466,16 +1474,34 @@ html[data-user-color-scheme='dark'] .toplist-page .toplist-entry__content li:nth
 }
 
 .toplist-page .toplist-stat {
+  appearance: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 1.7rem;
   padding: 0.18rem 0.58rem;
+  border-width: 1px;
+  border-style: solid;
   border-radius: 999px;
   font-size: 0.78rem;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.2;
   white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.toplist-page .toplist-stat:hover {
+  transform: translateY(-1px);
+}
+
+.toplist-page .toplist-stat:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+}
+
+.toplist-page .toplist-stat.is-active {
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
 }
 
 .toplist-page .toplist-stat--new {
