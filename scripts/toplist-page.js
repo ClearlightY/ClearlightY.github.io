@@ -256,11 +256,11 @@ function renderFilterToolbar() {
       <button type="button" class="toplist-filter__chip is-active" data-filter="all" aria-pressed="true">\u5168\u90e8</button>
       <button type="button" class="toplist-filter__chip" data-filter="changes" aria-pressed="false">\u53ea\u770b\u53d8\u5316</button>
       <button type="button" class="toplist-filter__chip" data-filter="top10" aria-pressed="false">Top10</button>
-    </div>
-    <div class="toplist-filter__search">
-      <input type="search" class="toplist-filter__input" placeholder="\u641c\u7d22\u5173\u952e\u8bcd" inputmode="search" autocomplete="off" spellcheck="false" aria-label="\u641c\u7d22\u5f53\u524d\u699c\u5355\u5173\u952e\u8bcd">
-      <span class="toplist-filter__count" aria-live="polite"></span>
       <button type="button" class="toplist-filter__clear" hidden disabled>\u6e05\u9664\u7b5b\u9009</button>
+      <button type="button" class="toplist-filter__search-toggle" aria-label="\u6253\u5f00\u641c\u7d22" aria-expanded="false"><span aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M10.5 4a6.5 6.5 0 1 1 0 13a6.5 6.5 0 0 1 0-13Zm0-1.5a8 8 0 1 0 4.95 14.28l4.13 4.14a.75.75 0 1 0 1.06-1.06l-4.14-4.13A8 8 0 0 0 10.5 2.5Z" fill="currentColor"/></svg></span></button>
+    </div>
+    <div class="toplist-filter__search-inline" hidden>
+      <input type="search" class="toplist-filter__input" placeholder="\u641c\u7d22\u5173\u952e\u8bcd" inputmode="search" autocomplete="off" spellcheck="false" aria-label="\u641c\u7d22\u5f53\u524d\u699c\u5355\u5173\u952e\u8bcd">
     </div>
   </div>
   <p class="toplist-filter__empty" hidden>\u5f53\u524d\u7b5b\u9009\u4e0b\u6682\u65e0\u7ed3\u679c</p>`;
@@ -276,7 +276,7 @@ function renderHoursBlock(payload, isInitialVisible) {
 
   const panelsHtml = payload.map((item, index) => {
     const active = index === 0;
-    const metaRight = `${item.updatedAt ? `<span class="toplist-hour-panel__updated">${escapeHtml(item.updatedAt)}</span>` : ''}<span class="toplist-hour-panel__state" aria-live="polite"></span>`;
+    const metaRight = `${item.updatedAt ? `<span class="toplist-hour-panel__updated">${escapeHtml(item.updatedAt)}</span>` : ''}<div class="toplist-hour-panel__meta-info"><span class="toplist-hour-panel__state" aria-live="polite"></span><span class="toplist-hour-panel__count" aria-live="polite"></span></div>`;
     const summaryText = index === payload.length - 1
       ? `\u5171 ${item.total} \u6761\uff0c\u6682\u65e0\u66f4\u65e9\u5c0f\u65f6\u53ef\u5bf9\u6bd4`
       : `\u5171 ${item.total} \u6761\uff0c\u542b\u76f8\u5bf9\u4e0a\u4e00\u5c0f\u65f6\u53d8\u5316`;
