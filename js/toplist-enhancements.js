@@ -15,6 +15,10 @@
     currentPanelId: ''
   };
 
+  function syncPageBodyState(root) {
+    document.body.classList.toggle('toplist-page-active', !!root);
+  }
+
   function isDesktop() {
     return window.matchMedia && window.matchMedia('(min-width: 768px)').matches;
   }
@@ -1252,6 +1256,7 @@
 
   function init() {
     var root = document.querySelector('.toplist-page');
+    syncPageBodyState(root);
     if (!root) {
       return;
     }
@@ -1591,4 +1596,6 @@
   } else {
     init();
   }
+
+  document.addEventListener('site:page-loaded', init);
 })();

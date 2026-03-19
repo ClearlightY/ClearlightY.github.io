@@ -1,4 +1,6 @@
 (function() {
+  var initialized = false;
+
   function shouldEnable() {
     return window.matchMedia && window.matchMedia('(max-width: 767px)').matches;
   }
@@ -39,6 +41,18 @@
   }
 
   function init() {
+    if (initialized) {
+      var current = getButton();
+      if (!shouldEnable() && current) {
+        current.remove();
+      } else if (shouldEnable()) {
+        var existing = createButton();
+        updateVisibility(existing);
+      }
+      return;
+    }
+    initialized = true;
+
     if (!shouldEnable()) {
       return;
     }
@@ -78,4 +92,6 @@
   } else {
     init();
   }
+
+  document.addEventListener('site:page-loaded', init);
 })();
