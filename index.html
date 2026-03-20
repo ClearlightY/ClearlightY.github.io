@@ -32,6 +32,10 @@
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js" defer></script>
+
+  
   <title>Clearlight&#39;s BLOG</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
@@ -566,15 +570,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/posts/202603134097.html" target="_blank">
-          Windows锁屏后定时任务执行指南
+        <a href="/posts/202603131826.html" target="_blank">
+          Windows计划任务问题诊断与解决方案
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/202603134097.html" target="_blank">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/202603131826.html" target="_blank">
         <div>
-          Windows锁屏后定时任务执行指南概述本文档详细说明Windows系统中定时任务在电脑锁屏后的执行行为，并提供确保任务正常运行的配置方法和最佳实践。 一、锁屏 vs 睡眠&#x2F;休眠的区别锁屏状态（✔ 任务通常继续运行） 用户会话被锁定，但系统仍在正常运行 后台服务、计划任务不受影响 任务计划程序服务（Schedule）持续运行 CPU、内存等资源正常分配  睡眠&#x2F;休眠状态（⚠ 可
+          Windows计划任务问题诊断与解决方案问题概述计划任务”每小时执行微博热搜榜”未按预定时间自动执行，手动测试批处理文件可以正常运行，但计划任务执行失败。 一、问题诊断1. 检查任务状态1schtasks /query /tn &quot;每小时执行微博热搜榜&quot; /fo LIST /v  诊断结果：  任务状态：Ready（准备就绪） 上次运行时间：2026&#x2F;3&#x2F;13
         </div>
       </a>
 
@@ -627,15 +631,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/posts/202603131826.html" target="_blank">
-          Windows计划任务问题诊断与解决方案
+        <a href="/posts/202603134097.html" target="_blank">
+          Windows锁屏后定时任务执行指南
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/202603131826.html" target="_blank">
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/202603134097.html" target="_blank">
         <div>
-          Windows计划任务问题诊断与解决方案问题概述计划任务”每小时执行微博热搜榜”未按预定时间自动执行，手动测试批处理文件可以正常运行，但计划任务执行失败。 一、问题诊断1. 检查任务状态1schtasks /query /tn &quot;每小时执行微博热搜榜&quot; /fo LIST /v  诊断结果：  任务状态：Ready（准备就绪） 上次运行时间：2026&#x2F;3&#x2F;13
+          Windows锁屏后定时任务执行指南概述本文档详细说明Windows系统中定时任务在电脑锁屏后的执行行为，并提供确保任务正常运行的配置方法和最佳实践。 一、锁屏 vs 睡眠&#x2F;休眠的区别锁屏状态（✔ 任务通常继续运行） 用户会话被锁定，但系统仍在正常运行 后台服务、计划任务不受影响 任务计划程序服务（Schedule）持续运行 CPU、内存等资源正常分配  睡眠&#x2F;休眠状态（⚠ 可
         </div>
       </a>
 

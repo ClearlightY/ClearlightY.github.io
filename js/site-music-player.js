@@ -1,14 +1,16 @@
 (function() {
   var PLAYER_ID = 'site-music-player';
-  var STORAGE_KEY = 'site-music-player-state-v1';
+  var STORAGE_KEY = 'site-music-player-state-v2';
   var NAV_LOCK_CLASS = 'site-nav-loading';
   var state = window.__siteMusicPlayerState || (window.__siteMusicPlayerState = {});
 
   var playlist = [
     {
-      title: 'Background Music',
+      name: 'Background Music',
       artist: 'Clearlight',
-      src: '/music/background.mp3'
+      url: '/music/background.mp3',
+      cover: '/img/bg/index_bg.jpg',
+      theme: '#cc874c'
     }
   ];
 
@@ -22,37 +24,23 @@
   }
 
   function savePersistedState() {
-    if (!state.audio) {
+    if (!state.aplayer || !state.aplayer.audio) {
       return;
     }
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify({
-        trackIndex: state.trackIndex || 0,
-        currentTime: state.audio.currentTime || 0,
-        paused: state.audio.paused,
-        volume: state.audio.volume,
-        muted: state.audio.muted
+        index: typeof state.aplayer.list.index === 'number' ? state.aplayer.list.index : 0,
+        currentTime: state.aplayer.audio.currentTime || 0,
+        volume: state.aplayer.audio.volume,
+        paused: state.aplayer.audio.paused,
+        muted: state.aplayer.audio.muted
       }));
     } catch (err) {
       return;
     }
   }
 
-  function getCurrentTrack() {
-    return playlist[state.trackIndex || 0] || null;
-  }
-
-  function formatTime(value) {
-    if (!isFinite(value) || value < 0) {
-      return '--:--';
-    }
-    var total = Math.floor(value);
-    var minutes = Math.floor(total / 60);
-    var seconds = total % 60;
-    return minutes + ':' + String(seconds).padStart(2, '0');
-  }
-
-  function createPlayer() {
+  function createPlayerHost() {
     var host = document.getElementById(PLAYER_ID);
     if (host) {
       return host;
@@ -62,236 +50,137 @@
     host.id = PLAYER_ID;
     host.className = 'site-music-player';
     host.innerHTML = [
-      '<div class="site-music-player__panel">',
-      '  <button class="site-music-player__toggle" type="button" aria-label="Toggle music player">&#9835;</button>',
-      '  <div class="site-music-player__body">',
-      '    <div class="site-music-player__meta">',
-      '      <p class="site-music-player__eyebrow">Music</p>',
-      '      <strong class="site-music-player__title">Background Music</strong>',
-      '      <span class="site-music-player__artist">Clearlight</span>',
-      '    </div>',
-      '    <div class="site-music-player__controls">',
-      '      <button class="site-music-player__button" type="button" data-action="play">Play</button>',
-      '      <button class="site-music-player__button is-secondary" type="button" data-action="mute">Mute</button>',
-      '    </div>',
-      '    <label class="site-music-player__volume">',
-      '      <span>Volume</span>',
-      '      <input class="site-music-player__slider" type="range" min="0" max="1" step="0.01" value="0.7" aria-label="Music volume">',
-      '    </label>',
-      '    <div class="site-music-player__progress">',
-      '      <span class="site-music-player__time" data-role="current">0:00</span>',
-      '      <input class="site-music-player__seek" type="range" min="0" max="100" step="0.1" value="0" aria-label="Music progress">',
-      '      <span class="site-music-player__time" data-role="duration">--:--</span>',
-      '    </div>',
-      '    <p class="site-music-player__hint">Start playback once, then internal navigation will keep it running.</p>',
-      '  </div>',
+      '<div class="site-music-player__shell">',
+      '  <div class="site-music-player__badge">APlayer</div>',
+      '  <div class="site-music-player__mount"></div>',
+      '  <p class="site-music-player__hint">Start playback once, then internal navigation will keep it running.</p>',
       '</div>'
     ].join('');
-
     document.body.appendChild(host);
     return host;
   }
 
-  function syncPlayerUI() {
-    if (!state.host || !state.audio) {
+  function syncHint(message, isError) {
+    if (!state.host) {
       return;
     }
-    var track = getCurrentTrack();
-    var playBtn = state.host.querySelector('[data-action="play"]');
-    var muteBtn = state.host.querySelector('[data-action="mute"]');
-    var title = state.host.querySelector('.site-music-player__title');
-    var artist = state.host.querySelector('.site-music-player__artist');
-    var current = state.host.querySelector('[data-role="current"]');
-    var duration = state.host.querySelector('[data-role="duration"]');
-    var seek = state.host.querySelector('.site-music-player__seek');
-    var volume = state.host.querySelector('.site-music-player__slider');
     var hint = state.host.querySelector('.site-music-player__hint');
-
-    if (title) {
-      title.textContent = track ? track.title : 'No Track Configured';
-    }
-    if (artist) {
-      artist.textContent = track ? (track.artist || '') : 'Add an audio file under /source/music/';
-    }
-    if (playBtn) {
-      playBtn.textContent = state.audio.paused ? 'Play' : 'Pause';
-      playBtn.disabled = !track;
-    }
-    if (muteBtn) {
-      muteBtn.textContent = state.audio.muted ? 'Unmute' : 'Mute';
-      muteBtn.disabled = !track;
-    }
-    if (current) {
-      current.textContent = formatTime(state.audio.currentTime || 0);
-    }
-    if (duration) {
-      duration.textContent = formatTime(state.audio.duration || 0);
-    }
-    if (seek) {
-      var progress = state.audio.duration ? (state.audio.currentTime / state.audio.duration) * 100 : 0;
-      seek.value = String(progress || 0);
-      seek.disabled = !track;
-    }
-    if (volume) {
-      volume.value = String(state.audio.volume);
-      volume.disabled = !track;
-    }
-    if (hint) {
-      if (!track) {
-        hint.textContent = 'Player is ready. Put your file at /source/music/background.mp3 to enable playback.';
-      } else if (state.loadError) {
-        hint.textContent = 'Audio failed to load. Confirm that /source/music/background.mp3 exists.';
-      } else {
-        hint.textContent = 'Start playback once, then internal navigation will keep it running.';
-      }
-    }
-    state.host.classList.toggle('is-playing', !state.audio.paused);
-    state.host.classList.toggle('is-muted', !!state.audio.muted);
-    state.host.classList.toggle('is-empty', !track);
-    state.host.classList.toggle('is-collapsed', state.collapsed !== false);
-  }
-
-  function applyTrack(index) {
-    var track = playlist[index] || null;
-    state.trackIndex = index;
-    state.loadError = false;
-    if (!state.audio) {
+    if (!hint) {
       return;
     }
-    if (!track) {
-      state.audio.removeAttribute('src');
-      state.audio.load();
-      syncPlayerUI();
-      savePersistedState();
-      return;
-    }
-    if (state.audio.getAttribute('src') !== track.src) {
-      state.audio.src = track.src;
-      state.audio.load();
-    }
-    syncPlayerUI();
-    savePersistedState();
+    hint.textContent = message;
+    hint.classList.toggle('is-error', !!isError);
   }
 
-  function restoreAudioState() {
+  function getTrackCount() {
+    return Array.isArray(playlist) ? playlist.length : 0;
+  }
+
+  function restoreAPlayerState() {
+    if (!state.aplayer || !state.aplayer.audio) {
+      return;
+    }
     var persisted = loadPersistedState();
-    state.trackIndex = typeof persisted.trackIndex === 'number' ? persisted.trackIndex : 0;
-    state.collapsed = true;
-    state.audio.volume = typeof persisted.volume === 'number' ? persisted.volume : 0.7;
-    state.audio.muted = !!persisted.muted;
-    applyTrack(state.trackIndex);
+    var audio = state.aplayer.audio;
+    var listIndex = typeof persisted.index === 'number' ? persisted.index : 0;
 
-    var seekTo = typeof persisted.currentTime === 'number' ? persisted.currentTime : 0;
-    if (seekTo > 0) {
-      state.audio.addEventListener('loadedmetadata', function onLoaded() {
-        state.audio.removeEventListener('loadedmetadata', onLoaded);
-        if (seekTo < state.audio.duration) {
-          state.audio.currentTime = seekTo;
-          syncPlayerUI();
+    if (state.aplayer.list && typeof state.aplayer.list.switch === 'function' && getTrackCount() > 1) {
+      state.aplayer.list.switch(Math.max(0, Math.min(listIndex, getTrackCount() - 1)));
+    }
+
+    audio.volume = typeof persisted.volume === 'number' ? persisted.volume : 0.7;
+    audio.muted = !!persisted.muted;
+
+    if (typeof persisted.currentTime === 'number' && persisted.currentTime > 0) {
+      audio.addEventListener('loadedmetadata', function onLoaded() {
+        audio.removeEventListener('loadedmetadata', onLoaded);
+        if (persisted.currentTime < audio.duration) {
+          audio.currentTime = persisted.currentTime;
         }
       });
     }
+
+    if (!playlist.length) {
+      syncHint('Player is ready. Put your file at /source/music/background.mp3 to enable playback.', false);
+      return;
+    }
+
+    syncHint('Start playback once, then internal navigation will keep it running.', false);
   }
 
-  function togglePlay() {
-    if (!getCurrentTrack()) {
-      syncPlayerUI();
+  function bindAPlayerEvents() {
+    if (!state.aplayer || state.host.getAttribute('data-player-bound') === '1') {
       return;
     }
-    if (state.audio.paused) {
-      state.audio.play().then(function() {
-        state.loadError = false;
-        syncPlayerUI();
-        savePersistedState();
-      }).catch(function() {
-        syncPlayerUI();
-      });
-      return;
-    }
-    state.audio.pause();
-    syncPlayerUI();
-    savePersistedState();
-  }
+    state.host.setAttribute('data-player-bound', '1');
 
-  function toggleMute() {
-    if (!getCurrentTrack()) {
-      return;
-    }
-    state.audio.muted = !state.audio.muted;
-    syncPlayerUI();
-    savePersistedState();
-  }
-
-  function bindPlayerEvents() {
-    if (!state.host || state.host.getAttribute('data-bound') === '1') {
-      return;
-    }
-    state.host.setAttribute('data-bound', '1');
-
-    state.host.addEventListener('click', function(e) {
-      var button = e.target.closest ? e.target.closest('button') : null;
-      if (!button || !state.host.contains(button)) {
-        return;
-      }
-      var action = button.getAttribute('data-action');
-      if (action === 'play') {
-        togglePlay();
-        return;
-      }
-      if (action === 'mute') {
-        toggleMute();
-        return;
-      }
-      if (button.classList.contains('site-music-player__toggle')) {
-        state.collapsed = !state.host.classList.contains('is-collapsed');
-        syncPlayerUI();
-      }
+    var audio = state.aplayer.audio;
+    state.aplayer.on('play', function() {
+      syncHint('APlayer is active. Internal navigation will keep playback running.', false);
+      savePersistedState();
     });
-
-    var volume = state.host.querySelector('.site-music-player__slider');
-    if (volume) {
-      volume.addEventListener('input', function() {
-        state.audio.volume = Number(volume.value || 0.7);
-        if (state.audio.volume > 0 && state.audio.muted) {
-          state.audio.muted = false;
-        }
-        syncPlayerUI();
-        savePersistedState();
-      });
-    }
-
-    var seek = state.host.querySelector('.site-music-player__seek');
-    if (seek) {
-      seek.addEventListener('input', function() {
-        if (!state.audio.duration) {
-          return;
-        }
-        state.audio.currentTime = (Number(seek.value || 0) / 100) * state.audio.duration;
-        syncPlayerUI();
-      });
-      seek.addEventListener('change', savePersistedState);
-    }
-
-    state.audio.addEventListener('timeupdate', function() {
-      syncPlayerUI();
+    state.aplayer.on('pause', savePersistedState);
+    state.aplayer.on('loadstart', savePersistedState);
+    state.aplayer.on('listswitch', savePersistedState);
+    audio.addEventListener('timeupdate', function() {
       if (!state.lastSaveAt || Date.now() - state.lastSaveAt > 3000) {
         state.lastSaveAt = Date.now();
         savePersistedState();
       }
     });
-    state.audio.addEventListener('loadedmetadata', syncPlayerUI);
-    state.audio.addEventListener('play', syncPlayerUI);
-    state.audio.addEventListener('pause', syncPlayerUI);
-    state.audio.addEventListener('volumechange', syncPlayerUI);
-    state.audio.addEventListener('error', function() {
-      state.loadError = true;
-      syncPlayerUI();
+    audio.addEventListener('volumechange', savePersistedState);
+    audio.addEventListener('ended', savePersistedState);
+    audio.addEventListener('error', function() {
+      syncHint('Audio failed to load. Confirm that /source/music/background.mp3 exists.', true);
     });
-    state.audio.addEventListener('ended', function() {
-      state.audio.currentTime = 0;
-      syncPlayerUI();
-      savePersistedState();
+  }
+
+  function mountAPlayer() {
+    if (state.aplayer || !window.APlayer) {
+      return !!state.aplayer;
+    }
+    if (!getTrackCount()) {
+      return false;
+    }
+
+    state.host = createPlayerHost();
+    state.aplayer = new window.APlayer({
+      container: state.host.querySelector('.site-music-player__mount'),
+      fixed: false,
+      mini: false,
+      autoplay: false,
+      theme: '#cc874c',
+      loop: 'all',
+      order: 'list',
+      preload: 'metadata',
+      volume: 0.7,
+      mutex: false,
+      listFolded: true,
+      listMaxHeight: '220px',
+      audio: playlist
     });
+
+    restoreAPlayerState();
+    bindAPlayerEvents();
+    return true;
+  }
+
+  function waitForAPlayer() {
+    state.host = createPlayerHost();
+    if (mountAPlayer()) {
+      return;
+    }
+
+    syncHint('Loading APlayer resources...', false);
+    if (state.aplayerWaiter) {
+      window.clearTimeout(state.aplayerWaiter);
+    }
+    state.aplayerWaiter = window.setTimeout(function retry() {
+      if (mountAPlayer()) {
+        return;
+      }
+      syncHint('APlayer failed to load. Check CDN access or provide local APlayer assets.', true);
+    }, 1200);
   }
 
   function shouldHandleLink(link, event) {
@@ -450,16 +339,9 @@
   }
 
   function init() {
-    state.host = createPlayer();
-    if (!state.audio) {
-      state.audio = document.createElement('audio');
-      state.audio.preload = 'metadata';
-      state.audio.setAttribute('aria-hidden', 'true');
-    }
-    restoreAudioState();
-    bindPlayerEvents();
+    state.host = createPlayerHost();
+    waitForAPlayer();
     bindNavigation();
-    syncPlayerUI();
   }
 
   if (document.readyState === 'loading') {
