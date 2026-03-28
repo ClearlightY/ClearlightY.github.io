@@ -1,22 +1,11 @@
 (function() {
   var PLAYER_ID = 'site-music-player';
-  var STORAGE_KEY = 'site-music-player-state-v2';
+  var STORAGE_KEY = 'site-music-player-state-v3';
   var NAV_LOCK_CLASS = 'site-nav-loading';
+  var PLAYLIST_URL = '/music/playlist.json';
   var state = window.__siteMusicPlayerState || (window.__siteMusicPlayerState = {});
 
-  var playlist = [
-    {
-      name: 'Background Music',
-      artist: 'Clearlight',
-      url: '/music/background.mp3',
-      cover: '/img/bg/index_bg.jpg',
-      theme: '#cc874c'
-    }
-  ];
-
-  function isMobileViewport() {
-    return window.matchMedia && window.matchMedia('(max-width: 767px)').matches;
-  }
+  state.playlist = Array.isArray(state.playlist) ? state.playlist : [];
 
   function loadPersistedState() {
     try {
@@ -38,11 +27,23 @@
         volume: state.aplayer.audio.volume,
         paused: state.aplayer.audio.paused,
         muted: state.aplayer.audio.muted,
-        collapsed: !!state.collapsed
+        collapsed: !!state.collapsed,
+        random: !!state.randomMode
       }));
     } catch (err) {
       return;
     }
+  }
+
+  function getTrackCount() {
+    return Array.isArray(state.playlist) ? state.playlist.length : 0;
+  }
+
+  function getCurrentIndex() {
+    if (state.aplayer && state.aplayer.list && typeof state.aplayer.list.index === 'number') {
+      return state.aplayer.list.index;
+    }
+    return 0;
   }
 
   function createPlayerHost() {
@@ -55,35 +56,19 @@
     host.id = PLAYER_ID;
     host.className = 'site-music-player';
     host.innerHTML = [
-      '<button class="site-music-player__toggle" type="button" aria-expanded="false" aria-label="Toggle music player">♪</button>',
+      '<button class="site-music-player__toggle" type="button" aria-expanded="false" aria-label="Toggle music player">&#9835;</button>',
       '<div class="site-music-player__shell">',
-      '  <div class="site-music-player__badge">APlayer</div>',
       '  <div class="site-music-player__mount"></div>',
-      '  <p class="site-music-player__hint">Start playback once, then internal navigation will keep it running.</p>',
+      '  <div class="site-music-player__toolbar">',
+      '    <button class="site-music-player__action site-music-player__action--collapse" type="button" data-action="collapse">Hide</button>',
+      '    <button class="site-music-player__action" type="button" data-action="prev">Prev</button>',
+      '    <button class="site-music-player__action" type="button" data-action="next">Next</button>',
+      '    <button class="site-music-player__action" type="button" data-action="random" aria-pressed="false">Sequence</button>',
+      '  </div>',
       '</div>'
     ].join('');
     document.body.appendChild(host);
     return host;
-  }
-
-  function syncCollapsedUI() {
-    if (!state.host) {
-      return;
-    }
-    var collapsed = state.collapsed !== false;
-    state.host.classList.toggle('is-collapsed', collapsed);
-    var toggle = state.host.querySelector('.site-music-player__toggle');
-    if (toggle) {
-      toggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-      toggle.setAttribute('aria-label', collapsed ? 'Expand music player' : 'Collapse music player');
-      toggle.textContent = collapsed ? '♪' : '×';
-    }
-  }
-
-  function setCollapsed(nextValue) {
-    state.collapsed = !!nextValue;
-    syncCollapsedUI();
-    savePersistedState();
   }
 
   function syncHint(message, isError) {
@@ -98,8 +83,100 @@
     hint.classList.toggle('is-error', !!isError);
   }
 
-  function getTrackCount() {
-    return Array.isArray(playlist) ? playlist.length : 0;
+  function syncCollapsedUI() {
+    if (!state.host) {
+      return;
+    }
+    var collapsed = state.collapsed !== false;
+    state.host.classList.toggle('is-collapsed', collapsed);
+    var toggle = state.host.querySelector('.site-music-player__toggle');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      toggle.setAttribute('aria-label', collapsed ? 'Expand music player' : 'Collapse music player');
+      toggle.innerHTML = collapsed ? '&#9835;' : '&#8722;';
+    }
+  }
+
+  function setCollapsed(nextValue) {
+    state.collapsed = !!nextValue;
+    syncCollapsedUI();
+    savePersistedState();
+  }
+
+  function syncPlaylistControls() {
+    if (!state.host) {
+      return;
+    }
+    var randomBtn = state.host.querySelector('[data-action="random"]');
+    var prevBtn = state.host.querySelector('[data-action="prev"]');
+    var nextBtn = state.host.querySelector('[data-action="next"]');
+    var hasTracks = getTrackCount() > 0;
+
+    if (randomBtn) {
+      randomBtn.disabled = !hasTracks;
+      randomBtn.setAttribute('aria-pressed', state.randomMode ? 'true' : 'false');
+      randomBtn.textContent = state.randomMode ? 'Random' : 'Sequence';
+    }
+    if (prevBtn) {
+      prevBtn.disabled = !hasTracks;
+    }
+    if (nextBtn) {
+      nextBtn.disabled = !hasTracks;
+    }
+  }
+
+  function switchTrack(nextIndex, shouldAutoplay) {
+    if (!state.aplayer || !state.aplayer.list || typeof state.aplayer.list.switch !== 'function') {
+      return;
+    }
+    var total = getTrackCount();
+    if (!total) {
+      return;
+    }
+    var safeIndex = ((nextIndex % total) + total) % total;
+    state.aplayer.list.switch(safeIndex);
+    syncPlaylistControls();
+    savePersistedState();
+    if (shouldAutoplay) {
+      setTimeout(function() {
+        state.aplayer.play();
+      }, 0);
+    }
+  }
+
+  function playRandomTrack() {
+    var total = getTrackCount();
+    if (!total) {
+      return;
+    }
+    var currentIndex = getCurrentIndex();
+    var nextIndex = currentIndex;
+    if (total > 1) {
+      while (nextIndex === currentIndex) {
+        nextIndex = Math.floor(Math.random() * total);
+      }
+    }
+    var isPlaying = !!(state.aplayer && state.aplayer.audio && !state.aplayer.audio.paused);
+    switchTrack(nextIndex, isPlaying);
+  }
+
+  function stepTrack(direction) {
+    var total = getTrackCount();
+    if (!total) {
+      return;
+    }
+    if (state.randomMode && total > 1) {
+      playRandomTrack();
+      return;
+    }
+    var isPlaying = !!(state.aplayer && state.aplayer.audio && !state.aplayer.audio.paused);
+    switchTrack(getCurrentIndex() + direction, isPlaying);
+  }
+
+  function setRandomMode(enabled) {
+    state.randomMode = !!enabled;
+    syncPlaylistControls();
+    savePersistedState();
   }
 
   function restoreAPlayerState() {
@@ -109,9 +186,11 @@
     var persisted = loadPersistedState();
     var audio = state.aplayer.audio;
     var listIndex = typeof persisted.index === 'number' ? persisted.index : 0;
-    state.collapsed = typeof persisted.collapsed === 'boolean' ? persisted.collapsed : true;
 
-    if (state.aplayer.list && typeof state.aplayer.list.switch === 'function' && getTrackCount() > 1) {
+    state.collapsed = typeof persisted.collapsed === 'boolean' ? persisted.collapsed : true;
+    state.randomMode = !!persisted.random;
+
+    if (state.aplayer.list && typeof state.aplayer.list.switch === 'function' && getTrackCount() > 0) {
       state.aplayer.list.switch(Math.max(0, Math.min(listIndex, getTrackCount() - 1)));
     }
 
@@ -127,14 +206,16 @@
       });
     }
 
-    if (!playlist.length) {
-      syncHint('Player is ready. Put your file at /source/music/background.mp3 to enable playback.', false);
+    if (!state.playlist.length) {
+      syncHint('Player is ready. Put your audio files under /source/music/ to enable playback.', false);
       syncCollapsedUI();
+      syncPlaylistControls();
       return;
     }
 
     syncHint('Start playback once, then internal navigation will keep it running.', false);
     syncCollapsedUI();
+    syncPlaylistControls();
   }
 
   function bindAPlayerEvents() {
@@ -145,18 +226,41 @@
 
     var audio = state.aplayer.audio;
     var toggle = state.host.querySelector('.site-music-player__toggle');
+
     if (toggle) {
       toggle.addEventListener('click', function() {
         setCollapsed(state.collapsed === false);
       });
     }
+
+    state.host.addEventListener('click', function(e) {
+      var btn = e.target && e.target.closest ? e.target.closest('.site-music-player__action') : null;
+      if (!btn || !state.host.contains(btn)) {
+        return;
+      }
+      var action = btn.getAttribute('data-action');
+      if (action === 'collapse') {
+        setCollapsed(true);
+      } else if (action === 'prev') {
+        stepTrack(-1);
+      } else if (action === 'next') {
+        stepTrack(1);
+      } else if (action === 'random') {
+        setRandomMode(!state.randomMode);
+      }
+    });
+
     state.aplayer.on('play', function() {
       syncHint('APlayer is active. Internal navigation will keep playback running.', false);
       savePersistedState();
     });
     state.aplayer.on('pause', savePersistedState);
     state.aplayer.on('loadstart', savePersistedState);
-    state.aplayer.on('listswitch', savePersistedState);
+    state.aplayer.on('listswitch', function() {
+      syncPlaylistControls();
+      savePersistedState();
+    });
+
     audio.addEventListener('timeupdate', function() {
       if (!state.lastSaveAt || Date.now() - state.lastSaveAt > 3000) {
         state.lastSaveAt = Date.now();
@@ -164,9 +268,14 @@
       }
     });
     audio.addEventListener('volumechange', savePersistedState);
-    audio.addEventListener('ended', savePersistedState);
+    audio.addEventListener('ended', function() {
+      savePersistedState();
+      if (state.randomMode && getTrackCount() > 1) {
+        playRandomTrack();
+      }
+    });
     audio.addEventListener('error', function() {
-      syncHint('Audio failed to load. Confirm that /source/music/background.mp3 exists.', true);
+      syncHint('Audio failed to load. Confirm that files under /source/music/ were generated correctly.', true);
     });
 
     if (window.matchMedia) {
@@ -204,9 +313,9 @@
       preload: 'metadata',
       volume: 0.7,
       mutex: false,
-      listFolded: true,
+      listFolded: false,
       listMaxHeight: '220px',
-      audio: playlist
+      audio: state.playlist
     });
 
     restoreAPlayerState();
@@ -218,6 +327,7 @@
     state.host = createPlayerHost();
     state.collapsed = true;
     syncCollapsedUI();
+
     if (mountAPlayer()) {
       return;
     }
@@ -232,6 +342,29 @@
       }
       syncHint('APlayer failed to load. Check CDN access or provide local APlayer assets.', true);
     }, 1200);
+  }
+
+  function loadPlaylist() {
+    if (state.playlistLoaded) {
+      return Promise.resolve(state.playlist);
+    }
+    state.playlistLoaded = true;
+    return window.fetch(PLAYLIST_URL, { credentials: 'same-origin' })
+      .then(function(res) {
+        if (!res.ok) {
+          throw new Error('HTTP ' + res.status);
+        }
+        return res.json();
+      })
+      .then(function(payload) {
+        state.playlist = payload && Array.isArray(payload.tracks) ? payload.tracks : [];
+        return state.playlist;
+      })
+      .catch(function() {
+        state.playlist = [];
+        state.playlistLoaded = false;
+        throw new Error('playlist-load-failed');
+      });
   }
 
   function shouldHandleLink(link, event) {
@@ -439,7 +572,13 @@
 
   function init() {
     state.host = createPlayerHost();
-    waitForAPlayer();
+    syncHint('Loading playlist...', false);
+    loadPlaylist().then(function() {
+      waitForAPlayer();
+    }).catch(function() {
+      syncHint('Playlist failed to load. Run a fresh build and check /source/music/.', true);
+      syncPlaylistControls();
+    });
     bindNavigation();
   }
 

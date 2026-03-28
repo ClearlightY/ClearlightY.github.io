@@ -1,0 +1,14 @@
+{
+  "generatedAt": "2026-03-28T15:32:18.399Z",
+  "total": 1,
+  "tracks": [
+    {
+      "name": "background",
+      "artist": "Clearlight",
+      "url": "/music/background.mp3",
+      "cover": "/img/bg/index_bg.jpg",
+      "theme": "#cc874c",
+      "filename": "background.mp3"
+    }
+  ]
+}
