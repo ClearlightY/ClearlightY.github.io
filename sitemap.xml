@@ -146,7 +146,7 @@
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/css/iconfont_csdn/iconfont.json</loc>
+    <loc>http://clearlight.com.cn/css/iconfont_csdn/demo_index.html</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -155,7 +155,7 @@
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/css/iconfont_csdn/demo_index.html</loc>
+    <loc>http://clearlight.com.cn/css/iconfont_csdn/iconfont.json</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -657,14 +657,14 @@
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/tags/Hexo/</loc>
+    <loc>http://clearlight.com.cn/tags/Win10%E5%AD%97%E4%BD%93%E5%A2%9E%E5%BC%BA/</loc>
     <lastmod>2026-04-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/tags/Win10%E5%AD%97%E4%BD%93%E5%A2%9E%E5%BC%BA/</loc>
+    <loc>http://clearlight.com.cn/tags/Hexo/</loc>
     <lastmod>2026-04-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -685,14 +685,14 @@
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/tags/share/</loc>
+    <loc>http://clearlight.com.cn/tags/Daily-notes/</loc>
     <lastmod>2026-04-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/tags/Daily-notes/</loc>
+    <loc>http://clearlight.com.cn/tags/share/</loc>
     <lastmod>2026-04-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
