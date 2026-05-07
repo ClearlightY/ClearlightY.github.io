@@ -128,7 +128,7 @@
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/defLinks/index.html</loc>
+    <loc>http://clearlight.com.cn/google91a04f17fb107c17.html</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -137,7 +137,7 @@
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/google91a04f17fb107c17.html</loc>
+    <loc>http://clearlight.com.cn/defLinks/index.html</loc>
     
     <lastmod>2026-03-10</lastmod>
     
@@ -601,13 +601,6 @@
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/tags/Linux-Redis/</loc>
-    <lastmod>2026-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://clearlight.com.cn/tags/Linux-IDEA-2019-2/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -616,6 +609,13 @@
   
   <url>
     <loc>http://clearlight.com.cn/tags/V2ray/</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://clearlight.com.cn/tags/Linux-Redis/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -636,13 +636,6 @@
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/tags/vimdiff/</loc>
-    <lastmod>2026-05-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://clearlight.com.cn/tags/JSP/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
@@ -650,14 +643,14 @@
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/tags/Vim/</loc>
+    <loc>http://clearlight.com.cn/tags/vimdiff/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/tags/Win10%E5%AD%97%E4%BD%93%E5%A2%9E%E5%BC%BA/</loc>
+    <loc>http://clearlight.com.cn/tags/Vim/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -678,7 +671,7 @@
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/tags/share/</loc>
+    <loc>http://clearlight.com.cn/tags/Win10%E5%AD%97%E4%BD%93%E5%A2%9E%E5%BC%BA/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -686,6 +679,13 @@
   
   <url>
     <loc>http://clearlight.com.cn/tags/Bootstrap/</loc>
+    <lastmod>2026-05-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://clearlight.com.cn/tags/share/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -727,14 +727,14 @@
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/tags/Windows/</loc>
+    <loc>http://clearlight.com.cn/tags/Notice/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/tags/Notice/</loc>
+    <loc>http://clearlight.com.cn/tags/Windows/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -785,14 +785,14 @@
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/categories/Dev-tools/</loc>
+    <loc>http://clearlight.com.cn/categories/Work/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://clearlight.com.cn/categories/Work/</loc>
+    <loc>http://clearlight.com.cn/categories/Dev-tools/</loc>
     <lastmod>2026-05-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
