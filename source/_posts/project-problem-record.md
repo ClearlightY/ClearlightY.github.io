@@ -1,8 +1,13 @@
 ---
 title: project_problem_record
+description: "汇总项目开发中遇到的 JSP、EL 表达式、tabIndex、前端页面和业务代码问题，作为工作排查记录。"
+categories: "工作笔记"
+tags:
+  - "JSP"
+  - "EL表达式"
+  - "前端问题"
+  - "项目记录"
 top: 0
-categories: Work
-tags: JSP
 abbrlink: 5056
 date: 2020-04-16 22:35:52
 ---

@@ -1,8 +1,13 @@
 ---
 title: 高效使用Google搜索 - Tools
+description: "整理 Google 搜索相关插件、镜像和访问工具，帮助提升资料检索和问题搜索效率。"
+categories: "工具资源"
+tags:
+  - "Google搜索"
+  - "Chrome插件"
+  - "搜索技巧"
+  - "工具"
 top: 0
-categories: 资源分享
-tags: tools
 abbrlink: 33405
 date: 2020-04-27 16:32:01
 ---

@@ -1,8 +1,13 @@
 ---
 title: vim常用操作
+description: "整理 Vim 常用行号设置、命令行快捷键、插入模式返回和基础编辑操作，便于快速查阅。"
+categories: "开发工具"
+tags:
+  - "Vim"
+  - "快捷键"
+  - "命令行"
+  - "编辑器"
 top: 0
-categories: Dev tools
-tags: Vim
 abbrlink: 55103
 date: 2020-06-04 00:12:09
 ---

@@ -1,10 +1,15 @@
 ---
 title: Hexo 静态博客框架使用教程
+description: "从环境准备、安装 Hexo、初始化博客、站点配置、写文章到部署，系统介绍 Hexo 静态博客的搭建流程。"
+categories: "Hexo"
+tags:
+  - "Hexo"
+  - "静态博客"
+  - "GitHub Pages"
+  - "教程"
 top: 0
 abbrlink: 202603101900
 date: 2026-03-10 19:00:00
-categories: Hexo
-tags: 教程
 ---
 
 

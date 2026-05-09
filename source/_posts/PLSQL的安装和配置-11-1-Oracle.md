@@ -1,8 +1,13 @@
 ---
 title: PLSQL的安装和配置 - v11.1 Oracle
+description: "记录 PL/SQL Developer 11.1 免安装版、Oracle instantclient 配置以及查询中文乱码问题的处理方法。"
+categories: "资源分享"
+tags:
+  - "PLSQL Developer"
+  - "Oracle"
+  - "数据库工具"
+  - "中文乱码"
 top: 0
-categories: 资源分享
-tags: PLSQL developer
 abbrlink: 45769
 date: 2020-11-01 01:03:05
 ---

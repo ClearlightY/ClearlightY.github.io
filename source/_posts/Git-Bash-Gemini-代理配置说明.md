@@ -1,10 +1,15 @@
 ---
 title: Git Bash Gemini 代理配置说明
+description: "说明在 Git Bash 中为 Gemini CLI 持久配置代理环境变量的方法，并解决 .bashrc 不存在导致配置无法加载的问题。"
+categories: "AI"
+tags:
+  - "Gemini CLI"
+  - "Git Bash"
+  - "代理配置"
+  - "环境变量"
 top: 0
 abbrlink: 202603289138
 date: 2026-03-28 20:53:54
-categories: #根据文章去分类
-tags: #根据文章给出对应Tag
 ---
 
 ﻿# 在 Git Bash 中为 Gemini 持久配置代理

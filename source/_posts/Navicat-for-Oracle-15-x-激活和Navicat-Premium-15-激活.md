@@ -1,8 +1,13 @@
 ---
 title: Navicat for Oracle 15.x 激活和Navicat Premium 15 激活
+description: "整理 Navicat for Oracle 15.x、Navicat Premium 15、instantclient 下载信息、安装激活流程和 Oracle 连接注意事项。"
+categories: "资源分享"
+tags:
+  - "Navicat"
+  - "Oracle"
+  - "数据库工具"
+  - "开发工具"
 top: 0
-categories: 资源分享
-tags: Navicat
 abbrlink: 3b3ba7ea
 date: 2021-01-14 17:02:28
 ---

@@ -1,8 +1,13 @@
 ---
 title: MyBatis入门(一)
+description: "介绍 MyBatis 持久层框架的基本概念、ORM 思想、Maven 工程搭建、配置文件和入门开发流程。"
+categories: "Java"
+tags:
+  - "MyBatis"
+  - "Java"
+  - "ORM"
+  - "Maven"
 top: 0
-categories: Java
-tags: MyBatis
 abbrlink: 17177
 date: 2020-03-10 22:22:39
 ---

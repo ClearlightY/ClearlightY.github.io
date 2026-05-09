@@ -1,8 +1,13 @@
 ---
 title: Redis的安装 - Linux/Windows
+description: "整理 Redis 在 Linux 和 Windows 环境下的下载安装、编译、启动命令和基础运行步骤。"
+categories: "数据库"
+tags:
+  - "Redis"
+  - "Linux"
+  - "Windows"
+  - "安装教程"
 top: 0
-categories: Skill
-tags: Linux_Redis
 abbrlink: 54105
 date: 2020-04-22 23:19:30
 ---

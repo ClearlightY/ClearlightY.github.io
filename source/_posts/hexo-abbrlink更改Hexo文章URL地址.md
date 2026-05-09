@@ -1,10 +1,15 @@
 ---
 title: hexo-abbrlink更改Hexo文章URL地址
+description: "记录使用 hexo-abbrlink 调整 Hexo 文章 URL 地址的方法，适合优化静态博客文章永久链接结构。"
+categories: "Hexo"
+tags:
+  - "Hexo"
+  - "abbrlink"
+  - "永久链接"
+  - "博客优化"
 top: 0
 abbrlink: 10838
 date: 2021-01-02 16:07:30
-categories: Hexo
-tags: hexo-abbrlink
 ---
 
 **作者：xingguang**

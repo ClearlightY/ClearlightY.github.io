@@ -1,8 +1,13 @@
 ---
 title: IDEA/PyCharm/GoLang等JetBrains 2020.3.x激活到2099
+description: "归档 JetBrains 2020.3.x 系列产品历史激活资源说明，文章内容已标注方法失效，仅作为旧资料留存。"
+categories: "资源分享"
+tags:
+  - "JetBrains"
+  - "IDEA"
+  - "PyCharm"
+  - "历史归档"
 top: 0
-categories: 资源分享
-tags: IDEA2020.3激活
 abbrlink: 64128
 date: 2021-01-01 23:14:45
 ---

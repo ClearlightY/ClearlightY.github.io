@@ -1,7 +1,12 @@
 ---
 title: VPN on linux
-categories: 资源分享
-tags: V2ray
+description: "记录 Linux、Windows、macOS 下 Qv2ray 和 v2ray 核心文件的下载、路径配置和基础代理工具使用方法。"
+categories: "资源分享"
+tags:
+  - "V2Ray"
+  - "Qv2ray"
+  - "Linux"
+  - "代理工具"
 abbrlink: 7479
 date: 2020-03-04 22:24:37
 ---

@@ -1,10 +1,15 @@
 ---
 title: OpenClaw 配置 Deepseek 3.2 模型指南
+description: "详细说明在 OpenClaw 中配置 Deepseek 3.2 模型、API 密钥、提供商参数、默认模型和验证步骤。"
+categories: "AI"
+tags:
+  - "OpenClaw"
+  - "Deepseek"
+  - "API配置"
+  - "AI模型"
 top: 0
 abbrlink: 202603111916
 date: 2026-03-11 10:46:39
-categories: AI
-tags: OpenClaw
 ---
 
 ## 📋 概述

@@ -1,10 +1,15 @@
 ---
 title: Hexo Fluid主题 细节优化
+description: "记录 Hexo Fluid 主题的版权声明、Tag 样式和页脚等细节优化方法，用于定制个人博客展示效果。"
+categories: "Hexo"
+tags:
+  - "Hexo"
+  - "Fluid主题"
+  - "主题优化"
+  - "博客定制"
 top: 0
 abbrlink: fluid_details
 date: 2021-01-23 15:16:26
-categories: Hexo
-tags: Fluid
 ---
 
 # 一、版权声明优化

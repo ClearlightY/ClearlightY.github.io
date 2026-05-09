@@ -1,10 +1,15 @@
 ---
 title: Windows锁屏后定时任务执行指南
+description: "解释 Windows 锁屏、睡眠和休眠对计划任务的影响，并给出锁屏后保持定时任务执行的配置建议。"
+categories: "Windows"
+tags:
+  - "Windows"
+  - "计划任务"
+  - "锁屏"
+  - "电源管理"
 top: 0
 abbrlink: 202603134097
 date: 2026-03-13 17:38:21
-categories: Windows
-tags: 计划任务
 ---
 
 # Windows锁屏后定时任务执行指南

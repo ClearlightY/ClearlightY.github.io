@@ -1,8 +1,13 @@
 ---
 title: 文件上传并校验文件 - Vue+Django开发
+description: "记录使用 Vue 和 Django 实现文件上传、组件注册、接口请求、文件校验和前后端联调的开发流程。"
+categories: "前端开发"
+tags:
+  - "Vue"
+  - "Django"
+  - "文件上传"
+  - "前后端开发"
 top: 0
-categories: Work
-tags: ["Vue","Django"]
 abbrlink: 17143
 date: 2020-06-12 11:17:34
 ---

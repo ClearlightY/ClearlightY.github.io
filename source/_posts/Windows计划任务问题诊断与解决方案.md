@@ -1,10 +1,15 @@
 ---
 title: Windows计划任务问题诊断与解决方案
+description: "分析 Windows 计划任务执行失败、错误代码 255、权限和批处理路径问题，并提供诊断与修复方案。"
+categories: "Windows"
+tags:
+  - "Windows"
+  - "计划任务"
+  - "故障排查"
+  - "PowerShell"
 top: 0
 abbrlink: 202603131826
 date: 2026-03-13 17:38:21
-categories: Windows
-tags: 计划任务
 ---
 
 # Windows计划任务问题诊断与解决方案

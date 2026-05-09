@@ -1,8 +1,13 @@
 ---
 title: JetBrains 全系列产品 包括 IDEA激活到2089年
+description: "归档 JetBrains 全系列产品历史激活方法和相关链接，内容已注明失效，仅用于旧资料查阅。"
+categories: "资源分享"
+tags:
+  - "JetBrains"
+  - "IDEA"
+  - "开发工具"
+  - "历史归档"
 top: 0
-categories: 资源分享
-tags: JetBrains产品激活
 abbrlink: 52325
 date: 2020-11-12 19:32:48
 ---

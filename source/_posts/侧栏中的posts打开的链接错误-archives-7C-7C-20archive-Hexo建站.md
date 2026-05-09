@@ -1,7 +1,12 @@
 ---
 title: 侧栏中的posts打开的链接错误 /archives/%7C%7C%20archive/ - Hexo建站
-tags: Hexo
-categories: BugFix
+description: "记录 Hexo Next 主题侧栏 posts 链接出现 /archives/%7C%7C%20archive/ 多余字符的原因和模板修复方法。"
+categories: "Hexo"
+tags:
+  - "Hexo"
+  - "Next主题"
+  - "链接错误"
+  - "Bug修复"
 abbrlink: 28754
 date: 2020-03-05 17:53:31
 ---

@@ -1,10 +1,15 @@
 ---
 title: Hexo 部署錯誤解決方案：Please make sure you have the correct access rights and the repository exists
+description: "分析 Hexo 部署时报 Please make sure you have the correct access rights and the repository exists 的原因，并给出 Git、仓库权限和插件排查步骤。"
+categories: "Hexo"
+tags:
+  - "Hexo"
+  - "部署错误"
+  - "Git"
+  - "SSH"
 top: 0
 abbrlink: 202603101901
 date: 2026-03-10 19:00:01
-categories: Hexo
-tags: 问题修复
 ---
 
 ## 錯誤描述

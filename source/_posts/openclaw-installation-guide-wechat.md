@@ -1,10 +1,15 @@
 ---
 title: Openclaw installation guide wechat
+description: "介绍 OpenClaw 个人 AI 助手的系统要求、Node.js 环境检查、全局安装、初始化配置和基础使用流程。"
+categories: "AI"
+tags:
+  - "OpenClaw"
+  - "AI助手"
+  - "Node.js"
+  - "安装配置"
 top: 0
 abbrlink: 202603118334
 date: 2026-03-11 10:46:39
-categories: AI
-tags: OpenClaw
 ---
 
 # 🦞 OpenClaw 安装与配置完全指南

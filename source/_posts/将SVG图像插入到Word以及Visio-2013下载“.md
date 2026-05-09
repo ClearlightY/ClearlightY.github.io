@@ -1,8 +1,13 @@
 ---
 title: 将SVG图像插入到Word以及Visio 2013下载
+description: "说明使用 Visio 将 SVG 图像转换为 EMF 后插入 Word 的方法，并附 Visio 2013 资源和参考链接。"
+categories: "办公工具"
+tags:
+  - "SVG"
+  - "Word"
+  - "Visio"
+  - "EMF"
 top: 0
-categories: 资源分享
-tags: tools
 abbrlink: 34755
 date: 2020-04-28 17:18:20
 ---

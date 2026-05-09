@@ -1,10 +1,15 @@
 ---
 title: Windows计划任务管理指南
+description: "说明 Windows 任务计划程序的创建、查看、修改和管理方法，用于定时自动执行批处理文件或其他程序。"
+categories: "Windows"
+tags:
+  - "Windows"
+  - "计划任务"
+  - "自动化"
+  - "批处理"
 top: 0
 abbrlink: 202603129288
 date: 2026-03-12 15:19:56
-categories: Windows
-tags: 计划任务
 ---
 
 # Windows计划任务管理指南

@@ -5,16 +5,17 @@
 # Site
 title: Clearlight's BLOG
 subtitle: ''
-description: 'smile, breath and go slowly.'
-keywords:
+description: 'Clearlight 的个人博客，记录 AI 工具、编程开发、Hexo 建站、Windows 自动化、学习资源与生活笔记。'
+keywords: AI, 编程, Hexo, Windows, 开发工具, 学习资源, 个人博客
 author: xyli 
 language: en
-#language: zh-Hans
+# Fluid supports zh-CN if Chinese theme labels are needed later.
+#language: zh-CN
 timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://clearlight.com.cn/
+url: https://clearlight.com.cn
 root: /
 # permalink: :year/:month/:day/:title/
 permalink: posts/:abbrlink.html  # 此处可以自己设置，也可以直接使用 :/abbrlink
@@ -40,6 +41,10 @@ skip_render:
   - README.md
   - js/toplist-enhancements.js
   - toplist/data/*.md
+  - css/iconfont_*/demo_index.html
+  - css/iconfont_*/iconfont.json
+  - baidu_verify_*.html
+  - google*.html
 
 # Writing
 new_post_name: :title.md # File name of new posts
@@ -136,6 +141,6 @@ feed:
     limit: 20
 baidu_url_submit:
         count: 5 
-        host: www.clearlight.com.cn
+        host: clearlight.com.cn
         token: aE8RYTe1ToL0GEac
         path: baidu_urls.txt

@@ -1,8 +1,13 @@
 ---
 title: MacOS系统 Goland 2019.2.3破解
+description: "记录 macOS 下 GoLand 2019.2.3 的下载、VM Options 配置和 License server 激活流程，作为旧版工具资料归档。"
+categories: "资源分享"
+tags:
+  - "GoLand"
+  - "JetBrains"
+  - "macOS"
+  - "开发工具"
 top: 0
-categories: 资源分享
-tags: JetBrains产品激活
 abbrlink: 407cdecb
 date: 2021-06-01 18:27:28
 ---

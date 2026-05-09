@@ -1,10 +1,15 @@
 ---
 title: Gemini CLI 学习指南
+description: "整理 Gemini CLI 的启动模式、斜杠命令、文件上下文、Shell 调用、会话管理和模型选择建议。"
+categories: "AI"
+tags:
+  - "Gemini CLI"
+  - "AI工具"
+  - "命令行"
+  - "开发效率"
 top: 0
 abbrlink: 202603287710
 date: 2026-03-28 20:53:54
-categories: #根据文章去分类
-tags: #根据文章给出对应Tag
 ---
 
 # Gemini CLI 基础操作指南 🚀

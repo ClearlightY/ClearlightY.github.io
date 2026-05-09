@@ -1,8 +1,13 @@
 ---
 title: 获取PC已连接过wifi密码的方法
+description: "介绍在 Windows 命令提示符中使用 netsh 查看电脑已连接过 WiFi 名称和明文密码的方法。"
+categories: "Windows"
+tags:
+  - "Windows"
+  - "WiFi密码"
+  - "CMD"
+  - "网络命令"
 top: 0
-categories: Skill
-tags: Windows
 abbrlink: 59758
 date: 2020-06-09 13:52:19
 ---

@@ -1,7 +1,12 @@
 ---
 title: 响应式中@media的注意事项
-categories: 前端
-tags: Bootstrap
+description: "整理响应式开发中 @media 媒体查询的书写顺序、移动优先原则和 CSS 覆盖注意事项。"
+categories: "前端开发"
+tags:
+  - "CSS"
+  - "响应式设计"
+  - "媒体查询"
+  - "Bootstrap"
 abbrlink: 20080
 date: 2020-03-27 13:53:54
 ---

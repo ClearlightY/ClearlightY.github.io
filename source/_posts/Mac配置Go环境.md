@@ -1,8 +1,13 @@
 ---
 title: Mac配置Go环境
+description: "介绍 macOS 安装 Go、配置 GOPATH 和 GOBIN 环境变量，并通过 go env、go version 验证开发环境的方法。"
+categories: "Go"
+tags:
+  - "Go"
+  - "macOS"
+  - "环境变量"
+  - "开发环境"
 top: 0
-categories: Skill
-tags: Mac_Go
 abbrlink: f058495d
 date: 2021-06-01 21:06:50
 ---

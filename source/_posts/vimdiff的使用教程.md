@@ -1,8 +1,13 @@
 ---
 title: vimdiff的使用教程
+description: "介绍 vimdiff 的文件对比启动方式、窗口切换、分割调整和常用差异比较操作。"
+categories: "开发工具"
+tags:
+  - "vimdiff"
+  - "Vim"
+  - "文件对比"
+  - "命令行"
 top: 0
-categories: Dev tools
-tags: vimdiff
 abbrlink: 21655
 date: 2020-05-21 13:52:13
 ---

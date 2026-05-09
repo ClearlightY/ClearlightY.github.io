@@ -1,10 +1,15 @@
 ---
 title: MyBatis入门(二)
+description: "讲解 MyBatis XML 映射方式、CRUD 操作、结果集字段映射、模糊查询和数据库访问封装实践。"
+categories: "Java"
+tags:
+  - "MyBatis"
+  - "Java"
+  - "CRUD"
+  - "JDBC"
 top: 0
 abbrlink: 33725
 date: 2020-03-12 14:41:00
-categories: Java
-tags: MyBatis
 ---
 
 # MyBatis入门(二)

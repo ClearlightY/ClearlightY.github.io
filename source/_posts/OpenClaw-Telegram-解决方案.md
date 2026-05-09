@@ -1,10 +1,15 @@
 ---
 title: OpenClaw Telegram 解决方案
+description: "针对 OpenClaw Telegram Bot 无响应和 health 检查失败问题，分析 ClashX、代理规则和 OpenClaw 配置并给出修复方案。"
+categories: "AI"
+tags:
+  - "OpenClaw"
+  - "Telegram Bot"
+  - "ClashX"
+  - "代理配置"
 top: 0
 abbrlink: 202603116759
 date: 2026-03-11 10:46:39
-categories: AI
-tags: OpenClaw
 ---
 
 # 解决 OpenClaw Telegram Bot 连接问题完整方案
@@ -128,7 +133,7 @@ openclaw logs | grep -i "telegram\\|connected\\|failed" | tail -20
 
 # 4. 测试代理连接（使用环境变量）
 env HTTP_PROXY="http://127.0.0.1:7890" HTTPS_PROXY="http://127.0.0.1:7890" \
-  curl -s "https://api.telegram.org/bot8775360310:AAFak2jbq7JTngNrfxrP2hLA0SwgHIhpE0I/getMe"
+  curl -s "https://api.telegram.org/botTOKEN/getMe"
 ```
 
 ## 🔧 故障排除

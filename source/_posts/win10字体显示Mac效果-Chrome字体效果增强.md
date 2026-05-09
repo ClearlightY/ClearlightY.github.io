@@ -1,10 +1,15 @@
 ---
 title: win10字体显示Mac效果+Chrome字体效果增强
+description: "介绍 Windows 10 通过 MacType 和字体设置实现接近 macOS 的字体显示效果，并优化 Chrome 浏览器字体。"
+categories: "Windows"
+tags:
+  - "Win10"
+  - "MacType"
+  - "Chrome字体"
+  - "字体优化"
 top: 0
 abbrlink: 31617
 date: 2020-03-14 21:51:15
-categories: Skill
-tags: Win10字体增强
 ---
 
 ## win10字体显示Mac效果

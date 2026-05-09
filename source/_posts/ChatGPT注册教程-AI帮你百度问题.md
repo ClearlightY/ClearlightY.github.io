@@ -1,8 +1,13 @@
 ---
 title: ChatGPT注册教程_AI帮你百度问题
+description: "介绍 ChatGPT 的用途、注册前准备、临时手机号购买、账号注册流程以及常见登录和验证码问题处理方法。"
+categories: "AI"
+tags:
+  - "ChatGPT"
+  - "OpenAI"
+  - "账号注册"
+  - "AI工具"
 top: 7
-categories: 资源分享
-tags: tools
 abbrlink: f36eb150
 date: 2023-03-19 11:02:43
 ---
