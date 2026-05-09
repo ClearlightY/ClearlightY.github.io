@@ -16,14 +16,14 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="xyli">
-  <meta name="keywords" content="">
+  <meta name="keywords" content="AI, 编程, Hexo, Windows, 开发工具, 学习资源, 个人博客">
   
-    <meta name="description" content="MyBatis入门(二)一、MyBatis如何通过XML方式对JDBC实现封装 二、MyBatis的CRUD修改操作step1、编写dao接口和方法 1void updateUser(User user);  step2、修改映射文件  step3、测试即可  删除操作step1、编写dao接口 1void delUser(Integer uid);  step2、映射文件  step3、测试">
+    <meta name="description" content="讲解 MyBatis XML 映射方式、CRUD 操作、结果集字段映射、模糊查询和数据库访问封装实践。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MyBatis入门(二)">
-<meta property="og:url" content="http://clearlight.com.cn/posts/33725.html">
+<meta property="og:url" content="https://clearlight.com.cn/posts/33725.html">
 <meta property="og:site_name" content="Clearlight&#39;s BLOG">
-<meta property="og:description" content="MyBatis入门(二)一、MyBatis如何通过XML方式对JDBC实现封装 二、MyBatis的CRUD修改操作step1、编写dao接口和方法 1void updateUser(User user);  step2、修改映射文件  step3、测试即可  删除操作step1、编写dao接口 1void delUser(Integer uid);  step2、映射文件  step3、测试">
+<meta property="og:description" content="讲解 MyBatis XML 映射方式、CRUD 操作、结果集字段映射、模糊查询和数据库访问封装实践。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173001.png">
 <meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173029.png">
@@ -49,9 +49,12 @@
 <meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173547.png">
 <meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173600.png">
 <meta property="article:published_time" content="2020-03-12T06:41:00.000Z">
-<meta property="article:modified_time" content="2026-03-10T10:33:02.774Z">
+<meta property="article:modified_time" content="2026-05-09T07:37:44.184Z">
 <meta property="article:author" content="xyli">
 <meta property="article:tag" content="MyBatis">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="CRUD">
+<meta property="article:tag" content="JDBC">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20210102173001.png">
   
@@ -178,6 +181,12 @@
 
 
   
+
+<link rel="canonical" href="https://clearlight.com.cn/posts/33725.html">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MyBatis入门(二)","name":"MyBatis入门(二)","url":"https://clearlight.com.cn/posts/33725.html","description":"讲解 MyBatis XML 映射方式、CRUD 操作、结果集字段映射、模糊查询和数据库访问封装实践。","inLanguage":"zh-CN","author":{"@type":"Person","name":"xyli"},"publisher":{"@type":"Organization","name":"Clearlight's BLOG","url":"https://clearlight.com.cn"},"datePublished":"2020-03-12T06:41:00.000Z","dateModified":"2026-05-09T07:37:44.184Z"}</script>
+
+
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Clearlight's BLOG" type="application/atom+xml">
 </head>
 
@@ -408,7 +417,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：March 10, 2026 pm
+                    本文最后更新于：May 9, 2026 pm
                   
                 
               </p>
@@ -570,6 +579,12 @@
       
         <a href="/tags/MyBatis/">#MyBatis</a>
       
+        <a href="/tags/Java/">#Java</a>
+      
+        <a href="/tags/CRUD/">#CRUD</a>
+      
+        <a href="/tags/JDBC/">#JDBC</a>
+      
     </div>
   
 </div>
@@ -581,7 +596,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>MyBatis入门(二)</div>
-      <div>http://clearlight.com.cn/posts/33725.html</div>
+      <div>https://clearlight.com.cn/posts/33725.html</div>
     </div>
     <div class="license-meta">
       

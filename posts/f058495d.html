@@ -16,22 +16,25 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="xyli">
-  <meta name="keywords" content="">
+  <meta name="keywords" content="AI, 编程, Hexo, Windows, 开发工具, 学习资源, 个人博客">
   
-    <meta name="description" content="Mac配置Go环境1. 下载并安装Go下载地址：https:&#x2F;&#x2F;golang.org&#x2F;dl&#x2F;  安装后Go位置：users&#x2F;local&#x2F;go 2. 配置环境变量如图，进入用户主目录，查看隐藏文件，直接vim .bash_profile 按i键进入编辑模式，复制下面内容后粘贴后，:wq保存并退出 12345export GOPATH&#x3D;&#x2F;Users&#x2F;lcore&#x2F;dev&#x2F;code&#x2F;g">
+    <meta name="description" content="介绍 macOS 安装 Go、配置 GOPATH 和 GOBIN 环境变量，并通过 go env、go version 验证开发环境的方法。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac配置Go环境">
-<meta property="og:url" content="http://clearlight.com.cn/posts/f058495d.html">
+<meta property="og:url" content="https://clearlight.com.cn/posts/f058495d.html">
 <meta property="og:site_name" content="Clearlight&#39;s BLOG">
-<meta property="og:description" content="Mac配置Go环境1. 下载并安装Go下载地址：https:&#x2F;&#x2F;golang.org&#x2F;dl&#x2F;  安装后Go位置：users&#x2F;local&#x2F;go 2. 配置环境变量如图，进入用户主目录，查看隐藏文件，直接vim .bash_profile 按i键进入编辑模式，复制下面内容后粘贴后，:wq保存并退出 12345export GOPATH&#x3D;&#x2F;Users&#x2F;lcore&#x2F;dev&#x2F;code&#x2F;g">
+<meta property="og:description" content="介绍 macOS 安装 Go、配置 GOPATH 和 GOBIN 环境变量，并通过 go env、go version 验证开发环境的方法。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20210601210758.png">
 <meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20210601210808.png">
 <meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20210601210812.png">
 <meta property="article:published_time" content="2021-06-01T13:06:50.000Z">
-<meta property="article:modified_time" content="2026-03-10T10:33:02.750Z">
+<meta property="article:modified_time" content="2026-05-09T07:37:44.180Z">
 <meta property="article:author" content="xyli">
-<meta property="article:tag" content="Mac_Go">
+<meta property="article:tag" content="环境变量">
+<meta property="article:tag" content="macOS">
+<meta property="article:tag" content="Go">
+<meta property="article:tag" content="开发环境">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20210601210758.png">
   
@@ -158,6 +161,12 @@
 
 
   
+
+<link rel="canonical" href="https://clearlight.com.cn/posts/f058495d.html">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Mac配置Go环境","name":"Mac配置Go环境","url":"https://clearlight.com.cn/posts/f058495d.html","description":"介绍 macOS 安装 Go、配置 GOPATH 和 GOBIN 环境变量，并通过 go env、go version 验证开发环境的方法。","inLanguage":"zh-CN","author":{"@type":"Person","name":"xyli"},"publisher":{"@type":"Organization","name":"Clearlight's BLOG","url":"https://clearlight.com.cn"},"datePublished":"2021-06-01T13:06:50.000Z","dateModified":"2026-05-09T07:37:44.180Z"}</script>
+
+
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Clearlight's BLOG" type="application/atom+xml">
 </head>
 
@@ -388,7 +397,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：March 10, 2026 pm
+                    本文最后更新于：May 9, 2026 pm
                   
                 
               </p>
@@ -424,7 +433,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Skill/" class="category-chain-item">Skill</a>
+  <a href="/categories/Go/" class="category-chain-item">Go</a>
   
   
 
@@ -439,7 +448,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Mac-Go/">#Mac_Go</a>
+        <a href="/tags/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/">#环境变量</a>
+      
+        <a href="/tags/macOS/">#macOS</a>
+      
+        <a href="/tags/Go/">#Go</a>
+      
+        <a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">#开发环境</a>
       
     </div>
   
@@ -452,7 +467,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>Mac配置Go环境</div>
-      <div>http://clearlight.com.cn/posts/f058495d.html</div>
+      <div>https://clearlight.com.cn/posts/f058495d.html</div>
     </div>
     <div class="license-meta">
       

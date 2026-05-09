@@ -16,22 +16,24 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="xyli">
-  <meta name="keywords" content="">
+  <meta name="keywords" content="AI, 编程, Hexo, Windows, 开发工具, 学习资源, 个人博客">
   
-    <meta name="description" content="一. 创建Django项目123456# 创建项目django-admin startproject mysite# 创建应用py manage.py startapp fileUpload# 运行项目py manage.py runserver      二. 创建Vue项目2.1 使用vue-cli脚手架创建新项目1234567891011# 全局安装vue-cli工具npm install">
+    <meta name="description" content="记录使用 Vue 和 Django 实现文件上传、组件注册、接口请求、文件校验和前后端联调的开发流程。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文件上传并校验文件 - Vue+Django开发">
-<meta property="og:url" content="http://clearlight.com.cn/posts/17143.html">
+<meta property="og:url" content="https://clearlight.com.cn/posts/17143.html">
 <meta property="og:site_name" content="Clearlight&#39;s BLOG">
-<meta property="og:description" content="一. 创建Django项目123456# 创建项目django-admin startproject mysite# 创建应用py manage.py startapp fileUpload# 运行项目py manage.py runserver      二. 创建Vue项目2.1 使用vue-cli脚手架创建新项目1234567891011# 全局安装vue-cli工具npm install">
+<meta property="og:description" content="记录使用 Vue 和 Django 实现文件上传、组件注册、接口请求、文件校验和前后端联调的开发流程。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20200612135110.png">
 <meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20200612135154.png">
 <meta property="article:published_time" content="2020-06-12T03:17:34.000Z">
-<meta property="article:modified_time" content="2026-03-10T10:33:02.949Z">
+<meta property="article:modified_time" content="2026-05-09T07:37:44.226Z">
 <meta property="article:author" content="xyli">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="Django">
+<meta property="article:tag" content="文件上传">
+<meta property="article:tag" content="前后端开发">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20200612135110.png">
   
@@ -158,6 +160,12 @@
 
 
   
+
+<link rel="canonical" href="https://clearlight.com.cn/posts/17143.html">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"文件上传并校验文件 - Vue+Django开发","name":"文件上传并校验文件 - Vue+Django开发","url":"https://clearlight.com.cn/posts/17143.html","description":"记录使用 Vue 和 Django 实现文件上传、组件注册、接口请求、文件校验和前后端联调的开发流程。","inLanguage":"zh-CN","author":{"@type":"Person","name":"xyli"},"publisher":{"@type":"Organization","name":"Clearlight's BLOG","url":"https://clearlight.com.cn"},"datePublished":"2020-06-12T03:17:34.000Z","dateModified":"2026-05-09T07:37:44.226Z"}</script>
+
+
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Clearlight's BLOG" type="application/atom+xml">
 </head>
 
@@ -388,7 +396,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：March 10, 2026 pm
+                    本文最后更新于：May 9, 2026 pm
                   
                 
               </p>
@@ -442,7 +450,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/Work/" class="category-chain-item">Work</a>
+  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" class="category-chain-item">前端开发</a>
   
   
 
@@ -461,6 +469,10 @@
       
         <a href="/tags/Django/">#Django</a>
       
+        <a href="/tags/%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">#文件上传</a>
+      
+        <a href="/tags/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/">#前后端开发</a>
+      
     </div>
   
 </div>
@@ -472,7 +484,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>文件上传并校验文件 - Vue+Django开发</div>
-      <div>http://clearlight.com.cn/posts/17143.html</div>
+      <div>https://clearlight.com.cn/posts/17143.html</div>
     </div>
     <div class="license-meta">
       

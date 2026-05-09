@@ -16,21 +16,24 @@
   
   <meta name="theme-color" content="#2f4154">
   <meta name="author" content="xyli">
-  <meta name="keywords" content="">
+  <meta name="keywords" content="AI, 编程, Hexo, Windows, 开发工具, 学习资源, 个人博客">
   
-    <meta name="description" content="一. 工具分享PL&#x2F;SQL v11.1免安装破解版 客户端插件 二. 客户端插件打开plsql, 先点击“取消” 打开软件，打开菜单 “工具”——》“首选项”——》“连接” 编辑“Oracle主目录名”，“OCI库“这两项，其中主instantclient_11_2目录名为，刚才放在plsql安装目录里的instantclient_11_2文件夹，oci库为文件夹下的oci.dll文件">
+    <meta name="description" content="记录 PL&#x2F;SQL Developer 11.1 免安装版、Oracle instantclient 配置以及查询中文乱码问题的处理方法。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PLSQL的安装和配置 - v11.1 Oracle">
-<meta property="og:url" content="http://clearlight.com.cn/posts/45769.html">
+<meta property="og:url" content="https://clearlight.com.cn/posts/45769.html">
 <meta property="og:site_name" content="Clearlight&#39;s BLOG">
-<meta property="og:description" content="一. 工具分享PL&#x2F;SQL v11.1免安装破解版 客户端插件 二. 客户端插件打开plsql, 先点击“取消” 打开软件，打开菜单 “工具”——》“首选项”——》“连接” 编辑“Oracle主目录名”，“OCI库“这两项，其中主instantclient_11_2目录名为，刚才放在plsql安装目录里的instantclient_11_2文件夹，oci库为文件夹下的oci.dll文件">
+<meta property="og:description" content="记录 PL&#x2F;SQL Developer 11.1 免安装版、Oracle instantclient 配置以及查询中文乱码问题的处理方法。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20201101010917.png">
 <meta property="og:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20201101011145.png">
 <meta property="article:published_time" content="2020-10-31T17:03:05.000Z">
-<meta property="article:modified_time" content="2026-03-10T10:33:02.872Z">
+<meta property="article:modified_time" content="2026-05-09T07:37:44.193Z">
 <meta property="article:author" content="xyli">
-<meta property="article:tag" content="PLSQL developer">
+<meta property="article:tag" content="Oracle">
+<meta property="article:tag" content="数据库工具">
+<meta property="article:tag" content="PLSQL Developer">
+<meta property="article:tag" content="中文乱码">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://gitee.com/clearlightY/mapdepot/raw/master/img/20201101010917.png">
   
@@ -157,6 +160,12 @@
 
 
   
+
+<link rel="canonical" href="https://clearlight.com.cn/posts/45769.html">
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"PLSQL的安装和配置 - v11.1 Oracle","name":"PLSQL的安装和配置 - v11.1 Oracle","url":"https://clearlight.com.cn/posts/45769.html","description":"记录 PL/SQL Developer 11.1 免安装版、Oracle instantclient 配置以及查询中文乱码问题的处理方法。","inLanguage":"zh-CN","author":{"@type":"Person","name":"xyli"},"publisher":{"@type":"Organization","name":"Clearlight's BLOG","url":"https://clearlight.com.cn"},"datePublished":"2020-10-31T17:03:05.000Z","dateModified":"2026-05-09T07:37:44.193Z"}</script>
+
+
 <meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="Clearlight's BLOG" type="application/atom+xml">
 </head>
 
@@ -387,7 +396,7 @@
                 
                   
                     <!-- compatible with older versions-->
-                    本文最后更新于：March 10, 2026 pm
+                    本文最后更新于：May 9, 2026 pm
                   
                 
               </p>
@@ -449,7 +458,13 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/PLSQL-developer/">#PLSQL developer</a>
+        <a href="/tags/Oracle/">#Oracle</a>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B7%A5%E5%85%B7/">#数据库工具</a>
+      
+        <a href="/tags/PLSQL-Developer/">#PLSQL Developer</a>
+      
+        <a href="/tags/%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/">#中文乱码</a>
       
     </div>
   
@@ -462,7 +477,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>PLSQL的安装和配置 - v11.1 Oracle</div>
-      <div>http://clearlight.com.cn/posts/45769.html</div>
+      <div>https://clearlight.com.cn/posts/45769.html</div>
     </div>
     <div class="license-meta">
       
