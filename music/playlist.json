@@ -1,0 +1,30 @@
+{
+  "generatedAt": "2026-06-04T09:08:55.955Z",
+  "total": 3,
+  "tracks": [
+    {
+      "name": "清明雨上 许嵩",
+      "artist": "Clearlight",
+      "url": "/music/清明雨上 - 许嵩.mp3",
+      "cover": "/img/bg/index_bg.jpg",
+      "theme": "#cc874c",
+      "filename": "清明雨上 - 许嵩.mp3"
+    },
+    {
+      "name": "清明雨上 (女声版) 向晨晨",
+      "artist": "Clearlight",
+      "url": "/music/清明雨上 (女声版) - 向晨晨.mp3",
+      "cover": "/img/bg/index_bg.jpg",
+      "theme": "#cc874c",
+      "filename": "清明雨上 (女声版) - 向晨晨.mp3"
+    },
+    {
+      "name": "background",
+      "artist": "Clearlight",
+      "url": "/music/background.mp3",
+      "cover": "/img/bg/index_bg.jpg",
+      "theme": "#cc874c",
+      "filename": "background.mp3"
+    }
+  ]
+}

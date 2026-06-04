@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://clearlight.com.cn/sitemap.xml
+Sitemap: https://clearlight.com.cn/baidusitemap.xml
