@@ -456,9 +456,9 @@
       
       <tag>环境变量</tag>
       
-      <tag>macOS</tag>
-      
       <tag>Go</tag>
+      
+      <tag>macOS</tag>
       
       <tag>开发环境</tag>
       
@@ -487,11 +487,11 @@
       
       <tag>JetBrains</tag>
       
+      <tag>macOS</tag>
+      
       <tag>开发工具</tag>
       
       <tag>GoLand</tag>
-      
-      <tag>macOS</tag>
       
     </tags>
     
@@ -580,11 +580,11 @@
       
       <tag>开发工具</tag>
       
-      <tag>Navicat</tag>
-      
       <tag>Oracle</tag>
       
       <tag>数据库工具</tag>
+      
+      <tag>Navicat</tag>
       
     </tags>
     
@@ -702,11 +702,11 @@
     
     <tags>
       
+      <tag>PLSQL Developer</tag>
+      
       <tag>Oracle</tag>
       
       <tag>数据库工具</tag>
-      
-      <tag>PLSQL Developer</tag>
       
       <tag>中文乱码</tag>
       
