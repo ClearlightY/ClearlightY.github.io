@@ -644,9 +644,9 @@
       
       <tag>IDEA</tag>
       
-      <tag>历史归档</tag>
-      
       <tag>PyCharm</tag>
+      
+      <tag>历史归档</tag>
       
     </tags>
     
@@ -675,9 +675,9 @@
       
       <tag>IDEA</tag>
       
-      <tag>开发工具</tag>
-      
       <tag>历史归档</tag>
+      
+      <tag>开发工具</tag>
       
     </tags>
     
@@ -921,9 +921,9 @@
       
       <tag>命令行</tag>
       
-      <tag>Vim</tag>
-      
       <tag>vimdiff</tag>
+      
+      <tag>Vim</tag>
       
       <tag>文件对比</tag>
       
@@ -1043,9 +1043,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>Redis</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Windows</tag>
       
@@ -1353,11 +1353,11 @@
     
     <tags>
       
+      <tag>Linux</tag>
+      
       <tag>V2Ray</tag>
       
       <tag>Qv2ray</tag>
-      
-      <tag>Linux</tag>
       
       <tag>代理工具</tag>
       
