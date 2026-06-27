@@ -443,7 +443,7 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/posts/202603287710.html</loc>
+    <loc>https://clearlight.com.cn/posts/202603289138.html</loc>
     
     <lastmod>2026-05-19</lastmod>
     
@@ -452,7 +452,7 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/posts/202603289138.html</loc>
+    <loc>https://clearlight.com.cn/posts/202603287710.html</loc>
     
     <lastmod>2026-05-19</lastmod>
     
@@ -471,48 +471,6 @@
   
   <url>
     <loc>https://clearlight.com.cn/tags/Gemini-CLI/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/AI%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/ChatGPT/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/OpenAI/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E8%B4%A6%E5%8F%B7%E6%B3%A8%E5%86%8C/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -540,28 +498,28 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/Hexo/</loc>
+    <loc>https://clearlight.com.cn/tags/ChatGPT/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E9%83%A8%E7%BD%B2%E9%94%99%E8%AF%AF/</loc>
+    <loc>https://clearlight.com.cn/tags/OpenAI/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/Git/</loc>
+    <loc>https://clearlight.com.cn/tags/%E8%B4%A6%E5%8F%B7%E6%B3%A8%E5%86%8C/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/SSH/</loc>
+    <loc>https://clearlight.com.cn/tags/AI%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -596,6 +554,27 @@
   </url>
   
   <url>
+    <loc>https://clearlight.com.cn/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/Hexo/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://clearlight.com.cn/tags/Fluid%E4%B8%BB%E9%A2%98/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -617,14 +596,7 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/Go/</loc>
+    <loc>https://clearlight.com.cn/tags/GoLand/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -638,28 +610,7 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/GitHub-Pages/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E6%95%99%E7%A8%8B/</loc>
+    <loc>https://clearlight.com.cn/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -694,6 +645,48 @@
   </url>
   
   <url>
+    <loc>https://clearlight.com.cn/tags/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/GitHub-Pages/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E6%95%99%E7%A8%8B/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E9%83%A8%E7%BD%B2%E9%94%99%E8%AF%AF/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/Git/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/SSH/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://clearlight.com.cn/tags/CRUD/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -702,6 +695,20 @@
   
   <url>
     <loc>https://clearlight.com.cn/tags/JDBC/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/Go/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -736,13 +743,6 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/GoLand/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://clearlight.com.cn/tags/Telegram-Bot/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -757,35 +757,21 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/PLSQL-Developer/</loc>
+    <loc>https://clearlight.com.cn/tags/Ubuntu/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/Oracle/</loc>
+    <loc>https://clearlight.com.cn/tags/V2Ray/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/Redis/</loc>
+    <loc>https://clearlight.com.cn/tags/Qv2ray/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -793,6 +779,20 @@
   
   <url>
     <loc>https://clearlight.com.cn/tags/Linux/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/Redis/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -813,14 +813,21 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/Ubuntu/</loc>
+    <loc>https://clearlight.com.cn/tags/Navicat/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/Navicat/</loc>
+    <loc>https://clearlight.com.cn/tags/Oracle/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -848,14 +855,49 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E9%94%81%E5%B1%8F/</loc>
+    <loc>https://clearlight.com.cn/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/</loc>
+    <loc>https://clearlight.com.cn/tags/PowerShell/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/PLSQL-Developer/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/AI%E5%8A%A9%E6%89%8B/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/Node-js/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -911,21 +953,21 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/AI%E5%8A%A9%E6%89%8B/</loc>
+    <loc>https://clearlight.com.cn/tags/vimdiff/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/Node-js/</loc>
+    <loc>https://clearlight.com.cn/tags/Vim/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</loc>
+    <loc>https://clearlight.com.cn/tags/%E6%96%87%E4%BB%B6%E5%AF%B9%E6%AF%94/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -960,77 +1002,14 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/V2Ray/</loc>
+    <loc>https://clearlight.com.cn/tags/%E9%94%81%E5%B1%8F/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/Qv2ray/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E4%BB%A3%E7%90%86%E5%B7%A5%E5%85%B7/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/Vim/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E7%BC%96%E8%BE%91%E5%99%A8/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E6%95%85%E9%9A%9C%E6%8E%92%E6%9F%A5/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/PowerShell/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/Next%E4%B8%BB%E9%A2%98/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E9%93%BE%E6%8E%A5%E9%94%99%E8%AF%AF/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/Bug%E4%BF%AE%E5%A4%8D/</loc>
+    <loc>https://clearlight.com.cn/tags/%E7%94%B5%E6%BA%90%E7%AE%A1%E7%90%86/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1093,6 +1072,41 @@
   </url>
   
   <url>
+    <loc>https://clearlight.com.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E7%BC%96%E8%BE%91%E5%99%A8/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E6%8A%80%E6%9C%AF%E7%BD%91%E7%AB%99/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://clearlight.com.cn/tags/CSS/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -1121,35 +1135,21 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/vimdiff/</loc>
+    <loc>https://clearlight.com.cn/tags/Next%E4%B8%BB%E9%A2%98/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E6%96%87%E4%BB%B6%E5%AF%B9%E6%AF%94/</loc>
+    <loc>https://clearlight.com.cn/tags/%E9%93%BE%E6%8E%A5%E9%94%99%E8%AF%AF/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E6%8A%80%E6%9C%AF%E7%BD%91%E7%AB%99/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</loc>
+    <loc>https://clearlight.com.cn/tags/Bug%E4%BF%AE%E5%A4%8D/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1178,34 +1178,6 @@
   
   <url>
     <loc>https://clearlight.com.cn/tags/EMF/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E5%B0%8F%E7%8B%97%E9%92%B1%E9%92%B1/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E7%90%86%E8%B4%A2/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E8%AF%BB%E5%90%8E%E6%84%9F/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1254,6 +1226,20 @@
   </url>
   
   <url>
+    <loc>https://clearlight.com.cn/tags/%E7%BD%91%E7%AB%99%E5%90%88%E9%9B%86/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://clearlight.com.cn/tags/%E7%8C%AB%E5%92%AA%E5%81%A5%E5%BA%B7/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -1282,21 +1268,21 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E5%AE%9E%E4%B9%A0/</loc>
+    <loc>https://clearlight.com.cn/tags/%E8%85%BE%E8%AE%AF%E7%94%B5%E8%84%91%E7%AE%A1%E5%AE%B6/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/React/</loc>
+    <loc>https://clearlight.com.cn/tags/%E6%A1%8C%E9%9D%A2%E6%95%B4%E7%90%86/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</loc>
+    <loc>https://clearlight.com.cn/tags/%E5%A3%81%E7%BA%B8%E8%B7%AF%E5%BE%84/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1331,42 +1317,70 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E7%BD%91%E7%AB%99%E5%90%88%E9%9B%86/</loc>
+    <loc>https://clearlight.com.cn/tags/%E5%AE%9E%E4%B9%A0/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E5%BC%80%E5%8F%91%E8%B5%84%E6%BA%90/</loc>
+    <loc>https://clearlight.com.cn/tags/React/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E9%9F%B3%E4%B9%90%E4%B8%8B%E8%BD%BD/</loc>
+    <loc>https://clearlight.com.cn/tags/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E7%AB%99%E7%82%B9%E5%85%AC%E5%91%8A/</loc>
+    <loc>https://clearlight.com.cn/tags/WiFi%E5%AF%86%E7%A0%81/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E6%AD%8C%E5%8D%95/</loc>
+    <loc>https://clearlight.com.cn/tags/CMD/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E8%B5%84%E6%BA%90%E8%AF%B4%E6%98%8E/</loc>
+    <loc>https://clearlight.com.cn/tags/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E5%B0%8F%E7%8B%97%E9%92%B1%E9%92%B1/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E7%90%86%E8%B4%A2/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E8%AF%BB%E5%90%8E%E6%84%9F/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/tags/%E4%B8%AA%E4%BA%BA%E6%88%90%E9%95%BF/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1401,42 +1415,28 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/WiFi%E5%AF%86%E7%A0%81/</loc>
+    <loc>https://clearlight.com.cn/tags/%E9%9F%B3%E4%B9%90%E4%B8%8B%E8%BD%BD/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/CMD/</loc>
+    <loc>https://clearlight.com.cn/tags/%E7%AB%99%E7%82%B9%E5%85%AC%E5%91%8A/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E7%BD%91%E7%BB%9C%E5%91%BD%E4%BB%A4/</loc>
+    <loc>https://clearlight.com.cn/tags/%E6%AD%8C%E5%8D%95/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/tags/%E8%85%BE%E8%AE%AF%E7%94%B5%E8%84%91%E7%AE%A1%E5%AE%B6/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E6%A1%8C%E9%9D%A2%E6%95%B4%E7%90%86/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://clearlight.com.cn/tags/%E5%A3%81%E7%BA%B8%E8%B7%AF%E5%BE%84/</loc>
+    <loc>https://clearlight.com.cn/tags/%E8%B5%84%E6%BA%90%E8%AF%B4%E6%98%8E/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1452,13 +1452,6 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/categories/Hexo/</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://clearlight.com.cn/categories/%E8%B5%84%E6%BA%90%E5%88%86%E4%BA%AB/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
@@ -1466,7 +1459,7 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/categories/Go/</loc>
+    <loc>https://clearlight.com.cn/categories/Hexo/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1480,7 +1473,7 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
+    <loc>https://clearlight.com.cn/categories/Go/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1488,6 +1481,13 @@
   
   <url>
     <loc>https://clearlight.com.cn/categories/Linux/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://clearlight.com.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1529,14 +1529,14 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/</loc>
+    <loc>https://clearlight.com.cn/categories/%E5%B7%A5%E5%85%B7%E8%B5%84%E6%BA%90/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/categories/%E5%B7%A5%E5%85%B7%E8%B5%84%E6%BA%90/</loc>
+    <loc>https://clearlight.com.cn/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1550,14 +1550,14 @@
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://clearlight.com.cn/categories/%E7%BE%8E%E9%A3%9F/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://clearlight.com.cn/categories/%E7%BE%8E%E9%A3%9F/</loc>
+    <loc>https://clearlight.com.cn/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
