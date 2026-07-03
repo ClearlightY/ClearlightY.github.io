@@ -33,9 +33,9 @@
     <category term="AI" scheme="https://clearlight.com.cn/categories/AI/"/>
     
     
-    <category term="Gemini CLI" scheme="https://clearlight.com.cn/tags/Gemini-CLI/"/>
-    
     <category term="AI工具" scheme="https://clearlight.com.cn/tags/AI%E5%B7%A5%E5%85%B7/"/>
+    
+    <category term="Gemini CLI" scheme="https://clearlight.com.cn/tags/Gemini-CLI/"/>
     
     <category term="命令行" scheme="https://clearlight.com.cn/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"/>
     
@@ -357,13 +357,13 @@
     <category term="AI" scheme="https://clearlight.com.cn/categories/AI/"/>
     
     
-    <category term="AI工具" scheme="https://clearlight.com.cn/tags/AI%E5%B7%A5%E5%85%B7/"/>
-    
     <category term="ChatGPT" scheme="https://clearlight.com.cn/tags/ChatGPT/"/>
     
     <category term="OpenAI" scheme="https://clearlight.com.cn/tags/OpenAI/"/>
     
     <category term="账号注册" scheme="https://clearlight.com.cn/tags/%E8%B4%A6%E5%8F%B7%E6%B3%A8%E5%86%8C/"/>
+    
+    <category term="AI工具" scheme="https://clearlight.com.cn/tags/AI%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
@@ -413,9 +413,9 @@
     
     <category term="环境变量" scheme="https://clearlight.com.cn/tags/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/"/>
     
-    <category term="Go" scheme="https://clearlight.com.cn/tags/Go/"/>
-    
     <category term="macOS" scheme="https://clearlight.com.cn/tags/macOS/"/>
+    
+    <category term="Go" scheme="https://clearlight.com.cn/tags/Go/"/>
     
     <category term="开发环境" scheme="https://clearlight.com.cn/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
     
@@ -442,9 +442,9 @@
     
     <category term="开发工具" scheme="https://clearlight.com.cn/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
     
-    <category term="macOS" scheme="https://clearlight.com.cn/tags/macOS/"/>
-    
     <category term="GoLand" scheme="https://clearlight.com.cn/tags/GoLand/"/>
+    
+    <category term="macOS" scheme="https://clearlight.com.cn/tags/macOS/"/>
     
   </entry>
   
@@ -521,11 +521,11 @@
     
     <category term="开发工具" scheme="https://clearlight.com.cn/tags/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/"/>
     
-    <category term="Navicat" scheme="https://clearlight.com.cn/tags/Navicat/"/>
-    
     <category term="Oracle" scheme="https://clearlight.com.cn/tags/Oracle/"/>
     
     <category term="数据库工具" scheme="https://clearlight.com.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%B7%A5%E5%85%B7/"/>
+    
+    <category term="Navicat" scheme="https://clearlight.com.cn/tags/Navicat/"/>
     
   </entry>
   
