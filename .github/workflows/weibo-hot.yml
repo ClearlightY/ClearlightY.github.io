@@ -2,8 +2,10 @@ name: 微博热搜定时采集与发布
 
 on:
   schedule:
-    # 每小时第 17 分钟采集；第 37 分钟补偿；第 50 分钟为临时调度测试点。
-    - cron: "17,37,50 * * * *"
+    # 每小时第 17 分钟采集；第 37 分钟作为漏调度时的自动补偿。
+    - cron: "17,37 * * * *"
+    # 临时测试计划：17:50 应自动触发，并强制执行一次完整采集。
+    - cron: "50 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -35,7 +37,7 @@ jobs:
         run: |
           archive_path="source/toplist/data/WB_Top_$(TZ=Asia/Shanghai date '+%Y%m%d_%H').md"
           echo "path=$archive_path" >> "$GITHUB_OUTPUT"
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" || ! -f "$archive_path" ]]; then
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" || "${{ github.event.schedule }}" == "50 * * * *" || ! -f "$archive_path" ]]; then
             echo "should_collect=true" >> "$GITHUB_OUTPUT"
           else
             echo "should_collect=false" >> "$GITHUB_OUTPUT"
