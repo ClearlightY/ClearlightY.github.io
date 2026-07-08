@@ -4,8 +4,8 @@ on:
   schedule:
     # 每小时第 17 分钟采集；第 37 分钟作为漏调度时的自动补偿。
     - cron: "17,37 * * * *"
-    # 临时测试计划：17:50 应自动触发，并强制执行一次完整采集。
-    - cron: "50 * * * *"
+    # 临时测试计划：17:50 或 18:00 自动触发，并强制执行一次完整采集。
+    - cron: "0,50 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -37,7 +37,7 @@ jobs:
         run: |
           archive_path="source/toplist/data/WB_Top_$(TZ=Asia/Shanghai date '+%Y%m%d_%H').md"
           echo "path=$archive_path" >> "$GITHUB_OUTPUT"
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" || "${{ github.event.schedule }}" == "50 * * * *" || ! -f "$archive_path" ]]; then
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" || "${{ github.event.schedule }}" == "0,50 * * * *" || ! -f "$archive_path" ]]; then
             echo "should_collect=true" >> "$GITHUB_OUTPUT"
           else
             echo "should_collect=false" >> "$GITHUB_OUTPUT"
