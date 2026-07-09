@@ -4,6 +4,11 @@ on:
   schedule:
     # 每小时第 17 分钟采集；第 37 分钟作为漏调度时的自动补偿。
     - cron: "17,37 * * * *"
+  push:
+    branches:
+      - hexo_v2.0
+    paths:
+      - "source/toplist/data/WB_Top_*.md"
   workflow_dispatch:
 
 permissions:
@@ -73,30 +78,30 @@ jobs:
           fi
 
       - name: 配置 Node.js
-        if: steps.archive.outputs.should_collect == 'true'
+        if: steps.archive.outputs.should_collect == 'true' || github.event_name == 'push'
         uses: actions/setup-node@v6
         with:
           node-version: "24"
           cache: npm
 
       - name: 构建 Hexo
-        if: steps.archive.outputs.should_collect == 'true'
+        if: steps.archive.outputs.should_collect == 'true' || github.event_name == 'push'
         run: |
           npm ci
           npm run clean
           npm run build
 
       - name: 配置 GitHub Pages
-        if: steps.archive.outputs.should_collect == 'true'
+        if: steps.archive.outputs.should_collect == 'true' || github.event_name == 'push'
         uses: actions/configure-pages@v6
 
       - name: 上传 Pages 构建产物
-        if: steps.archive.outputs.should_collect == 'true'
+        if: steps.archive.outputs.should_collect == 'true' || github.event_name == 'push'
         uses: actions/upload-pages-artifact@v5
         with:
           path: public
 
       - name: 发布 GitHub Pages
-        if: steps.archive.outputs.should_collect == 'true'
+        if: steps.archive.outputs.should_collect == 'true' || github.event_name == 'push'
         id: deployment
         uses: actions/deploy-pages@v5
