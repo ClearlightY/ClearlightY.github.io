@@ -1,9 +1,6 @@
 name: 微博热搜定时采集与发布
 
 on:
-  schedule:
-    # 每小时第 17 分钟采集；第 37 分钟作为漏调度时的自动补偿。
-    - cron: "17,37 * * * *"
   push:
     branches:
       - hexo_v2.0
@@ -34,17 +31,17 @@ jobs:
           ref: hexo_v2.0
           fetch-depth: 0
 
-      - name: 判断本小时是否需要采集
+      - name: 判断是否需要手动采集
         id: archive
         shell: bash
         run: |
           archive_path="source/toplist/data/WB_Top_$(TZ=Asia/Shanghai date '+%Y%m%d_%H').md"
           echo "path=$archive_path" >> "$GITHUB_OUTPUT"
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" || ! -f "$archive_path" ]]; then
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             echo "should_collect=true" >> "$GITHUB_OUTPUT"
           else
             echo "should_collect=false" >> "$GITHUB_OUTPUT"
-            echo "本小时记录已存在，补偿任务无需重复采集：$archive_path"
+            echo "由本机推送触发：仅构建和发布，不执行远程采集。"
           fi
 
       - name: 配置 Python
