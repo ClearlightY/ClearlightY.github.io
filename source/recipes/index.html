@@ -1,0 +1,105 @@
+---
+title: My Kitchen
+subtitle: My Kitchen
+description: 记录每一次下厨，也方便从现有食材找到今天吃什么。
+layout: page
+banner_img: none
+banner_img_height: 8
+banner_mask_alpha: 0
+comment: false
+---
+
+<div id="recipe-app" class="recipe-app" lang="zh-CN" data-source="/recipes/data.json">
+  <section id="recipe-list-view">
+    <header class="kitchen-hero">
+      <div>
+        <p class="kitchen-eyebrow">RECIPES · 我的食谱库</p>
+        <h1>My Kitchen</h1>
+        <p class="kitchen-subtitle">记录每一次下厨，也方便从现有食材找到今天吃什么。</p>
+      </div>
+      <div class="kitchen-stats" aria-label="食谱统计">
+        <span><strong id="recipe-total">0</strong> 道菜品</span>
+        <span><strong id="ingredient-total">0</strong> 种食材</span>
+        <span>最近更新：<strong id="latest-update">—</strong></span>
+      </div>
+    </header>
+
+    <section class="recipe-toolbar" aria-label="搜索与筛选">
+      <div class="search-row">
+        <label class="recipe-search">
+          <span aria-hidden="true">⌕</span>
+          <input id="recipe-search" type="search" autocomplete="off" placeholder="搜索菜名、食材或关键词……" aria-label="搜索菜名、食材或关键词">
+        </label>
+        <button class="tool-button" id="advanced-filter-button" type="button" aria-controls="filter-drawer" aria-expanded="false">筛选</button>
+        <button class="tool-button tool-button-quiet" id="clear-filter-button" type="button">清除</button>
+        <span class="result-count" aria-live="polite" aria-atomic="true"><strong id="result-count">0</strong> 道</span>
+      </div>
+
+      <div class="filter-line desktop-filter-line">
+        <span class="filter-label">常用食材</span>
+        <div id="common-ingredients" class="chip-list"></div>
+        <button class="text-button" id="ingredient-drawer-button" type="button" aria-controls="ingredient-drawer" aria-expanded="false">全部食材</button>
+      </div>
+
+      <div class="mobile-filter-actions">
+        <button class="tool-button" id="mobile-ingredient-button" type="button">常用食材</button>
+        <button class="tool-button" id="mobile-filter-button" type="button">筛选</button>
+      </div>
+
+      <div class="filter-line desktop-filter-line">
+        <span class="filter-label">快捷筛选</span>
+        <div id="quick-filters" class="chip-list"></div>
+      </div>
+    </section>
+
+    <nav class="category-tabs" aria-label="食谱分类">
+      <span class="filter-label">分类</span>
+      <div id="category-tabs" class="category-scroll"></div>
+    </nav>
+
+    <div id="active-filter-summary" class="active-filter-summary" hidden></div>
+    <section id="recipe-grid" class="recipe-grid" aria-label="食谱列表">
+      <p class="recipe-loading">正在加载食谱……</p>
+    </section>
+    <div id="empty-state" class="empty-state" hidden>
+      <p>没有找到符合条件的菜品</p>
+      <button class="primary-button" type="button" data-action="clear">清除筛选</button>
+    </div>
+    <div class="load-more-wrap">
+      <button id="load-more-button" class="load-more-button" type="button">加载更多</button>
+    </div>
+  </section>
+
+  <section id="recipe-detail-view" class="recipe-detail-view" hidden></section>
+
+  <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+  <aside id="ingredient-drawer" class="recipe-drawer" role="dialog" aria-modal="true" aria-label="全部食材" aria-hidden="true" tabindex="-1">
+    <header class="drawer-header">
+      <div><span class="drawer-kicker">按食材找菜</span><h2>全部食材</h2></div>
+      <button class="icon-button" type="button" data-close-drawer aria-label="关闭">×</button>
+    </header>
+    <p class="drawer-help">可同时选择多个食材，结果需包含全部已选食材。</p>
+    <div id="ingredient-groups" class="ingredient-groups"></div>
+    <footer class="drawer-footer">
+      <button class="tool-button tool-button-quiet" type="button" data-action="clear-ingredients">清空食材</button>
+      <button class="primary-button" type="button" data-close-drawer>查看结果</button>
+    </footer>
+  </aside>
+
+  <aside id="filter-drawer" class="recipe-drawer" role="dialog" aria-modal="true" aria-label="进阶筛选" aria-hidden="true" tabindex="-1">
+    <header class="drawer-header">
+      <div><span class="drawer-kicker">缩小范围</span><h2>进阶筛选</h2></div>
+      <button class="icon-button" type="button" data-close-drawer aria-label="关闭">×</button>
+    </header>
+    <div id="advanced-filters" class="advanced-filters"></div>
+    <footer class="drawer-footer">
+      <button class="tool-button tool-button-quiet" type="button" data-action="clear-advanced">重置</button>
+      <button class="primary-button" type="button" data-close-drawer>查看结果</button>
+    </footer>
+  </aside>
+
+  <div id="cooking-mode" class="cooking-mode" role="dialog" aria-modal="true" aria-label="烹饪模式" tabindex="-1" hidden></div>
+  <div id="recipe-toast" class="recipe-toast" role="status" hidden></div>
+</div>
+
+<noscript><p class="recipe-noscript">食谱库需要启用 JavaScript 才能使用搜索、筛选和烹饪模式。</p></noscript>

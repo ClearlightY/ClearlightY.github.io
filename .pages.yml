@@ -1,0 +1,177 @@
+settings:
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      create: "recipes: 新增 {filename}"
+      update: "recipes: 更新 {filename}"
+      delete: "recipes: 删除 {filename}"
+      rename: "recipes: 重命名 {oldFilename} 为 {newFilename}"
+
+content:
+  - name: recipes
+    label: 我的菜谱
+    type: collection
+    path: source/recipes/data
+    format: yaml-frontmatter
+    subfolders: false
+    exclude:
+      - _template.md
+      - _README.md
+    filename:
+      template: "{fields.slug}.md"
+      field: false
+    operations:
+      create: true
+      rename: false
+      delete: true
+    view:
+      fields:
+        - name
+        - category
+        - difficulty
+        - time
+        - favorite
+        - updated
+      primary: name
+      sort:
+        - updated
+        - name
+        - category
+        - time
+      search:
+        - name
+        - description
+        - category
+        - tags
+        - aliases
+      default:
+        sort: updated
+        order: desc
+    fields:
+      - name: slug
+        label: 唯一标识
+        type: string
+        required: true
+        description: "用于文件名和详情链接，只能填写小写英文字母、数字及连字符；已有菜品不建议修改。"
+        pattern:
+          regex: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+          message: "请使用类似 fan-qie-chao-ji-dan 的格式。"
+
+      - name: name
+        label: 菜品名称
+        type: string
+        required: true
+
+      - name: description
+        label: 一句话描述
+        type: text
+        required: true
+        options:
+          maxlength: 120
+
+      - name: category
+        label: 分类
+        type: select
+        required: true
+        default: 家常菜
+        options:
+          values:
+            - 家常菜
+            - 主食
+            - 汤羹
+            - 小吃
+            - 烘焙
+            - 饮品
+            - 其他
+
+      - name: tags
+        label: 标签
+        type: string
+        list: true
+        default:
+          - 快手
+        description: "例如：常做、快手、下饭、清淡。可以自由增加。"
+
+      - name: time
+        label: 制作时间（分钟）
+        type: number
+        required: true
+        default: 30
+        options:
+          min: 1
+          max: 1440
+
+      - name: difficulty
+        label: 难度
+        type: select
+        required: true
+        default: 简单
+        options:
+          values:
+            - 简单
+            - 中等
+            - 较难
+
+      - name: servings
+        label: 默认份量（人数）
+        type: number
+        required: true
+        default: 2
+        options:
+          min: 1
+          max: 20
+
+      - name: favorite
+        label: 常做
+        type: boolean
+        default: false
+        description: "开启后会出现在页面的“常做”筛选中。"
+
+      - name: updated
+        label: 最近更新日期
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+
+      - name: aliases
+        label: 其他叫法
+        type: string
+        list: true
+        default: []
+        description: "用于搜索，例如番茄可以填写“西红柿”。"
+
+      - name: body
+        label: 食材、步骤与下厨记录
+        type: rich-text
+        required: true
+        description: "请保留四个二级标题。食材和下厨记录使用竖线分隔，步骤标题使用粗体。"
+        default: |
+          ## 食材
+
+          - 食材一 | 200 克 | 切块
+          - 食材二 | 1 个
+          - 盐 | 少许
+
+          ## 制作步骤
+
+          1. **准备食材**：清洗并处理所有食材。
+             - 提示：需要提前腌制的食材可在这里说明。
+
+          2. **开始制作**：写下实际操作、火力和时间。
+
+          3. **装盘**：完成后装盘。
+
+          ## 注意事项
+
+          - 记录容易失败的地方、替代食材或下次要调整的内容。
+
+          ## 下厨记录
+
+          - 2026-07-15 | 5 | 第一次记录，味道不错。
+        options:
+          format: markdown
+          switcher: true
+          media: false

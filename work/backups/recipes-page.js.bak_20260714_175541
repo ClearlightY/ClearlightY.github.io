@@ -1,0 +1,448 @@
+(function () {
+  'use strict';
+
+  var app = document.getElementById('recipe-app');
+  if (!app) return;
+  document.body.classList.add('recipes-page');
+
+  var aliases = {
+    '西红柿': '番茄', '圣女果': '番茄', '马铃薯': '土豆', '洋芋': '土豆',
+    '青葱': '葱', '香葱': '葱', '大葱': '葱', '生姜': '姜', '蒜头': '蒜',
+    '猪绞肉': '猪肉末', '肉馅': '猪肉末', '生抽': '酱油', '老抽': '酱油',
+    '花椰菜': '西兰花', '包菜': '卷心菜', '圆白菜': '卷心菜', '玉蜀黍': '玉米'
+  };
+
+  var ingredientFamilies = {
+    '冰糖': '糖', '低筋面粉': '面粉', '红茶': '茶叶',
+    '鸡胸肉': '鸡肉', '鸡腿': '鸡肉', '五花肉': '猪肉', '猪肉末': '猪肉',
+    '馄饨皮': '面粉', '春卷皮': '面粉'
+  };
+
+  var amountMap = {
+    '鸡蛋': '3 个', '番茄': '2 个', '葱': '1 根', '姜': '3 片', '蒜': '3 瓣', '食用油': '适量', '盐': '少许',
+    '糖': '1 茶匙', '酱油': '1 汤匙', '豆腐': '1 盒', '猪肉末': '100 克', '豆瓣酱': '1 汤匙', '花椒': '少许',
+    '土豆': '2 个', '青椒': '1 个', '醋': '1 汤匙', '五花肉': '400 克', '冰糖': '20 克', '料酒': '1 汤匙',
+    '鲈鱼': '1 条', '鸡胸肉': '250 克', '花生': '50 克', '干辣椒': '6 个', '茄子': '2 根', '芹菜': '300 克',
+    '生菜': '1 棵', '黄瓜': '2 根', '牛肉': '250 克', '米饭': '2 碗', '胡萝卜': '半根', '面条': '2 人份',
+    '面粉': '300 克', '韭菜': '200 克', '大米': '100 克', '小米': '50 克', '紫菜': '1 小把', '玉米': '1 根',
+    '排骨': '400 克', '冬瓜': '300 克', '香菇': '6 朵', '鸡腿': '2 只', '虾仁': '150 克', '馄饨皮': '20 张',
+    '春卷皮': '12 张', '茶叶': '10 克', '酸奶': '200 克', '水果': '适量', '低筋面粉': '100 克', '黄油': '80 克',
+    '牛奶': '250 毫升', '酵母': '3 克', '淡奶油': '100 毫升', '乌梅': '30 克', '山楂': '20 克', '柠檬': '1 个',
+    '红茶': '5 克', '黄豆': '80 克', '咖啡': '1 份', '海带': '80 克', '白萝卜': '半根', '白菜': '200 克'
+  };
+
+  var prepMap = {
+    '鸡蛋': '打散备用', '番茄': '切成小块', '葱': '切成葱花', '姜': '切片', '蒜': '切末', '豆腐': '切成小方块',
+    '土豆': '切丝后泡水', '青椒': '去籽切丝', '五花肉': '切成均匀小块', '鲈鱼': '处理干净并擦干', '鸡胸肉': '切丁并提前腌制',
+    '茄子': '切成长条', '芹菜': '去筋切段', '生菜': '洗净沥水', '黄瓜': '拍开切段', '牛肉': '逆纹切片',
+    '胡萝卜': '切成小丁', '韭菜': '洗净切碎', '玉米': '切段', '排骨': '冷水浸泡去血水', '冬瓜': '去皮切片',
+    '香菇': '洗净切片', '鸡腿': '斩块', '虾仁': '去虾线', '黄豆': '提前浸泡 8 小时', '柠檬': '切片去籽'
+  };
+
+  var specs = [
+    ['fan-qie-chao-ji-dan','番茄炒鸡蛋','酸甜家常，十分钟就能端上桌。','家常菜',['常做','快手','下饭'],15,'简单',2,true,'2026-07-14','番茄,鸡蛋,葱,食用油,盐,糖'],
+    ['ma-po-dou-fu','麻婆豆腐','香辣开胃的家常豆腐做法。','家常菜',['下饭'],30,'中等',2,false,'2026-07-12','豆腐,猪肉末,豆瓣酱,花椒,葱,蒜,食用油'],
+    ['suan-la-tu-dou-si','酸辣土豆丝','脆爽酸辣，适合工作日快炒。','家常菜',['常做','快手','下饭'],18,'简单',2,true,'2026-07-10','土豆,青椒,干辣椒,醋,盐,食用油'],
+    ['hong-shao-rou','红烧肉','酱香浓郁，软糯而不腻。','家常菜',['下饭'],75,'中等',4,false,'2026-07-06','五花肉,冰糖,酱油,料酒,姜,葱'],
+    ['qing-zheng-lu-yu','清蒸鲈鱼','少调味突出鱼肉本身的鲜。','家常菜',['清淡'],25,'简单',3,true,'2026-07-03','鲈鱼,姜,葱,酱油,食用油'],
+    ['gong-bao-ji-ding','宫保鸡丁','酸甜微辣，鸡丁滑嫩。','家常菜',['下饭'],35,'中等',3,false,'2026-06-29','鸡胸肉,花生,干辣椒,葱,酱油,醋,糖'],
+    ['yu-xiang-qie-zi','鱼香茄子','没有鱼也有复合鱼香味。','家常菜',['下饭'],35,'中等',3,false,'2026-06-26','茄子,猪肉末,豆瓣酱,醋,糖,蒜,葱'],
+    ['jia-chang-dou-fu','家常豆腐','外香内嫩，咸鲜适口。','家常菜',['常做','下饭'],30,'简单',3,true,'2026-06-22','豆腐,青椒,猪肉末,豆瓣酱,蒜'],
+    ['qin-cai-chao-rou','芹菜炒肉','清香爽口，荤素搭配。','家常菜',['快手'],22,'简单',2,false,'2026-06-18','芹菜,猪肉末,姜,酱油,盐'],
+    ['suan-rong-sheng-cai','蒜蓉生菜','保持脆嫩和翠绿的快手菜。','家常菜',['常做','快手','清淡'],10,'简单',2,true,'2026-06-14','生菜,蒜,盐,食用油'],
+    ['pai-huang-gua','拍黄瓜','清爽开胃，提前冷藏更好吃。','家常菜',['快手','清淡'],12,'简单',2,false,'2026-06-11','黄瓜,蒜,醋,酱油,糖'],
+    ['fan-qie-dun-niu-rou','番茄炖牛肉','汤汁浓郁，牛肉软烂入味。','家常菜',['下饭'],90,'中等',4,true,'2026-06-08','番茄,牛肉,土豆,胡萝卜,姜,酱油'],
+    ['dan-chao-fan','蛋炒饭','粒粒分明的剩饭好去处。','主食',['常做','快手'],15,'简单',1,true,'2026-07-09','米饭,鸡蛋,胡萝卜,葱,盐'],
+    ['cong-you-ban-mian','葱油拌面','葱香浓郁，材料简单。','主食',['快手'],20,'简单',2,false,'2026-07-02','面条,葱,酱油,糖,食用油'],
+    ['jiu-cai-jiao-zi','韭菜鸡蛋饺子','清鲜不腻的家常水饺。','主食',['常做'],70,'中等',4,true,'2026-06-20','面粉,韭菜,鸡蛋,盐,食用油'],
+    ['cong-you-bing','葱油饼','外酥里软，层次分明。','主食',[],55,'中等',3,false,'2026-06-12','面粉,葱,盐,食用油'],
+    ['xiao-mi-zhou','小米粥','温和清淡，适合早餐。','主食',['清淡'],40,'简单',2,false,'2026-06-05','小米,大米'],
+    ['zi-cai-fan-tuan','紫菜饭团','便于携带的简单早餐。','主食',['快手'],20,'简单',2,false,'2026-05-30','米饭,紫菜,鸡蛋,胡萝卜'],
+    ['fan-qie-dan-hua-tang','番茄蛋花汤','酸甜清爽，蛋花轻盈。','汤羹',['常做','快手','清淡'],15,'简单',2,true,'2026-07-13','番茄,鸡蛋,葱,盐'],
+    ['yu-mi-pai-gu-tang','玉米排骨汤','汤清味甜，适合慢炖。','汤羹',['清淡'],80,'简单',4,true,'2026-07-07','排骨,玉米,胡萝卜,姜,盐'],
+    ['dong-gua-wan-zi-tang','冬瓜丸子汤','冬瓜清甜，肉丸鲜嫩。','汤羹',['清淡'],40,'中等',3,false,'2026-06-28','冬瓜,猪肉末,葱,姜,盐'],
+    ['hai-dai-dou-fu-tang','海带豆腐汤','清淡鲜美，日常好搭配。','汤羹',['快手','清淡'],25,'简单',3,false,'2026-06-21','海带,豆腐,姜,盐'],
+    ['zi-cai-dan-hua-tang','紫菜蛋花汤','五分钟也能做好的暖汤。','汤羹',['快手','清淡'],8,'简单',2,true,'2026-06-16','紫菜,鸡蛋,葱,盐'],
+    ['xiang-gu-ji-tang','香菇鸡汤','香气温润，汤味醇厚。','汤羹',['清淡'],90,'简单',4,false,'2026-06-01','鸡腿,香菇,姜,葱,盐'],
+    ['xian-rou-hun-tun','鲜肉馄饨','皮薄馅鲜，一次多包些冷冻。','小吃',['常做'],60,'中等',4,true,'2026-07-05','馄饨皮,猪肉末,紫菜,葱,酱油'],
+    ['su-cai-chun-juan','素菜春卷','外皮酥脆，内馅清爽。','小吃',[],45,'中等',3,false,'2026-06-24','春卷皮,白菜,胡萝卜,香菇,食用油'],
+    ['wu-xiang-cha-ye-dan','五香茶叶蛋','茶香入味，适合提前准备。','小吃',['常做'],65,'简单',6,true,'2026-06-15','鸡蛋,茶叶,酱油,糖'],
+    ['suan-nai-shui-guo-bei','酸奶水果杯','无需开火的清爽甜点。','小吃',['快手','清淡'],8,'简单',1,false,'2026-06-09','酸奶,水果'],
+    ['qi-feng-dan-gao','戚风蛋糕','柔软轻盈的基础蛋糕。','烘焙',[],70,'较难',6,false,'2026-07-08','低筋面粉,鸡蛋,牛奶,糖,食用油'],
+    ['huang-you-qu-qi','黄油曲奇','奶香酥松，纹路清晰。','烘焙',[],45,'中等',5,false,'2026-06-30','低筋面粉,黄油,鸡蛋,糖'],
+    ['niu-nai-mian-bao','牛奶小面包','柔软拉丝，适合作为早餐。','烘焙',[],150,'较难',6,false,'2026-06-17','面粉,牛奶,鸡蛋,酵母,黄油,糖'],
+    ['pu-shi-dan-ta','葡式蛋挞','外酥内嫩，焦斑漂亮。','烘焙',['快手'],35,'简单',6,true,'2026-06-07','鸡蛋,牛奶,淡奶油,糖'],
+    ['suan-mei-tang','酸梅汤','酸甜解腻，冰镇后饮用。','饮品',['常做'],45,'简单',6,true,'2026-07-11','乌梅,山楂,冰糖'],
+    ['ning-meng-hong-cha','柠檬红茶','清新微酸，甜度可以自由调整。','饮品',['快手'],12,'简单',2,false,'2026-07-04','柠檬,红茶,糖'],
+    ['yuan-wei-dou-jiang','原味豆浆','豆香浓郁，早餐常备。','饮品',['常做','清淡'],30,'简单',3,true,'2026-06-23','黄豆,糖'],
+    ['bing-na-tie','冰拿铁','咖啡与牛奶的简单组合。','饮品',['快手'],5,'简单',1,false,'2026-06-13','咖啡,牛奶']
+  ];
+
+  function makeRecipe(spec, index) {
+    var ingredients = spec[10].split(',').map(function (name) {
+      return { name: name, amount: amountMap[name] || '适量', prep: prepMap[name] || '' };
+    });
+    var main = ingredients[0].name;
+    var steps = [
+      { title: '准备食材', text: '按食材清单称量并完成清洗、切配，调味料放在手边备用。' },
+      { title: '开始制作', text: '按照易熟程度依次处理食材，注意控制火力并及时翻动。', tip: '第一次制作时先少量加调味料，出锅前再调整。' },
+      { title: '调味收尾', text: '加入主要调味料，让味道均匀包裹食材并达到合适状态。' },
+      { title: '装盘享用', text: main + '达到理想口感后关火，趁热装盘。' }
+    ];
+    if (spec[0] === 'fan-qie-chao-ji-dan') {
+      steps = [
+        { title: '处理食材', text: '番茄切块，鸡蛋打散，葱切成葱花。' },
+        { title: '炒鸡蛋', text: '锅中放油，倒入蛋液快速翻炒，刚凝固时盛出。', tip: '鸡蛋不要炒得太老，后面还会再次回锅。' },
+        { title: '炒出番茄汁', text: '锅中补少许油，倒入番茄，中火翻炒至略微出汁。', tip: '火力不要太大，避免番茄边缘糊锅。' },
+        { title: '合炒调味', text: '放回鸡蛋，加盐和少量糖，快速翻匀后撒葱花出锅。' }
+      ];
+    }
+    return {
+      slug: spec[0], name: spec[1], description: spec[2], category: spec[3], tags: spec[4],
+      time: spec[5], difficulty: spec[6], servings: spec[7], favorite: spec[8], updated: spec[9],
+      ingredients: ingredients, steps: steps,
+      notes: ['食材状态和灶具火力会影响时间，请以实际熟度为准。'],
+      aliases: ingredients.reduce(function (list, item) {
+        Object.keys(aliases).forEach(function (key) { if (aliases[key] === item.name) list.push(key); });
+        return list;
+      }, []),
+      logs: [
+        { date: spec[9], note: index % 3 === 0 ? '减少了糖和油，味道更自然。' : '按当前配比制作，咸淡和口感合适。', rating: 4 + (index % 2) },
+        { date: '2026-05-' + String(10 + index % 18).padStart(2, '0'), note: '第一次记录，下次继续微调火候。', rating: 0 }
+      ]
+    };
+  }
+
+  var recipes = specs.map(makeRecipe);
+  var categories = ['全部', '家常菜', '主食', '汤羹', '小吃', '烘焙', '饮品'];
+  var commonIngredients = ['鸡蛋', '豆腐', '番茄', '猪肉末', '土豆'];
+  var quickFilters = ['全部', '常做', '快手', '下饭', '清淡'];
+  var ingredientGroups = {
+    '肉蛋': ['鸡蛋','猪肉末','五花肉','牛肉','鸡胸肉','鸡腿','排骨'],
+    '水产': ['鲈鱼','虾仁'],
+    '蔬菜': ['番茄','土豆','青椒','茄子','芹菜','生菜','黄瓜','胡萝卜','玉米','冬瓜','香菇','韭菜','白菜'],
+    '豆制品': ['豆腐','黄豆'],
+    '主食与烘焙': ['米饭','面条','面粉','大米','小米','馄饨皮','春卷皮','低筋面粉'],
+    '调味与其他': ['葱','姜','蒜','豆瓣酱','花椒','干辣椒','醋','酱油','糖','牛奶','黄油','柠檬','红茶']
+  };
+
+  var state = {
+    query: '', category: '全部', quick: '全部', ingredients: [], time: '', difficulty: '', sort: 'updated', shown: 12
+  };
+  var cooking = { recipe: null, step: 0, showIngredients: false };
+  var drawerReturnFocus = null;
+  var cookingReturnFocus = null;
+  var els = {
+    list: document.getElementById('recipe-list-view'), detail: document.getElementById('recipe-detail-view'),
+    grid: document.getElementById('recipe-grid'), search: document.getElementById('recipe-search'),
+    count: document.getElementById('result-count'), empty: document.getElementById('empty-state'),
+    load: document.getElementById('load-more-button'), summary: document.getElementById('active-filter-summary'),
+    backdrop: document.getElementById('drawer-backdrop'), ingredientDrawer: document.getElementById('ingredient-drawer'),
+    filterDrawer: document.getElementById('filter-drawer'), cooking: document.getElementById('cooking-mode'), toast: document.getElementById('recipe-toast')
+  };
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>'"]/g, function (char) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char];
+    });
+  }
+
+  function normalize(value) {
+    var text = String(value || '').toLowerCase().replace(/[，、／/]/g, ' ').replace(/\s+/g, ' ').trim();
+    Object.keys(aliases).sort(function (a, b) { return b.length - a.length; }).forEach(function (key) {
+      text = text.split(key).join(aliases[key]);
+    });
+    return text;
+  }
+
+  function queryTokens() { return normalize(state.query).split(' ').filter(Boolean); }
+
+  function highlight(value) {
+    var output = escapeHtml(value);
+    var rawTokens = String(state.query).replace(/[，、／/]/g, ' ').split(/\s+/).filter(Boolean);
+    rawTokens = rawTokens.concat(rawTokens.map(normalize)).filter(function (token, index, list) { return token && list.indexOf(token) === index; });
+    rawTokens.forEach(function (token) {
+      var safe = token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      if (safe) output = output.replace(new RegExp('(' + safe + ')', 'gi'), '<mark>$1</mark>');
+    });
+    return output;
+  }
+
+  function recipeHaystack(recipe) {
+    return normalize([recipe.name, recipe.description, recipe.category, recipe.tags.join(' '), recipe.aliases.join(' '), recipe.ingredients.map(function (i) { return i.name; }).join(' ')].join(' '));
+  }
+
+  function filteredRecipes() {
+    var tokens = queryTokens();
+    var result = recipes.filter(function (recipe) {
+      var ingredientNames = recipe.ingredients.map(function (item) { return normalize(item.name); });
+      return (!tokens.length || tokens.every(function (token) { return recipeHaystack(recipe).indexOf(token) !== -1; })) &&
+        (state.category === '全部' || recipe.category === state.category) &&
+        (state.quick === '全部' || (state.quick === '常做' ? recipe.favorite : recipe.tags.indexOf(state.quick) !== -1)) &&
+        state.ingredients.every(function (item) { return ingredientNames.indexOf(normalize(item)) !== -1; }) &&
+        (!state.time || (state.time === '15' ? recipe.time <= 15 : state.time === '30' ? recipe.time > 15 && recipe.time <= 30 : state.time === '60' ? recipe.time > 30 && recipe.time <= 60 : recipe.time > 60)) &&
+        (!state.difficulty || recipe.difficulty === state.difficulty);
+    });
+    return result.sort(function (a, b) {
+      if (state.sort === 'name') return a.name.localeCompare(b.name, 'zh-CN');
+      if (state.sort === 'time') return a.time - b.time;
+      return b.updated.localeCompare(a.updated);
+    });
+  }
+
+  function syncUrl(replace) {
+    var params = new URLSearchParams();
+    if (state.query) params.set('q', state.query);
+    if (state.category !== '全部') params.set('category', state.category);
+    if (state.quick !== '全部') params.set('tag', state.quick);
+    if (state.ingredients.length) params.set('ingredients', state.ingredients.join(','));
+    if (state.time) params.set('time', state.time);
+    if (state.difficulty) params.set('difficulty', state.difficulty);
+    if (state.sort !== 'updated') params.set('sort', state.sort);
+    var currentRecipe = els.detail.dataset.slug;
+    if (!els.detail.hidden && currentRecipe) params.set('recipe', currentRecipe);
+    var next = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+    window.history[replace ? 'replaceState' : 'pushState']({}, '', next);
+  }
+
+  function loadUrlState() {
+    var params = new URLSearchParams(window.location.search);
+    state.query = params.get('q') || '';
+    state.category = params.get('category') || '全部';
+    state.quick = params.get('tag') || '全部';
+    state.ingredients = (params.get('ingredients') || '').split(',').filter(Boolean);
+    state.time = params.get('time') || '';
+    state.difficulty = params.get('difficulty') || '';
+    state.sort = params.get('sort') || 'updated';
+    els.search.value = state.query;
+    return params.get('recipe');
+  }
+
+  function renderStaticFilters() {
+    document.getElementById('common-ingredients').innerHTML = commonIngredients.map(function (item) {
+      return '<button type="button" class="filter-chip" data-ingredient="' + item + '">' + item + '</button>';
+    }).join('');
+    document.getElementById('quick-filters').innerHTML = quickFilters.map(function (item) {
+      return '<button type="button" class="filter-chip" data-quick="' + item + '">' + item + '</button>';
+    }).join('');
+    document.getElementById('category-tabs').innerHTML = categories.map(function (item) {
+      return '<button type="button" class="category-chip" data-category="' + item + '">' + item + '</button>';
+    }).join('');
+    document.getElementById('ingredient-groups').innerHTML = Object.keys(ingredientGroups).map(function (group) {
+      return '<section class="ingredient-group"><h3>' + group + '</h3><div class="chip-list">' + ingredientGroups[group].map(function (item) {
+        return '<button type="button" class="ingredient-chip" data-ingredient="' + item + '">' + item + '</button>';
+      }).join('') + '</div></section>';
+    }).join('');
+    document.getElementById('advanced-filters').innerHTML =
+      filterGroup('主分类', 'category', categories) +
+      filterGroup('制作时间', 'time', [['','全部'],['15','15 分钟内'],['30','16—30 分钟'],['60','31—60 分钟'],['61','60 分钟以上']]) +
+      filterGroup('难度', 'difficulty', [['','全部'],['简单','简单'],['中等','中等'],['较难','较难']]) +
+      filterGroup('特征标签', 'quick', quickFilters) +
+      '<section class="filter-group"><h3>排序方式</h3><select id="recipe-sort" class="sort-select" aria-label="排序方式"><option value="updated">最近更新</option><option value="name">名称</option><option value="time">制作时间</option></select></section>';
+  }
+
+  function filterGroup(title, key, values) {
+    return '<section class="filter-group"><h3>' + title + '</h3><div class="filter-options">' + values.map(function (entry) {
+      var value = Array.isArray(entry) ? entry[0] : entry;
+      var label = Array.isArray(entry) ? entry[1] : entry;
+      return '<button type="button" class="filter-chip" data-filter-key="' + key + '" data-filter-value="' + value + '">' + label + '</button>';
+    }).join('') + '</div></section>';
+  }
+
+  function updateFilterStates() {
+    app.querySelectorAll('[data-category]').forEach(function (button) { button.classList.toggle('is-active', button.dataset.category === state.category); });
+    app.querySelectorAll('[data-quick]').forEach(function (button) { button.classList.toggle('is-active', button.dataset.quick === state.quick); });
+    app.querySelectorAll('[data-ingredient]').forEach(function (button) { button.classList.toggle('is-active', state.ingredients.indexOf(button.dataset.ingredient) !== -1); });
+    app.querySelectorAll('[data-filter-key]').forEach(function (button) {
+      var current = state[button.dataset.filterKey];
+      button.classList.toggle('is-active', String(current) === button.dataset.filterValue);
+    });
+    var sort = document.getElementById('recipe-sort'); if (sort) sort.value = state.sort;
+  }
+
+  function renderList(updateUrl) {
+    var result = filteredRecipes();
+    els.count.textContent = result.length;
+    els.grid.innerHTML = result.slice(0, state.shown).map(renderCard).join('');
+    els.empty.hidden = result.length !== 0;
+    els.load.hidden = result.length <= state.shown;
+    var active = [];
+    if (state.ingredients.length) active.push('食材：' + state.ingredients.join(' + '));
+    if (state.quick !== '全部') active.push('标签：' + state.quick);
+    if (state.time) active.push('已限制制作时间');
+    if (state.difficulty) active.push('难度：' + state.difficulty);
+    els.summary.hidden = active.length === 0;
+    els.summary.textContent = active.length ? '当前筛选 · ' + active.join(' · ') : '';
+    updateFilterStates();
+    if (updateUrl !== false) syncUrl(true);
+  }
+
+  function renderCard(recipe) {
+    var ingredients = recipe.ingredients.slice(0, 3);
+    return '<article class="recipe-card" tabindex="0" role="link" data-recipe="' + recipe.slug + '" aria-label="查看' + recipe.name + '">' +
+      '<div class="recipe-card-top"><div><h2>' + highlight(recipe.name) + '</h2><p>' + highlight(recipe.description) + '</p></div>' +
+      (recipe.favorite ? '<span class="favorite-badge">常做</span>' : '') + '</div>' +
+      '<div class="recipe-meta"><span>' + recipe.category + '</span><span>' + recipe.difficulty + '</span><span>' + recipe.time + ' 分钟</span><span>' + recipe.servings + ' 人份</span></div>' +
+      '<div class="recipe-card-footer"><div class="card-ingredients">' + ingredients.map(function (item) { return '<span class="card-ingredient">' + highlight(item.name) + '</span>'; }).join('') +
+      (recipe.ingredients.length > 3 ? '<span class="more-ingredients">+' + (recipe.ingredients.length - 3) + '</span>' : '') + '</div><span class="recipe-card-arrow">→</span></div></article>';
+  }
+
+  function openRecipe(slug, push) {
+    var recipe = recipes.find(function (item) { return item.slug === slug; });
+    if (!recipe) return;
+    els.list.hidden = true; els.detail.hidden = false; els.detail.dataset.slug = slug;
+    els.detail.innerHTML = renderDetail(recipe, recipe.servings);
+    if (push !== false) syncUrl(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function renderDetail(recipe, servings) {
+    var scale = servings / recipe.servings;
+    return '<nav class="recipe-breadcrumb"><a href="/">首页</a> / <button type="button" data-action="back-list">Recipes</button> / ' + recipe.name + '</nav>' +
+      '<header class="detail-header"><div class="detail-title-row"><div><h1>' + recipe.name + '</h1><p class="detail-description">' + recipe.description + '</p>' +
+      '<div class="detail-meta">' + recipe.category + '　·　' + recipe.difficulty + '　·　' + recipe.time + ' 分钟　·　' + servings + ' 人份</div></div>' +
+      '<div class="detail-actions"><button class="primary-button" type="button" data-action="start-cooking">开始烹饪</button><button class="tool-button" type="button" data-action="copy-ingredients">复制食材</button><button class="tool-button" type="button" data-action="print">打印食谱</button></div></div></header>' +
+      '<div class="detail-layout"><aside class="ingredient-panel"><h2>食材</h2><div class="serving-control"><span>份量</span><div class="serving-buttons"><button type="button" data-serving="-1" aria-label="减少份量">−</button><strong id="serving-value" data-value="' + servings + '">' + servings + ' 人</strong><button type="button" data-serving="1" aria-label="增加份量">＋</button></div></div>' +
+      '<ul class="ingredient-checklist">' + recipe.ingredients.map(function (item, index) { return '<li><input id="ingredient-' + index + '" type="checkbox"><label for="ingredient-' + index + '">' + item.name + (item.prep ? '<span class="ingredient-prep">' + item.prep + '</span>' : '') + '</label><span class="ingredient-amount">' + scaleAmount(item.amount, scale) + '</span></li>'; }).join('') + '</ul></aside>' +
+      '<section class="steps-panel"><h2>制作步骤</h2>' + recipe.steps.map(function (step, index) { return '<article class="recipe-step"><span class="step-number">' + String(index + 1).padStart(2, '0') + '</span><div class="step-content"><h3>' + step.title + '</h3><p>' + step.text + '</p>' + (step.tip ? '<div class="step-tip">注意：' + step.tip + '</div>' : '') + '</div></article>'; }).join('') +
+      '<section class="global-notes"><h3>全局注意事项</h3>' + recipe.notes.map(function (note) { return '<div class="global-note">' + note + '</div>'; }).join('') + '</section></section></div>' +
+      '<section class="cooking-log"><h2>下厨记录</h2><div class="log-list">' + recipe.logs.map(function (log) { return '<div class="log-item"><span class="log-date">' + log.date + '</span><span>' + log.note + '</span><span class="log-stars">' + (log.rating ? '★★★★★'.slice(0, log.rating) + '☆☆☆☆☆'.slice(0, 5 - log.rating) : '') + '</span></div>'; }).join('') + '</div></section>';
+  }
+
+  function scaleAmount(amount, scale) {
+    if (scale === 1) return amount;
+    return amount.replace(/\d+(?:\.\d+)?/, function (number) {
+      var value = Math.round(parseFloat(number) * scale * 10) / 10;
+      return String(value).replace(/\.0$/, '');
+    });
+  }
+
+  function backToList(push) {
+    els.detail.hidden = true; els.detail.dataset.slug = ''; els.list.hidden = false;
+    if (push !== false) syncUrl(false);
+    renderList(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleIngredient(name) {
+    var index = state.ingredients.indexOf(name);
+    if (index === -1) state.ingredients.push(name); else state.ingredients.splice(index, 1);
+    state.shown = 12; renderList();
+  }
+
+  function clearAll() {
+    state.query = ''; state.category = '全部'; state.quick = '全部'; state.ingredients = [];
+    state.time = ''; state.difficulty = ''; state.sort = 'updated'; state.shown = 12; els.search.value = '';
+    renderList();
+  }
+
+  function openDrawer(drawer) {
+    closeDrawers(false);
+    drawerReturnFocus = document.activeElement;
+    els.backdrop.hidden = false; drawer.classList.add('is-open'); drawer.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    drawer.focus();
+  }
+
+  function closeDrawers(restoreFocus) {
+    var hadOpenDrawer = els.ingredientDrawer.classList.contains('is-open') || els.filterDrawer.classList.contains('is-open');
+    [els.ingredientDrawer, els.filterDrawer].forEach(function (drawer) { drawer.classList.remove('is-open'); drawer.setAttribute('aria-hidden', 'true'); });
+    els.backdrop.hidden = true; document.body.style.overflow = '';
+    if (restoreFocus !== false && hadOpenDrawer && drawerReturnFocus && document.contains(drawerReturnFocus)) drawerReturnFocus.focus();
+    drawerReturnFocus = null;
+  }
+
+  function toast(message) {
+    els.toast.textContent = message; els.toast.hidden = false;
+    window.clearTimeout(toast.timer); toast.timer = window.setTimeout(function () { els.toast.hidden = true; }, 1800);
+  }
+
+  function copyIngredients(recipe) {
+    var text = recipe.name + '（' + recipe.servings + ' 人份）\n' + recipe.ingredients.map(function (item) { return '□ ' + item.name + '　' + item.amount + (item.prep ? '（' + item.prep + '）' : ''); }).join('\n');
+    if (navigator.clipboard) navigator.clipboard.writeText(text).then(function () { toast('食材清单已复制'); });
+    else toast('当前浏览器不支持自动复制');
+  }
+
+  function openCooking(recipe) {
+    cookingReturnFocus = document.activeElement;
+    cooking.recipe = recipe; cooking.step = 0; cooking.showIngredients = false;
+    els.cooking.hidden = false; document.body.style.overflow = 'hidden'; renderCooking();
+  }
+
+  function closeCooking() {
+    els.cooking.hidden = true; document.body.style.overflow = '';
+    if (cookingReturnFocus && document.contains(cookingReturnFocus)) cookingReturnFocus.focus();
+    cookingReturnFocus = null;
+  }
+
+  function renderCooking() {
+    var recipe = cooking.recipe, step = recipe.steps[cooking.step];
+    els.cooking.innerHTML = '<div class="cooking-shell"><header class="cooking-header"><strong>' + recipe.name + '</strong><div class="cooking-header-actions"><span>' + (cooking.step + 1) + ' / ' + recipe.steps.length + '</span><button class="tool-button" type="button" data-cooking="close">退出</button></div></header>' +
+      '<main class="cooking-content"><span class="cooking-step-number">' + String(cooking.step + 1).padStart(2, '0') + '</span><h2>' + step.title + '</h2><p class="cooking-instruction">' + step.text + '</p>' +
+      (step.tip ? '<div class="cooking-tip">注意：' + step.tip + '</div>' : '') +
+      (cooking.showIngredients ? '<aside class="cooking-ingredients"><strong>食材清单</strong><ul>' + recipe.ingredients.map(function (item) { return '<li>' + item.name + '　' + item.amount + '</li>'; }).join('') + '</ul></aside>' : '') + '</main>' +
+      '<footer class="cooking-footer"><button class="tool-button" type="button" data-cooking="ingredients">' + (cooking.showIngredients ? '收起食材' : '查看食材') + '</button><div class="cooking-nav"><button class="tool-button" type="button" data-cooking="prev" ' + (cooking.step === 0 ? 'disabled' : '') + '>上一步</button><button class="primary-button" type="button" data-cooking="next">' + (cooking.step === recipe.steps.length - 1 ? '完成' : '下一步') + '</button></div></footer></div>';
+    els.cooking.focus();
+  }
+
+  app.addEventListener('click', function (event) {
+    var target = event.target.closest('button, [data-recipe]'); if (!target) return;
+    if (target.dataset.recipe) return openRecipe(target.dataset.recipe, true);
+    if (target.dataset.category !== undefined) { state.category = target.dataset.category; state.shown = 12; return renderList(); }
+    if (target.dataset.quick !== undefined) { state.quick = target.dataset.quick; state.shown = 12; return renderList(); }
+    if (target.dataset.ingredient) return toggleIngredient(target.dataset.ingredient);
+    if (target.dataset.filterKey) { state[target.dataset.filterKey] = target.dataset.filterValue; state.shown = 12; return renderList(); }
+    if (target.hasAttribute('data-close-drawer')) return closeDrawers();
+    if (target.dataset.serving) {
+      var recipe = recipes.find(function (item) { return item.slug === els.detail.dataset.slug; });
+      var current = Number(document.getElementById('serving-value').dataset.value);
+      var next = Math.max(1, Math.min(12, current + Number(target.dataset.serving)));
+      els.detail.innerHTML = renderDetail(recipe, next); return;
+    }
+    switch (target.dataset.action) {
+      case 'clear': clearAll(); break;
+      case 'clear-ingredients': state.ingredients = []; renderList(); break;
+      case 'clear-advanced': state.category = '全部'; state.quick = '全部'; state.time = ''; state.difficulty = ''; state.sort = 'updated'; renderList(); break;
+      case 'back-list': backToList(true); break;
+      case 'start-cooking': openCooking(recipes.find(function (item) { return item.slug === els.detail.dataset.slug; })); break;
+      case 'copy-ingredients': copyIngredients(recipes.find(function (item) { return item.slug === els.detail.dataset.slug; })); break;
+      case 'print': window.print(); break;
+    }
+  });
+
+  els.cooking.addEventListener('click', function (event) {
+    var target = event.target.closest('[data-cooking]'); if (!target) return;
+    event.stopPropagation();
+    if (target.dataset.cooking === 'close') return closeCooking();
+    if (target.dataset.cooking === 'ingredients') cooking.showIngredients = !cooking.showIngredients;
+    if (target.dataset.cooking === 'prev') cooking.step = Math.max(0, cooking.step - 1);
+    if (target.dataset.cooking === 'next') { if (cooking.step === cooking.recipe.steps.length - 1) return closeCooking(); cooking.step += 1; }
+    renderCooking();
+  });
+
+  els.grid.addEventListener('keydown', function (event) {
+    var card = event.target.closest('[data-recipe]');
+    if (card && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); openRecipe(card.dataset.recipe, true); }
+  });
+  els.search.addEventListener('input', function () { state.query = els.search.value.trim(); state.shown = 12; renderList(); });
+  els.load.addEventListener('click', function () { state.shown += 12; renderList(false); });
+  document.getElementById('clear-filter-button').addEventListener('click', clearAll);
+  document.getElementById('advanced-filter-button').addEventListener('click', function () { openDrawer(els.filterDrawer); });
+  document.getElementById('ingredient-drawer-button').addEventListener('click', function () { openDrawer(els.ingredientDrawer); });
+  document.getElementById('mobile-filter-button').addEventListener('click', function () { openDrawer(els.filterDrawer); });
+  document.getElementById('mobile-ingredient-button').addEventListener('click', function () { openDrawer(els.ingredientDrawer); });
+  els.backdrop.addEventListener('click', closeDrawers);
+  document.getElementById('advanced-filters').addEventListener('change', function (event) { if (event.target.id === 'recipe-sort') { state.sort = event.target.value; renderList(); } });
+  document.addEventListener('keydown', function (event) { if (event.key === 'Escape') { closeDrawers(); if (!els.cooking.hidden) closeCooking(); } });
+  window.addEventListener('popstate', function () { var slug = loadUrlState(); if (slug) openRecipe(slug, false); else backToList(false); renderList(false); });
+
+  renderStaticFilters();
+  var initialSlug = loadUrlState();
+  document.getElementById('recipe-total').textContent = recipes.length;
+  document.getElementById('ingredient-total').textContent = new Set(recipes.reduce(function (all, recipe) {
+    return all.concat(recipe.ingredients.map(function (item) { return ingredientFamilies[item.name] || item.name; }));
+  }, [])).size;
+  document.getElementById('latest-update').textContent = recipes.map(function (recipe) { return recipe.updated; }).sort().reverse()[0];
+  renderList(false);
+  if (initialSlug) openRecipe(initialSlug, false);
+}());

@@ -40,9 +40,7 @@ i18n_dir: :lang
 skip_render:
   - README.md
   - js/toplist-enhancements.js
-  - js/recipes-page.js
   - toplist/data/*.md
-  - recipes/data/*.md
   - css/iconfont_*/demo_index.html
   - css/iconfont_*/iconfont.json
   - baidu_verify_*.html

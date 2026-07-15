@@ -42,7 +42,6 @@ skip_render:
   - js/toplist-enhancements.js
   - js/recipes-page.js
   - toplist/data/*.md
-  - recipes/data/*.md
   - css/iconfont_*/demo_index.html
   - css/iconfont_*/iconfont.json
   - baidu_verify_*.html
