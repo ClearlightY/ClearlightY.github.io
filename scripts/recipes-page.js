@@ -123,7 +123,9 @@ function parseRecipeBody(body) {
 }
 
 function parseRecipeFile(filePath) {
-  const raw = fs.readFileSync(filePath, 'utf8');
+  // Pages CMS may save Markdown with CRLF. hexo-front-matter 3.x only
+  // recognizes the opening delimiter reliably after normalizing line endings.
+  const raw = fs.readFileSync(filePath, 'utf8').replace(/\r\n?/g, '\n');
   const parsed = frontMatter.parse(raw);
   const body = parseRecipeBody(parsed._content);
   const slug = stringValue(parsed.slug, path.basename(filePath, path.extname(filePath)));
