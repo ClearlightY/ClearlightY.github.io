@@ -20,9 +20,9 @@
     
     <tags>
       
-      <tag>Gemini CLI</tag>
-      
       <tag>AI工具</tag>
+      
+      <tag>Gemini CLI</tag>
       
       <tag>命令行</tag>
       
@@ -392,13 +392,13 @@
     
     <tags>
       
-      <tag>AI工具</tag>
-      
       <tag>ChatGPT</tag>
       
       <tag>OpenAI</tag>
       
       <tag>账号注册</tag>
+      
+      <tag>AI工具</tag>
       
     </tags>
     
@@ -485,13 +485,13 @@
     
     <tags>
       
-      <tag>GoLand</tag>
-      
       <tag>JetBrains</tag>
       
-      <tag>macOS</tag>
-      
       <tag>开发工具</tag>
+      
+      <tag>GoLand</tag>
+      
+      <tag>macOS</tag>
       
     </tags>
     
@@ -673,11 +673,11 @@
       
       <tag>JetBrains</tag>
       
-      <tag>开发工具</tag>
-      
       <tag>IDEA</tag>
       
       <tag>历史归档</tag>
+      
+      <tag>开发工具</tag>
       
     </tags>
     
@@ -921,9 +921,9 @@
       
       <tag>命令行</tag>
       
-      <tag>vimdiff</tag>
-      
       <tag>Vim</tag>
+      
+      <tag>vimdiff</tag>
       
       <tag>文件对比</tag>
       
@@ -1043,9 +1043,9 @@
     
     <tags>
       
-      <tag>Linux</tag>
-      
       <tag>Redis</tag>
+      
+      <tag>Linux</tag>
       
       <tag>Windows</tag>
       
@@ -1353,11 +1353,11 @@
     
     <tags>
       
+      <tag>Linux</tag>
+      
       <tag>V2Ray</tag>
       
       <tag>Qv2ray</tag>
-      
-      <tag>Linux</tag>
       
       <tag>代理工具</tag>
       
@@ -1386,9 +1386,9 @@
       
       <tag>JetBrains</tag>
       
-      <tag>开发环境</tag>
-      
       <tag>IDEA</tag>
+      
+      <tag>开发环境</tag>
       
       <tag>Ubuntu</tag>
       
