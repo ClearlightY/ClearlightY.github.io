@@ -1,0 +1,45 @@
+@echo off
+chcp 65001 >nul
+setlocal
+
+set "LOG_FILE=D:\Personal\BLOG\python\log\task_log.txt"
+set "PY_DIR=D:\Personal\BLOG\python"
+set "REPO_DIR=D:\Personal\BLOG\ClearlightY.github.io"
+set "PYTHONIOENCODING=utf-8"
+
+echo %date% %time% start >> "%LOG_FILE%"
+
+git -C "%REPO_DIR%" pull --rebase origin hexo_v2.0 >> "%LOG_FILE%" 2>&1
+if errorlevel 1 goto fail
+
+cd /d "%PY_DIR%"
+python "weibo_hot_final.py" >> "%LOG_FILE%" 2>&1
+if errorlevel 1 goto fail
+
+git -C "%REPO_DIR%" add -- source/toplist/data/WB_Top_*.md >> "%LOG_FILE%" 2>&1
+if errorlevel 1 goto fail
+
+git -C "%REPO_DIR%" diff --cached --quiet
+if errorlevel 1 goto commit
+
+echo %date% %time% no new files to commit >> "%LOG_FILE%"
+goto push
+
+:commit
+git -C "%REPO_DIR%" -c user.name="Clearlight Auto Sync" -c user.email="actions@clearlight.local" commit -m "Local auto update Weibo hot %DATE:~0,10% %TIME:~0,5%" >> "%LOG_FILE%" 2>&1
+if errorlevel 1 goto fail
+
+:push
+git -C "%REPO_DIR%" push origin HEAD:hexo_v2.0 >> "%LOG_FILE%" 2>&1
+if errorlevel 1 goto fail
+
+goto done
+
+:fail
+set "ERR=%ERRORLEVEL%"
+echo %date% %time% failed with %ERR% >> "%LOG_FILE%"
+endlocal & exit /b %ERR%
+
+:done
+echo %date% %time% end >> "%LOG_FILE%"
+endlocal

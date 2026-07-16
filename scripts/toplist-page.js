@@ -177,14 +177,25 @@ function renderEntryList(entries) {
 function loadHotFiles(sourceDir) {
   if (!sourceDir || !fs.existsSync(sourceDir)) return [];
 
-  const files = fs.readdirSync(sourceDir)
-    .filter(name =>
-      /^WB_Top_\d{8}_\d{2}\.md$/i.test(name) ||
-      /^Top_\d{8}\.md$/i.test(name) ||
-      /^WB_Hot_\d{8}_\d{2}\.md$/i.test(name) ||
-      /^Hot_\d{8}\.md$/i.test(name)
-    )
-    .map(name => path.join(sourceDir, name));
+  const files = [];
+  const pendingDirs = [sourceDir];
+  const isHotFile = name =>
+    /^WB_Top_\d{8}_\d{2}\.md$/i.test(name) ||
+    /^Top_\d{8}\.md$/i.test(name) ||
+    /^WB_Hot_\d{8}_\d{2}\.md$/i.test(name) ||
+    /^Hot_\d{8}\.md$/i.test(name);
+
+  while (pendingDirs.length) {
+    const currentDir = pendingDirs.pop();
+    for (const entry of fs.readdirSync(currentDir, { withFileTypes: true })) {
+      const entryPath = path.join(currentDir, entry.name);
+      if (entry.isDirectory()) {
+        pendingDirs.push(entryPath);
+      } else if (entry.isFile() && isHotFile(entry.name)) {
+        files.push(entryPath);
+      }
+    }
+  }
 
   return files
     .map(filePath => {

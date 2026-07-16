@@ -1,0 +1,196 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+"""
+获取微博热搜榜前50名并保存到Markdown文件
+文件名格式：WB_热搜_YYYYMMDD_HH.md
+每条热搜都包含可点击的链接
+适合每小时定时运行，保留每个小时的记录
+"""
+
+import requests
+from datetime import datetime
+import sys
+import io
+import os
+from urllib.parse import quote
+
+WEIBO_API_URL = "https://weibo.com/ajax/statuses/hot_band"
+REQUEST_TIMEOUT = int(os.getenv("WEIBO_REQUEST_TIMEOUT", "15"))
+
+# 默认直连，避免 requests 自动读取系统环境里的 HTTP_PROXY/HTTPS_PROXY。
+# 可选值：
+#   direct：忽略系统代理，适合 v2ray 全局模式下微博被代理出口拦截的情况
+#   system：使用系统/环境代理
+#   proxy ：使用 WEIBO_PROXY 指定的代理，例如 http://127.0.0.1:10809
+PROXY_MODE = os.getenv("WEIBO_PROXY_MODE", "direct").strip().lower()
+WEIBO_PROXY = os.getenv("WEIBO_PROXY", "").strip()
+
+def setup_console_encoding():
+    """设置控制台编码以避免中文字符输出错误"""
+    if sys.platform.startswith('win'):
+        try:
+            sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='ignore')
+            sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='ignore')
+        except:
+            pass
+
+def create_http_session():
+    """创建请求会话，并显式控制是否使用代理。"""
+    session = requests.Session()
+
+    if PROXY_MODE == "system":
+        session.trust_env = True
+        print("网络模式: 使用系统/环境代理")
+        return session
+
+    session.trust_env = False
+
+    if PROXY_MODE == "proxy":
+        if not WEIBO_PROXY:
+            print("网络模式: 指定代理，但未设置 WEIBO_PROXY，改用直连")
+            return session
+
+        session.proxies.update({
+            "http": WEIBO_PROXY,
+            "https": WEIBO_PROXY,
+        })
+        print(f"网络模式: 使用指定代理 {WEIBO_PROXY}")
+        return session
+
+    if PROXY_MODE != "direct":
+        print(f"网络模式: 未识别的 WEIBO_PROXY_MODE={PROXY_MODE}，改用直连")
+    else:
+        print("网络模式: 直连，不读取系统/环境代理")
+
+    return session
+
+def get_weibo_hot():
+    """
+    获取微博热搜榜数据
+    使用微博官方API：weibo.com/ajax/statuses/hot_band
+    """
+    print("正在获取微博热搜榜数据...")
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'application/json, text/plain, */*',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Referer': 'https://weibo.com/',
+        'Connection': 'keep-alive',
+    }
+
+    try:
+        session = create_http_session()
+        response = session.get(WEIBO_API_URL, headers=headers, timeout=REQUEST_TIMEOUT)
+        if response.status_code == 200:
+            data = response.json()
+            if 'data' in data and 'band_list' in data['data']:
+                hot_items = []
+                for idx, item in enumerate(data['data']['band_list'][:50], 1):
+                    title = item.get('note', '')
+                    hot_num = str(item.get('num', ''))
+                    # URL编码标题，确保链接正确
+                    encoded_title = quote(title, safe='')
+                    link = f"https://s.weibo.com/weibo?q=%23{encoded_title}%23"
+                    hot_items.append({
+                        'rank': idx,
+                        'title': title,
+                        'hot': hot_num,
+                        'link': link
+                    })
+                print(f"成功获取 {len(hot_items)} 条热搜")
+                return hot_items
+        else:
+            print(f"微博接口返回异常状态码: {response.status_code}")
+            print(response.text[:300])
+    except Exception as e:
+        print(f"获取热搜数据失败: {e}")
+        print("请检查网络连接、v2ray 路由规则或微博API是否变更")
+
+    return None
+
+def save_to_file(hot_items, filename):
+    """
+    将热搜数据保存到Markdown文件
+    """
+    if not hot_items:
+        print("没有热搜数据可保存")
+        return False
+
+    try:
+        with open(filename, 'w', encoding='utf-8') as f:
+            # 写入Markdown标题
+            f.write(f"# 微博热搜榜\n\n")
+            f.write(f"**更新时间**: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
+            f.write("---\n\n")
+
+            # 写入热搜列表
+            f.write("## 热搜榜 Top 50\n\n")
+
+            for item in hot_items:
+                rank_str = f"{item['rank']}. "
+                title_str = item['title']
+                hot_str = f" ({item['hot']})" if item['hot'] else ""
+                link_str = item['link']
+
+                # Markdown格式：带链接的列表项
+                # 格式: 1. [标题](链接) (热度)
+                f.write(f"{rank_str}[{title_str}]({link_str}){hot_str}\n")
+
+            f.write("\n---\n\n")
+            f.write(f"**总计**: {len(hot_items)} 条热搜\n")
+            f.write(f"**数据来源**: 微博热搜榜\n")
+
+        print(f"热搜数据已保存到: {filename}")
+        return True
+
+    except Exception as e:
+        print(f"保存文件时出错: {e}")
+        return False
+
+
+def main():
+    setup_console_encoding()
+
+    print("微博热搜榜获取工具")
+    print("=" * 50)
+
+    # 设置输出目录
+    output_dir = r"D:\Personal\BLOG\ClearlightY.github.io\source\toplist\data"
+
+    # 确保输出目录存在
+    os.makedirs(output_dir, exist_ok=True)
+    print(f"输出目录: {output_dir}")
+
+    # 获取热搜数据
+    hot_items = get_weibo_hot()
+
+    if not hot_items:
+        print("\n获取热搜失败，请稍后重试")
+        sys.exit(1)
+
+    # 生成文件名：WB_热搜_YYYYMMDD_HH.md
+    date_hour_str = datetime.now().strftime('%Y%m%d_%H')
+    md_filename = os.path.join(output_dir, f"WB_Top_{date_hour_str}.md")
+
+    # 保存到Markdown文件
+    success = save_to_file(hot_items, md_filename)
+
+    if success:
+        # 打印前10名
+        print("\n微博热搜榜前10名:")
+        print("-" * 50)
+        for item in hot_items[:10]:
+            hot_str = f" ({item['hot']})" if item['hot'] else ""
+            print(f"{item['rank']:2d}. {item['title']}{hot_str}")
+
+        print(f"\n完整榜单已保存到: {md_filename}")
+        print(f"总计: {len(hot_items)} 条热搜")
+        print(f"更新时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    else:
+        print("保存文件失败")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

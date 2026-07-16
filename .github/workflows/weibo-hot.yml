@@ -39,7 +39,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add source/toplist/data/WB_Top_*.md
+          git add -- source/toplist/data
           if git diff --cached --quiet; then
             echo "本小时数据没有变化，无需提交。"
           else

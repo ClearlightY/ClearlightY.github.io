@@ -96,8 +96,9 @@ def get_weibo_hot() -> list[dict[str, object]]:
 
 def save_to_file(hot_items: list[dict[str, object]], captured_at: datetime) -> Path:
     """将热搜数据保存为 UTF-8 Markdown 文件。"""
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    output_file = OUTPUT_DIR / f"WB_Top_{captured_at:%Y%m%d_%H}.md"
+    month_dir = OUTPUT_DIR / f"{captured_at:%Y}" / f"{captured_at:%m}"
+    month_dir.mkdir(parents=True, exist_ok=True)
+    output_file = month_dir / f"WB_Top_{captured_at:%Y%m%d_%H}.md"
 
     lines = [
         "# 微博热搜榜",

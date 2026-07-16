@@ -1,0 +1,43 @@
+@echo off
+chcp 65001 >nul
+setlocal
+
+set "LOG_DIR=D:\Personal\BLOG\python\log"
+set "LOG_FILE=%LOG_DIR%\task_deploy_log.txt"
+set "REPO_DIR=D:\Personal\BLOG\ClearlightY.github.io"
+set "PY_DIR=D:\Personal\BLOG\python"
+set "PYTHONIOENCODING=utf-8"
+
+if not exist "%LOG_DIR%" mkdir "%LOG_DIR%"
+echo %date% %time% start >> "%LOG_FILE%"
+
+rem Safety net: push any hourly records that were collected locally but not yet synced.
+git -C "%REPO_DIR%" pull --rebase origin hexo_v2.0 >> "%LOG_FILE%" 2>&1
+if errorlevel 1 goto fail
+git -C "%REPO_DIR%" add -- source/toplist/data/WB_Top_*.md >> "%LOG_FILE%" 2>&1
+if errorlevel 1 goto fail
+git -C "%REPO_DIR%" diff --cached --quiet
+if errorlevel 1 goto commit
+goto deploy
+
+:commit
+git -C "%REPO_DIR%" -c user.name="Clearlight Auto Sync" -c user.email="actions@clearlight.local" commit -m "Sync pending Weibo hot records %DATE:~0,10% %TIME:~0,5%" >> "%LOG_FILE%" 2>&1
+if errorlevel 1 goto fail
+git -C "%REPO_DIR%" push origin HEAD:hexo_v2.0 >> "%LOG_FILE%" 2>&1
+if errorlevel 1 goto fail
+
+:deploy
+cd /d "%PY_DIR%"
+python "hexo_deploy.py" >> "%LOG_FILE%" 2>&1
+if errorlevel 1 goto fail
+
+goto done
+
+:fail
+set "ERR=%ERRORLEVEL%"
+echo %date% %time% failed with %ERR% >> "%LOG_FILE%"
+endlocal & exit /b %ERR%
+
+:done
+echo %date% %time% end >> "%LOG_FILE%"
+endlocal
