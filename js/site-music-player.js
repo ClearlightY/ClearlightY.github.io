@@ -28,6 +28,7 @@
         paused: state.aplayer.audio.paused,
         muted: state.aplayer.audio.muted,
         collapsed: !!state.collapsed,
+        docked: !!state.docked,
         random: !!state.randomMode
       }));
     } catch (err) {
@@ -54,9 +55,9 @@
 
     host = document.createElement('aside');
     host.id = PLAYER_ID;
-    host.className = 'site-music-player';
+    host.className = 'site-music-player is-collapsed is-docked';
     host.innerHTML = [
-      '<button class="site-music-player__toggle" type="button" aria-expanded="false" aria-label="Toggle music player">&#9835;</button>',
+      '<button class="site-music-player__dock-toggle" type="button" aria-expanded="false" aria-label="展开音乐播放器">&#8250;</button>',
       '<div class="site-music-player__shell">',
       '  <div class="site-music-player__mount"></div>',
       '  <div class="site-music-player__toolbar">',
@@ -89,17 +90,27 @@
     }
     var collapsed = state.collapsed !== false;
     state.host.classList.toggle('is-collapsed', collapsed);
-    var toggle = state.host.querySelector('.site-music-player__toggle');
-    if (toggle) {
-      toggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
-      toggle.setAttribute('aria-label', collapsed ? 'Expand music player' : 'Collapse music player');
-      toggle.innerHTML = collapsed ? '&#9835;' : '&#8722;';
+  }
+
+  function syncDockedUI() {
+    if (!state.host) {
+      return;
+    }
+    var docked = state.docked !== false && state.collapsed !== false;
+    state.host.classList.toggle('is-docked', docked);
+    var dockToggle = state.host.querySelector('.site-music-player__dock-toggle');
+    if (dockToggle) {
+      dockToggle.setAttribute('aria-expanded', docked ? 'false' : 'true');
+      dockToggle.setAttribute('aria-label', docked ? '展开音乐播放器' : '收起音乐播放器');
+      dockToggle.innerHTML = docked ? '&#8250;' : '&#8249;';
     }
   }
 
   function setCollapsed(nextValue) {
     state.collapsed = !!nextValue;
+    state.docked = state.collapsed;
     syncCollapsedUI();
+    syncDockedUI();
     savePersistedState();
   }
 
@@ -188,6 +199,7 @@
     var listIndex = typeof persisted.index === 'number' ? persisted.index : 0;
 
     state.collapsed = typeof persisted.collapsed === 'boolean' ? persisted.collapsed : true;
+    state.docked = state.collapsed;
     state.randomMode = !!persisted.random;
 
     if (state.aplayer.list && typeof state.aplayer.list.switch === 'function' && getTrackCount() > 0) {
@@ -209,12 +221,14 @@
     if (!state.playlist.length) {
       syncHint('Player is ready. Put your audio files under /source/music/ to enable playback.', false);
       syncCollapsedUI();
+      syncDockedUI();
       syncPlaylistControls();
       return;
     }
 
     syncHint('Start playback once, then internal navigation will keep it running.', false);
     syncCollapsedUI();
+    syncDockedUI();
     syncPlaylistControls();
   }
 
@@ -225,10 +239,10 @@
     state.host.setAttribute('data-player-bound', '1');
 
     var audio = state.aplayer.audio;
-    var toggle = state.host.querySelector('.site-music-player__toggle');
+    var dockToggle = state.host.querySelector('.site-music-player__dock-toggle');
 
-    if (toggle) {
-      toggle.addEventListener('click', function() {
+    if (dockToggle) {
+      dockToggle.addEventListener('click', function() {
         setCollapsed(state.collapsed === false);
       });
     }
@@ -326,7 +340,9 @@
   function waitForAPlayer() {
     state.host = createPlayerHost();
     state.collapsed = true;
+    state.docked = true;
     syncCollapsedUI();
+    syncDockedUI();
 
     if (mountAPlayer()) {
       return;
@@ -479,8 +495,19 @@
 
   function refreshPageScripts() {
     if (window.Fluid && window.Fluid.boot) {
-      if (typeof window.Fluid.boot.registerEvents === 'function') {
-        window.Fluid.boot.registerEvents();
+      if (window.Fluid.events) {
+        if (typeof window.Fluid.events.registerParallaxEvent === 'function') {
+          window.Fluid.events.registerParallaxEvent();
+        }
+        if (typeof window.Fluid.events.registerScrollDownArrowEvent === 'function') {
+          window.Fluid.events.registerScrollDownArrowEvent();
+        }
+        if (typeof window.Fluid.events.registerScrollTopArrowEvent === 'function') {
+          window.Fluid.events.registerScrollTopArrowEvent();
+        }
+        if (typeof window.Fluid.events.registerImageLoadedEvent === 'function') {
+          window.Fluid.events.registerImageLoadedEvent();
+        }
       }
       if (typeof window.Fluid.boot.refresh === 'function') {
         window.Fluid.boot.refresh();
@@ -511,18 +538,27 @@
     }).then(function(html) {
       var parser = new DOMParser();
       var nextDoc = parser.parseFromString(html, 'text/html');
-      var nextHeader = nextDoc.querySelector('header');
       var nextMain = nextDoc.querySelector('main');
-      var currentHeader = document.querySelector('header');
       var currentMain = document.querySelector('main');
-      if (!nextHeader || !nextMain || !currentHeader || !currentMain) {
+      if (!nextMain || !currentMain) {
         window.location.href = nextUrl.href;
         return;
       }
 
       syncDocumentSettings(nextDoc);
-      replaceNode(currentHeader, nextHeader, 'header');
+      var persistentSearch = document.getElementById('modalSearch');
+      if (persistentSearch && currentMain.contains(persistentSearch)) {
+        persistentSearch.parentNode.removeChild(persistentSearch);
+      }
       replaceNode(currentMain, nextMain, 'main');
+      if (persistentSearch) {
+        var replacementSearch = currentMain.querySelector('#modalSearch');
+        if (replacementSearch && replacementSearch.parentNode) {
+          replacementSearch.parentNode.replaceChild(persistentSearch, replacementSearch);
+        } else {
+          currentMain.appendChild(persistentSearch);
+        }
+      }
 
       if (options && options.push) {
         window.history.pushState({ url: nextUrl.href }, '', nextUrl.href);
@@ -537,9 +573,7 @@
         window.scrollTo(0, 0);
       }
 
-      return executeScriptsWithin(currentHeader).then(function() {
-        return executeScriptsWithin(currentMain);
-      }).then(function() {
+      return executeScriptsWithin(currentMain).then(function() {
         refreshPageScripts();
       });
     }).catch(function() {
