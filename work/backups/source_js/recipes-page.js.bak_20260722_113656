@@ -457,7 +457,7 @@
     var savedSession = readStorage(STORAGE_KEYS.cooking, null);
     var checkedIngredients = savedSession && savedSession.recipeSlug === recipe.slug && Array.isArray(savedSession.checkedIngredients) ? savedSession.checkedIngredients : [];
     var cookingLabel = savedSession && savedSession.recipeSlug === recipe.slug ? '继续烹饪' : '开始烹饪';
-    return '<div class="recipe-back-row"><button class="recipe-back-button" type="button" data-action="back-list"><span class="recipe-back-icon" aria-hidden="true">←</span><span>返回菜谱</span></button></div>' +
+    return '<nav class="recipe-breadcrumb"><a href="/">首页</a> / <button type="button" data-action="back-list">Recipes</button> / ' + escapeHtml(recipe.name) + '</nav>' +
       '<header class="detail-header"><div class="detail-title-row"><div><h1>' + escapeHtml(recipe.name) + '</h1><p class="detail-description">' + escapeHtml(recipe.description) + '</p>' +
       '<div class="detail-meta">' + escapeHtml(recipe.category) + '　·　' + escapeHtml(recipe.difficulty) + '　·　' + escapeHtml(recipe.time) + ' 分钟　·　' + escapeHtml(servings) + ' 人份</div></div>' +
       '<div class="detail-actions"><button class="primary-button" type="button" data-action="start-cooking">' + cookingLabel + '</button><button class="tool-button" type="button" data-action="copy-ingredients">复制食材</button><button class="tool-button" type="button" data-action="print">打印食谱</button></div></div></header>' +

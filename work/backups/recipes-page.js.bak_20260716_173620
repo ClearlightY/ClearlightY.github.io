@@ -52,14 +52,6 @@ function splitCells(value) {
   return String(value || '').split('|').map(item => item.trim());
 }
 
-function durationSeconds(value) {
-  const text = stringValue(value);
-  const minutes = text.match(/(\d+(?:\.\d+)?)\s*分钟/);
-  if (minutes) return Math.max(1, Math.round(Number(minutes[1]) * 60));
-  const seconds = text.match(/(\d+(?:\.\d+)?)\s*秒/);
-  return seconds ? Math.max(1, Math.round(Number(seconds[1]))) : 0;
-}
-
 function parseRecipeBody(body) {
   const result = { ingredients: [], steps: [], notes: [], logs: [] };
   const lines = String(body || '').split(/\r?\n/);
@@ -94,18 +86,13 @@ function parseRecipeBody(body) {
     if (section === 'steps') {
       const stepMatch = line.match(/^\d+[.)]\s+(?:\*\*(.+?)\*\*|([^\uff1a:]+))[\uff1a:]\s*(.+)$/);
       if (stepMatch) {
-        currentStep = { title: stringValue(stepMatch[1] || stepMatch[2]), text: stringValue(stepMatch[3]), tip: '', timer: 0 };
+        currentStep = { title: stringValue(stepMatch[1] || stepMatch[2]), text: stringValue(stepMatch[3]), tip: '' };
         result.steps.push(currentStep);
         continue;
       }
       const tipMatch = line.match(/^(?:[-*]\s*)?(?:\u63d0\u793a|\u6ce8\u610f)[\uff1a:]\s*(.+)$/);
       if (tipMatch && currentStep) {
         currentStep.tip = stringValue(tipMatch[1]);
-        continue;
-      }
-      const timerMatch = line.match(/^(?:[-*]\s*)?计时[：:]\s*(.+)$/);
-      if (timerMatch && currentStep) {
-        currentStep.timer = durationSeconds(timerMatch[1]);
         continue;
       }
       if (currentStep && !/^[-*]\s+/.test(line)) currentStep.text += ` ${line}`;
@@ -157,8 +144,6 @@ function parseRecipeFile(filePath) {
     favorite,
     updated: dateValue(parsed.updated),
     aliases: stringList(parsed.aliases),
-    cover: stringValue(parsed.cover),
-    accent: stringValue(parsed.accent),
     ingredients: body.ingredients,
     steps: body.steps,
     notes: body.notes,

@@ -12,15 +12,10 @@ comment: false
 <div id="recipe-app" class="recipe-app" lang="zh-CN" data-source="/recipes/data.json">
   <section id="recipe-list-view">
     <header class="kitchen-hero">
-      <div class="kitchen-hero-copy">
+      <div>
         <p class="kitchen-eyebrow">RECIPES · 我的食谱库</p>
         <h1>My Kitchen</h1>
         <p class="kitchen-subtitle">记录每一次下厨，也方便从现有食材找到今天吃什么。</p>
-        <div class="kitchen-actions" aria-label="快速开始">
-          <button class="primary-button" type="button" data-action="open-decision">今晚吃什么</button>
-          <button class="tool-button" type="button" data-action="random-recipe">随机一道</button>
-          <button class="text-button" type="button" data-action="open-ingredients">按现有食材找菜</button>
-        </div>
       </div>
       <div class="kitchen-stats" aria-label="食谱统计">
         <span><strong id="recipe-total">0</strong> 道菜品</span>
@@ -28,38 +23,6 @@ comment: false
         <span>最近更新：<strong id="latest-update">—</strong></span>
       </div>
     </header>
-
-    <section id="decision-panel" class="decision-panel" aria-labelledby="decision-title" hidden>
-      <div class="decision-copy">
-        <p class="kitchen-eyebrow">DINNER PICKER · 今晚推荐</p>
-        <h2 id="decision-title">少想一点，快点开饭</h2>
-        <p>选择今晚能接受的时间和难度；已选食材也会参与推荐评分。</p>
-      </div>
-      <div class="decision-controls">
-        <div class="decision-control-group">
-          <span class="filter-label">时间</span>
-          <div class="chip-list">
-            <button class="filter-chip is-active" type="button" data-decision-key="time" data-decision-value="">不限</button>
-            <button class="filter-chip" type="button" data-decision-key="time" data-decision-value="15">15分钟内</button>
-            <button class="filter-chip" type="button" data-decision-key="time" data-decision-value="30">30分钟内</button>
-            <button class="filter-chip" type="button" data-decision-key="time" data-decision-value="60">60分钟内</button>
-          </div>
-        </div>
-        <div class="decision-control-group">
-          <span class="filter-label">难度</span>
-          <div class="chip-list">
-            <button class="filter-chip is-active" type="button" data-decision-key="difficulty" data-decision-value="">不限</button>
-            <button class="filter-chip" type="button" data-decision-key="difficulty" data-decision-value="简单">简单</button>
-            <button class="filter-chip" type="button" data-decision-key="difficulty" data-decision-value="中等">中等</button>
-          </div>
-        </div>
-        <div class="decision-buttons">
-          <button class="primary-button" type="button" data-action="generate-recommendations">给我推荐</button>
-          <button class="tool-button tool-button-quiet" type="button" data-action="close-decision">收起</button>
-        </div>
-      </div>
-      <div id="recommendation-results" class="recommendation-results" aria-live="polite"></div>
-    </section>
 
     <section class="recipe-toolbar" aria-label="搜索与筛选">
       <div class="search-row">
@@ -69,7 +32,6 @@ comment: false
         </label>
         <button class="tool-button" id="advanced-filter-button" type="button" aria-controls="filter-drawer" aria-expanded="false">筛选</button>
         <button class="tool-button tool-button-quiet" id="clear-filter-button" type="button">清除</button>
-        <button class="tool-button view-toggle" id="recipe-view-toggle" type="button" data-action="toggle-view" aria-pressed="false">紧凑列表</button>
         <span class="result-count" aria-live="polite" aria-atomic="true"><strong id="result-count">0</strong> 道</span>
       </div>
 
@@ -95,7 +57,7 @@ comment: false
       <div id="category-tabs" class="category-scroll"></div>
     </nav>
 
-    <div id="active-filter-summary" class="active-filter-summary" aria-label="当前筛选条件" hidden></div>
+    <div id="active-filter-summary" class="active-filter-summary" hidden></div>
     <section id="recipe-grid" class="recipe-grid" aria-label="食谱列表">
       <p class="recipe-loading">正在加载食谱……</p>
     </section>
@@ -120,7 +82,7 @@ comment: false
     <div id="ingredient-groups" class="ingredient-groups"></div>
     <footer class="drawer-footer">
       <button class="tool-button tool-button-quiet" type="button" data-action="clear-ingredients">清空食材</button>
-      <button class="primary-button" type="button" data-close-drawer>查看 <span id="ingredient-result-count">0</span> 道结果</button>
+      <button class="primary-button" type="button" data-close-drawer>查看结果</button>
     </footer>
   </aside>
 
@@ -132,7 +94,7 @@ comment: false
     <div id="advanced-filters" class="advanced-filters"></div>
     <footer class="drawer-footer">
       <button class="tool-button tool-button-quiet" type="button" data-action="clear-advanced">重置</button>
-      <button class="primary-button" type="button" data-close-drawer>查看 <span id="filter-result-count">0</span> 道结果</button>
+      <button class="primary-button" type="button" data-close-drawer>查看结果</button>
     </footer>
   </aside>
 
